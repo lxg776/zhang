@@ -1,0 +1,4 @@
+redis-server
+/Users/sunshine/Desktop/zhang/zookeeper-1/bin/zkServer.sh start
+/Users/sunshine/Desktop/zhang/apache-tomcat-8.0.47/bin/catalina.sh start
+/Users/sunshine/Desktop/zhang/apache-activemq-5.9.0/bin/macosx/activemq
