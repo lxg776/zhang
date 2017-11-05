@@ -22,7 +22,6 @@
         <module>zheng-friend-dao</module>
         <module>zheng-friend-rpc-api</module>
         <module>zheng-friend-rpc-service</module>
-        <module>zheng-friend-web</module>
         <module>zheng-friend-job</module>
         <module>zheng-friend-search</module>
         <module>zheng-friend-admin</module>
