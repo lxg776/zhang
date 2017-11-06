@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zheng.friend.dao.mapper.FActivityMapper">
+  <resultMap id="BaseResultMap" type="com.zheng.friend.dao.model.FActivity">
+    <id column="activity_id" jdbcType="INTEGER" property="activityId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sign_time" jdbcType="VARCHAR" property="signTime" />
+    <result column="sign_end_time" jdbcType="TIMESTAMP" property="signEndTime" />
+    <result column="activity_time" jdbcType="TIMESTAMP" property="activityTime" />
+    <result column="sponsor" jdbcType="VARCHAR" property="sponsor" />
+    <result column="link_man" jdbcType="VARCHAR" property="linkMan" />
+    <result column="sign_cost" jdbcType="VARCHAR" property="signCost" />
+    <result column="link_address" jdbcType="VARCHAR" property="linkAddress" />
+    <result column="activity_address" jdbcType="VARCHAR" property="activityAddress" />
+    <result column="show_status" jdbcType="VARCHAR" property="showStatus" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zheng.friend.dao.model.FActivity">
+    <result column="context" jdbcType="LONGVARCHAR" property="context" />
+    <result column="attention" jdbcType="LONGVARCHAR" property="attention" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    activity_id, title, sign_time, sign_end_time, activity_time, sponsor, link_man, sign_cost, 
+    link_address, activity_address, show_status
+  </sql>
+  <sql id="Blob_Column_List">
+    context, attention
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zheng.friend.dao.model.FActivityExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from f_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zheng.friend.dao.model.FActivityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from f_activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from f_activity
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zheng.friend.dao.model.FActivityExample">
+    delete from f_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zheng.friend.dao.model.FActivity">
+    insert into f_activity (activity_id, title, sign_time, 
+      sign_end_time, activity_time, sponsor, 
+      link_man, sign_cost, link_address, 
+      activity_address, show_status, context, 
+      attention)
+    values (#{activityId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{signTime,jdbcType=VARCHAR}, 
+      #{signEndTime,jdbcType=TIMESTAMP}, #{activityTime,jdbcType=TIMESTAMP}, #{sponsor,jdbcType=VARCHAR}, 
+      #{linkMan,jdbcType=VARCHAR}, #{signCost,jdbcType=VARCHAR}, #{linkAddress,jdbcType=VARCHAR}, 
+      #{activityAddress,jdbcType=VARCHAR}, #{showStatus,jdbcType=VARCHAR}, #{context,jdbcType=LONGVARCHAR}, 
+      #{attention,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zheng.friend.dao.model.FActivity">
+    insert into f_activity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        activity_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="signTime != null">
+        sign_time,
+      </if>
+      <if test="signEndTime != null">
+        sign_end_time,
+      </if>
+      <if test="activityTime != null">
+        activity_time,
+      </if>
+      <if test="sponsor != null">
+        sponsor,
+      </if>
+      <if test="linkMan != null">
+        link_man,
+      </if>
+      <if test="signCost != null">
+        sign_cost,
+      </if>
+      <if test="linkAddress != null">
+        link_address,
+      </if>
+      <if test="activityAddress != null">
+        activity_address,
+      </if>
+      <if test="showStatus != null">
+        show_status,
+      </if>
+      <if test="context != null">
+        context,
+      </if>
+      <if test="attention != null">
+        attention,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="activityId != null">
+        #{activityId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null">
+        #{signTime,jdbcType=VARCHAR},
+      </if>
+      <if test="signEndTime != null">
+        #{signEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityTime != null">
+        #{activityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sponsor != null">
+        #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null">
+        #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="signCost != null">
+        #{signCost,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddress != null">
+        #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="activityAddress != null">
+        #{activityAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="showStatus != null">
+        #{showStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        #{context,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attention != null">
+        #{attention,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zheng.friend.dao.model.FActivityExample" resultType="java.lang.Long">
+    select count(*) from f_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update f_activity
+    <set>
+      <if test="record.activityId != null">
+        activity_id = #{record.activityId,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signTime != null">
+        sign_time = #{record.signTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signEndTime != null">
+        sign_end_time = #{record.signEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.activityTime != null">
+        activity_time = #{record.activityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sponsor != null">
+        sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkMan != null">
+        link_man = #{record.linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signCost != null">
+        sign_cost = #{record.signCost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkAddress != null">
+        link_address = #{record.linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activityAddress != null">
+        activity_address = #{record.activityAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.showStatus != null">
+        show_status = #{record.showStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.context != null">
+        context = #{record.context,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.attention != null">
+        attention = #{record.attention,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update f_activity
+    set activity_id = #{record.activityId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      sign_time = #{record.signTime,jdbcType=VARCHAR},
+      sign_end_time = #{record.signEndTime,jdbcType=TIMESTAMP},
+      activity_time = #{record.activityTime,jdbcType=TIMESTAMP},
+      sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      link_man = #{record.linkMan,jdbcType=VARCHAR},
+      sign_cost = #{record.signCost,jdbcType=VARCHAR},
+      link_address = #{record.linkAddress,jdbcType=VARCHAR},
+      activity_address = #{record.activityAddress,jdbcType=VARCHAR},
+      show_status = #{record.showStatus,jdbcType=VARCHAR},
+      context = #{record.context,jdbcType=LONGVARCHAR},
+      attention = #{record.attention,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update f_activity
+    set activity_id = #{record.activityId,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      sign_time = #{record.signTime,jdbcType=VARCHAR},
+      sign_end_time = #{record.signEndTime,jdbcType=TIMESTAMP},
+      activity_time = #{record.activityTime,jdbcType=TIMESTAMP},
+      sponsor = #{record.sponsor,jdbcType=VARCHAR},
+      link_man = #{record.linkMan,jdbcType=VARCHAR},
+      sign_cost = #{record.signCost,jdbcType=VARCHAR},
+      link_address = #{record.linkAddress,jdbcType=VARCHAR},
+      activity_address = #{record.activityAddress,jdbcType=VARCHAR},
+      show_status = #{record.showStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zheng.friend.dao.model.FActivity">
+    update f_activity
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null">
+        sign_time = #{signTime,jdbcType=VARCHAR},
+      </if>
+      <if test="signEndTime != null">
+        sign_end_time = #{signEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="activityTime != null">
+        activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sponsor != null">
+        sponsor = #{sponsor,jdbcType=VARCHAR},
+      </if>
+      <if test="linkMan != null">
+        link_man = #{linkMan,jdbcType=VARCHAR},
+      </if>
+      <if test="signCost != null">
+        sign_cost = #{signCost,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAddress != null">
+        link_address = #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="activityAddress != null">
+        activity_address = #{activityAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="showStatus != null">
+        show_status = #{showStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        context = #{context,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attention != null">
+        attention = #{attention,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zheng.friend.dao.model.FActivity">
+    update f_activity
+    set title = #{title,jdbcType=VARCHAR},
+      sign_time = #{signTime,jdbcType=VARCHAR},
+      sign_end_time = #{signEndTime,jdbcType=TIMESTAMP},
+      activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      sponsor = #{sponsor,jdbcType=VARCHAR},
+      link_man = #{linkMan,jdbcType=VARCHAR},
+      sign_cost = #{signCost,jdbcType=VARCHAR},
+      link_address = #{linkAddress,jdbcType=VARCHAR},
+      activity_address = #{activityAddress,jdbcType=VARCHAR},
+      show_status = #{showStatus,jdbcType=VARCHAR},
+      context = #{context,jdbcType=LONGVARCHAR},
+      attention = #{attention,jdbcType=LONGVARCHAR}
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zheng.friend.dao.model.FActivity">
+    update f_activity
+    set title = #{title,jdbcType=VARCHAR},
+      sign_time = #{signTime,jdbcType=VARCHAR},
+      sign_end_time = #{signEndTime,jdbcType=TIMESTAMP},
+      activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      sponsor = #{sponsor,jdbcType=VARCHAR},
+      link_man = #{linkMan,jdbcType=VARCHAR},
+      sign_cost = #{signCost,jdbcType=VARCHAR},
+      link_address = #{linkAddress,jdbcType=VARCHAR},
+      activity_address = #{activityAddress,jdbcType=VARCHAR},
+      show_status = #{showStatus,jdbcType=VARCHAR}
+    where activity_id = #{activityId,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

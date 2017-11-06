@@ -2,10 +2,7 @@ package com.zheng.cms.web.controller;
 
 import com.zheng.cms.dao.model.CmsArticle;
 import com.zheng.cms.dao.model.CmsArticleExample;
-import com.zheng.cms.dao.model.CmsTag;
-import com.zheng.cms.dao.model.CmsTagExample;
-import com.zheng.cms.rpc.api.CmsArticleService;
-import com.zheng.cms.rpc.api.CmsTagService;
+import com.zheng.friend.rpc.api.CmsArticleService;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.Paginator;
 import org.apache.commons.lang.StringUtils;

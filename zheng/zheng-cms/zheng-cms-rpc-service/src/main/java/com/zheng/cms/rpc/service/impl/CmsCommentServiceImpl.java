@@ -5,7 +5,7 @@ import com.zheng.common.base.BaseServiceImpl;
 import com.zheng.cms.dao.mapper.CmsCommentMapper;
 import com.zheng.cms.dao.model.CmsComment;
 import com.zheng.cms.dao.model.CmsCommentExample;
-import com.zheng.cms.rpc.api.CmsCommentService;
+import com.zheng.friend.rpc.api.CmsCommentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

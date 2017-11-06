@@ -5,7 +5,7 @@ import com.zheng.common.base.BaseServiceImpl;
 import com.zheng.cms.dao.mapper.CmsMenuMapper;
 import com.zheng.cms.dao.model.CmsMenu;
 import com.zheng.cms.dao.model.CmsMenuExample;
-import com.zheng.cms.rpc.api.CmsMenuService;
+import com.zheng.friend.rpc.api.CmsMenuService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

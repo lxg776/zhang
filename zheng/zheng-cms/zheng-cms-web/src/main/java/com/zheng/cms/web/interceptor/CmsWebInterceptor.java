@@ -2,7 +2,7 @@ package com.zheng.cms.web.interceptor;
 
 import com.zheng.cms.dao.model.CmsMenu;
 import com.zheng.cms.dao.model.CmsMenuExample;
-import com.zheng.cms.rpc.api.CmsMenuService;
+import com.zheng.friend.rpc.api.CmsMenuService;
 import com.zheng.common.util.PropertiesFileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

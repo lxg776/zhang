@@ -2,7 +2,7 @@ package com.zheng.cms.web.controller;
 
 import com.zheng.cms.dao.model.CmsTopic;
 import com.zheng.cms.dao.model.CmsTopicExample;
-import com.zheng.cms.rpc.api.CmsTopicService;
+import com.zheng.friend.rpc.api.CmsTopicService;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.Paginator;
 import org.slf4j.Logger;

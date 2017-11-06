@@ -5,7 +5,7 @@ import com.zheng.common.base.BaseServiceImpl;
 import com.zheng.cms.dao.mapper.CmsTopicMapper;
 import com.zheng.cms.dao.model.CmsTopic;
 import com.zheng.cms.dao.model.CmsTopicExample;
-import com.zheng.cms.rpc.api.CmsTopicService;
+import com.zheng.friend.rpc.api.CmsTopicService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

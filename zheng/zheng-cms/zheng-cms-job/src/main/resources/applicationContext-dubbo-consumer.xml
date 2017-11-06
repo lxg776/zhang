@@ -14,12 +14,12 @@
     <!-- 订阅服务 -->
     <dubbo:consumer check="false"/>
 
-    <dubbo:reference id="cmsArticleService" interface="com.zheng.cms.rpc.api.CmsArticleService" mock="true"/>
+    <dubbo:reference id="cmsArticleService" interface="com.zheng.friend.rpc.api.CmsArticleService" mock="true"/>
 
-    <dubbo:reference id="cmsCategoryService" interface="com.zheng.cms.rpc.api.CmsCategoryService" mock="true"/>
+    <dubbo:reference id="cmsCategoryService" interface="com.zheng.friend.rpc.api.CmsCategoryService" mock="true"/>
 
-    <dubbo:reference id="cmsCommentService" interface="com.zheng.cms.rpc.api.CmsCommentService" mock="true"/>
+    <dubbo:reference id="cmsCommentService" interface="com.zheng.friend.rpc.api.CmsCommentService" mock="true"/>
 
-    <dubbo:reference id="cmsTagService" interface="com.zheng.cms.rpc.api.CmsTagService" mock="true"/>
+    <dubbo:reference id="cmsTagService" interface="com.zheng.friend.rpc.api.CmsTagService" mock="true"/>
 
 </beans>

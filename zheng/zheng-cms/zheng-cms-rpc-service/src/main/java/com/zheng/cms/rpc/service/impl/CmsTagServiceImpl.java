@@ -5,7 +5,7 @@ import com.zheng.common.base.BaseServiceImpl;
 import com.zheng.cms.dao.mapper.CmsTagMapper;
 import com.zheng.cms.dao.model.CmsTag;
 import com.zheng.cms.dao.model.CmsTagExample;
-import com.zheng.cms.rpc.api.CmsTagService;
+import com.zheng.friend.rpc.api.CmsTagService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

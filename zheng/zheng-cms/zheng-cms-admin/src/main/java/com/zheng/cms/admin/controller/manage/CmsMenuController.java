@@ -7,7 +7,7 @@ import com.zheng.cms.common.constant.CmsResult;
 import com.zheng.cms.common.constant.CmsResultConstant;
 import com.zheng.cms.dao.model.CmsMenu;
 import com.zheng.cms.dao.model.CmsMenuExample;
-import com.zheng.cms.rpc.api.CmsMenuService;
+import com.zheng.friend.rpc.api.CmsMenuService;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.validator.LengthValidator;
 import io.swagger.annotations.Api;

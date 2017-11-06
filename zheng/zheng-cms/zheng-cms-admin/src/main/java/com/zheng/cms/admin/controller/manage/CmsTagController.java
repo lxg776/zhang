@@ -7,7 +7,7 @@ import com.zheng.cms.common.constant.CmsResult;
 import com.zheng.cms.common.constant.CmsResultConstant;
 import com.zheng.cms.dao.model.CmsTag;
 import com.zheng.cms.dao.model.CmsTagExample;
-import com.zheng.cms.rpc.api.CmsTagService;
+import com.zheng.friend.rpc.api.CmsTagService;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.validator.LengthValidator;
 import io.swagger.annotations.Api;

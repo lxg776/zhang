@@ -26,12 +26,12 @@
     <dubbo:reference id="upmsApiService" interface="com.zheng.upms.rpc.api.UpmsApiService" mock="true"/>
 
     <!-- 文章 -->
-    <dubbo:reference id="cmsArticleService" interface="com.zheng.cms.rpc.api.CmsArticleService" mock="true"/>
+    <dubbo:reference id="cmsArticleService" interface="com.zheng.friend.rpc.api.CmsArticleService" mock="true"/>
     <!-- 类目 -->
-    <dubbo:reference id="cmsCategoryService" interface="com.zheng.cms.rpc.api.CmsCategoryService" mock="true"/>
+    <dubbo:reference id="cmsCategoryService" interface="com.zheng.friend.rpc.api.CmsCategoryService" mock="true"/>
     <!-- 评论 -->
-    <dubbo:reference id="cmsCommentService" interface="com.zheng.cms.rpc.api.CmsCommentService" mock="true"/>
+    <dubbo:reference id="cmsCommentService" interface="com.zheng.friend.rpc.api.CmsCommentService" mock="true"/>
     <!-- 标签 -->
-    <dubbo:reference id="cmsTagService" interface="com.zheng.cms.rpc.api.CmsTagService" mock="true"/>
+    <dubbo:reference id="cmsTagService" interface="com.zheng.friend.rpc.api.CmsTagService" mock="true"/>
 
 </beans>

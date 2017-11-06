@@ -15,22 +15,22 @@
     <dubbo:consumer check="false"/>
 
     <!-- 文章 -->
-    <dubbo:reference id="cmsArticleService" interface="com.zheng.cms.rpc.api.CmsArticleService" mock="true"/>
+    <dubbo:reference id="cmsArticleService" interface="com.zheng.friend.rpc.api.CmsArticleService" mock="true"/>
     <!-- 类目 -->
-    <dubbo:reference id="cmsCategoryService" interface="com.zheng.cms.rpc.api.CmsCategoryService" mock="true"/>
+    <dubbo:reference id="cmsCategoryService" interface="com.zheng.friend.rpc.api.CmsCategoryService" mock="true"/>
     <!-- 评论 -->
-    <dubbo:reference id="cmsCommentService" interface="com.zheng.cms.rpc.api.CmsCommentService" mock="true"/>
+    <dubbo:reference id="cmsCommentService" interface="com.zheng.friend.rpc.api.CmsCommentService" mock="true"/>
     <!-- 标签 -->
-    <dubbo:reference id="cmsTagService" interface="com.zheng.cms.rpc.api.CmsTagService" mock="true"/>
+    <dubbo:reference id="cmsTagService" interface="com.zheng.friend.rpc.api.CmsTagService" mock="true"/>
     <!-- 专题 -->
-    <dubbo:reference id="cmsTopicService" interface="com.zheng.cms.rpc.api.CmsTopicService" mock="true"/>
+    <dubbo:reference id="cmsTopicService" interface="com.zheng.friend.rpc.api.CmsTopicService" mock="true"/>
     <!-- 菜单 -->
-    <dubbo:reference id="cmsMenuService" interface="com.zheng.cms.rpc.api.CmsMenuService" mock="true"/>
+    <dubbo:reference id="cmsMenuService" interface="com.zheng.friend.rpc.api.CmsMenuService" mock="true"/>
     <!-- 单页 -->
-    <dubbo:reference id="cmsPageService" interface="com.zheng.cms.rpc.api.CmsPageService" mock="true"/>
+    <dubbo:reference id="cmsPageService" interface="com.zheng.friend.rpc.api.CmsPageService" mock="true"/>
     <!-- 设置 -->
-    <dubbo:reference id="cmsSettingService" interface="com.zheng.cms.rpc.api.CmsSettingService" mock="true"/>
+    <dubbo:reference id="cmsSettingService" interface="com.zheng.friend.rpc.api.CmsSettingService" mock="true"/>
     <!-- 系统 -->
-    <dubbo:reference id="cmsSystemService" interface="com.zheng.cms.rpc.api.CmsSystemService" mock="true"/>
+    <dubbo:reference id="cmsSystemService" interface="com.zheng.friend.rpc.api.CmsSystemService" mock="true"/>
 
 </beans>

@@ -4,7 +4,7 @@ import com.zheng.cms.common.constant.CmsResult;
 import com.zheng.cms.common.constant.CmsResultConstant;
 import com.zheng.cms.dao.model.CmsComment;
 import com.zheng.cms.dao.model.CmsCommentExample;
-import com.zheng.cms.rpc.api.CmsCommentService;
+import com.zheng.friend.rpc.api.CmsCommentService;
 import com.zheng.common.base.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
