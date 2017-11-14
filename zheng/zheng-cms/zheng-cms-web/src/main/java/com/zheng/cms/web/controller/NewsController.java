@@ -3,7 +3,7 @@ package com.zheng.cms.web.controller;
 import com.zheng.cms.common.constant.CmsResult;
 import com.zheng.cms.common.constant.CmsResultConstant;
 import com.zheng.cms.dao.model.*;
-import com.zheng.cms.rpc.api.*;
+
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.Paginator;
 import com.zheng.common.util.RequestUtil;

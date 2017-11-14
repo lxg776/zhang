@@ -77,8 +77,7 @@
 							class="break"></span>会员管理
 					</h2>
 					<div class="box-icon">
-						<a href="${ctx}/executor/toSave" style="color: #FFF">添加</a>
-
+						<a href="${ctx}/manage/member/editUser" style="color: #FFF">添加</a>
 					</div>
 				</div>
 				<div class="box-content">
@@ -86,28 +85,28 @@
 						<thead>
 						<tr>
 							<th style="width: 100px;">userId</th>
-							<th style="width: 200px;">姓名</th>
+							<th style="width: 200px;">昵称</th>
 							<th style="width: 200px;">性别</th>
-							<th style="width: 200px;">手机号码</th>
-							<th style="width: 200px;">会员类型</th>
+							<th style="width: 200px;">注册时间</th>
 							<th style="width: 400px;">操作</th>
 						</tr>
 						</thead>
 						<tbody>
-						<tr>
-							<td style="width: 100px;">9527</td>
-							<td style="width: 200px;">梁学钢</td>
-							<td style="width: 200px;">男</td>
-							<td style="width: 200px;">18825208133</td>
-							<td style="width: 200px;">普通会员</th>
-							<td style="width: 600px;"><a href="#" style="color: #0033FF">查看详情</a>
-								/<a href="#" style="color: #0033FF">修改基本资料</a><br/><a href="#" style="color: #0033FF">修改认证信息</a>/<a href="#" style="color: #0033FF">设置会员</a>/
-								<a href="#" style="color: #0033FF">删除</a>
-							</td>
-						</tr>
+						<c:forEach var="item" items="${page.dataList}" >
+							<tr>
+								<td>${item.activityId}</td>
+								<td style="width: 800px;">${item.userId}</td>
+								<td style="width: 200px;">${item.nickname}</td>
+								<td style="width: 200px;">${item.createTime}</td>
+								<td style="width: 600px;"><a href="#" style="color: #0033FF">编辑用户信息</a>
+									/<a href="#" style="color: #0033FF">编辑基本资料</a><br/><a href="#" style="color: #0033FF">编辑认证信息</a>/<a href="#" style="color: #0033FF">设置会员</a>/
+									<a href="#" style="color: #0033FF">删除</a>
+								</td>
+							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
-
+					<%@include file="/common/c_pagination.jsp"%>
 				</div>
 
 			</div>

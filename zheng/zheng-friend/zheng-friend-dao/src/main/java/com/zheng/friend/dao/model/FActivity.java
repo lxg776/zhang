@@ -1,7 +1,6 @@
 package com.zheng.friend.dao.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class FActivity implements Serializable {
     /**
@@ -30,14 +29,14 @@ public class FActivity implements Serializable {
      *
      * @mbg.generated
      */
-    private Date signEndTime;
+    private String signEndTime;
 
     /**
      * 活动时间
      *
      * @mbg.generated
      */
-    private Date activityTime;
+    private String activityTime;
 
     /**
      * 主办方
@@ -68,6 +67,13 @@ public class FActivity implements Serializable {
     private String linkAddress;
 
     /**
+     * 联系电话
+     *
+     * @mbg.generated
+     */
+    private String linkPhone;
+
+    /**
      * 活动地址
      *
      * @mbg.generated
@@ -82,11 +88,18 @@ public class FActivity implements Serializable {
     private String showStatus;
 
     /**
+     * 创建时间
+     *
+     * @mbg.generated
+     */
+    private Long ctime;
+
+    /**
      * 内容
      *
      * @mbg.generated
      */
-    private String context;
+    private String content;
 
     /**
      * 注意事项
@@ -121,19 +134,19 @@ public class FActivity implements Serializable {
         this.signTime = signTime;
     }
 
-    public Date getSignEndTime() {
+    public String getSignEndTime() {
         return signEndTime;
     }
 
-    public void setSignEndTime(Date signEndTime) {
+    public void setSignEndTime(String signEndTime) {
         this.signEndTime = signEndTime;
     }
 
-    public Date getActivityTime() {
+    public String getActivityTime() {
         return activityTime;
     }
 
-    public void setActivityTime(Date activityTime) {
+    public void setActivityTime(String activityTime) {
         this.activityTime = activityTime;
     }
 
@@ -169,6 +182,14 @@ public class FActivity implements Serializable {
         this.linkAddress = linkAddress;
     }
 
+    public String getLinkPhone() {
+        return linkPhone;
+    }
+
+    public void setLinkPhone(String linkPhone) {
+        this.linkPhone = linkPhone;
+    }
+
     public String getActivityAddress() {
         return activityAddress;
     }
@@ -185,12 +206,20 @@ public class FActivity implements Serializable {
         this.showStatus = showStatus;
     }
 
-    public String getContext() {
-        return context;
+    public Long getCtime() {
+        return ctime;
     }
 
-    public void setContext(String context) {
-        this.context = context;
+    public void setCtime(Long ctime) {
+        this.ctime = ctime;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getAttention() {
@@ -216,9 +245,11 @@ public class FActivity implements Serializable {
         sb.append(", linkMan=").append(linkMan);
         sb.append(", signCost=").append(signCost);
         sb.append(", linkAddress=").append(linkAddress);
+        sb.append(", linkPhone=").append(linkPhone);
         sb.append(", activityAddress=").append(activityAddress);
         sb.append(", showStatus=").append(showStatus);
-        sb.append(", context=").append(context);
+        sb.append(", ctime=").append(ctime);
+        sb.append(", content=").append(content);
         sb.append(", attention=").append(attention);
         sb.append("]");
         return sb.toString();
@@ -245,9 +276,11 @@ public class FActivity implements Serializable {
             && (this.getLinkMan() == null ? other.getLinkMan() == null : this.getLinkMan().equals(other.getLinkMan()))
             && (this.getSignCost() == null ? other.getSignCost() == null : this.getSignCost().equals(other.getSignCost()))
             && (this.getLinkAddress() == null ? other.getLinkAddress() == null : this.getLinkAddress().equals(other.getLinkAddress()))
+            && (this.getLinkPhone() == null ? other.getLinkPhone() == null : this.getLinkPhone().equals(other.getLinkPhone()))
             && (this.getActivityAddress() == null ? other.getActivityAddress() == null : this.getActivityAddress().equals(other.getActivityAddress()))
             && (this.getShowStatus() == null ? other.getShowStatus() == null : this.getShowStatus().equals(other.getShowStatus()))
-            && (this.getContext() == null ? other.getContext() == null : this.getContext().equals(other.getContext()))
+            && (this.getCtime() == null ? other.getCtime() == null : this.getCtime().equals(other.getCtime()))
+            && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
             && (this.getAttention() == null ? other.getAttention() == null : this.getAttention().equals(other.getAttention()));
     }
 
@@ -264,9 +297,11 @@ public class FActivity implements Serializable {
         result = prime * result + ((getLinkMan() == null) ? 0 : getLinkMan().hashCode());
         result = prime * result + ((getSignCost() == null) ? 0 : getSignCost().hashCode());
         result = prime * result + ((getLinkAddress() == null) ? 0 : getLinkAddress().hashCode());
+        result = prime * result + ((getLinkPhone() == null) ? 0 : getLinkPhone().hashCode());
         result = prime * result + ((getActivityAddress() == null) ? 0 : getActivityAddress().hashCode());
         result = prime * result + ((getShowStatus() == null) ? 0 : getShowStatus().hashCode());
-        result = prime * result + ((getContext() == null) ? 0 : getContext().hashCode());
+        result = prime * result + ((getCtime() == null) ? 0 : getCtime().hashCode());
+        result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         result = prime * result + ((getAttention() == null) ? 0 : getAttention().hashCode());
         return result;
     }

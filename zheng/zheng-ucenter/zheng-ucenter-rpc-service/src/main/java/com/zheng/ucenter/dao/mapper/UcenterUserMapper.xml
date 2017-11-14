@@ -12,6 +12,7 @@
     <result column="create_ip" jdbcType="VARCHAR" property="createIp" />
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
     <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, password, salt, nickname, sex, avatar, create_time, create_ip, last_login_time, 
-    last_login_ip
+    last_login_ip, user_name
   </sql>
   <select id="selectByExample" parameterType="com.zheng.ucenter.dao.model.UcenterUserExample" resultMap="BaseResultMap">
     select
@@ -109,11 +110,11 @@
     insert into ucenter_user (user_id, password, salt, 
       nickname, sex, avatar, 
       create_time, create_ip, last_login_time, 
-      last_login_ip)
+      last_login_ip, user_name)
     values (#{userId,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
       #{nickname,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, #{avatar,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{createIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
-      #{lastLoginIp,jdbcType=VARCHAR})
+      #{lastLoginIp,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.ucenter.dao.model.UcenterUser">
     insert into ucenter_user
@@ -148,6 +149,9 @@
       <if test="lastLoginIp != null">
         last_login_ip,
       </if>
+      <if test="userName != null">
+        user_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -179,6 +183,9 @@
       </if>
       <if test="lastLoginIp != null">
         #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -221,6 +228,9 @@
       <if test="record.lastLoginIp != null">
         last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
       </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -237,7 +247,8 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       create_ip = #{record.createIp,jdbcType=VARCHAR},
       last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
-      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR}
+      last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -272,6 +283,9 @@
       <if test="lastLoginIp != null">
         last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
       </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -285,7 +299,8 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_ip = #{createIp,jdbcType=VARCHAR},
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
-      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR}
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />

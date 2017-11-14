@@ -15,9 +15,17 @@
     <dubbo:consumer check="false"/>
 
     <!-- 文章 -->
-    <dubbo:reference id="cmsArticleService" interface="com.zheng.friend.rpc.api.FActivityService" mock="true"/>
+    <dubbo:reference id="factivityService" interface="com.zheng.friend.rpc.api.FActivityService" mock="true"/>
 
 
     <!-- 接口服务 -->
     <dubbo:reference id="upmsApiService" interface="com.zheng.upms.rpc.api.UpmsApiService" mock="true"/>
+
+    <!-- 接口服务 -->
+    <dubbo:reference id="ucenterIdentificaionService" interface="com.zheng.ucenter.rpc.api.UcenterIdentificaionService" mock="true"/>
+
+    <dubbo:reference id="ucenterUserService" interface="com.zheng.ucenter.rpc.api.UcenterUserService" mock="true"/>
+
+
+
 </beans>

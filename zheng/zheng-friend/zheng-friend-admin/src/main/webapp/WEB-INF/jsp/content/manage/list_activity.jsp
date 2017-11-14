@@ -3,38 +3,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <!-- start: Meta -->
     <%@include file="/common/meta.jsp"%>
     <!-- end: Mobile Specific -->
     <title>管理后台</title>
     <%@include file="/common/css-link01.jsp"%>
     <!-- start: CSS -->
-
-
-
     <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <link id="ie-style" href="css/ie.css" rel="stylesheet">
     <![endif]-->
-
     <!--[if IE 9]>
     <link id="ie9style" href="css/ie9.css" rel="stylesheet">
     <![endif]-->
-
     <!-- start: Favicon -->
-
     <!-- end: Favicon -->
-
-
     <script type="text/javascript">
-        var listUrl = "${ctx}" + "/executor/list?pageNum=";
+        var listUrl = "${ctx}" + "/manage/activity/list?pageNum=";
         function getDataList(pageNum) {
             window.location.href = listUrl + pageNum;
         }
     </script>
-
 </head>
 
 <body>
@@ -77,7 +67,7 @@
                             class="break"></span>活动管理
                     </h2>
                     <div class="box-icon">
-                        <a href="${ctx}/executor/toSave" style="color: #FFF">添加</a>
+                        <a href="${ctx}/manage/activity/edit" style="color: #FFF">添加</a>
 
                     </div>
                 </div>
@@ -93,18 +83,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td style="width: 100px;">9527</td>
-                            <td style="width: 800px;">相亲大会</td>
-                            <td style="width: 200px;">2017-06-09</td>
-                            <td style="width: 200px;">18825208133</td>
-                            <td style="width: 100px;"><a href="#" style="color: #0033FF">编辑</a>
-                                /<a href="#" style="color: #0033FF">删除</a>
-                            </td>
-                        </tr>
+                        <c:forEach var="item" items="${page.dataList}" >
+                            <tr>
+                                <td>${item.activityId}</td>
+                                <td style="width: 800px;">${item.title}</td>
+                                <td style="width: 200px;">${item.signTime}</td>
+                                <td style="width: 200px;">${item.linkPhone}</td>
+                                <td style="width: 100px;"><a href="${ctx}/manage/activity/edit?id=${item.activityId}" style="color: #0033FF">编辑</a>
+                                    /<a href="#" style="color: #0033FF">删除</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
-
+                    <%@include file="/common/c_pagination.jsp"%>
                 </div>
 
             </div>

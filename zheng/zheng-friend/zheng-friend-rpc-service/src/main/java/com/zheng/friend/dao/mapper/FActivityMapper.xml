@@ -5,17 +5,19 @@
     <id column="activity_id" jdbcType="INTEGER" property="activityId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="sign_time" jdbcType="VARCHAR" property="signTime" />
-    <result column="sign_end_time" jdbcType="TIMESTAMP" property="signEndTime" />
-    <result column="activity_time" jdbcType="TIMESTAMP" property="activityTime" />
+    <result column="sign_end_time" jdbcType="VARCHAR" property="signEndTime" />
+    <result column="activity_time" jdbcType="VARCHAR" property="activityTime" />
     <result column="sponsor" jdbcType="VARCHAR" property="sponsor" />
     <result column="link_man" jdbcType="VARCHAR" property="linkMan" />
     <result column="sign_cost" jdbcType="VARCHAR" property="signCost" />
     <result column="link_address" jdbcType="VARCHAR" property="linkAddress" />
+    <result column="link_phone" jdbcType="VARCHAR" property="linkPhone" />
     <result column="activity_address" jdbcType="VARCHAR" property="activityAddress" />
     <result column="show_status" jdbcType="VARCHAR" property="showStatus" />
+    <result column="ctime" jdbcType="BIGINT" property="ctime" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zheng.friend.dao.model.FActivity">
-    <result column="context" jdbcType="LONGVARCHAR" property="context" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="attention" jdbcType="LONGVARCHAR" property="attention" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -78,10 +80,10 @@
   </sql>
   <sql id="Base_Column_List">
     activity_id, title, sign_time, sign_end_time, activity_time, sponsor, link_man, sign_cost, 
-    link_address, activity_address, show_status
+    link_address, link_phone, activity_address, show_status, ctime
   </sql>
   <sql id="Blob_Column_List">
-    context, attention
+    content, attention
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.zheng.friend.dao.model.FActivityExample" resultMap="ResultMapWithBLOBs">
     select
@@ -135,13 +137,15 @@
     insert into f_activity (activity_id, title, sign_time, 
       sign_end_time, activity_time, sponsor, 
       link_man, sign_cost, link_address, 
-      activity_address, show_status, context, 
-      attention)
+      link_phone, activity_address, show_status, 
+      ctime, content, attention
+      )
     values (#{activityId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{signTime,jdbcType=VARCHAR}, 
-      #{signEndTime,jdbcType=TIMESTAMP}, #{activityTime,jdbcType=TIMESTAMP}, #{sponsor,jdbcType=VARCHAR}, 
+      #{signEndTime,jdbcType=VARCHAR}, #{activityTime,jdbcType=VARCHAR}, #{sponsor,jdbcType=VARCHAR}, 
       #{linkMan,jdbcType=VARCHAR}, #{signCost,jdbcType=VARCHAR}, #{linkAddress,jdbcType=VARCHAR}, 
-      #{activityAddress,jdbcType=VARCHAR}, #{showStatus,jdbcType=VARCHAR}, #{context,jdbcType=LONGVARCHAR}, 
-      #{attention,jdbcType=LONGVARCHAR})
+      #{linkPhone,jdbcType=VARCHAR}, #{activityAddress,jdbcType=VARCHAR}, #{showStatus,jdbcType=VARCHAR}, 
+      #{ctime,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR}, #{attention,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.friend.dao.model.FActivity">
     insert into f_activity
@@ -173,14 +177,20 @@
       <if test="linkAddress != null">
         link_address,
       </if>
+      <if test="linkPhone != null">
+        link_phone,
+      </if>
       <if test="activityAddress != null">
         activity_address,
       </if>
       <if test="showStatus != null">
         show_status,
       </if>
-      <if test="context != null">
-        context,
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="content != null">
+        content,
       </if>
       <if test="attention != null">
         attention,
@@ -197,10 +207,10 @@
         #{signTime,jdbcType=VARCHAR},
       </if>
       <if test="signEndTime != null">
-        #{signEndTime,jdbcType=TIMESTAMP},
+        #{signEndTime,jdbcType=VARCHAR},
       </if>
       <if test="activityTime != null">
-        #{activityTime,jdbcType=TIMESTAMP},
+        #{activityTime,jdbcType=VARCHAR},
       </if>
       <if test="sponsor != null">
         #{sponsor,jdbcType=VARCHAR},
@@ -214,14 +224,20 @@
       <if test="linkAddress != null">
         #{linkAddress,jdbcType=VARCHAR},
       </if>
+      <if test="linkPhone != null">
+        #{linkPhone,jdbcType=VARCHAR},
+      </if>
       <if test="activityAddress != null">
         #{activityAddress,jdbcType=VARCHAR},
       </if>
       <if test="showStatus != null">
         #{showStatus,jdbcType=VARCHAR},
       </if>
-      <if test="context != null">
-        #{context,jdbcType=LONGVARCHAR},
+      <if test="ctime != null">
+        #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
       </if>
       <if test="attention != null">
         #{attention,jdbcType=LONGVARCHAR},
@@ -247,10 +263,10 @@
         sign_time = #{record.signTime,jdbcType=VARCHAR},
       </if>
       <if test="record.signEndTime != null">
-        sign_end_time = #{record.signEndTime,jdbcType=TIMESTAMP},
+        sign_end_time = #{record.signEndTime,jdbcType=VARCHAR},
       </if>
       <if test="record.activityTime != null">
-        activity_time = #{record.activityTime,jdbcType=TIMESTAMP},
+        activity_time = #{record.activityTime,jdbcType=VARCHAR},
       </if>
       <if test="record.sponsor != null">
         sponsor = #{record.sponsor,jdbcType=VARCHAR},
@@ -264,14 +280,20 @@
       <if test="record.linkAddress != null">
         link_address = #{record.linkAddress,jdbcType=VARCHAR},
       </if>
+      <if test="record.linkPhone != null">
+        link_phone = #{record.linkPhone,jdbcType=VARCHAR},
+      </if>
       <if test="record.activityAddress != null">
         activity_address = #{record.activityAddress,jdbcType=VARCHAR},
       </if>
       <if test="record.showStatus != null">
         show_status = #{record.showStatus,jdbcType=VARCHAR},
       </if>
-      <if test="record.context != null">
-        context = #{record.context,jdbcType=LONGVARCHAR},
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=BIGINT},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.attention != null">
         attention = #{record.attention,jdbcType=LONGVARCHAR},
@@ -286,15 +308,17 @@
     set activity_id = #{record.activityId,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
       sign_time = #{record.signTime,jdbcType=VARCHAR},
-      sign_end_time = #{record.signEndTime,jdbcType=TIMESTAMP},
-      activity_time = #{record.activityTime,jdbcType=TIMESTAMP},
+      sign_end_time = #{record.signEndTime,jdbcType=VARCHAR},
+      activity_time = #{record.activityTime,jdbcType=VARCHAR},
       sponsor = #{record.sponsor,jdbcType=VARCHAR},
       link_man = #{record.linkMan,jdbcType=VARCHAR},
       sign_cost = #{record.signCost,jdbcType=VARCHAR},
       link_address = #{record.linkAddress,jdbcType=VARCHAR},
+      link_phone = #{record.linkPhone,jdbcType=VARCHAR},
       activity_address = #{record.activityAddress,jdbcType=VARCHAR},
       show_status = #{record.showStatus,jdbcType=VARCHAR},
-      context = #{record.context,jdbcType=LONGVARCHAR},
+      ctime = #{record.ctime,jdbcType=BIGINT},
+      content = #{record.content,jdbcType=LONGVARCHAR},
       attention = #{record.attention,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -305,14 +329,16 @@
     set activity_id = #{record.activityId,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
       sign_time = #{record.signTime,jdbcType=VARCHAR},
-      sign_end_time = #{record.signEndTime,jdbcType=TIMESTAMP},
-      activity_time = #{record.activityTime,jdbcType=TIMESTAMP},
+      sign_end_time = #{record.signEndTime,jdbcType=VARCHAR},
+      activity_time = #{record.activityTime,jdbcType=VARCHAR},
       sponsor = #{record.sponsor,jdbcType=VARCHAR},
       link_man = #{record.linkMan,jdbcType=VARCHAR},
       sign_cost = #{record.signCost,jdbcType=VARCHAR},
       link_address = #{record.linkAddress,jdbcType=VARCHAR},
+      link_phone = #{record.linkPhone,jdbcType=VARCHAR},
       activity_address = #{record.activityAddress,jdbcType=VARCHAR},
-      show_status = #{record.showStatus,jdbcType=VARCHAR}
+      show_status = #{record.showStatus,jdbcType=VARCHAR},
+      ctime = #{record.ctime,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -327,10 +353,10 @@
         sign_time = #{signTime,jdbcType=VARCHAR},
       </if>
       <if test="signEndTime != null">
-        sign_end_time = #{signEndTime,jdbcType=TIMESTAMP},
+        sign_end_time = #{signEndTime,jdbcType=VARCHAR},
       </if>
       <if test="activityTime != null">
-        activity_time = #{activityTime,jdbcType=TIMESTAMP},
+        activity_time = #{activityTime,jdbcType=VARCHAR},
       </if>
       <if test="sponsor != null">
         sponsor = #{sponsor,jdbcType=VARCHAR},
@@ -344,14 +370,20 @@
       <if test="linkAddress != null">
         link_address = #{linkAddress,jdbcType=VARCHAR},
       </if>
+      <if test="linkPhone != null">
+        link_phone = #{linkPhone,jdbcType=VARCHAR},
+      </if>
       <if test="activityAddress != null">
         activity_address = #{activityAddress,jdbcType=VARCHAR},
       </if>
       <if test="showStatus != null">
         show_status = #{showStatus,jdbcType=VARCHAR},
       </if>
-      <if test="context != null">
-        context = #{context,jdbcType=LONGVARCHAR},
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
       </if>
       <if test="attention != null">
         attention = #{attention,jdbcType=LONGVARCHAR},
@@ -363,15 +395,17 @@
     update f_activity
     set title = #{title,jdbcType=VARCHAR},
       sign_time = #{signTime,jdbcType=VARCHAR},
-      sign_end_time = #{signEndTime,jdbcType=TIMESTAMP},
-      activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      sign_end_time = #{signEndTime,jdbcType=VARCHAR},
+      activity_time = #{activityTime,jdbcType=VARCHAR},
       sponsor = #{sponsor,jdbcType=VARCHAR},
       link_man = #{linkMan,jdbcType=VARCHAR},
       sign_cost = #{signCost,jdbcType=VARCHAR},
       link_address = #{linkAddress,jdbcType=VARCHAR},
+      link_phone = #{linkPhone,jdbcType=VARCHAR},
       activity_address = #{activityAddress,jdbcType=VARCHAR},
       show_status = #{showStatus,jdbcType=VARCHAR},
-      context = #{context,jdbcType=LONGVARCHAR},
+      ctime = #{ctime,jdbcType=BIGINT},
+      content = #{content,jdbcType=LONGVARCHAR},
       attention = #{attention,jdbcType=LONGVARCHAR}
     where activity_id = #{activityId,jdbcType=INTEGER}
   </update>
@@ -379,14 +413,16 @@
     update f_activity
     set title = #{title,jdbcType=VARCHAR},
       sign_time = #{signTime,jdbcType=VARCHAR},
-      sign_end_time = #{signEndTime,jdbcType=TIMESTAMP},
-      activity_time = #{activityTime,jdbcType=TIMESTAMP},
+      sign_end_time = #{signEndTime,jdbcType=VARCHAR},
+      activity_time = #{activityTime,jdbcType=VARCHAR},
       sponsor = #{sponsor,jdbcType=VARCHAR},
       link_man = #{linkMan,jdbcType=VARCHAR},
       sign_cost = #{signCost,jdbcType=VARCHAR},
       link_address = #{linkAddress,jdbcType=VARCHAR},
+      link_phone = #{linkPhone,jdbcType=VARCHAR},
       activity_address = #{activityAddress,jdbcType=VARCHAR},
-      show_status = #{showStatus,jdbcType=VARCHAR}
+      show_status = #{showStatus,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=BIGINT}
     where activity_id = #{activityId,jdbcType=INTEGER}
   </update>
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />

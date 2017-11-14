@@ -1,7 +1,6 @@
 package com.zheng.api.rpc.service.impl;
 
 import com.zheng.api.rpc.api.ApiService;
-import com.zheng.cms.rpc.api.*;
 import com.zheng.friend.rpc.api.CmsArticleService;
 import com.zheng.friend.rpc.api.CmsCategoryService;
 import com.zheng.friend.rpc.api.CmsCommentService;

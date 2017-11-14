@@ -1,7 +1,7 @@
 package com.zheng.cms.web.controller;
 
 import com.zheng.cms.dao.model.*;
-import com.zheng.cms.rpc.api.*;
+
 import com.zheng.common.base.BaseController;
 import com.zheng.friend.rpc.api.CmsCategoryService;
 import com.zheng.friend.rpc.api.CmsMenuService;

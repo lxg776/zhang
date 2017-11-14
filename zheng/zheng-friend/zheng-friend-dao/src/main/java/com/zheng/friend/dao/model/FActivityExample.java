@@ -2,7 +2,6 @@ package com.zheng.friend.dao.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class FActivityExample implements Serializable {
@@ -318,52 +317,62 @@ public class FActivityExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andSignEndTimeEqualTo(Date value) {
+        public Criteria andSignEndTimeEqualTo(String value) {
             addCriterion("sign_end_time =", value, "signEndTime");
             return (Criteria) this;
         }
 
-        public Criteria andSignEndTimeNotEqualTo(Date value) {
+        public Criteria andSignEndTimeNotEqualTo(String value) {
             addCriterion("sign_end_time <>", value, "signEndTime");
             return (Criteria) this;
         }
 
-        public Criteria andSignEndTimeGreaterThan(Date value) {
+        public Criteria andSignEndTimeGreaterThan(String value) {
             addCriterion("sign_end_time >", value, "signEndTime");
             return (Criteria) this;
         }
 
-        public Criteria andSignEndTimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andSignEndTimeGreaterThanOrEqualTo(String value) {
             addCriterion("sign_end_time >=", value, "signEndTime");
             return (Criteria) this;
         }
 
-        public Criteria andSignEndTimeLessThan(Date value) {
+        public Criteria andSignEndTimeLessThan(String value) {
             addCriterion("sign_end_time <", value, "signEndTime");
             return (Criteria) this;
         }
 
-        public Criteria andSignEndTimeLessThanOrEqualTo(Date value) {
+        public Criteria andSignEndTimeLessThanOrEqualTo(String value) {
             addCriterion("sign_end_time <=", value, "signEndTime");
             return (Criteria) this;
         }
 
-        public Criteria andSignEndTimeIn(List<Date> values) {
+        public Criteria andSignEndTimeLike(String value) {
+            addCriterion("sign_end_time like", value, "signEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignEndTimeNotLike(String value) {
+            addCriterion("sign_end_time not like", value, "signEndTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andSignEndTimeIn(List<String> values) {
             addCriterion("sign_end_time in", values, "signEndTime");
             return (Criteria) this;
         }
 
-        public Criteria andSignEndTimeNotIn(List<Date> values) {
+        public Criteria andSignEndTimeNotIn(List<String> values) {
             addCriterion("sign_end_time not in", values, "signEndTime");
             return (Criteria) this;
         }
 
-        public Criteria andSignEndTimeBetween(Date value1, Date value2) {
+        public Criteria andSignEndTimeBetween(String value1, String value2) {
             addCriterion("sign_end_time between", value1, value2, "signEndTime");
             return (Criteria) this;
         }
 
-        public Criteria andSignEndTimeNotBetween(Date value1, Date value2) {
+        public Criteria andSignEndTimeNotBetween(String value1, String value2) {
             addCriterion("sign_end_time not between", value1, value2, "signEndTime");
             return (Criteria) this;
         }
@@ -378,52 +387,62 @@ public class FActivityExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andActivityTimeEqualTo(Date value) {
+        public Criteria andActivityTimeEqualTo(String value) {
             addCriterion("activity_time =", value, "activityTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivityTimeNotEqualTo(Date value) {
+        public Criteria andActivityTimeNotEqualTo(String value) {
             addCriterion("activity_time <>", value, "activityTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivityTimeGreaterThan(Date value) {
+        public Criteria andActivityTimeGreaterThan(String value) {
             addCriterion("activity_time >", value, "activityTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivityTimeGreaterThanOrEqualTo(Date value) {
+        public Criteria andActivityTimeGreaterThanOrEqualTo(String value) {
             addCriterion("activity_time >=", value, "activityTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivityTimeLessThan(Date value) {
+        public Criteria andActivityTimeLessThan(String value) {
             addCriterion("activity_time <", value, "activityTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivityTimeLessThanOrEqualTo(Date value) {
+        public Criteria andActivityTimeLessThanOrEqualTo(String value) {
             addCriterion("activity_time <=", value, "activityTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivityTimeIn(List<Date> values) {
+        public Criteria andActivityTimeLike(String value) {
+            addCriterion("activity_time like", value, "activityTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityTimeNotLike(String value) {
+            addCriterion("activity_time not like", value, "activityTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andActivityTimeIn(List<String> values) {
             addCriterion("activity_time in", values, "activityTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivityTimeNotIn(List<Date> values) {
+        public Criteria andActivityTimeNotIn(List<String> values) {
             addCriterion("activity_time not in", values, "activityTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivityTimeBetween(Date value1, Date value2) {
+        public Criteria andActivityTimeBetween(String value1, String value2) {
             addCriterion("activity_time between", value1, value2, "activityTime");
             return (Criteria) this;
         }
 
-        public Criteria andActivityTimeNotBetween(Date value1, Date value2) {
+        public Criteria andActivityTimeNotBetween(String value1, String value2) {
             addCriterion("activity_time not between", value1, value2, "activityTime");
             return (Criteria) this;
         }
@@ -708,6 +727,76 @@ public class FActivityExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andLinkPhoneIsNull() {
+            addCriterion("link_phone is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneIsNotNull() {
+            addCriterion("link_phone is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneEqualTo(String value) {
+            addCriterion("link_phone =", value, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneNotEqualTo(String value) {
+            addCriterion("link_phone <>", value, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneGreaterThan(String value) {
+            addCriterion("link_phone >", value, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneGreaterThanOrEqualTo(String value) {
+            addCriterion("link_phone >=", value, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneLessThan(String value) {
+            addCriterion("link_phone <", value, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneLessThanOrEqualTo(String value) {
+            addCriterion("link_phone <=", value, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneLike(String value) {
+            addCriterion("link_phone like", value, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneNotLike(String value) {
+            addCriterion("link_phone not like", value, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneIn(List<String> values) {
+            addCriterion("link_phone in", values, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneNotIn(List<String> values) {
+            addCriterion("link_phone not in", values, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneBetween(String value1, String value2) {
+            addCriterion("link_phone between", value1, value2, "linkPhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkPhoneNotBetween(String value1, String value2) {
+            addCriterion("link_phone not between", value1, value2, "linkPhone");
+            return (Criteria) this;
+        }
+
         public Criteria andActivityAddressIsNull() {
             addCriterion("activity_address is null");
             return (Criteria) this;
@@ -845,6 +934,66 @@ public class FActivityExample implements Serializable {
 
         public Criteria andShowStatusNotBetween(String value1, String value2) {
             addCriterion("show_status not between", value1, value2, "showStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeIsNull() {
+            addCriterion("ctime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeIsNotNull() {
+            addCriterion("ctime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeEqualTo(Long value) {
+            addCriterion("ctime =", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeNotEqualTo(Long value) {
+            addCriterion("ctime <>", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeGreaterThan(Long value) {
+            addCriterion("ctime >", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("ctime >=", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeLessThan(Long value) {
+            addCriterion("ctime <", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeLessThanOrEqualTo(Long value) {
+            addCriterion("ctime <=", value, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeIn(List<Long> values) {
+            addCriterion("ctime in", values, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeNotIn(List<Long> values) {
+            addCriterion("ctime not in", values, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeBetween(Long value1, Long value2) {
+            addCriterion("ctime between", value1, value2, "ctime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCtimeNotBetween(Long value1, Long value2) {
+            addCriterion("ctime not between", value1, value2, "ctime");
             return (Criteria) this;
         }
     }

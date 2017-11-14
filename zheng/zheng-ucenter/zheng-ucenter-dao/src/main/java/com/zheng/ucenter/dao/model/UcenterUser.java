@@ -74,6 +74,8 @@ public class UcenterUser implements Serializable {
      */
     private String lastLoginIp;
 
+    private String userName;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUserId() {
@@ -156,6 +158,14 @@ public class UcenterUser implements Serializable {
         this.lastLoginIp = lastLoginIp;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -172,6 +182,7 @@ public class UcenterUser implements Serializable {
         sb.append(", createIp=").append(createIp);
         sb.append(", lastLoginTime=").append(lastLoginTime);
         sb.append(", lastLoginIp=").append(lastLoginIp);
+        sb.append(", userName=").append(userName);
         sb.append("]");
         return sb.toString();
     }
@@ -197,7 +208,8 @@ public class UcenterUser implements Serializable {
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getCreateIp() == null ? other.getCreateIp() == null : this.getCreateIp().equals(other.getCreateIp()))
             && (this.getLastLoginTime() == null ? other.getLastLoginTime() == null : this.getLastLoginTime().equals(other.getLastLoginTime()))
-            && (this.getLastLoginIp() == null ? other.getLastLoginIp() == null : this.getLastLoginIp().equals(other.getLastLoginIp()));
+            && (this.getLastLoginIp() == null ? other.getLastLoginIp() == null : this.getLastLoginIp().equals(other.getLastLoginIp()))
+            && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()));
     }
 
     @Override
@@ -214,6 +226,7 @@ public class UcenterUser implements Serializable {
         result = prime * result + ((getCreateIp() == null) ? 0 : getCreateIp().hashCode());
         result = prime * result + ((getLastLoginTime() == null) ? 0 : getLastLoginTime().hashCode());
         result = prime * result + ((getLastLoginIp() == null) ? 0 : getLastLoginIp().hashCode());
+        result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
         return result;
     }
 }

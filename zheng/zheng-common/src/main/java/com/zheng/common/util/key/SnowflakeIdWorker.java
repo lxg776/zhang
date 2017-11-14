@@ -174,10 +174,10 @@ public class SnowflakeIdWorker {
 	 */
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
-		SnowflakeIdWorker idWorker0 = new SnowflakeIdWorker(0, 0);
-		for (int i = 0; i < 10000000; i++) {
+		SnowflakeIdWorker idWorker0 = new SnowflakeIdWorker(22, 0);
+		for (int i = 0; i < 10; i++) {
 			long id = idWorker0.nextId();
-			//System.out.println(id);
+			System.out.println(id);
 		}
 		System.out.println("耗时：" + (System.currentTimeMillis() - start));
 	}

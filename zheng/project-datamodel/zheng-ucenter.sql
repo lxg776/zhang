@@ -22,6 +22,7 @@ alter table ucenter_oauth comment '认证方式表';
 create table ucenter_user
 (
    user_id              int unsigned not null auto_increment comment '编号',
+   user_name            varchar(20) not null comment '昵称',
    password             varchar(32) comment '密码(MD5(密码+盐))',
    salt                 varchar(32) comment '盐',
    nickname             varchar(20) comment '昵称',
@@ -33,6 +34,21 @@ create table ucenter_user
    last_login_ip        varchar(50) comment '最后登录IP地址',
    primary key (user_id)
 );
+
+alter table ucenter_user  add user_name varchar(32) not Null;
+
+
+create table ucenter_identificaion
+(
+   user_id              int unsigned not null comment '编号',
+   real_name            varchar(20) comment '真实姓名',
+   idcard_type          varchar(11) comment '证件类型',
+   idcard_no            varchar(30) comment '证件号码',
+   cellphone            varchar(11) comment '手机号码',
+   primary key (user_id)
+);
+
+
 
 alter table ucenter_user comment '用户表';
 
