@@ -32,6 +32,13 @@ public class UcenterIdentificaion implements Serializable {
     private String idcardNo;
 
     /**
+     * 证件图片
+     *
+     * @mbg.generated
+     */
+    private String idcardImgs;
+
+    /**
      * 手机号码
      *
      * @mbg.generated
@@ -72,6 +79,14 @@ public class UcenterIdentificaion implements Serializable {
         this.idcardNo = idcardNo;
     }
 
+    public String getIdcardImgs() {
+        return idcardImgs;
+    }
+
+    public void setIdcardImgs(String idcardImgs) {
+        this.idcardImgs = idcardImgs;
+    }
+
     public String getCellphone() {
         return cellphone;
     }
@@ -90,6 +105,7 @@ public class UcenterIdentificaion implements Serializable {
         sb.append(", realName=").append(realName);
         sb.append(", idcardType=").append(idcardType);
         sb.append(", idcardNo=").append(idcardNo);
+        sb.append(", idcardImgs=").append(idcardImgs);
         sb.append(", cellphone=").append(cellphone);
         sb.append("]");
         return sb.toString();
@@ -111,6 +127,7 @@ public class UcenterIdentificaion implements Serializable {
             && (this.getRealName() == null ? other.getRealName() == null : this.getRealName().equals(other.getRealName()))
             && (this.getIdcardType() == null ? other.getIdcardType() == null : this.getIdcardType().equals(other.getIdcardType()))
             && (this.getIdcardNo() == null ? other.getIdcardNo() == null : this.getIdcardNo().equals(other.getIdcardNo()))
+            && (this.getIdcardImgs() == null ? other.getIdcardImgs() == null : this.getIdcardImgs().equals(other.getIdcardImgs()))
             && (this.getCellphone() == null ? other.getCellphone() == null : this.getCellphone().equals(other.getCellphone()));
     }
 
@@ -122,6 +139,7 @@ public class UcenterIdentificaion implements Serializable {
         result = prime * result + ((getRealName() == null) ? 0 : getRealName().hashCode());
         result = prime * result + ((getIdcardType() == null) ? 0 : getIdcardType().hashCode());
         result = prime * result + ((getIdcardNo() == null) ? 0 : getIdcardNo().hashCode());
+        result = prime * result + ((getIdcardImgs() == null) ? 0 : getIdcardImgs().hashCode());
         result = prime * result + ((getCellphone() == null) ? 0 : getCellphone().hashCode());
         return result;
     }

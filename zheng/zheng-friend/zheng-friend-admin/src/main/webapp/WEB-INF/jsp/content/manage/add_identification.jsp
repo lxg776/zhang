@@ -73,14 +73,20 @@
                 </div>
                 <!-- 新闻栏目 -->
                 <div class="box-content">
-                    <form action="saveField" method="post" class="form-horizontal">
+                    <form action="editIdentific" method="post" class="form-horizontal">
+                        <input type="hidden"
+                               name="keyword" value="${keyword}" >
+
+                        <input type="hidden"
+                               name="userId" value="${modle.userId}" >
+
                         <fieldset>
 
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">真实姓名 </label>
                                 <div class="controls">
                                     <input type="text" class="span6 typeahead" id="typeahead"
-                                           name="show_field_name" value="{vo.show_field_name}" data-provide="typeahead">
+                                           name="realName" value="${modle.realName}" data-provide="typeahead">
 
                                 </div>
                             </div>
@@ -90,34 +96,31 @@
                                 <label class="control-label" for="typeahead">手机号码 </label>
                                 <div class="controls">
                                     <input type="text" class="span6 typeahead" id="typeahead"
-                                           name="show_field_name" value="{vo.show_field_name}" data-provide="typeahead">
+                                           name="cellphone" value="${modle.cellphone}" data-provide="typeahead">
 
                                 </div>
                             </div>
 
-
-                            <div class="control-group">
-                                <label class="control-label" for="typeahead">性别 </label>
-                                <div class="controls">
-                                    <select id="selectError3" name="keyWord">
-                                        <option value="online">未知</option>
-                                        <option value="cn">男</option>
-                                        <option value="en">女</option>
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">证件类型 </label>
                                 <div class="controls">
-                                    <select id="selectError4" name="keyWord">
-                                        <option value="online">身份证</option>
-                                        <option value="cn">其他证件</option>
+                                    <select id="selectError4" name="idcardType">
+                                        <option value="idcard">身份证</option>
+                                        <option value="other">其他证件</option>
 
                                     </select>
                                 </div>
                             </div>
 
+                            <div class="control-group">
+                                <label class="control-label" for="typeahead">证件号码 </label>
+                                <div class="controls">
+                                    <input type="text" class="span6 typeahead" id="typeahead"
+                                           name="idcardNo" value="${modle.idcardNo}" data-provide="typeahead">
+
+                                </div>
+                            </div>
 
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">证件图片 </label>

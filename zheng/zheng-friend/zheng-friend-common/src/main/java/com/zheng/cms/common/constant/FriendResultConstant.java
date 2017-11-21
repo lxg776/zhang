@@ -4,7 +4,7 @@ package com.zheng.cms.common.constant;
  * cms系统接口结果常量枚举类
  * Created by shuzheng on 2017/2/19.
  */
-public enum CmsResultConstant {
+public enum FriendResultConstant {
 
     FAILED(0, "failed"),
     SUCCESS(1, "success"),
@@ -17,7 +17,7 @@ public enum CmsResultConstant {
 
     public String message;
 
-    CmsResultConstant(int code, String message) {
+    FriendResultConstant(int code, String message) {
         this.code = code;
         this.message = message;
     }

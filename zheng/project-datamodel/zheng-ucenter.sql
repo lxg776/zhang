@@ -35,7 +35,66 @@ create table ucenter_user
    primary key (user_id)
 );
 
+create table f_user_base_msg
+(
+   user_id              int unsigned not null comment '编号',
+   nikename             varchar(50)  comment '昵称',
+   birth_date           varchar(50) comment '出生年月',
+   height               float comment '身高',
+   shape                varchar(20)  comment '体型',
+   year_income          varchar(20)  comment '年收入',
+   month_income         varchar(20) comment '月薪',
+   education            varchar(100) comment '教育',
+   disposition          varchar(100) comment '性格',
+   profession           varchar(20) comment '职业',
+   unit_property        varchar(20) comment '单位性质',
+   work_unit            varchar(20) comment '工作单位',
+   work_place           varchar(20) comment '工作地点',
+   house_status         varchar(20) comment '房屋状况',
+   car_status           varchar(50) comment '车辆状况',
+   marital_status       varchar(20) comment '婚姻状况',
+   children_status      varchar(20) comment '孩子状况',
+   soliloquy            VARCHAR(255) comment '内心独白',
+   declaration          varchar(255) comment '交友宣言',
+   primary key (user_id)
+);
+
+create table f_member_type
+(
+   id                   int unsigned not null auto_increment comment '编号',
+   name                 varchar(50)  comment '类型名称',
+   info                 text comment '类型简介',
+   info_img             varchar(100) comment '简介图片',
+   msg_read_status      tinyint(4) unsigned comment '能否查看收件箱(0:不能,1:可以)',
+   msg_send_status      tinyint(4) unsigned comment '能否发送邮件(0:不能,1:可以)',
+   view_msg_status      tinyint(4) unsigned comment '能否访问用户资料(0:不能,1:可以)',
+   hongniang_status      tinyint(4) unsigned comment '是否开通红娘服务(0:不能,1:可以)',
+   historyview_status  tinyint(4) unsigned comment '能否查看访问记录(0:不能,1:可以)',
+   level                int unsigned DEFAULT 10 comment '等级',
+   price                float  comment '开通价格',
+   service_days         int  comment '服务天数',
+   create_time          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   primary key (id)
+);
+
+create table f_user_member_rel
+(
+   id                   int unsigned not null auto_increment comment '编号',
+   user_id              int unsigned not null comment '用户id',
+   member_type_id       int unsigned not null comment '会员类型id',
+   beg_time             long comment '开始时间',
+   end_time             long comment '结束时间',
+   end_status           tinyint(4) unsigned comment '能否访问用户资料(0:没有终止,1:终止)',
+   msg_send_status      tinyint(4) unsigned comment '能否发送邮件(0:不能,1:可以)',
+   createTime           long comment '结束时间',
+   level                int unsigned DEFAULT 10 comment '等级'
+   primary key (id)
+)
+
+
+
 alter table ucenter_user  add user_name varchar(32) not Null;
+alter table ucenter_user  ADD UNIQUE (user_name);
 
 
 create table ucenter_identificaion
@@ -44,6 +103,7 @@ create table ucenter_identificaion
    real_name            varchar(20) comment '真实姓名',
    idcard_type          varchar(11) comment '证件类型',
    idcard_no            varchar(30) comment '证件号码',
+   idcard_imgs          varchar(255) comment '证件图片',
    cellphone            varchar(11) comment '手机号码',
    primary key (user_id)
 );

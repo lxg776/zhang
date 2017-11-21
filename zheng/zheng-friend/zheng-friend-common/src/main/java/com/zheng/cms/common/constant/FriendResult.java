@@ -6,9 +6,9 @@ import com.zheng.common.base.BaseResult;
  * cms系统常量枚举类
  * Created by shuzheng on 2017/2/19.
  */
-public class CmsResult extends BaseResult {
+public class FriendResult extends BaseResult {
 
-    public CmsResult(CmsResultConstant cmsResultConstant, Object data) {
+    public FriendResult(FriendResultConstant cmsResultConstant, Object data) {
         super(cmsResultConstant.getCode(), cmsResultConstant.getMessage(), data);
     }
 

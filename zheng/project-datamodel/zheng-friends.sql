@@ -32,6 +32,31 @@ create table f_user_account
 
 }
 
+
+create table f_user_request
+(
+   user_id              int unsigned not null comment '用户编号',
+   sex                  varchar(10) comment '性别',
+   height               varchar(20) comment '身高要求',
+   shape                varchar(20) comment '体型要求',
+   age                  varchar(50) comment '年龄要求',
+   income_monthly       varchar(50) comment '月收入',
+   income_year          varchar(50) comment '年收入',
+   house_state          varchar(50) comment '房屋状况',
+   education            varchar(50) comment '学历',
+   marital_status       varchar(50) comment '婚姻状况',
+   house_status         varchar(50) comment '房屋状况',
+   car_status           varchar(50) comment '车辆状况',
+   job                  varchar(50) comment '工作状况',
+   friend_require       varchar(255) comment '对另一半得要求',
+   drink_status         varchar(50) comment '饮酒情况',
+   smoke_status         varchar(50) comment '饮酒情况',
+   living_status        varchar(50) comment '是否与父母同住',
+   primary key (user_id)
+
+)
+
+
 create table f_activity
 (
   activity_id   int unsigned not null auto_increment comment '活动编号',

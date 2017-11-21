@@ -77,32 +77,35 @@
 							class="break"></span>会员管理
 					</h2>
 					<div class="box-icon">
-						<a href="${ctx}/manage/member/editUser" style="color: #FFF">添加</a>
+						<a href="${ctx}/manage/memberType/editType" style="color: #FFF">添加</a>
 					</div>
 				</div>
 				<div class="box-content">
 					<table class="table table-bordered">
 						<thead>
 						<tr>
-							<th style="width: 100px;">userId</th>
-							<th style="width: 200px;">用户名</th>
-							<th style="width: 200px;">性别</th>
-							<th style="width: 200px;">注册时间</th>
-							<th style="width: 600px;">操作</th>
+							<th style="width: 100px;">id</th>
+							<th style="width: 200px;">名称</th>
+							<th style="width: 200px;">红娘服务</th>
+							<th style="width: 200px;">开通价格</th>
+							<th style="width: 200px;">优先级等级</th>
+							<th style="width: 200px;">创建时间</th>
+							<th style="width: 400px;">操作</th>
 						</tr>
 						</thead>
 						<tbody>
 						<c:forEach var="item" items="${page.dataList}" >
 							<tr>
-								<td style="width: 100px;">${item.userId}</td>
-								<td style="width: 200px;">${item.userName}</td>
-								<c:if test="${item.sex == 0}">	<td style="width: 200px;">未知</td></c:if>
-								<c:if test="${item.sex == 1}"><td style="width: 200px;">男</td></c:if>
-								<c:if test="${item.sex == 2}"><td style="width: 200px;">女</td></c:if>
+								<td style="width: 100px;">${item.id}</td>
+								<td style="width: 200px;">${item.name}</td>
+								<c:if test="${item.hongniangStatus == 0}">	<td style="width: 200px;">否</td></c:if>
+								<c:if test="${item.hongniangStatus == 1}"><td style="width: 200px;">是</td></c:if>
+
+								<td style="width: 200px;">${item.price}元</td>
+								<td style="width: 200px;">${item.level}</td>
 								<td style="width: 200px;"><fmt:formatDate value="${item.createTime}" pattern="yyyy/MM/dd  HH:mm:ss" /></td>
-								<td style="width: 600px;"><a href="${ctx}/manage/member/editUser?id=${item.userId}" style="color: #0033FF">编辑用户信息</a>
-									/<a href="${ctx}/manage/member/editBaseMsg?userId=${item.userId}" style="color: #0033FF">编辑基本资料</a><br/><a href="${ctx}/manage/member/editIdentific?userId=${item.userId}" style="color: #0033FF">编辑认证信息</a>/<a href="#" style="color: #0033FF">设置会员</a>/
-								<a href="${ctx}/manage/member/editRequestMsg?userId=${item.userId}" style="color: #0033FF">编辑择偶要求</a>/<a href="#" style="color: #0033FF">删除</a>
+								<td style="width: 400px;"><a href="${ctx}/manage/memberType/editType?id=${item.id}" style="color: #0033FF">编辑类型</a>
+								<a href="#" style="color: #0033FF">删除</a>
 								</td>
 							</tr>
 						</c:forEach>

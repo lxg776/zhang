@@ -74,13 +74,19 @@
                 <!-- 新闻栏目 -->
                 <div class="box-content">
                     <form action="/manage/member/editUser" method="post" class="form-horizontal">
+                        <input type="hidden"
+                               name="keyword" value="${keyword}" />
+
+                        <input type="hidden"
+                               name="userId" value="${modle.userId}" />
+
                         <fieldset>
 
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">用户名 </label>
                                 <div class="controls">
                                     <input type="text" class="span6 typeahead" id="typeahead"
-                                           name="userName" value="${vo.userName}" data-provide="typeahead">
+                                           name="userName" value="${modle.userName}" data-provide="typeahead">
 
                                 </div>
                             </div>
@@ -90,7 +96,7 @@
                                 <label class="control-label" for="typeahead">昵称 </label>
                                 <div class="controls">
                                     <input type="text" class="span6 typeahead" id="typeahead"
-                                           name="nickname" value="${vo.nickname}" data-provide="typeahead">
+                                           name="nickname" value="${modle.nickname}" data-provide="typeahead">
 
                                 </div>
                             </div>
@@ -110,9 +116,9 @@
                                 <label class="control-label" for="typeahead">性别 </label>
                                 <div class="controls">
                                     <select id="selectError3" name="sex">
-                                        <option value="0">未知</option>
-                                        <option value="1">男</option>
-                                        <option value="2">女</option>
+                                        <option value="0"  <c:if test="${modle.sex==0}">selected = "selected"</c:if> >未知</option>
+                                        <option value="1" <c:if test="${modle.sex==1}">selected = "selected"</c:if> >男</option>
+                                        <option value="2" <c:if test="${modle.sex==2}">selected = "selected"</c:if> >女</option>
                                     </select>
                                 </div>
                             </div>

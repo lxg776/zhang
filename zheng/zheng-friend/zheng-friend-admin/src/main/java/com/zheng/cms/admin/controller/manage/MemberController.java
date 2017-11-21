@@ -3,6 +3,13 @@ package com.zheng.cms.admin.controller.manage;
 import com.zheng.cms.admin.modle.PageOnterModle;
 import com.zheng.common.base.BaseController;
 
+import com.zheng.common.util.MD5Util;
+import com.zheng.common.util.StringUtil;
+import com.zheng.friend.dao.model.FUserBaseMsg;
+import com.zheng.friend.dao.model.FUserRequest;
+import com.zheng.friend.rpc.api.FUserBaseMsgService;
+import com.zheng.friend.rpc.api.FUserRequestService;
+import com.zheng.ucenter.dao.model.UcenterIdentificaion;
 import com.zheng.ucenter.dao.model.UcenterUser;
 import com.zheng.ucenter.dao.model.UcenterUserExample;
 import com.zheng.ucenter.rpc.api.UcenterIdentificaionService;
@@ -36,6 +43,14 @@ public class MemberController extends BaseController{
 
     @Autowired
     private UcenterUserService ucenterUserService;
+
+    @Autowired
+    private FUserBaseMsgService fUserBaseMsgService;
+
+
+    @Autowired
+    private FUserRequestService fUserRequestService;
+
 
 
     private int pageSize=15;
@@ -78,24 +93,130 @@ public class MemberController extends BaseController{
     }
 
 
+
+
+
+
+
+
+
     @ApiOperation(value = "活动编辑")
     @RequestMapping(value = "/editUser", method = RequestMethod.POST)
     public String createAndUpdate(@RequestParam(defaultValue = "0") String keyword, UcenterUser modle){
-
-
-
-
         if("del".equals(keyword)){
             if(modle.getUserId()>0){
                 ucenterUserService.deleteByPrimaryKey(modle.getUserId());
             }
         }else if("update".equals(keyword)){
-            ucenterUserService.updateByPrimaryKey(modle);
-        }else{
+            if(null==modle.getPassword()||"".equals(modle.getPassword())){
 
+            }else{
+                String password =  MD5Util.MD5(modle.getSalt()+modle.getPassword());
+                modle.setPassword(password);
+            }
+            ucenterUserService.updateByPrimaryKeySelective(modle);
+        }else{
+            modle.setSalt("friend");
+            String password =  MD5Util.MD5(modle.getSalt()+modle.getPassword());
+            modle.setPassword(password);
             ucenterUserService.insert(modle);
         }
         return "redirect:list";
     }
 
+    @ApiOperation(value = "编辑")
+    @RequestMapping(value = "/editIdentific", method = RequestMethod.GET)
+    public String editIdentific(@RequestParam(defaultValue = "0") Integer userId,ModelMap modelMap){
+
+        UcenterIdentificaion modle = ucenterIdentificaionService.selectByPrimaryKey(userId);
+        if(modle==null){
+            modle =new UcenterIdentificaion();
+            modle.setUserId(userId);
+            modelMap.put("keyword","create");
+        }else{
+            modelMap.put("keyword","update");
+        }
+        modelMap.put("modle",modle);
+        return "/content/manage/add_identification.jsp";
+
+
+    }
+
+
+
+    @ApiOperation(value = "活动编辑")
+    @RequestMapping(value = "/editIdentific", method = RequestMethod.POST)
+    public String editIdentific(@RequestParam(defaultValue = "0") String keyword, UcenterIdentificaion modle){
+       if("update".equals(keyword)){
+           ucenterIdentificaionService.updateByPrimaryKeySelective(modle);
+        }else{
+           ucenterIdentificaionService.insert(modle);
+        }
+        return "redirect:list";
+    }
+
+
+    @ApiOperation(value = "编辑")
+    @RequestMapping(value = "/editBaseMsg", method = RequestMethod.GET)
+    public String editBaseMsg(@RequestParam(defaultValue = "0") Integer userId,ModelMap modelMap){
+
+        FUserBaseMsg modle = fUserBaseMsgService.selectByPrimaryKey(userId);
+        if(modle==null){
+            modle =new FUserBaseMsg();
+            modle.setUserId(userId);
+            modelMap.put("keyword","create");
+        }else{
+            modelMap.put("keyword","update");
+        }
+        modelMap.put("modle",modle);
+        return "/content/manage/add_base_msg.jsp";
+
+
+    }
+
+
+
+    @ApiOperation(value = "操作基本资料")
+    @RequestMapping(value = "/editBaseMsg", method = RequestMethod.POST)
+    public String editBaseMsg(@RequestParam(defaultValue = "0") String keyword, FUserBaseMsg modle){
+        if("update".equals(keyword)){
+            fUserBaseMsgService.updateByPrimaryKeySelective(modle);
+        }else{
+            fUserBaseMsgService.insert(modle);
+        }
+        return "redirect:list";
+    }
+
+
+
+    @ApiOperation(value = "编辑")
+    @RequestMapping(value = "/editRequestMsg", method = RequestMethod.GET)
+    public String editRequestMsg(@RequestParam(defaultValue = "0") Integer userId,ModelMap modelMap){
+
+        FUserRequest modle = fUserRequestService.selectByPrimaryKey(userId);
+        if(modle==null){
+            modle =new FUserRequest();
+            modle.setUserId(userId);
+            modelMap.put("keyword","create");
+        }else{
+            modelMap.put("keyword","update");
+        }
+        modelMap.put("modle",modle);
+        return "/content/manage/add_requirements.jsp";
+
+
+    }
+
+
+
+    @ApiOperation(value = "操作基本资料")
+    @RequestMapping(value = "/editRequestMsg", method = RequestMethod.POST)
+    public String editRequestMsg(@RequestParam(defaultValue = "0") String keyword, FUserRequest modle){
+        if("update".equals(keyword)){
+            fUserRequestService.updateByPrimaryKeySelective(modle);
+        }else{
+            fUserRequestService.insert(modle);
+        }
+        return "redirect:list";
+    }
 }

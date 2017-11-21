@@ -6,6 +6,7 @@
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
     <result column="idcard_type" jdbcType="VARCHAR" property="idcardType" />
     <result column="idcard_no" jdbcType="VARCHAR" property="idcardNo" />
+    <result column="idcard_imgs" jdbcType="VARCHAR" property="idcardImgs" />
     <result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, real_name, idcard_type, idcard_no, cellphone
+    user_id, real_name, idcard_type, idcard_no, idcard_imgs, cellphone
   </sql>
   <select id="selectByExample" parameterType="com.zheng.ucenter.dao.model.UcenterIdentificaionExample" resultMap="BaseResultMap">
     select
@@ -101,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.zheng.ucenter.dao.model.UcenterIdentificaion">
     insert into ucenter_identificaion (user_id, real_name, idcard_type, 
-      idcard_no, cellphone)
+      idcard_no, idcard_imgs, cellphone
+      )
     values (#{userId,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, #{idcardType,jdbcType=VARCHAR}, 
-      #{idcardNo,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR})
+      #{idcardNo,jdbcType=VARCHAR}, #{idcardImgs,jdbcType=VARCHAR}, #{cellphone,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.ucenter.dao.model.UcenterIdentificaion">
     insert into ucenter_identificaion
@@ -119,6 +122,9 @@
       </if>
       <if test="idcardNo != null">
         idcard_no,
+      </if>
+      <if test="idcardImgs != null">
+        idcard_imgs,
       </if>
       <if test="cellphone != null">
         cellphone,
@@ -136,6 +142,9 @@
       </if>
       <if test="idcardNo != null">
         #{idcardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardImgs != null">
+        #{idcardImgs,jdbcType=VARCHAR},
       </if>
       <if test="cellphone != null">
         #{cellphone,jdbcType=VARCHAR},
@@ -163,6 +172,9 @@
       <if test="record.idcardNo != null">
         idcard_no = #{record.idcardNo,jdbcType=VARCHAR},
       </if>
+      <if test="record.idcardImgs != null">
+        idcard_imgs = #{record.idcardImgs,jdbcType=VARCHAR},
+      </if>
       <if test="record.cellphone != null">
         cellphone = #{record.cellphone,jdbcType=VARCHAR},
       </if>
@@ -177,6 +189,7 @@
       real_name = #{record.realName,jdbcType=VARCHAR},
       idcard_type = #{record.idcardType,jdbcType=VARCHAR},
       idcard_no = #{record.idcardNo,jdbcType=VARCHAR},
+      idcard_imgs = #{record.idcardImgs,jdbcType=VARCHAR},
       cellphone = #{record.cellphone,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -194,6 +207,9 @@
       <if test="idcardNo != null">
         idcard_no = #{idcardNo,jdbcType=VARCHAR},
       </if>
+      <if test="idcardImgs != null">
+        idcard_imgs = #{idcardImgs,jdbcType=VARCHAR},
+      </if>
       <if test="cellphone != null">
         cellphone = #{cellphone,jdbcType=VARCHAR},
       </if>
@@ -205,6 +221,7 @@
     set real_name = #{realName,jdbcType=VARCHAR},
       idcard_type = #{idcardType,jdbcType=VARCHAR},
       idcard_no = #{idcardNo,jdbcType=VARCHAR},
+      idcard_imgs = #{idcardImgs,jdbcType=VARCHAR},
       cellphone = #{cellphone,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>

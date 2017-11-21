@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zheng.friend.dao.mapper.FUserRequestMapper">
+  <resultMap id="BaseResultMap" type="com.zheng.friend.dao.model.FUserRequest">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="height" jdbcType="VARCHAR" property="height" />
+    <result column="shape" jdbcType="VARCHAR" property="shape" />
+    <result column="age" jdbcType="VARCHAR" property="age" />
+    <result column="income_monthly" jdbcType="VARCHAR" property="incomeMonthly" />
+    <result column="income_year" jdbcType="VARCHAR" property="incomeYear" />
+    <result column="house_state" jdbcType="VARCHAR" property="houseState" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="house_status" jdbcType="VARCHAR" property="houseStatus" />
+    <result column="car_status" jdbcType="VARCHAR" property="carStatus" />
+    <result column="job" jdbcType="VARCHAR" property="job" />
+    <result column="friend_require" jdbcType="VARCHAR" property="friendRequire" />
+    <result column="drink_status" jdbcType="VARCHAR" property="drinkStatus" />
+    <result column="smoke_status" jdbcType="VARCHAR" property="smokeStatus" />
+    <result column="living_status" jdbcType="VARCHAR" property="livingStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, sex, height, shape, age, income_monthly, income_year, house_state, education, 
+    marital_status, house_status, car_status, job, friend_require, drink_status, smoke_status, 
+    living_status
+  </sql>
+  <select id="selectByExample" parameterType="com.zheng.friend.dao.model.FUserRequestExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_user_request
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from f_user_request
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from f_user_request
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zheng.friend.dao.model.FUserRequestExample">
+    delete from f_user_request
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zheng.friend.dao.model.FUserRequest">
+    insert into f_user_request (user_id, sex, height, 
+      shape, age, income_monthly, 
+      income_year, house_state, education, 
+      marital_status, house_status, car_status, 
+      job, friend_require, drink_status, 
+      smoke_status, living_status)
+    values (#{userId,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, 
+      #{shape,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{incomeMonthly,jdbcType=VARCHAR}, 
+      #{incomeYear,jdbcType=VARCHAR}, #{houseState,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
+      #{maritalStatus,jdbcType=VARCHAR}, #{houseStatus,jdbcType=VARCHAR}, #{carStatus,jdbcType=VARCHAR}, 
+      #{job,jdbcType=VARCHAR}, #{friendRequire,jdbcType=VARCHAR}, #{drinkStatus,jdbcType=VARCHAR}, 
+      #{smokeStatus,jdbcType=VARCHAR}, #{livingStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zheng.friend.dao.model.FUserRequest">
+    insert into f_user_request
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="shape != null">
+        shape,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="incomeMonthly != null">
+        income_monthly,
+      </if>
+      <if test="incomeYear != null">
+        income_year,
+      </if>
+      <if test="houseState != null">
+        house_state,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="maritalStatus != null">
+        marital_status,
+      </if>
+      <if test="houseStatus != null">
+        house_status,
+      </if>
+      <if test="carStatus != null">
+        car_status,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="friendRequire != null">
+        friend_require,
+      </if>
+      <if test="drinkStatus != null">
+        drink_status,
+      </if>
+      <if test="smokeStatus != null">
+        smoke_status,
+      </if>
+      <if test="livingStatus != null">
+        living_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="shape != null">
+        #{shape,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeMonthly != null">
+        #{incomeMonthly,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeYear != null">
+        #{incomeYear,jdbcType=VARCHAR},
+      </if>
+      <if test="houseState != null">
+        #{houseState,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="houseStatus != null">
+        #{houseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="carStatus != null">
+        #{carStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="friendRequire != null">
+        #{friendRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="drinkStatus != null">
+        #{drinkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="smokeStatus != null">
+        #{smokeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="livingStatus != null">
+        #{livingStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zheng.friend.dao.model.FUserRequestExample" resultType="java.lang.Long">
+    select count(*) from f_user_request
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update f_user_request
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.height != null">
+        height = #{record.height,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shape != null">
+        shape = #{record.shape,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeMonthly != null">
+        income_monthly = #{record.incomeMonthly,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeYear != null">
+        income_year = #{record.incomeYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseState != null">
+        house_state = #{record.houseState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.education != null">
+        education = #{record.education,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maritalStatus != null">
+        marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.houseStatus != null">
+        house_status = #{record.houseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carStatus != null">
+        car_status = #{record.carStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null">
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.friendRequire != null">
+        friend_require = #{record.friendRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drinkStatus != null">
+        drink_status = #{record.drinkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smokeStatus != null">
+        smoke_status = #{record.smokeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.livingStatus != null">
+        living_status = #{record.livingStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update f_user_request
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      height = #{record.height,jdbcType=VARCHAR},
+      shape = #{record.shape,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=VARCHAR},
+      income_monthly = #{record.incomeMonthly,jdbcType=VARCHAR},
+      income_year = #{record.incomeYear,jdbcType=VARCHAR},
+      house_state = #{record.houseState,jdbcType=VARCHAR},
+      education = #{record.education,jdbcType=VARCHAR},
+      marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
+      house_status = #{record.houseStatus,jdbcType=VARCHAR},
+      car_status = #{record.carStatus,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      friend_require = #{record.friendRequire,jdbcType=VARCHAR},
+      drink_status = #{record.drinkStatus,jdbcType=VARCHAR},
+      smoke_status = #{record.smokeStatus,jdbcType=VARCHAR},
+      living_status = #{record.livingStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zheng.friend.dao.model.FUserRequest">
+    update f_user_request
+    <set>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="shape != null">
+        shape = #{shape,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeMonthly != null">
+        income_monthly = #{incomeMonthly,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeYear != null">
+        income_year = #{incomeYear,jdbcType=VARCHAR},
+      </if>
+      <if test="houseState != null">
+        house_state = #{houseState,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="maritalStatus != null">
+        marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="houseStatus != null">
+        house_status = #{houseStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="carStatus != null">
+        car_status = #{carStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="friendRequire != null">
+        friend_require = #{friendRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="drinkStatus != null">
+        drink_status = #{drinkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="smokeStatus != null">
+        smoke_status = #{smokeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="livingStatus != null">
+        living_status = #{livingStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zheng.friend.dao.model.FUserRequest">
+    update f_user_request
+    set sex = #{sex,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      shape = #{shape,jdbcType=VARCHAR},
+      age = #{age,jdbcType=VARCHAR},
+      income_monthly = #{incomeMonthly,jdbcType=VARCHAR},
+      income_year = #{incomeYear,jdbcType=VARCHAR},
+      house_state = #{houseState,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      marital_status = #{maritalStatus,jdbcType=VARCHAR},
+      house_status = #{houseStatus,jdbcType=VARCHAR},
+      car_status = #{carStatus,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      friend_require = #{friendRequire,jdbcType=VARCHAR},
+      drink_status = #{drinkStatus,jdbcType=VARCHAR},
+      smoke_status = #{smokeStatus,jdbcType=VARCHAR},
+      living_status = #{livingStatus,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

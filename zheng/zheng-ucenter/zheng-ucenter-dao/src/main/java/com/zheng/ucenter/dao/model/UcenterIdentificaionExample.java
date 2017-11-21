@@ -377,6 +377,76 @@ public class UcenterIdentificaionExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andIdcardImgsIsNull() {
+            addCriterion("idcard_imgs is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsIsNotNull() {
+            addCriterion("idcard_imgs is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsEqualTo(String value) {
+            addCriterion("idcard_imgs =", value, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsNotEqualTo(String value) {
+            addCriterion("idcard_imgs <>", value, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsGreaterThan(String value) {
+            addCriterion("idcard_imgs >", value, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsGreaterThanOrEqualTo(String value) {
+            addCriterion("idcard_imgs >=", value, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsLessThan(String value) {
+            addCriterion("idcard_imgs <", value, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsLessThanOrEqualTo(String value) {
+            addCriterion("idcard_imgs <=", value, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsLike(String value) {
+            addCriterion("idcard_imgs like", value, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsNotLike(String value) {
+            addCriterion("idcard_imgs not like", value, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsIn(List<String> values) {
+            addCriterion("idcard_imgs in", values, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsNotIn(List<String> values) {
+            addCriterion("idcard_imgs not in", values, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsBetween(String value1, String value2) {
+            addCriterion("idcard_imgs between", value1, value2, "idcardImgs");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardImgsNotBetween(String value1, String value2) {
+            addCriterion("idcard_imgs not between", value1, value2, "idcardImgs");
+            return (Criteria) this;
+        }
+
         public Criteria andCellphoneIsNull() {
             addCriterion("cellphone is null");
             return (Criteria) this;

@@ -26,6 +26,12 @@
 
     <dubbo:reference id="ucenterUserService" interface="com.zheng.ucenter.rpc.api.UcenterUserService" mock="true"/>
 
+    <dubbo:reference id="fUserBaseMsgServiceImpl" interface="com.zheng.friend.rpc.api.FUserBaseMsgService" mock="true"/>
 
+    <dubbo:reference id="fUserRequestService" interface="com.zheng.friend.rpc.api.FUserRequestService" mock="true"/>
+
+    <dubbo:reference id="fMemberTypeService" interface="com.zheng.friend.rpc.api.FMemberTypeService" mock="true"/>
+
+    <dubbo:reference id="fUserMemberRelService" interface="com.zheng.friend.rpc.api.FUserMemberRelService" mock="true"/>
 
 </beans>
