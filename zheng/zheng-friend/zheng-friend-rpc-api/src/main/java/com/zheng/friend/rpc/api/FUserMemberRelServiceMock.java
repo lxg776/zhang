@@ -4,6 +4,9 @@ import com.zheng.common.base.BaseServiceMock;
 import com.zheng.friend.dao.mapper.FUserMemberRelMapper;
 import com.zheng.friend.dao.model.FUserMemberRel;
 import com.zheng.friend.dao.model.FUserMemberRelExample;
+import com.zheng.friend.dao.vo.FUserMemberRelVo;
+
+import java.util.List;
 
 /**
 * 降级实现FUserMemberRelService接口
@@ -11,4 +14,9 @@ import com.zheng.friend.dao.model.FUserMemberRelExample;
 */
 public class FUserMemberRelServiceMock extends BaseServiceMock<FUserMemberRelMapper, FUserMemberRel, FUserMemberRelExample> implements FUserMemberRelService {
 
+
+    @Override
+    public List<FUserMemberRelVo> selectFUserMemberRelVoByUserId(Integer userId) {
+        return null;
+    }
 }

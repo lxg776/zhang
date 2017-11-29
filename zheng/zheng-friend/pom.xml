@@ -26,6 +26,7 @@
         <module>zheng-friend-search</module>
         <module>zheng-friend-admin</module>
         <module>zheng-friend-common</module>
+        <module>zheng-friend-web</module>
     </modules>
 
     <dependencyManagement>

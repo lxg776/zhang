@@ -82,11 +82,10 @@ create table f_user_member_rel
    id                   int unsigned not null auto_increment comment '编号',
    user_id              int unsigned not null comment '用户id',
    member_type_id       int unsigned not null comment '会员类型id',
-   beg_time             long comment '开始时间',
-   end_time             long comment '结束时间',
-   end_status           tinyint(4) unsigned comment '能否访问用户资料(0:没有终止,1:终止)',
-   msg_send_status      tinyint(4) unsigned comment '能否发送邮件(0:不能,1:可以)',
-   createTime           long comment '结束时间',
+   beg_time             varchar(50)  comment '开始时间',
+   end_time             varchar(50)  comment '结束时间',
+   end_status           tinyint(4) unsigned comment '终止状态(0:没有终止,1:终止)',
+   create_time          timestamp default CURRENT_TIMESTAMP comment '操作时间',
    level                int unsigned DEFAULT 10 comment '等级'
    primary key (id)
 )

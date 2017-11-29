@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+
+    <dubbo:application name="zheng-cms-admin"/>
+
+    <dubbo:registry file="./zheng-cms-admin-dubbo.cache" address="zookeeper://zkserver:2181"/>
+
+    <!-- 订阅服务 -->
+    <dubbo:consumer check="false"/>
+
+    <!-- 文章 -->
+    <dubbo:reference id="factivityService" interface="com.zheng.friend.rpc.api.FActivityService" mock="true"/>
+
+
+    <!-- 接口服务 -->
+    <dubbo:reference id="upmsApiService" interface="com.zheng.upms.rpc.api.UpmsApiService" mock="true"/>
+
+    <!-- 接口服务 -->
+    <dubbo:reference id="ucenterIdentificaionService" interface="com.zheng.ucenter.rpc.api.UcenterIdentificaionService" mock="true"/>
+
+    <dubbo:reference id="ucenterUserService" interface="com.zheng.ucenter.rpc.api.UcenterUserService" mock="true"/>
+
+    <dubbo:reference id="fUserBaseMsgServiceImpl" interface="com.zheng.friend.rpc.api.FUserBaseMsgService" mock="true"/>
+
+    <dubbo:reference id="fUserRequestService" interface="com.zheng.friend.rpc.api.FUserRequestService" mock="true"/>
+
+    <dubbo:reference id="fMemberTypeService" interface="com.zheng.friend.rpc.api.FMemberTypeService" mock="true"/>
+
+    <dubbo:reference id="fUserMemberRelService" interface="com.zheng.friend.rpc.api.FUserMemberRelService" mock="true"/>
+
+</beans>

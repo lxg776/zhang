@@ -5,14 +5,11 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="member_type_id" jdbcType="INTEGER" property="memberTypeId" />
+    <result column="beg_time" jdbcType="VARCHAR" property="begTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
     <result column="end_status" jdbcType="TINYINT" property="endStatus" />
-    <result column="msg_send_status" jdbcType="TINYINT" property="msgSendStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="level" jdbcType="INTEGER" property="level" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zheng.friend.dao.model.FUserMemberRel">
-    <result column="beg_time" jdbcType="LONGVARCHAR" property="begTime" />
-    <result column="end_time" jdbcType="LONGVARCHAR" property="endTime" />
-    <result column="createTime" jdbcType="LONGVARCHAR" property="createtime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,27 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, member_type_id, end_status, msg_send_status, level
+    id, user_id, member_type_id, beg_time, end_time, end_status, create_time, level
   </sql>
-  <sql id="Blob_Column_List">
-    beg_time, end_time, createTime
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.zheng.friend.dao.model.FUserMemberRelExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from f_user_member_rel
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.zheng.friend.dao.model.FUserMemberRelExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -108,11 +86,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from f_user_member_rel
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -128,13 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.zheng.friend.dao.model.FUserMemberRel">
     insert into f_user_member_rel (id, user_id, member_type_id, 
-      end_status, msg_send_status, level, 
-      beg_time, end_time, createTime
-      )
+      beg_time, end_time, end_status, 
+      create_time, level)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{memberTypeId,jdbcType=INTEGER}, 
-      #{endStatus,jdbcType=TINYINT}, #{msgSendStatus,jdbcType=TINYINT}, #{level,jdbcType=INTEGER}, 
-      #{begTime,jdbcType=LONGVARCHAR}, #{endTime,jdbcType=LONGVARCHAR}, #{createtime,jdbcType=LONGVARCHAR}
-      )
+      #{begTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{endStatus,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{level,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.friend.dao.model.FUserMemberRel">
     insert into f_user_member_rel
@@ -148,23 +122,20 @@
       <if test="memberTypeId != null">
         member_type_id,
       </if>
-      <if test="endStatus != null">
-        end_status,
-      </if>
-      <if test="msgSendStatus != null">
-        msg_send_status,
-      </if>
-      <if test="level != null">
-        level,
-      </if>
       <if test="begTime != null">
         beg_time,
       </if>
       <if test="endTime != null">
         end_time,
       </if>
-      <if test="createtime != null">
-        createTime,
+      <if test="endStatus != null">
+        end_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="level != null">
+        level,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -177,23 +148,20 @@
       <if test="memberTypeId != null">
         #{memberTypeId,jdbcType=INTEGER},
       </if>
+      <if test="begTime != null">
+        #{begTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
       <if test="endStatus != null">
         #{endStatus,jdbcType=TINYINT},
       </if>
-      <if test="msgSendStatus != null">
-        #{msgSendStatus,jdbcType=TINYINT},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="level != null">
         #{level,jdbcType=INTEGER},
-      </if>
-      <if test="begTime != null">
-        #{begTime,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="endTime != null">
-        #{endTime,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -215,40 +183,22 @@
       <if test="record.memberTypeId != null">
         member_type_id = #{record.memberTypeId,jdbcType=INTEGER},
       </if>
+      <if test="record.begTime != null">
+        beg_time = #{record.begTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=VARCHAR},
+      </if>
       <if test="record.endStatus != null">
         end_status = #{record.endStatus,jdbcType=TINYINT},
       </if>
-      <if test="record.msgSendStatus != null">
-        msg_send_status = #{record.msgSendStatus,jdbcType=TINYINT},
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.level != null">
         level = #{record.level,jdbcType=INTEGER},
       </if>
-      <if test="record.begTime != null">
-        beg_time = #{record.begTime,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.endTime != null">
-        end_time = #{record.endTime,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="record.createtime != null">
-        createTime = #{record.createtime,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update f_user_member_rel
-    set id = #{record.id,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      member_type_id = #{record.memberTypeId,jdbcType=INTEGER},
-      end_status = #{record.endStatus,jdbcType=TINYINT},
-      msg_send_status = #{record.msgSendStatus,jdbcType=TINYINT},
-      level = #{record.level,jdbcType=INTEGER},
-      beg_time = #{record.begTime,jdbcType=LONGVARCHAR},
-      end_time = #{record.endTime,jdbcType=LONGVARCHAR},
-      createTime = #{record.createtime,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -258,8 +208,10 @@
     set id = #{record.id,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       member_type_id = #{record.memberTypeId,jdbcType=INTEGER},
+      beg_time = #{record.begTime,jdbcType=VARCHAR},
+      end_time = #{record.endTime,jdbcType=VARCHAR},
       end_status = #{record.endStatus,jdbcType=TINYINT},
-      msg_send_status = #{record.msgSendStatus,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
       level = #{record.level,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -274,45 +226,32 @@
       <if test="memberTypeId != null">
         member_type_id = #{memberTypeId,jdbcType=INTEGER},
       </if>
+      <if test="begTime != null">
+        beg_time = #{begTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
       <if test="endStatus != null">
         end_status = #{endStatus,jdbcType=TINYINT},
       </if>
-      <if test="msgSendStatus != null">
-        msg_send_status = #{msgSendStatus,jdbcType=TINYINT},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="level != null">
         level = #{level,jdbcType=INTEGER},
       </if>
-      <if test="begTime != null">
-        beg_time = #{begTime,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="endTime != null">
-        end_time = #{endTime,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="createtime != null">
-        createTime = #{createtime,jdbcType=LONGVARCHAR},
-      </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zheng.friend.dao.model.FUserMemberRel">
-    update f_user_member_rel
-    set user_id = #{userId,jdbcType=INTEGER},
-      member_type_id = #{memberTypeId,jdbcType=INTEGER},
-      end_status = #{endStatus,jdbcType=TINYINT},
-      msg_send_status = #{msgSendStatus,jdbcType=TINYINT},
-      level = #{level,jdbcType=INTEGER},
-      beg_time = #{begTime,jdbcType=LONGVARCHAR},
-      end_time = #{endTime,jdbcType=LONGVARCHAR},
-      createTime = #{createtime,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zheng.friend.dao.model.FUserMemberRel">
     update f_user_member_rel
     set user_id = #{userId,jdbcType=INTEGER},
       member_type_id = #{memberTypeId,jdbcType=INTEGER},
+      beg_time = #{begTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
       end_status = #{endStatus,jdbcType=TINYINT},
-      msg_send_status = #{msgSendStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       level = #{level,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

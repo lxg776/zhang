@@ -16,21 +16,15 @@ public interface FUserMemberRelMapper {
 
     int insertSelective(FUserMemberRel record);
 
-    List<FUserMemberRel> selectByExampleWithBLOBs(FUserMemberRelExample example);
-
     List<FUserMemberRel> selectByExample(FUserMemberRelExample example);
 
     FUserMemberRel selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") FUserMemberRel record, @Param("example") FUserMemberRelExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") FUserMemberRel record, @Param("example") FUserMemberRelExample example);
-
     int updateByExample(@Param("record") FUserMemberRel record, @Param("example") FUserMemberRelExample example);
 
     int updateByPrimaryKeySelective(FUserMemberRel record);
-
-    int updateByPrimaryKeyWithBLOBs(FUserMemberRel record);
 
     int updateByPrimaryKey(FUserMemberRel record);
 }

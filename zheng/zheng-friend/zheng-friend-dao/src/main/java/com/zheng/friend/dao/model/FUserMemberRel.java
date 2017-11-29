@@ -1,6 +1,7 @@
 package com.zheng.friend.dao.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class FUserMemberRel implements Serializable {
     /**
@@ -25,27 +26,6 @@ public class FUserMemberRel implements Serializable {
     private Integer memberTypeId;
 
     /**
-     * 能否访问用户资料(0:没有终止,1:终止)
-     *
-     * @mbg.generated
-     */
-    private Byte endStatus;
-
-    /**
-     * 能否发送邮件(0:不能,1:可以)
-     *
-     * @mbg.generated
-     */
-    private Byte msgSendStatus;
-
-    /**
-     * 等级
-     *
-     * @mbg.generated
-     */
-    private Integer level;
-
-    /**
      * 开始时间
      *
      * @mbg.generated
@@ -60,11 +40,25 @@ public class FUserMemberRel implements Serializable {
     private String endTime;
 
     /**
-     * 结束时间
+     * 终止状态(0:没有终止,1:终止)
      *
      * @mbg.generated
      */
-    private String createtime;
+    private Byte endStatus;
+
+    /**
+     * 操作时间
+     *
+     * @mbg.generated
+     */
+    private Date createTime;
+
+    /**
+     * 等级
+     *
+     * @mbg.generated
+     */
+    private Integer level;
 
     private static final long serialVersionUID = 1L;
 
@@ -92,30 +86,6 @@ public class FUserMemberRel implements Serializable {
         this.memberTypeId = memberTypeId;
     }
 
-    public Byte getEndStatus() {
-        return endStatus;
-    }
-
-    public void setEndStatus(Byte endStatus) {
-        this.endStatus = endStatus;
-    }
-
-    public Byte getMsgSendStatus() {
-        return msgSendStatus;
-    }
-
-    public void setMsgSendStatus(Byte msgSendStatus) {
-        this.msgSendStatus = msgSendStatus;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
-
     public String getBegTime() {
         return begTime;
     }
@@ -132,12 +102,28 @@ public class FUserMemberRel implements Serializable {
         this.endTime = endTime;
     }
 
-    public String getCreatetime() {
-        return createtime;
+    public Byte getEndStatus() {
+        return endStatus;
     }
 
-    public void setCreatetime(String createtime) {
-        this.createtime = createtime;
+    public void setEndStatus(Byte endStatus) {
+        this.endStatus = endStatus;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     @Override
@@ -149,12 +135,11 @@ public class FUserMemberRel implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", userId=").append(userId);
         sb.append(", memberTypeId=").append(memberTypeId);
-        sb.append(", endStatus=").append(endStatus);
-        sb.append(", msgSendStatus=").append(msgSendStatus);
-        sb.append(", level=").append(level);
         sb.append(", begTime=").append(begTime);
         sb.append(", endTime=").append(endTime);
-        sb.append(", createtime=").append(createtime);
+        sb.append(", endStatus=").append(endStatus);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", level=").append(level);
         sb.append("]");
         return sb.toString();
     }
@@ -174,12 +159,11 @@ public class FUserMemberRel implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getMemberTypeId() == null ? other.getMemberTypeId() == null : this.getMemberTypeId().equals(other.getMemberTypeId()))
-            && (this.getEndStatus() == null ? other.getEndStatus() == null : this.getEndStatus().equals(other.getEndStatus()))
-            && (this.getMsgSendStatus() == null ? other.getMsgSendStatus() == null : this.getMsgSendStatus().equals(other.getMsgSendStatus()))
-            && (this.getLevel() == null ? other.getLevel() == null : this.getLevel().equals(other.getLevel()))
             && (this.getBegTime() == null ? other.getBegTime() == null : this.getBegTime().equals(other.getBegTime()))
             && (this.getEndTime() == null ? other.getEndTime() == null : this.getEndTime().equals(other.getEndTime()))
-            && (this.getCreatetime() == null ? other.getCreatetime() == null : this.getCreatetime().equals(other.getCreatetime()));
+            && (this.getEndStatus() == null ? other.getEndStatus() == null : this.getEndStatus().equals(other.getEndStatus()))
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getLevel() == null ? other.getLevel() == null : this.getLevel().equals(other.getLevel()));
     }
 
     @Override
@@ -189,12 +173,11 @@ public class FUserMemberRel implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getMemberTypeId() == null) ? 0 : getMemberTypeId().hashCode());
-        result = prime * result + ((getEndStatus() == null) ? 0 : getEndStatus().hashCode());
-        result = prime * result + ((getMsgSendStatus() == null) ? 0 : getMsgSendStatus().hashCode());
-        result = prime * result + ((getLevel() == null) ? 0 : getLevel().hashCode());
         result = prime * result + ((getBegTime() == null) ? 0 : getBegTime().hashCode());
         result = prime * result + ((getEndTime() == null) ? 0 : getEndTime().hashCode());
-        result = prime * result + ((getCreatetime() == null) ? 0 : getCreatetime().hashCode());
+        result = prime * result + ((getEndStatus() == null) ? 0 : getEndStatus().hashCode());
+        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
+        result = prime * result + ((getLevel() == null) ? 0 : getLevel().hashCode());
         return result;
     }
 }

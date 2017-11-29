@@ -2,6 +2,7 @@ package com.zheng.friend.dao.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FUserMemberRelExample implements Serializable {
@@ -287,6 +288,146 @@ public class FUserMemberRelExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andBegTimeIsNull() {
+            addCriterion("beg_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeIsNotNull() {
+            addCriterion("beg_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeEqualTo(String value) {
+            addCriterion("beg_time =", value, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeNotEqualTo(String value) {
+            addCriterion("beg_time <>", value, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeGreaterThan(String value) {
+            addCriterion("beg_time >", value, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("beg_time >=", value, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeLessThan(String value) {
+            addCriterion("beg_time <", value, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeLessThanOrEqualTo(String value) {
+            addCriterion("beg_time <=", value, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeLike(String value) {
+            addCriterion("beg_time like", value, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeNotLike(String value) {
+            addCriterion("beg_time not like", value, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeIn(List<String> values) {
+            addCriterion("beg_time in", values, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeNotIn(List<String> values) {
+            addCriterion("beg_time not in", values, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeBetween(String value1, String value2) {
+            addCriterion("beg_time between", value1, value2, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBegTimeNotBetween(String value1, String value2) {
+            addCriterion("beg_time not between", value1, value2, "begTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeIsNull() {
+            addCriterion("end_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeIsNotNull() {
+            addCriterion("end_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeEqualTo(String value) {
+            addCriterion("end_time =", value, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeNotEqualTo(String value) {
+            addCriterion("end_time <>", value, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeGreaterThan(String value) {
+            addCriterion("end_time >", value, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeGreaterThanOrEqualTo(String value) {
+            addCriterion("end_time >=", value, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeLessThan(String value) {
+            addCriterion("end_time <", value, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeLessThanOrEqualTo(String value) {
+            addCriterion("end_time <=", value, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeLike(String value) {
+            addCriterion("end_time like", value, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeNotLike(String value) {
+            addCriterion("end_time not like", value, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeIn(List<String> values) {
+            addCriterion("end_time in", values, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeNotIn(List<String> values) {
+            addCriterion("end_time not in", values, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeBetween(String value1, String value2) {
+            addCriterion("end_time between", value1, value2, "endTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndTimeNotBetween(String value1, String value2) {
+            addCriterion("end_time not between", value1, value2, "endTime");
+            return (Criteria) this;
+        }
+
         public Criteria andEndStatusIsNull() {
             addCriterion("end_status is null");
             return (Criteria) this;
@@ -347,63 +488,63 @@ public class FUserMemberRelExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusIsNull() {
-            addCriterion("msg_send_status is null");
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusIsNotNull() {
-            addCriterion("msg_send_status is not null");
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusEqualTo(Byte value) {
-            addCriterion("msg_send_status =", value, "msgSendStatus");
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusNotEqualTo(Byte value) {
-            addCriterion("msg_send_status <>", value, "msgSendStatus");
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusGreaterThan(Byte value) {
-            addCriterion("msg_send_status >", value, "msgSendStatus");
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusGreaterThanOrEqualTo(Byte value) {
-            addCriterion("msg_send_status >=", value, "msgSendStatus");
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusLessThan(Byte value) {
-            addCriterion("msg_send_status <", value, "msgSendStatus");
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusLessThanOrEqualTo(Byte value) {
-            addCriterion("msg_send_status <=", value, "msgSendStatus");
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusIn(List<Byte> values) {
-            addCriterion("msg_send_status in", values, "msgSendStatus");
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusNotIn(List<Byte> values) {
-            addCriterion("msg_send_status not in", values, "msgSendStatus");
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusBetween(Byte value1, Byte value2) {
-            addCriterion("msg_send_status between", value1, value2, "msgSendStatus");
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
-        public Criteria andMsgSendStatusNotBetween(Byte value1, Byte value2) {
-            addCriterion("msg_send_status not between", value1, value2, "msgSendStatus");
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
 
