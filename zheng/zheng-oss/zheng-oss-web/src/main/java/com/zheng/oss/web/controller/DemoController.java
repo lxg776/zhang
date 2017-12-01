@@ -42,7 +42,7 @@ public class DemoController extends BaseController {
 
     @GetMapping("/aliyun/upload2")
     public String upload2() throws FileNotFoundException {
-        File file = new File("d:\\zheng.png");
+        File file = new File("d:\\wtf.png");
         PutObjectResult putObjectResult = aliyunOssClient.putObject(OssConstant.ALIYUN_OSS_BUCKET_NAME, "file.png", file);
         return "success";
     }

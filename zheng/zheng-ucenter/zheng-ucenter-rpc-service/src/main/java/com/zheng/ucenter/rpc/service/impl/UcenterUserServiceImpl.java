@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
 * UcenterUserService实现
 * Created by shuzheng on 2017/4/27.
@@ -26,4 +28,16 @@ public class UcenterUserServiceImpl extends BaseServiceImpl<UcenterUserMapper, U
     @Autowired
     UcenterUserMapper ucenterUserMapper;
 
+    @Override
+    public UcenterUser selectUpmsUserByUsername(String username) {
+
+        UcenterUserExample uenterUserExample = new UcenterUserExample();
+        uenterUserExample.createCriteria().andUserNameEqualTo(username);
+
+        List<UcenterUser> ucenterUsers = ucenterUserMapper.selectByExample(uenterUserExample);
+        if (null !=  ucenterUsers &&  ucenterUsers.size() > 0) {
+            return  ucenterUsers.get(0);
+        }
+        return null;
+    }
 }

@@ -10,4 +10,6 @@ import com.zheng.ucenter.dao.model.UcenterUserExample;
 */
 public interface UcenterUserService extends BaseService<UcenterUser, UcenterUserExample> {
 
+    public UcenterUser selectUpmsUserByUsername(String name);
+
 }

@@ -11,4 +11,8 @@ import com.zheng.ucenter.dao.model.UcenterUserExample;
 */
 public class UcenterUserServiceMock extends BaseServiceMock<UcenterUserMapper, UcenterUser, UcenterUserExample> implements UcenterUserService {
 
+    @Override
+    public UcenterUser selectUpmsUserByUsername(String name) {
+        return null;
+    }
 }
