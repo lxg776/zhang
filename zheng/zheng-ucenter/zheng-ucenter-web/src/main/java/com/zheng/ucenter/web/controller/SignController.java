@@ -1,12 +1,22 @@
 package com.zheng.ucenter.web.controller;
 
 import com.zheng.common.base.BaseController;
+import com.zheng.common.util.RedisUtil;
 import com.zheng.ucenter.common.constant.UcenterResult;
 import com.zheng.ucenter.common.constant.UcenterResultConstant;
+import com.zheng.ucenter.dao.model.UcenterUser;
+import com.zheng.ucenter.rpc.api.UcenterUserService;
+import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +31,20 @@ import javax.servlet.http.HttpServletRequest;
 public class SignController extends BaseController {
 
     private static Logger _log = LoggerFactory.getLogger(SignController.class);
+
+    @Autowired
+    UcenterUserService ucenterUserService;
+
+    @ApiOperation(value = "登录")
+    @RequestMapping(value = "/uc/manage/index", method = RequestMethod.GET)
+    public String login(HttpServletRequest request,ModelMap model) {
+       UcenterUser ucenterUser =  ucenterUserService.selectUpmsUserByUsername("lxg776");
+
+        model.put("tsetString",ucenterUser.getPassword());
+        return thymeleaf("/test");
+    }
+
+
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String signup(Model model) {

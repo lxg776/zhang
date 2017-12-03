@@ -22,7 +22,7 @@
             <bean id="manageInterceptor" class="com.zheng.cms.admin.Interceptor.ManageInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
-    <mvc:resources location="/cdn/bootstrap/" mapping="/bootstrap/**" />
+    <mvc:resources location="/cdn/" mapping="/**" />
 
     <!-- Jsp视图 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

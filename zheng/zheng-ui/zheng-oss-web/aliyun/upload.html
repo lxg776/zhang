@@ -5,14 +5,14 @@
 <title>zheng-oss-web AliyunOSS demo</title>
 </head>
 <body>
-<input id="dir" type="hidden" name="dir" th:value="${policy.dir}"/>
-<form id="form" th:action="${policy.action}" method="post" enctype="multipart/form-data">
+<input id="dir" type="hidden" name="dir"  value="20171117" />
+<form id="form" action="http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com" method="post" enctype="multipart/form-data">
 <p>key : <input id="key" type="text" name="key"/></p>
-<p>policy : <input type="text" name="policy" th:value="${policy.policy}"/></p>
-<p>OSSAccessKeyId : <input type="text" name="OSSAccessKeyId" th:value="${policy.OSSAccessKeyId}"/></p>
+<p>policy : <input type="text" name="policy" value="eyJleHBpcmF0aW9uIjoiMjAxNy0xMS0xN1QwMzozOTo1OC40OTlaIiwiY29uZGl0aW9ucyI6W1siY29udGVudC1sZW5ndGgtcmFuZ2UiLDAsMTA0ODU3NjBdLFsic3RhcnRzLXdpdGgiLCIka2V5IiwiMjAxNzExMTciXV19"/></p>
+<p>OSSAccessKeyId : <input type="text" name="OSSAccessKeyId" value="LTAIJEhkh9r4MfQy"/></p>
 <p>success_action_status : <input type="text" name="success_action_status" value="200"/></p>
-<p>callback : <input type="text" name="callback" th:value="${policy.callback}"/></p>
-<p>signature : <input type="text" name="signature" th:value="${policy.signature}"/></p>
+<p>callback : <input type="text" name="callback" value="eyJjYWxsYmFja1VybCI6Imh0dHA6Ly9zaHV6aGVuZy50dW5uZWwucXlkZXYuY29tL2FsaXl1bi9vc3MvY2FsbGJhY2siLCJjYWxsYmFja0JvZHlUeXBlIjoiYXBwbGljYXRpb24veC13d3ctZm9ybS11cmxlbmNvZGVkIiwiY2FsbGJhY2tCb2R5IjoiZmlsZW5hbWU9JHtvYmplY3R9JnNpemU9JHtzaXplfSZtaW1lVHlwZT0ke21pbWVUeXBlfSZoZWlnaHQ9JHtpbWFnZUluZm8uaGVpZ2h0fSZ3aWR0aD0ke2ltYWdlSW5mby53aWR0aH0ifQ=="/></p>
+<p>signature : <input type="text" name="signature" value="D1NQ5YeD/2vtk2ZX9dlyi6x2YeA="/></p>
 <p>file : <input id="file" type="file" name="file"/></p>
 <p><input id="submit" type="submit" value="上传"/></p>
 </form>

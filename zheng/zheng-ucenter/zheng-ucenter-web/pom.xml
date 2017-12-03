@@ -19,7 +19,6 @@
             <groupId>com.zheng</groupId>
             <artifactId>zheng-ucenter-rpc-api</artifactId>
             <version>1.0.0</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -38,6 +37,13 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
+        <!-- zheng-upms-client -->
+        <dependency>
+            <groupId>com.zheng</groupId>
+            <artifactId>zheng-upms-client</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
     </dependencies>
 
     <profiles>
@@ -88,7 +94,7 @@
                         <contextPath>/</contextPath>
                     </webApp>
                     <httpConnector>
-                        <port>4441</port>
+                        <port>998</port>
                     </httpConnector>
                     <reload>automatic</reload>
                 </configuration>
