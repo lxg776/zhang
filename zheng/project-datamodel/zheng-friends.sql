@@ -33,6 +33,28 @@ create table f_user_account
 }
 
 
+create table f_user_living_status
+(
+   user_id              int unsigned not null comment '编号',
+   smoking_status       tinyint(4) default 0 comment '抽烟状况(0:不抽,1:偶尔抽,2:经常抽)',
+   drinking_status      tinyint(4) default 0 comment '饮酒状况(0:不喝,1:偶尔喝,2:经常喝)',
+   cooking              tinyint(4) default 0 comment '饮酒状况(0:不下厨,1:厨艺有待提高,3:上得了厅堂，4.饭店大厨级别)',
+   live_with_parents    varchar(100) comment '与父母同住情况',
+   favorite_date    varchar(100) comment '喜欢怎么样的约会',
+   favorite_music    varchar(100) comment '喜欢的音乐',
+   favorite_film    varchar(100) comment '喜欢的电影',
+   favorite_sports    varchar(100) comment '喜欢的运动',
+   favorite_pet    varchar(100) comment '喜欢的运动',
+   primary key (user_id)
+)
+
+select uc.*,base.*,ic.*,zo.* from ucenter_user as uc
+left join f_user_base_msg as base on uc.user_id = base.user_id
+left join ucenter_identificaion as ic on uc.user_id = ic.user_id
+left join f_user_request as zo on uc.user_id = zo.user_id
+where uc.user_id=4
+
+
 create table f_user_request
 (
    user_id              int unsigned not null comment '用户编号',

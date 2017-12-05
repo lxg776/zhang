@@ -25,7 +25,7 @@
     <a class="aui-pull-left aui-btn">
         <span class="aui-iconfont aui-icon-left"></span>返回
     </a>
-    <div class="aui-title">生活状况</div>
+    <div class="aui-title">兴趣爱好</div>
 
 </header>
 
@@ -33,37 +33,18 @@
 <div class="aui-content aui-margin-b-15" style="margin-top: 2.5rem;">
     <ul class="aui-list aui-form-list">
 
-        <li class="aui-list-item">
-            <div class="aui-list-item-inner">
-                <div class="aui-list-item-label">
-                    是否喝酒
-                </div>
-
-                <div class="aui-list-item-input">
-                    <select>
-                        <option>不喝</option>
-                        <option>偶尔喝</option>
-                        <option>经常喝</option>
-                    </select>
-                </div>
-            </div>
-        </li>
 
 
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
                 <div class="aui-list-item-label">
-                    是否抽烟
+                    喜欢的运动
                 </div>
-
                 <div class="aui-list-item-input">
-                    <select>
-
-                        <option>不抽</option>
-                        <option>偶尔抽</option>
-                        <option>经常抽</option>
-                    </select>
+                    <input type="text" placeholder="填写">
                 </div>
+
+
             </div>
         </li>
 
@@ -71,17 +52,13 @@
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
                 <div class="aui-list-item-label">
-                    厨艺
+                    喜欢的音乐
+                </div>
+                <div class="aui-list-item-input">
+                    <input type="text" placeholder="填写">
                 </div>
 
-                <div class="aui-list-item-input">
-                    <select>
-                        <option>不下厨</option>
-                        <option>厨艺有待提高</option>
-                        <option>上的了厅堂</option>
-                        <option>饭店大厨</option>
-                    </select>
-                </div>
+
             </div>
         </li>
 
@@ -89,36 +66,29 @@
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
                 <div class="aui-list-item-label">
-                    与父母同住
+                    喜欢的电影
+                </div>
+                <div class="aui-list-item-input">
+                    <input type="text" placeholder="填写">
                 </div>
 
-                <div class="aui-list-item-input">
-                    <select>
-                        <option>不与父母同住</option>
-                        <option>与父母同住</option>
-                    </select>
-                </div>
+
             </div>
         </li>
-
 
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
-                <div class="aui-list-item-label" style="width: 220px;">
-                    喜欢怎么样的约会
+                <div class="aui-list-item-label">
+                    喜欢的宠物
+                </div>
+                <div class="aui-list-item-input">
+                    <input type="text" placeholder="填写">
                 </div>
 
-                <div class="aui-list-item-input">
-                    <select>
-                        <option>公园散步/爬山</option>
-                        <option>电影院</option>
-                        <option>奶茶/咖啡厅</option>
-                        <option>酒吧</option>
-                        <option>电影院</option>
-                    </select>
-                </div>
+
             </div>
         </li>
+
 
 
     </ul>
