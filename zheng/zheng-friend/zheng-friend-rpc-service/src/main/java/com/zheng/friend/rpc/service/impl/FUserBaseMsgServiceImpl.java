@@ -5,7 +5,9 @@ import com.zheng.common.base.BaseServiceImpl;
 import com.zheng.friend.dao.mapper.FUserBaseMsgMapper;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserBaseMsgExample;
+import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.rpc.api.FUserBaseMsgService;
+import com.zheng.friend.rpc.mapper.FUserBaseMsgExtMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +27,10 @@ public class FUserBaseMsgServiceImpl extends BaseServiceImpl<FUserBaseMsgMapper,
 
     @Autowired
     FUserBaseMsgMapper fUserBaseMsgMapper;
-
+    @Autowired
+    FUserBaseMsgExtMapper fUserBaseMsgExtMapper;
+    @Override
+    public FuserDetailVo selectFUserDetailVoByUserId(Integer userId) {
+        return fUserBaseMsgExtMapper.selectFUserDetailVoByUserId(userId);
+    }
 }

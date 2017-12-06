@@ -23,7 +23,16 @@
             <groupId>com.zheng</groupId>
             <artifactId>zheng-friend-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.zheng</groupId>
+            <artifactId>zheng-ucenter-dao</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+
     </dependencies>
+
+
 
     <build>
         <finalName>zheng-friend-dao</finalName>

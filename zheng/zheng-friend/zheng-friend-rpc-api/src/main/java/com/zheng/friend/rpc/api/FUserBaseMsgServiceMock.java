@@ -4,6 +4,7 @@ import com.zheng.common.base.BaseServiceMock;
 import com.zheng.friend.dao.mapper.FUserBaseMsgMapper;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserBaseMsgExample;
+import com.zheng.friend.dao.vo.FuserDetailVo;
 
 /**
 * 降级实现FUserBaseMsgService接口
@@ -11,4 +12,8 @@ import com.zheng.friend.dao.model.FUserBaseMsgExample;
 */
 public class FUserBaseMsgServiceMock extends BaseServiceMock<FUserBaseMsgMapper, FUserBaseMsg, FUserBaseMsgExample> implements FUserBaseMsgService {
 
+    @Override
+    public FuserDetailVo selectFUserDetailVoByUserId(Integer userId) {
+        return null;
+    }
 }

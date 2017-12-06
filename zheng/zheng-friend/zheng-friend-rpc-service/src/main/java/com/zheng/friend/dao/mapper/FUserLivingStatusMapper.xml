@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zheng.friend.dao.mapper.FUserLivingStatusMapper">
+  <resultMap id="BaseResultMap" type="com.zheng.friend.dao.model.FUserLivingStatus">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="smoking_status" jdbcType="TINYINT" property="smokingStatus" />
+    <result column="drinking_status" jdbcType="TINYINT" property="drinkingStatus" />
+    <result column="cooking" jdbcType="TINYINT" property="cooking" />
+    <result column="live_with_parents" jdbcType="VARCHAR" property="liveWithParents" />
+    <result column="favorite_date" jdbcType="VARCHAR" property="favoriteDate" />
+    <result column="favorite_music" jdbcType="VARCHAR" property="favoriteMusic" />
+    <result column="favorite_film" jdbcType="VARCHAR" property="favoriteFilm" />
+    <result column="favorite_sports" jdbcType="VARCHAR" property="favoriteSports" />
+    <result column="favorite_pet" jdbcType="VARCHAR" property="favoritePet" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, smoking_status, drinking_status, cooking, live_with_parents, favorite_date, 
+    favorite_music, favorite_film, favorite_sports, favorite_pet
+  </sql>
+  <select id="selectByExample" parameterType="com.zheng.friend.dao.model.FUserLivingStatusExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from f_user_living_status
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from f_user_living_status
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from f_user_living_status
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zheng.friend.dao.model.FUserLivingStatusExample">
+    delete from f_user_living_status
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zheng.friend.dao.model.FUserLivingStatus">
+    insert into f_user_living_status (user_id, smoking_status, drinking_status, 
+      cooking, live_with_parents, favorite_date, 
+      favorite_music, favorite_film, favorite_sports, 
+      favorite_pet)
+    values (#{userId,jdbcType=INTEGER}, #{smokingStatus,jdbcType=TINYINT}, #{drinkingStatus,jdbcType=TINYINT}, 
+      #{cooking,jdbcType=TINYINT}, #{liveWithParents,jdbcType=VARCHAR}, #{favoriteDate,jdbcType=VARCHAR}, 
+      #{favoriteMusic,jdbcType=VARCHAR}, #{favoriteFilm,jdbcType=VARCHAR}, #{favoriteSports,jdbcType=VARCHAR}, 
+      #{favoritePet,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zheng.friend.dao.model.FUserLivingStatus">
+    insert into f_user_living_status
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="smokingStatus != null">
+        smoking_status,
+      </if>
+      <if test="drinkingStatus != null">
+        drinking_status,
+      </if>
+      <if test="cooking != null">
+        cooking,
+      </if>
+      <if test="liveWithParents != null">
+        live_with_parents,
+      </if>
+      <if test="favoriteDate != null">
+        favorite_date,
+      </if>
+      <if test="favoriteMusic != null">
+        favorite_music,
+      </if>
+      <if test="favoriteFilm != null">
+        favorite_film,
+      </if>
+      <if test="favoriteSports != null">
+        favorite_sports,
+      </if>
+      <if test="favoritePet != null">
+        favorite_pet,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="smokingStatus != null">
+        #{smokingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="drinkingStatus != null">
+        #{drinkingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="cooking != null">
+        #{cooking,jdbcType=TINYINT},
+      </if>
+      <if test="liveWithParents != null">
+        #{liveWithParents,jdbcType=VARCHAR},
+      </if>
+      <if test="favoriteDate != null">
+        #{favoriteDate,jdbcType=VARCHAR},
+      </if>
+      <if test="favoriteMusic != null">
+        #{favoriteMusic,jdbcType=VARCHAR},
+      </if>
+      <if test="favoriteFilm != null">
+        #{favoriteFilm,jdbcType=VARCHAR},
+      </if>
+      <if test="favoriteSports != null">
+        #{favoriteSports,jdbcType=VARCHAR},
+      </if>
+      <if test="favoritePet != null">
+        #{favoritePet,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zheng.friend.dao.model.FUserLivingStatusExample" resultType="java.lang.Long">
+    select count(*) from f_user_living_status
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update f_user_living_status
+    <set>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.smokingStatus != null">
+        smoking_status = #{record.smokingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.drinkingStatus != null">
+        drinking_status = #{record.drinkingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.cooking != null">
+        cooking = #{record.cooking,jdbcType=TINYINT},
+      </if>
+      <if test="record.liveWithParents != null">
+        live_with_parents = #{record.liveWithParents,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoriteDate != null">
+        favorite_date = #{record.favoriteDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoriteMusic != null">
+        favorite_music = #{record.favoriteMusic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoriteFilm != null">
+        favorite_film = #{record.favoriteFilm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoriteSports != null">
+        favorite_sports = #{record.favoriteSports,jdbcType=VARCHAR},
+      </if>
+      <if test="record.favoritePet != null">
+        favorite_pet = #{record.favoritePet,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update f_user_living_status
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      smoking_status = #{record.smokingStatus,jdbcType=TINYINT},
+      drinking_status = #{record.drinkingStatus,jdbcType=TINYINT},
+      cooking = #{record.cooking,jdbcType=TINYINT},
+      live_with_parents = #{record.liveWithParents,jdbcType=VARCHAR},
+      favorite_date = #{record.favoriteDate,jdbcType=VARCHAR},
+      favorite_music = #{record.favoriteMusic,jdbcType=VARCHAR},
+      favorite_film = #{record.favoriteFilm,jdbcType=VARCHAR},
+      favorite_sports = #{record.favoriteSports,jdbcType=VARCHAR},
+      favorite_pet = #{record.favoritePet,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zheng.friend.dao.model.FUserLivingStatus">
+    update f_user_living_status
+    <set>
+      <if test="smokingStatus != null">
+        smoking_status = #{smokingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="drinkingStatus != null">
+        drinking_status = #{drinkingStatus,jdbcType=TINYINT},
+      </if>
+      <if test="cooking != null">
+        cooking = #{cooking,jdbcType=TINYINT},
+      </if>
+      <if test="liveWithParents != null">
+        live_with_parents = #{liveWithParents,jdbcType=VARCHAR},
+      </if>
+      <if test="favoriteDate != null">
+        favorite_date = #{favoriteDate,jdbcType=VARCHAR},
+      </if>
+      <if test="favoriteMusic != null">
+        favorite_music = #{favoriteMusic,jdbcType=VARCHAR},
+      </if>
+      <if test="favoriteFilm != null">
+        favorite_film = #{favoriteFilm,jdbcType=VARCHAR},
+      </if>
+      <if test="favoriteSports != null">
+        favorite_sports = #{favoriteSports,jdbcType=VARCHAR},
+      </if>
+      <if test="favoritePet != null">
+        favorite_pet = #{favoritePet,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zheng.friend.dao.model.FUserLivingStatus">
+    update f_user_living_status
+    set smoking_status = #{smokingStatus,jdbcType=TINYINT},
+      drinking_status = #{drinkingStatus,jdbcType=TINYINT},
+      cooking = #{cooking,jdbcType=TINYINT},
+      live_with_parents = #{liveWithParents,jdbcType=VARCHAR},
+      favorite_date = #{favoriteDate,jdbcType=VARCHAR},
+      favorite_music = #{favoriteMusic,jdbcType=VARCHAR},
+      favorite_film = #{favoriteFilm,jdbcType=VARCHAR},
+      favorite_sports = #{favoriteSports,jdbcType=VARCHAR},
+      favorite_pet = #{favoritePet,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>
