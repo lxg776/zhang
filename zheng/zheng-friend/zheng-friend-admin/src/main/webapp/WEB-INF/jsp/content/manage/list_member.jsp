@@ -10,31 +10,22 @@
 	<title>管理后台</title>
 	<%@include file="/common/css-link01.jsp"%>
 	<!-- start: CSS -->
-
-
-
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<link id="ie-style" href="css/ie.css" rel="stylesheet">
 	<![endif]-->
-
 	<!--[if IE 9]>
 	<link id="ie9style" href="css/ie9.css" rel="stylesheet">
 	<![endif]-->
-
 	<!-- start: Favicon -->
-
 	<!-- end: Favicon -->
-
-
 	<script type="text/javascript">
         var listUrl = "${ctx}" + "/manage/member/list?pageNum=";
         function getDataList(pageNum) {
             window.location.href = listUrl + pageNum;
         }
 	</script>
-
 </head>
 
 <body>
@@ -102,7 +93,7 @@
 								<td style="width: 200px;"><fmt:formatDate value="${item.createTime}" pattern="yyyy/MM/dd  HH:mm:ss" /></td>
 								<td style="width: 600px;"><a href="${ctx}/manage/member/editUser?id=${item.userId}" style="color: #0033FF">编辑用户信息</a>
 									/<a href="${ctx}/manage/member/editBaseMsg?userId=${item.userId}" style="color: #0033FF">编辑基本资料</a><br/><a href="${ctx}/manage/member/editIdentific?userId=${item.userId}" style="color: #0033FF">编辑认证信息</a>/<a href="${ctx}/manage/member//userMemberList?userId=${item.userId}" style="color: #0033FF">设置会员</a>/
-								<a href="${ctx}/manage/member/editRequestMsg?userId=${item.userId}" style="color: #0033FF">编辑择偶要求</a>/<a href="#" style="color: #0033FF">删除</a>
+								<a href="${ctx}/manage/member/editRequestMsg?userId=${item.userId}" style="color: #0033FF">编辑择偶要求</a>/<a href="${ctx}/manage/member/editLivingStatus?userId=${item.userId}" style="color: #0033FF">编辑生活状态</a>/<a href="#" style="color: #0033FF">删除</a>
 								</td>
 							</tr>
 						</c:forEach>

@@ -89,7 +89,7 @@
                         <contextPath>/</contextPath>
                     </webApp>
                     <httpConnector>
-                        <port>80</port>
+                        <port>9997</port>
                     </httpConnector>
                     <reload>automatic</reload>
                 </configuration>

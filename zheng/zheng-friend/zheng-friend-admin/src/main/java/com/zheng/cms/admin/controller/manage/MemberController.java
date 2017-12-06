@@ -35,7 +35,7 @@ public class MemberController extends BaseController{
 
 
     private static Logger _log = LoggerFactory.getLogger(ActivityController.class);
-
+    public static String imageBase = "http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com/";
 
     @Autowired
     private UcenterIdentificaionService ucenterIdentificaionService;
@@ -56,6 +56,10 @@ public class MemberController extends BaseController{
 
     @Autowired
     private FMemberTypeService fMemberTypeService;
+
+    @Autowired
+    private FUserLivingStatusService fUserLivingStatusService;
+
 
 
     private int pageSize=15;
@@ -129,11 +133,18 @@ public class MemberController extends BaseController{
         return "redirect:list";
     }
 
-    @ApiOperation(value = "编辑")
+    @ApiOperation(value = "编辑身份验证")
     @RequestMapping(value = "/editIdentific", method = RequestMethod.GET)
     public String editIdentific(@RequestParam(defaultValue = "0") Integer userId,ModelMap modelMap){
 
         UcenterIdentificaion modle = ucenterIdentificaionService.selectByPrimaryKey(userId);
+
+        if(null!=modle.getIdcardImgs()&&modle.getIdcardImgs().length()>0){
+            String [] imgs =  modle.getIdcardImgs().split(",");
+            modelMap.put("imgs",imgs);
+            modelMap.put("imageBase",imageBase);
+        }
+
         if(modle==null){
             modle =new UcenterIdentificaion();
             modle.setUserId(userId);
@@ -144,14 +155,14 @@ public class MemberController extends BaseController{
         modelMap.put("modle",modle);
         return "/content/manage/add_identification.jsp";
 
-
     }
 
 
 
-    @ApiOperation(value = "活动编辑")
+    @ApiOperation(value = "编辑身份验证")
     @RequestMapping(value = "/editIdentific", method = RequestMethod.POST)
     public String editIdentific(@RequestParam(defaultValue = "0") String keyword, UcenterIdentificaion modle){
+
        if("update".equals(keyword)){
            ucenterIdentificaionService.updateByPrimaryKeySelective(modle);
         }else{
@@ -224,6 +235,41 @@ public class MemberController extends BaseController{
         }
         return "redirect:list";
     }
+
+
+    @ApiOperation(value = "编辑生活状态")
+    @RequestMapping(value = "/editLivingStatus", method = RequestMethod.GET)
+    public String editLivingStatus(@RequestParam(defaultValue = "0") Integer userId,ModelMap modelMap){
+
+        FUserLivingStatus modle = fUserLivingStatusService.selectByPrimaryKey(userId);
+        if(modle==null){
+            modle =new FUserLivingStatus();
+            modle.setUserId(userId);
+            modelMap.put("keyword","create");
+        }else{
+            modelMap.put("keyword","update");
+        }
+        modelMap.put("modle",modle);
+        return "/content/manage/add_living_status.jsp";
+
+
+    }
+
+
+
+    @ApiOperation(value = "操作基本资料")
+    @RequestMapping(value = "/editLivingStatus", method = RequestMethod.POST)
+    public String editLivingStatus(@RequestParam(defaultValue = "0") String keyword, FUserLivingStatus modle){
+        if("update".equals(keyword)){
+            fUserLivingStatusService.updateByPrimaryKeySelective(modle);
+        }else{
+            fUserLivingStatusService.insert(modle);
+        }
+        return "redirect:list";
+    }
+
+
+
 
 
 

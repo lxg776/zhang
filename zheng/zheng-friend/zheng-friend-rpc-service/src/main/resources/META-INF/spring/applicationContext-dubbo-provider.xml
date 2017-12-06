@@ -25,17 +25,22 @@
 
 
     <!-- 择偶要求 -->
-    <bean id="FUserRequestServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserRequestServiceImpl"/>
-    <dubbo:service interface="com.zheng.friend.rpc.api.FUserRequestService" ref="FUserRequestServiceImpl" timeout="10000"/>
+    <bean id="fUserRequestServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserRequestServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserRequestService" ref="fUserRequestServiceImpl" timeout="10000"/>
 
 
     <!-- 会员类型 -->
-    <bean id="FMemberTypeServiceImpl" class="com.zheng.friend.rpc.service.impl.FMemberTypeServiceImpl"/>
-    <dubbo:service interface="com.zheng.friend.rpc.api.FMemberTypeService" ref="FMemberTypeServiceImpl" timeout="10000"/>
+    <bean id="fMemberTypeServiceImpl" class="com.zheng.friend.rpc.service.impl.FMemberTypeServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FMemberTypeService" ref="fMemberTypeServiceImpl" timeout="10000"/>
 
 
 
     <!-- 用户会员关系 -->
-    <bean id="FUserMemberRelServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserMemberRelServiceImpl"/>
+    <bean id="fUserMemberRelServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserMemberRelServiceImpl"/>
     <dubbo:service interface="com.zheng.friend.rpc.api.FUserMemberRelService" ref="FUserMemberRelServiceImpl" timeout="10000"/>
+
+    <!-- 用户会员关系 -->
+    <bean id="fUserLivingStatusServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserLivingStatusServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserLivingStatusService" ref="fUserLivingStatusServiceImpl" timeout="10000"/>
+
 </beans>

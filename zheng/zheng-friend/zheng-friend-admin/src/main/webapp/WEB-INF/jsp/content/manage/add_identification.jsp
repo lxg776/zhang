@@ -25,7 +25,25 @@
     <!-- start: Favicon -->
 
     <!-- end: Favicon -->
+    <link id="ie-style" href="${ctx}/webuploader-0.1.5/css/webuploader.css" rel="stylesheet">
 
+    <link id="ie-style" href="${ctx}/webuploader-0.1.5/examples/image-upload/style.css" rel="stylesheet">
+
+
+    <style type="text/css">
+        .imgDiv {
+            display: inline-block;
+            position: relative;
+        }
+
+        .imgDiv .delete {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 12px;
+            height: 12px;
+        }
+    </style>
 
 </head>
 
@@ -123,13 +141,51 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="typeahead">证件图片 </label>
+                                <label class="control-label" for="typeahead"> 证件图片</label>
                                 <div class="controls">
-                                        <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3406130064,2380820040&fm=27&gp=0.jpg" />
-
+                                            <c:forEach var="item" items="${imgs}" varStatus="go" >
+                                                <div class="imgDiv" id="imgDiv${go.index}">
+                                                    <img src="${imageBase}${item}"  d-value="${item}"/>
+                                                    <a href="javascript:void(0);" onclick="deleteImageByName(${go.index},'${item}')">
+                                                        <img src="${ctx}/bootstrap/img/close-button.png" class="delete" />
+                                                    </a>
+                                                </div>
+                                            </c:forEach>
                                 </div>
 
                             </div>
+
+                            <div class="control-group">
+
+
+                                <label class="control-label" for="typeahead">证件上传 </label>
+
+                                <div class="controls">
+                                    <div id="wrapper">
+                                        <div id="container">
+                                            <!--头部，相册选择和格式选择-->
+
+                                            <div id="uploader">
+                                                <div class="queueList">
+                                                    <div id="dndArea" class="placeholder">
+                                                        <div id="filePicker"></div>
+                                                        <p>或将照片拖到这里，单次最多可选2张</p>
+                                                    </div>
+                                                </div>
+                                                <div class="statusBar" style="display:none;">
+                                                    <div class="progress">
+                                                        <span class="text">0%</span>
+                                                        <span class="percentage"></span>
+                                                    </div><div class="info"></div>
+                                                    <div class="btns">
+                                                        <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input id="imgs" type="hidden" name="idcardImgs"  value="${modle.idcardImgs}" />
+                                </div>
 
 
 
@@ -171,5 +227,32 @@
 </footer>
 <!-- start: JavaScript-->
 <%@ include file="/common/s.jsp" %>
+<script language="JavaScript">
+
+    function deleteImageByName(index,path) {
+        id = "#imgDiv".concat(index);
+        imgs =   $("#imgs").val();
+        mImgsArray = imgs.split(",");
+
+        $.each(mImgsArray,function(index,value){
+            orgImgs="";
+            if(value!=path){
+                if(orgImgs&&orgImgs.length>0){
+                    orgImgs = orgImgs +","+value;
+                }else{
+                    orgImgs = value;
+                }
+                $("#imgs").val(orgImgs);
+            }
+        });
+        $(id).remove();
+    }
+
+
+</script>
+<script type="text/javascript" src="${ctx}/webuploader-0.1.5/dist/webuploader.js"></script>
+<script type="text/javascript" src="${ctx}/webuploader-0.1.5/examples/image-upload/upload.js"></script>
+
+
 </body>
 </html>

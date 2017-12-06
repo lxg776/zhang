@@ -38,7 +38,7 @@ create table f_user_living_status
    user_id              int unsigned not null comment '编号',
    smoking_status       tinyint(4) default 0 comment '抽烟状况(0:不抽,1:偶尔抽,2:经常抽)',
    drinking_status      tinyint(4) default 0 comment '饮酒状况(0:不喝,1:偶尔喝,2:经常喝)',
-   cooking              tinyint(4) default 0 comment '饮酒状况(0:不下厨,1:厨艺有待提高,3:上得了厅堂，4.饭店大厨级别)',
+   cooking              tinyint(4) default 0 comment '厨艺(0:不下厨,1:厨艺有待提高,2:上得了厅堂，3.饭店大厨级别)',
    live_with_parents    varchar(100) comment '与父母同住情况',
    favorite_date    varchar(100) comment '喜欢怎么样的约会',
    favorite_music    varchar(100) comment '喜欢的音乐',

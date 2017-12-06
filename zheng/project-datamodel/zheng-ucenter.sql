@@ -86,7 +86,7 @@ create table f_user_member_rel
    end_time             varchar(50)  comment '结束时间',
    end_status           tinyint(4) unsigned comment '终止状态(0:没有终止,1:终止)',
    create_time          timestamp default CURRENT_TIMESTAMP comment '操作时间',
-   level                int unsigned DEFAULT 10 comment '等级'
+   level                int unsigned DEFAULT 10 comment '等级',
    primary key (id)
 )
 
@@ -102,7 +102,7 @@ create table ucenter_identificaion
    real_name            varchar(20) comment '真实姓名',
    idcard_type          varchar(11) comment '证件类型',
    idcard_no            varchar(30) comment '证件号码',
-   idcard_imgs          varchar(255) comment '证件图片',
+   idcard_imgs         varchar(255) comment '证件图片',
    cellphone            varchar(11) comment '手机号码',
    primary key (user_id)
 );
