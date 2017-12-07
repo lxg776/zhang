@@ -83,6 +83,18 @@
 
 
                        <fieldset>
+
+                           <div class="control-group">
+                               <label class="control-label" for="typeahead">性别 </label>
+                               <div class="controls">
+                                   <select id="selectError3" name="sex">
+                                       <option value="1" <c:if test="${modle.sex==1}">selected = "selected"</c:if> >男</option>
+                                       <option value="2" <c:if test="${modle.sex==2}">selected = "selected"</c:if> >女</option>
+                                   </select>
+                               </div>
+                           </div>
+
+
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">要求身高(cm) </label>
                                 <div class="controls">

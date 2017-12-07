@@ -109,6 +109,19 @@
                                 </div>
                             </div>
 
+                            <div class="control-group">
+                                <label class="control-label" for="typeahead">学历</label>
+                                <div class="controls">
+                                    <select id="xl" name="education">
+                                        <option value="大专" <c:if test="${modle.education=='大专'}"> selected="selected"</c:if>  >大专</option>
+                                        <option value="本科" <c:if test="${modle.education=='本科'}"> selected="selected"</c:if>  >本科</option>
+                                        <option value="研究生" <c:if test="${modle.education=='研究生'}"> selected="selected"</c:if> >研究生</option>
+                                        <option value="中专" <c:if test="${modle.education=='中专'}"> selected="selected"</c:if>  >中专</option>
+                                        <option value="高中" <c:if test="${modle.education=='高中'}"> selected="selected"</c:if>  >高中</option>
+                                    </select>
+                                </div>
+                            </div>
+
 
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">性格类型 </label>
@@ -164,7 +177,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">房屋状况</label>
                                 <div class="controls">
-                                    <select id="rw" name="houseStatus">
+                                    <select id="fw" name="houseStatus">
                                         <option value="未购房" <c:if test="${modle.houseStatus=='未购房'}"> selected="selected"</c:if> >未购房</option>
                                         <option value="已经购房" <c:if test="${modle.houseStatus=='已经购房'}"> selected="selected"</c:if>  >已经购房</option>
                                         <option value="与父母同住" <c:if test="${modle.houseStatus=='与父母同住'}"> selected="selected"</c:if> >与父母同住</option>
@@ -172,6 +185,25 @@
                                 </div>
                             </div>
 
+
+                            <div class="control-group">
+                                <label class="control-label" for="typeahead">购车状况</label>
+                                <div class="controls">
+                                    <select id="mc" name="carStatus">
+                                        <option value="未购车" <c:if test="${modle.carStatus=='未购车'}"> selected="selected"</c:if> >未购车</option>
+                                        <option value="已购车" <c:if test="${modle.carStatus=='已购车'}"> selected="selected"</c:if>  >已购车</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label class="control-label" for="typeahead">工作单位 </label>
+                                <div class="controls">
+                                    <input type="text" class="span6 typeahead" id="typeahead"
+                                           name="workUnit" value="${modle.workUnit}" data-provide="typeahead">
+                                </div>
+                            </div>
 
 
                             <div class="control-group">

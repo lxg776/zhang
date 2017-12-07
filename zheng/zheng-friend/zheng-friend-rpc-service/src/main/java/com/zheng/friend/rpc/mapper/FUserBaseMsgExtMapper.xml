@@ -2,40 +2,110 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zheng.friend.rpc.mapper.FUserBaseMsgExtMapper">
 
-
-
     <resultMap id="BaseResultMap" type="com.zheng.friend.dao.vo.FuserDetailVo">
-        <id column="uc.user_id" jdbcType="INTEGER" property="userId" />
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
         <result column="nickname" jdbcType="VARCHAR" property="nickname" />
         <result column="sex" jdbcType="TINYINT" property="sex" />
         <result column="avatar" jdbcType="VARCHAR" property="avatar" />
         <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
         <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <collection property="fUserBaseMsg" resultMap="fUserBaseMsg" />
+        <collection property="fUserRequest" resultMap="fUserRequest" />
+        <collection property="ucenterIdentificaion" resultMap="ucenterIdentificaion" />
+        <collection property="fUserLivingStatus" resultMap="fUserLivingStatus" />
+    </resultMap>
 
+    <resultMap id="fUserBaseMsg" type="com.zheng.friend.dao.model.FUserBaseMsg">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
         <result column="nikename" jdbcType="VARCHAR" property="nikename" />
         <result column="birth_date" jdbcType="VARCHAR" property="birthDate" />
-        <result column="height" jdbcType="float" property="height" />
+        <result column="height" jdbcType="FLOAT" property="height" />
+        <result column="shape" jdbcType="VARCHAR" property="shape" />
+        <result column="year_income" jdbcType="VARCHAR" property="yearIncome" />
+        <result column="month_income" jdbcType="VARCHAR" property="monthIncome" />
+        <result column="education" jdbcType="VARCHAR" property="education" />
+        <result column="disposition" jdbcType="VARCHAR" property="disposition" />
+        <result column="profession" jdbcType="VARCHAR" property="profession" />
+        <result column="work_unit" jdbcType="VARCHAR" property="workUnit" />
+        <result column="work_place" jdbcType="VARCHAR" property="workPlace" />
+        <result column="house_status" jdbcType="VARCHAR" property="houseStatus" />
+        <result column="car_status" jdbcType="VARCHAR" property="carStatus" />
+        <result column="marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+        <result column="children_status" jdbcType="VARCHAR" property="childrenStatus" />
+        <result column="soliloquy" jdbcType="VARCHAR" property="soliloquy" />
+        <result column="declaration" jdbcType="VARCHAR" property="declaration" />
+    </resultMap>
+
+    <resultMap id="fUserRequest" type="com.zheng.friend.dao.model.FUserRequest">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="r_sex" jdbcType="VARCHAR" property="sex" />
+        <result column="r_height" jdbcType="VARCHAR" property="height" />
+        <result column="r_shape" jdbcType="VARCHAR" property="shape" />
+        <result column="r_income_monthly" jdbcType="VARCHAR" property="incomeMonthly" />
+        <result column="r_year_income" jdbcType="VARCHAR" property="yearIncome" />
+        <result column="r_house_state" jdbcType="VARCHAR" property="houseState" />
+        <result column="r_education" jdbcType="VARCHAR" property="education" />
+        <result column="r_marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+        <result column="r_house_status" jdbcType="VARCHAR" property="houseStatus" />
+        <result column="r_car_status" jdbcType="VARCHAR" property="carStatus" />
+        <result column="r_job" jdbcType="VARCHAR" property="job" />
+        <result column="r_friend_require" jdbcType="VARCHAR" property="friendRequire" />
+        <result column="r_drink_status" jdbcType="VARCHAR" property="drinkStatus" />
+        <result column="r_smoke_status" jdbcType="VARCHAR" property="smokeStatus" />
+        <result column="r_living_status" jdbcType="VARCHAR" property="livingStatus" />
     </resultMap>
 
 
+    <resultMap id="ucenterIdentificaion" type="com.zheng.ucenter.dao.model.UcenterIdentificaion">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="z_real_name" jdbcType="VARCHAR" property="realName" />
+        <result column="z_idcard_type" jdbcType="VARCHAR" property="idcardType" />
+        <result column="z_idcard_no" jdbcType="VARCHAR" property="idcardNo" />
+        <result column="z_idcard_imgs" jdbcType="VARCHAR" property="idcardImgs" />
+        <result column="z_cellphone" jdbcType="VARCHAR" property="cellphone" />
+    </resultMap>
+
+    <resultMap id="ucenterIdentificaion" type="com.zheng.ucenter.dao.model.UcenterIdentificaion">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="l_smoking_status" jdbcType="TINYINT" property="smokingStatus" />
+        <result column="l_drinking_status" jdbcType="TINYINT" property="drinkingStatus" />
+        <result column="l_cooking" jdbcType="TINYINT" property="cooking" />
+        <result column="l_live_with_parents" jdbcType="VARCHAR" property="liveWithParents" />
+        <result column="l_favorite_date" jdbcType="VARCHAR" property="favoriteDate" />
+        <result column="l_favorite_music" jdbcType="VARCHAR" property="favoriteMusic" />
+        <result column="l_favorite_film" jdbcType="VARCHAR" property="favoriteFilm" />
+        <result column="l_favorite_sports" jdbcType="VARCHAR" property="favoriteSports" />
+        <result column="l_favorite_pet" jdbcType="VARCHAR" property="favoritePet" />
+    </resultMap>
 
     <sql id="Base_Column_List">
-      uc.user_id, uc.user_name,uc.avatar, uc.nickname, uc.sex, uc.last_login_time, uc.last_login_ip
+      uc.user_id , uc.user_name,uc.avatar, uc.nickname, uc.sex, uc.last_login_time, uc.last_login_ip
     </sql>
 
     <sql id="Base_Column_List2">
-    base.nikename,base.birth_date,base.height,base.shape,base.year_income,base.month_income,base.education,base.disposition,base.profession,base.unit_property,
+        base.nikename,base.birth_date,base.height,base.shape,base.year_income,base.month_income,base.education,base.disposition,base.profession,base.unit_property,
     base.work_unit,base.work_place,base.house_status,base.marital_status,base.children_status,base.soliloquy,base.declaration
     </sql>
 
+    <sql id="Base_Column_List3">
+        zo.sex as r_sex,zo.height as r_height,zo.shape as r_shape,zo.income_monthly as r_income_monthly,zo.income_year as r_income_year,zo.house_state as r_house_state,zo.education as r_education,zo.marital_status as r_marital_status,zo.house_status as r_house_status,zo.car_status as r_car_status,zo.job as r_job,zo.friend_require as r_friend_require,
+        zo.drink_status as r_drink_status,zo.smoke_status as r_smoke_status,zo.living_status as r_living_status
+    </sql>
 
+    <sql id="Base_Column_List4">
+        ic.real_name as z_real_name, ic.idcard_type as z_idcard_type, ic.idcard_no as z_idcard_no, ic.idcard_imgs as z_idcard_imgs, ic.cellphone as z_cellphone
+    </sql>
 
+    <sql id="Base_Column_List5">
+        zh.smoking_status as l_smoking_status,zh.drinking_status as l_drinking_status,zh.cooking as l_cooking,zh.live_with_parents as l_live_with_parents,zh.favorite_date as l_favorite_date,zh.favorite_music as l_favorite_music,
+        zh.favorite_film as l_favorite_film,zh.favorite_sports as l_favorite_sports,zh.favorite_pet as l_favorite_pet
+    </sql>
 
 
     <!-- 排序上移 -->
     <select id="selectFUserDetailVoByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select     <include refid="Base_Column_List" /> ,<include refid="Base_Column_List2" /> from ucenter_user as uc
+        select     <include refid="Base_Column_List" /> ,<include refid="Base_Column_List2" />,<include refid="Base_Column_List3" />,<include refid="Base_Column_List4" />,<include refid="Base_Column_List5" /> from ucenter_user as uc
         left join f_user_base_msg as base on uc.user_id = base.user_id
         left join ucenter_identificaion as ic on uc.user_id = ic.user_id
         left join f_user_request as zo on uc.user_id = zo.user_id
@@ -43,8 +113,6 @@
         where uc.user_id=#{userId,jdbcType=INTEGER}
     </select>
 
-
     <!-- 缓存 -->
     <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-
 </mapper>

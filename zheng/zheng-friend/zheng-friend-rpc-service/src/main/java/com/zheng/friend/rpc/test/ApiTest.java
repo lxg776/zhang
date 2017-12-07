@@ -17,7 +17,7 @@ public class ApiTest {
     @Test
     public void test01(){
 
-        FuserDetailVo vo = fUserBaseMsgService.selectFUserDetailVoByUserId(4);
+        FuserDetailVo vo = fUserBaseMsgService.selectFUserDetailVoByUserId(1);
         System.out.println(vo.getUserId());
         System.out.println(vo.getLastLoginTime());
     }
