@@ -79,6 +79,19 @@ create table f_user_request
 )
 
 
+create table f_user_setting
+(
+   user_id              int unsigned not null comment '编号',
+   show_index_page             tinyint(4) default 0 comment '首页能否显示(0:能,1:不能)',
+   show_base_msg            tinyint(4) default 0 comment '基本信息能否显示(0:能,1:不能)',
+   show_friend_request            tinyint(4) default 0 comment '择偶要求能否显示(0:能,1:不能)',
+   show_living_status            tinyint(4) default 0 comment '生活状况能否显示(0:能,1:不能)',
+   show_favorite            tinyint(4) default 0 comment '生活状况能否显示(0:能,1:不能)',
+   primary key (user_id)
+);
+
+
+
 create table f_activity
 (
   activity_id   int unsigned not null auto_increment comment '活动编号',

@@ -25,7 +25,25 @@
     <!-- start: Favicon -->
 
     <!-- end: Favicon -->
+    <link id="ie-style" href="${ctx}/webuploader-0.1.5/css/webuploader.css" rel="stylesheet">
 
+    <link id="ie-style" href="${ctx}/webuploader-0.1.5/examples/image-upload/style.css" rel="stylesheet">
+
+
+    <style type="text/css">
+        .imgDiv {
+            display: inline-block;
+            position: relative;
+        }
+
+        .imgDiv .delete {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            width: 12px;
+            height: 12px;
+        }
+    </style>
 
 </head>
 
@@ -60,20 +78,20 @@
                 <li><a href="#">会员管理</a></li>
                 <i class="icon-angle-right"></i>
                 </li>
-                <li><a href="#">认证信息</a></li>
+                <li><a href="#">用户设置</a></li>
 
             </ul>
             <div class="box span12" style="width: 800px;">
 
                 <div class="box-header" data-original-title>
                     <h2>
-                        <i class="halflings-icon white edit"></i><span class="break"></span>认证信息
+                        <i class="halflings-icon white edit"></i><span class="break"></span>用户设置
                     </h2>
 
                 </div>
                 <!-- 新闻栏目 -->
                 <div class="box-content">
-                    <form action="editIdentific" method="post" class="form-horizontal">
+                    <form action="editUserSetting"" method="post" class="form-horizontal">
                         <input type="hidden"
                                name="keyword" value="${keyword}" >
 
@@ -83,55 +101,56 @@
                         <fieldset>
 
                             <div class="control-group">
-                                <label class="control-label" for="typeahead">真实姓名 </label>
+                                <label class="control-label" for="typeahead">首页能否显示 </label>
                                 <div class="controls">
-                                    <input type="text" class="span6 typeahead" id="typeahead"
-                                           name="realName" value="${modle.realName}" data-provide="typeahead">
-
+                                    <select id="chouyan" name="showIndexPage">
+                                        <option value="0" <c:if test="${modle.showIndexPage =='0' }"> selected="selected" </c:if> >能</option>
+                                        <option value="1" <c:if test="${modle.showIndexPage =='1' }"> selected="selected" </c:if> >不能</option>
+                                    </select>
                                 </div>
                             </div>
 
 
                             <div class="control-group">
-                                <label class="control-label" for="typeahead">手机号码 </label>
+                                <label class="control-label" for="typeahead">基本信息能否显示</label>
                                 <div class="controls">
-                                    <input type="text" class="span6 typeahead" id="typeahead"
-                                           name="cellphone" value="${modle.cellphone}" data-provide="typeahead">
-
+                                    <select id="basemsg" name="showBaseMsg">
+                                        <option value="0" <c:if test="${modle.showBaseMsg =='0' }"> selected="selected" </c:if> >能</option>
+                                        <option value="1" <c:if test="${modle.showBaseMsg =='1' }"> selected="selected" </c:if> >不能</option>
+                                    </select>
                                 </div>
                             </div>
 
 
                             <div class="control-group">
-                                <label class="control-label" for="typeahead">证件类型 </label>
+                                <label class="control-label" for="typeahead">择偶要求能否显示</label>
                                 <div class="controls">
-                                    <select id="selectError4" name="idcardType">
-                                        <option value="idcard">身份证</option>
-                                        <option value="other">其他证件</option>
-
+                                    <select id="zheou" name="showFriendRequest">
+                                        <option value="0" <c:if test="${modle.showFriendRequest =='0' }"> selected="selected" </c:if> >能</option>
+                                        <option value="1" <c:if test="${modle.showFriendRequest =='1' }"> selected="selected" </c:if> >不能</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="typeahead">证件号码 </label>
+                                <label class="control-label" for="typeahead">生活状况能否显示</label>
                                 <div class="controls">
-                                    <input type="text" class="span6 typeahead" id="typeahead"
-                                           name="idcardNo" value="${modle.idcardNo}" data-provide="typeahead">
-
+                                    <select id="living" name="showLivingStatus">
+                                        <option value="0" <c:if test="${modle.showLivingStatus =='0' }"> selected="selected" </c:if> >能</option>
+                                        <option value="1" <c:if test="${modle.showLivingStatus =='1' }"> selected="selected" </c:if> >不能</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="typeahead">证件图片 </label>
+                                <label class="control-label" for="typeahead">兴趣爱好能否显示</label>
                                 <div class="controls">
-                                        <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3406130064,2380820040&fm=27&gp=0.jpg" />
-
+                                    <select id="showFavorite" name="showFavorite">
+                                        <option value="0" <c:if test="${modle.showFavorite =='0' }"> selected="selected" </c:if> >能</option>
+                                        <option value="1" <c:if test="${modle.showFavorite =='1' }"> selected="selected" </c:if> >不能</option>
+                                    </select>
                                 </div>
-
                             </div>
-
-
 
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-primary">保存</button>
@@ -171,5 +190,32 @@
 </footer>
 <!-- start: JavaScript-->
 <%@ include file="/common/s.jsp" %>
+<script language="JavaScript">
+
+    function deleteImageByName(index,path) {
+        id = "#imgDiv".concat(index);
+        imgs =   $("#imgs").val();
+        mImgsArray = imgs.split(",");
+
+        $.each(mImgsArray,function(index,value){
+            orgImgs="";
+            if(value!=path){
+                if(orgImgs&&orgImgs.length>0){
+                    orgImgs = orgImgs +","+value;
+                }else{
+                    orgImgs = value;
+                }
+                $("#imgs").val(orgImgs);
+            }
+        });
+        $(id).remove();
+    }
+
+
+</script>
+<script type="text/javascript" src="${ctx}/webuploader-0.1.5/dist/webuploader.js"></script>
+<script type="text/javascript" src="${ctx}/webuploader-0.1.5/examples/image-upload/upload.js"></script>
+
+
 </body>
 </html>

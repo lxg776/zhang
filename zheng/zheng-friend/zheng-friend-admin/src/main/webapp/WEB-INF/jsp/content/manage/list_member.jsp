@@ -93,7 +93,7 @@
 								<td style="width: 200px;"><fmt:formatDate value="${item.createTime}" pattern="yyyy/MM/dd  HH:mm:ss" /></td>
 								<td style="width: 600px;"><a href="${ctx}/manage/member/editUser?id=${item.userId}" style="color: #0033FF">编辑用户信息</a>
 									/<a href="${ctx}/manage/member/editBaseMsg?userId=${item.userId}" style="color: #0033FF">编辑基本资料</a><br/><a href="${ctx}/manage/member/editIdentific?userId=${item.userId}" style="color: #0033FF">编辑认证信息</a>/<a href="${ctx}/manage/member//userMemberList?userId=${item.userId}" style="color: #0033FF">设置会员</a>/
-								<a href="${ctx}/manage/member/editRequestMsg?userId=${item.userId}" style="color: #0033FF">编辑择偶要求</a>/<a href="${ctx}/manage/member/editLivingStatus?userId=${item.userId}" style="color: #0033FF">编辑生活状态</a>/<a href="#" style="color: #0033FF">删除</a>
+								<a href="${ctx}/manage/member/editRequestMsg?userId=${item.userId}" style="color: #0033FF">编辑择偶要求</a>/<a href="${ctx}/manage/member/editLivingStatus?userId=${item.userId}" style="color: #0033FF">编辑生活状态</a>/<a href="${ctx}/manage/member/editUserSetting?userId=${item.userId}" style="color: #0033FF">用户设置</a>/<a href="#" style="color: #0033FF">删除</a>
 								</td>
 							</tr>
 						</c:forEach>

@@ -16,7 +16,14 @@ public interface FUserBaseMsgService extends BaseService<FUserBaseMsg, FUserBase
 
 
 
-    // 根据类目获取文章列表
+    /**
+     * 根据用户id获取用户详情
+     */
     public FuserDetailVo selectFUserDetailVoByUserId(Integer userId);
+
+    /**
+     * 根据用户获取推荐用户
+      */
+    public List<FuserDetailVo> selectRecommendUsers(FuserDetailVo ucenterUser,Integer offset, Integer limit);
 
 }

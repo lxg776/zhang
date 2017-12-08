@@ -66,7 +66,7 @@
         <result column="z_cellphone" jdbcType="VARCHAR" property="cellphone" />
     </resultMap>
 
-    <resultMap id="ucenterIdentificaion" type="com.zheng.ucenter.dao.model.UcenterIdentificaion">
+    <resultMap id="fUserLivingStatus" type="com.zheng.friend.dao.model.FUserLivingStatus">
         <id column="user_id" jdbcType="INTEGER" property="userId" />
         <result column="l_smoking_status" jdbcType="TINYINT" property="smokingStatus" />
         <result column="l_drinking_status" jdbcType="TINYINT" property="drinkingStatus" />
@@ -103,8 +103,24 @@
     </sql>
 
 
+    <sql id="Base_Column_List6">
+        s.show_index_page as s_show_index_page , s.show_base_msg as s_show_base_msg,s.show_friend_request as s_show_friend_request,s.show_living_status as s_show_living_status ,s.show_favorite as s_show_favorite
+    </sql>
+
+
     <!-- 排序上移 -->
     <select id="selectFUserDetailVoByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select     <include refid="Base_Column_List" /> ,<include refid="Base_Column_List2" />,<include refid="Base_Column_List3" />,<include refid="Base_Column_List4" />,<include refid="Base_Column_List5" />,<include refid="Base_Column_List6" /> from ucenter_user as uc
+        left join f_user_base_msg as base on uc.user_id = base.user_id
+        left join ucenter_identificaion as ic on uc.user_id = ic.user_id
+        left join f_user_request as zo on uc.user_id = zo.user_id
+        left join f_user_living_status as zh on uc.user_id = zh.user_id
+        left join f_user_setting as s on uc.user_id = s.user_id
+        where uc.user_id=#{userId,jdbcType=INTEGER}
+    </select>
+
+    <!-- 排序上移 -->
+    <select id="selectFUserDetailVoList" resultMap="BaseResultMap" parameterType="com.zheng.friend.dao.vo.FuserDetailVo">
         select     <include refid="Base_Column_List" /> ,<include refid="Base_Column_List2" />,<include refid="Base_Column_List3" />,<include refid="Base_Column_List4" />,<include refid="Base_Column_List5" /> from ucenter_user as uc
         left join f_user_base_msg as base on uc.user_id = base.user_id
         left join ucenter_identificaion as ic on uc.user_id = ic.user_id
@@ -112,6 +128,8 @@
         left join f_user_living_status as zh on uc.user_id = zh.user_id
         where uc.user_id=#{userId,jdbcType=INTEGER}
     </select>
+
+
 
     <!-- 缓存 -->
     <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>

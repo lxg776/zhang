@@ -233,19 +233,19 @@
         id = "#imgDiv".concat(index);
         imgs =   $("#imgs").val();
         mImgsArray = imgs.split(",");
-
+        orgImgs="";
         $.each(mImgsArray,function(index,value){
-            orgImgs="";
             if(value!=path){
                 if(orgImgs&&orgImgs.length>0){
                     orgImgs = orgImgs +","+value;
                 }else{
                     orgImgs = value;
                 }
-                $("#imgs").val(orgImgs);
+
             }
         });
-        $(id).remove();
+        $("#imgs").val(orgImgs);
+       $(id).remove();
     }
 
 

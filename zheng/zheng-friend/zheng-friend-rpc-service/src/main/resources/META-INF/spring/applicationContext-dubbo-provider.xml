@@ -43,4 +43,8 @@
     <bean id="fUserLivingStatusServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserLivingStatusServiceImpl"/>
     <dubbo:service interface="com.zheng.friend.rpc.api.FUserLivingStatusService" ref="fUserLivingStatusServiceImpl" timeout="10000"/>
 
+    <!-- 用户设置 -->
+    <bean id="fUserSettingServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserSettingServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserSettingService" ref="fUserSettingServiceImpl" timeout="10000"/>
+
 </beans>

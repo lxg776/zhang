@@ -7,9 +7,7 @@
 	<!-- start: Meta -->
 	<%@include file="/common/h5/meta.jsp"%>
 	<!-- end: Mobile Specific -->
-
 	<%@include file="/common/h5/css-link.jsp"%>
-
 	<title>首页</title>
 	<!-- start: CSS -->
 	<style type="text/css">

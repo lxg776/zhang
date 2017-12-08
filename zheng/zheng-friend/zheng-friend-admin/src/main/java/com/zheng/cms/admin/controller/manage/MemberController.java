@@ -60,6 +60,9 @@ public class MemberController extends BaseController{
     @Autowired
     private FUserLivingStatusService fUserLivingStatusService;
 
+    @Autowired
+    private FUserSettingService fUserSettingService;
+
 
 
     private int pageSize=15;
@@ -269,6 +272,34 @@ public class MemberController extends BaseController{
     }
 
 
+    @ApiOperation(value = "编辑用户设置")
+    @RequestMapping(value = "/editUserSetting", method = RequestMethod.GET)
+    public String editUserSetting(@RequestParam(defaultValue = "0") Integer userId,ModelMap modelMap){
+
+        FUserSetting modle = fUserSettingService.selectByPrimaryKey(userId);
+        if(modle==null){
+            modle =new FUserSetting();
+            modle.setUserId(userId);
+            modelMap.put("keyword","create");
+        }else{
+            modelMap.put("keyword","update");
+        }
+        modelMap.put("modle",modle);
+        return "/content/manage/add_u_setting.jsp";
+    }
+
+
+
+    @ApiOperation(value = "编辑用户设置")
+    @RequestMapping(value = "/editUserSetting", method = RequestMethod.POST)
+    public String editUserSetting(@RequestParam(defaultValue = "0") String keyword, FUserSetting modle){
+        if("update".equals(keyword)){
+            fUserSettingService.updateByPrimaryKeySelective(modle);
+        }else{
+            fUserSettingService.insert(modle);
+        }
+        return "redirect:list";
+    }
 
 
 
@@ -281,10 +312,7 @@ public class MemberController extends BaseController{
 
         modelMap.put("dataList",dataList);
         modelMap.put("userId",userId);
-
         return "/content/manage/list_u_member_type.jsp";
-
-
     }
 
     @ApiOperation(value = "编辑")

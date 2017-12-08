@@ -17,6 +17,6 @@ public interface FUserBaseMsgExtMapper {
 
     public FuserDetailVo selectFUserDetailVoByUserId(@Param("userId") Integer userId);
 
-
+    public List<FuserDetailVo> selectRecommendUsers(@Param("modle") FuserDetailVo modle);
 
 }

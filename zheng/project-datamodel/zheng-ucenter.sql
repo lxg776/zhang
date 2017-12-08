@@ -59,6 +59,12 @@ create table f_user_base_msg
    primary key (user_id)
 );
 
+
+
+
+
+
+
 create table f_member_type
 (
    id                   int unsigned not null auto_increment comment '编号',
