@@ -19,6 +19,7 @@
     <resultMap id="fUserBaseMsg" type="com.zheng.friend.dao.model.FUserBaseMsg">
         <id column="user_id" jdbcType="INTEGER" property="userId" />
         <result column="nikename" jdbcType="VARCHAR" property="nikename" />
+        <result column="b_avatar" jdbcType="VARCHAR" property="avatar" />
         <result column="birth_date" jdbcType="VARCHAR" property="birthDate" />
         <result column="height" jdbcType="FLOAT" property="height" />
         <result column="shape" jdbcType="VARCHAR" property="shape" />
@@ -108,6 +109,8 @@
     </sql>
 
 
+
+
     <!-- 排序上移 -->
     <select id="selectFUserDetailVoByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select     <include refid="Base_Column_List" /> ,<include refid="Base_Column_List2" />,<include refid="Base_Column_List3" />,<include refid="Base_Column_List4" />,<include refid="Base_Column_List5" />,<include refid="Base_Column_List6" /> from ucenter_user as uc
@@ -119,16 +122,86 @@
         where uc.user_id=#{userId,jdbcType=INTEGER}
     </select>
 
-    <!-- 排序上移 -->
-    <select id="selectFUserDetailVoList" resultMap="BaseResultMap" parameterType="com.zheng.friend.dao.vo.FuserDetailVo">
-        select     <include refid="Base_Column_List" /> ,<include refid="Base_Column_List2" />,<include refid="Base_Column_List3" />,<include refid="Base_Column_List4" />,<include refid="Base_Column_List5" /> from ucenter_user as uc
+
+
+    <resultMap id="listResultMap" type="com.zheng.friend.dao.vo.FuserDetailVo">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="nickname" jdbcType="VARCHAR" property="nickname" />
+        <result column="sex" jdbcType="TINYINT" property="sex" />
+        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <collection property="fUserBaseMsg" resultMap="fUserBaseMsg" />
+        <collection property="fUserRequest" resultMap="fUserRequest" />
+        <collection property="ucenterIdentificaion" resultMap="ucenterIdentificaion" />
+
+    </resultMap>
+
+
+
+    <sql id="userList_Column_List2">
+        base.nikename,base.birth_date,base.height,base.profession
+    </sql>
+
+    <sql id="userList_Column_List3">
+        zo.sex as r_sex,zo.height as r_height,zo.income_monthly as r_income_monthly,zo.education as r_education
+    </sql>
+
+    <!-- 获取推荐列表 -->
+    <select id="selectRecommendUsers" resultMap="listResultMap" parameterType="hashmap">
+        select     <include refid="userList_Column_List2" /> ,<include refid="userList_Column_List3" /> from ucenter_user as uc
         left join f_user_base_msg as base on uc.user_id = base.user_id
-        left join ucenter_identificaion as ic on uc.user_id = ic.user_id
         left join f_user_request as zo on uc.user_id = zo.user_id
-        left join f_user_living_status as zh on uc.user_id = zh.user_id
-        where uc.user_id=#{userId,jdbcType=INTEGER}
+        left join f_user_setting as s on uc.user_id = s.user_id
+        where uc.user_id!=#{modle.userId,jdbcType=INTEGER} and s.show_index_page = 0
+        <if test="modle.sex == 1">
+           and uc.sex = 2
+        </if>
+
+        <if test="modle.sex == 2">
+          and  uc.sex = 1
+        </if>
+        ORDER BY uc.last_login_time desc limit #{offset},#{limit}
     </select>
 
+
+
+    <sql id="user_view_List">
+      r.b_user_id as r_b_user_id,base.user_id as base_user_id,base.nikename,base.avatar as b_avatar,base.birth_date,base.height,base.month_income,base.education,base.marital_status
+    </sql>
+
+
+
+    <resultMap id="fUserBaseMsgList" type="com.zheng.friend.dao.model.FUserBaseMsg">
+        <id column="b_user_id" jdbcType="INTEGER" property="userId" />
+        <result column="nikename" jdbcType="VARCHAR" property="nikename" />
+        <result column="b_avatar" jdbcType="VARCHAR" property="avatar" />
+        <result column="birth_date" jdbcType="VARCHAR" property="birthDate" />
+        <result column="height" jdbcType="FLOAT" property="height" />
+        <result column="month_income" jdbcType="VARCHAR" property="monthIncome" />
+        <result column="education" jdbcType="VARCHAR" property="education" />
+        <result column="marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+    </resultMap>
+
+
+
+    <resultMap id="userViewRecordMap" type="com.zheng.friend.dao.vo.FUserViewRecordVo">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <id column="base_user_id" jdbcType="INTEGER" property="fUserId" />
+        <id column="b_user_id" jdbcType="INTEGER" property="bUserId" />
+        <collection property="fwUserBaseMsg" resultMap="fUserBaseMsgList" />
+    </resultMap>
+
+
+
+    <!-- 获取推荐列表 -->
+    <select id="selectViewRecordUsers" resultMap="userViewRecordMap" parameterType="java.lang.Integer">
+      select  <include refid="user_view_List" /> from f_user_view_record  as r
+        left join f_user_base_msg as base on r.f_user_id = base.user_id
+        where r.b_user_id=#{userId,jdbcType=INTEGER} GROUP BY r.f_user_id
+        order by r.view_time desc
+    </select>
 
 
     <!-- 缓存 -->

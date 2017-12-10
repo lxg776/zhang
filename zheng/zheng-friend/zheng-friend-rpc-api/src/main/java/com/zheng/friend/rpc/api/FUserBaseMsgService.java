@@ -24,6 +24,6 @@ public interface FUserBaseMsgService extends BaseService<FUserBaseMsg, FUserBase
     /**
      * 根据用户获取推荐用户
       */
-    public List<FuserDetailVo> selectRecommendUsers(FuserDetailVo ucenterUser,Integer offset, Integer limit);
+    public List<FuserDetailVo> selectRecommendUsers(FuserDetailVo modle,Integer offset, Integer limit);
 
 }

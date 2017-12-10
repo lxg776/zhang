@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -42,7 +43,10 @@ public class FUserBaseMsgServiceImpl extends BaseServiceImpl<FUserBaseMsgMapper,
     @Override
     public List<FuserDetailVo> selectRecommendUsers(FuserDetailVo ucenterUser,Integer offset, Integer limit) {
 
-
-        return null;
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("modle",ucenterUser);
+        map.put("offset",offset);
+        map.put("limit",limit);
+        return fUserBaseMsgExtMapper.selectRecommendUsers(map);
     }
 }

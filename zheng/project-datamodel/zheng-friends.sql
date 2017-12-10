@@ -23,14 +23,14 @@ create table f_user_account
    house_state          varchar(100) comment '房屋状况',
    interest             varchar(200) comment '兴趣爱好',
    speciality           varchar(200) comment '特长优点',
-   tags			varchar(200) comment '标签',
+   tags			            varchar(200) comment '标签',
    height               float comment '身高',
    profession           varchar(100) comment '职业',
    friend_require       varchar(255) comment '对另一半得要求',
    declaration          varchar(255) comment '交友宣言',
    primary key (user_id)
 
-}
+)
 
 
 create table f_user_living_status
@@ -76,6 +76,16 @@ create table f_user_request
    living_status        varchar(50) comment '是否与父母同住',
    primary key (user_id)
 
+);
+
+
+create table f_user_view_record
+(
+   id             int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+   f_user_id             int(10) unsigned NOT NULL  COMMENT '访问人id',
+   b_user_id             int(10) unsigned NOT NULL  COMMENT '被访问人id',
+   view_time          timestamp default CURRENT_TIMESTAMP comment '访问时间',
+   primary key (id)
 )
 
 

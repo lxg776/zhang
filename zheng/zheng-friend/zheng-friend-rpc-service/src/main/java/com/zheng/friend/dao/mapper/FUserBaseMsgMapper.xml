@@ -21,6 +21,7 @@
     <result column="children_status" jdbcType="VARCHAR" property="childrenStatus" />
     <result column="soliloquy" jdbcType="VARCHAR" property="soliloquy" />
     <result column="declaration" jdbcType="VARCHAR" property="declaration" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -83,7 +84,7 @@
   <sql id="Base_Column_List">
     user_id, nikename, birth_date, height, shape, year_income, month_income, education, 
     disposition, profession, unit_property, work_unit, work_place, house_status, car_status, 
-    marital_status, children_status, soliloquy, declaration
+    marital_status, children_status, soliloquy, declaration, avatar
   </sql>
   <select id="selectByExample" parameterType="com.zheng.friend.dao.model.FUserBaseMsgExample" resultMap="BaseResultMap">
     select
@@ -122,14 +123,14 @@
       profession, unit_property, work_unit, 
       work_place, house_status, car_status, 
       marital_status, children_status, soliloquy, 
-      declaration)
+      declaration, avatar)
     values (#{userId,jdbcType=INTEGER}, #{nikename,jdbcType=VARCHAR}, #{birthDate,jdbcType=VARCHAR}, 
       #{height,jdbcType=REAL}, #{shape,jdbcType=VARCHAR}, #{yearIncome,jdbcType=VARCHAR}, 
       #{monthIncome,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, #{disposition,jdbcType=VARCHAR}, 
       #{profession,jdbcType=VARCHAR}, #{unitProperty,jdbcType=VARCHAR}, #{workUnit,jdbcType=VARCHAR}, 
       #{workPlace,jdbcType=VARCHAR}, #{houseStatus,jdbcType=VARCHAR}, #{carStatus,jdbcType=VARCHAR}, 
       #{maritalStatus,jdbcType=VARCHAR}, #{childrenStatus,jdbcType=VARCHAR}, #{soliloquy,jdbcType=VARCHAR}, 
-      #{declaration,jdbcType=VARCHAR})
+      #{declaration,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.friend.dao.model.FUserBaseMsg">
     insert into f_user_base_msg
@@ -191,6 +192,9 @@
       <if test="declaration != null">
         declaration,
       </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -249,6 +253,9 @@
       </if>
       <if test="declaration != null">
         #{declaration,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -318,6 +325,9 @@
       <if test="record.declaration != null">
         declaration = #{record.declaration,jdbcType=VARCHAR},
       </if>
+      <if test="record.avatar != null">
+        avatar = #{record.avatar,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -343,7 +353,8 @@
       marital_status = #{record.maritalStatus,jdbcType=VARCHAR},
       children_status = #{record.childrenStatus,jdbcType=VARCHAR},
       soliloquy = #{record.soliloquy,jdbcType=VARCHAR},
-      declaration = #{record.declaration,jdbcType=VARCHAR}
+      declaration = #{record.declaration,jdbcType=VARCHAR},
+      avatar = #{record.avatar,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -405,6 +416,9 @@
       <if test="declaration != null">
         declaration = #{declaration,jdbcType=VARCHAR},
       </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -427,7 +441,8 @@
       marital_status = #{maritalStatus,jdbcType=VARCHAR},
       children_status = #{childrenStatus,jdbcType=VARCHAR},
       soliloquy = #{soliloquy,jdbcType=VARCHAR},
-      declaration = #{declaration,jdbcType=VARCHAR}
+      declaration = #{declaration,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />

@@ -136,6 +136,8 @@ public class FUserBaseMsg implements Serializable {
      */
     private String declaration;
 
+    private String avatar;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUserId() {
@@ -290,6 +292,14 @@ public class FUserBaseMsg implements Serializable {
         this.declaration = declaration;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -315,6 +325,7 @@ public class FUserBaseMsg implements Serializable {
         sb.append(", childrenStatus=").append(childrenStatus);
         sb.append(", soliloquy=").append(soliloquy);
         sb.append(", declaration=").append(declaration);
+        sb.append(", avatar=").append(avatar);
         sb.append("]");
         return sb.toString();
     }
@@ -349,7 +360,8 @@ public class FUserBaseMsg implements Serializable {
             && (this.getMaritalStatus() == null ? other.getMaritalStatus() == null : this.getMaritalStatus().equals(other.getMaritalStatus()))
             && (this.getChildrenStatus() == null ? other.getChildrenStatus() == null : this.getChildrenStatus().equals(other.getChildrenStatus()))
             && (this.getSoliloquy() == null ? other.getSoliloquy() == null : this.getSoliloquy().equals(other.getSoliloquy()))
-            && (this.getDeclaration() == null ? other.getDeclaration() == null : this.getDeclaration().equals(other.getDeclaration()));
+            && (this.getDeclaration() == null ? other.getDeclaration() == null : this.getDeclaration().equals(other.getDeclaration()))
+            && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()));
     }
 
     @Override
@@ -375,6 +387,7 @@ public class FUserBaseMsg implements Serializable {
         result = prime * result + ((getChildrenStatus() == null) ? 0 : getChildrenStatus().hashCode());
         result = prime * result + ((getSoliloquy() == null) ? 0 : getSoliloquy().hashCode());
         result = prime * result + ((getDeclaration() == null) ? 0 : getDeclaration().hashCode());
+        result = prime * result + ((getAvatar() == null) ? 0 : getAvatar().hashCode());
         return result;
     }
 }
