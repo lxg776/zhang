@@ -48,8 +48,12 @@
     <dubbo:service interface="com.zheng.friend.rpc.api.FUserSettingService" ref="fUserSettingServiceImpl" timeout="10000"/>
 
 
-    <!-- 用户设置 -->
+    <!-- 访问记录 -->
     <bean id="fUserViewRecordServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserViewRecordServiceImpl"/>
     <dubbo:service interface="com.zheng.friend.rpc.api.FUserViewRecordService" ref="fUserViewRecordServiceImpl" timeout="10000"/>
+
+    <!-- 最近消息列表 -->
+    <bean id="fMessageServiceImpl" class="com.zheng.friend.rpc.service.impl.FMessageServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FMessageService" ref="fMessageServiceImpl" timeout="10000"/>
 
 </beans>

@@ -77,7 +77,19 @@ create table f_user_request
    primary key (user_id)
 
 );
+alter table f_user_base_msg  add avatar varchar(200);
 
+create table f_message
+(
+   id                   int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+   from_user_id         int(10) unsigned NOT NULL comment '发送者ID',
+   to_user_id           int(10) unsigned NOT NULL  comment '接受者ID',
+   msg_content          varchar(255) comment '消息内容',
+   msg_state            tinyint(4) default 0 comment '抽烟状况(0:未读,1:已读)',
+   create_time          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   primary key (id)
+);
+select count(id) as unReadcount ,base.*  from f_message as m left join f_user_base_msg as base on m.from_user_id = base.user_id where to_user_id =6 and msg_state = 0  group by m.from_user_id order by m.create_time desc;
 
 create table f_user_view_record
 (
