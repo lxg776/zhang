@@ -10,7 +10,7 @@
 
 	<!-- 根目录'/'对应页面 -->
 	<mvc:view-controller path="/" view-name="/index.jsp"/>
-
+	<mvc:resources location="/cdn/" mapping="/**" />
 	<context:property-placeholder location="classpath:config.properties"/>
 
 	<!-- thymeleaf视图 -->
