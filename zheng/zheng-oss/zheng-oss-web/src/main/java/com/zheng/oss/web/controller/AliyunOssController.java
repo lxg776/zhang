@@ -51,7 +51,7 @@ public class AliyunOssController {
 	 * @param callback 跨域请求
 	 * @return
 	 */
-	@CrossOrigin(origins = "http://127.0.0.1:2222")
+	//@CrossOrigin(origins = "http://127.0.0.1:2222")
 	@GetMapping("/ky_policy")
 	@ResponseBody
 	//@CrossOrigin(origins = "*", methods = RequestMethod.GET) // 该注解不支持JDK1.7

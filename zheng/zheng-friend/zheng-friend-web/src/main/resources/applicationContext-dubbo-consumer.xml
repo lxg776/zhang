@@ -35,4 +35,7 @@
     <dubbo:reference id="fUserMemberRelService" interface="com.zheng.friend.rpc.api.FUserMemberRelService" mock="true"/>
 
     <dubbo:reference id="fMessageService" interface="com.zheng.friend.rpc.api.FMessageService" mock="true"/>
+
+    <dubbo:reference id="fUserViewRecordService" interface="com.zheng.friend.rpc.api.FUserViewRecordService" mock="true"/>
+
 </beans>

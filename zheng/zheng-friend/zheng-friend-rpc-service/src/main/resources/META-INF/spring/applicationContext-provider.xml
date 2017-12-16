@@ -31,7 +31,7 @@
     <!-- 用户会员关系 -->
     <bean id="FUserMemberRelServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserMemberRelServiceImpl"/>
 
-    <!-- 用户访问记录 -->
+    <!-- 用户会员关系 -->
     <bean id="fUserViewRecordServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserViewRecordServiceImpl"/>
 
 

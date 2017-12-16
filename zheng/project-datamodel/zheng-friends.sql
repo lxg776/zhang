@@ -99,7 +99,15 @@ create table f_user_view_record
    view_time          timestamp default CURRENT_TIMESTAMP comment '访问时间',
    primary key (id)
 )
-
+create table f_user_images
+(
+   id                  int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+   user_id             int(10) unsigned NOT NULL  COMMENT '访问人id',
+   imnage_path         varchar(255) comment '基本信息能否显示(0:能,1:不能)',
+   key                 varchar(10)  comment '择偶要求能否显示(0:能,1:不能)',
+   create_time          timestamp default CURRENT_TIMESTAMP comment '注册时间',
+   primary key (id)
+);
 
 create table f_user_setting
 (

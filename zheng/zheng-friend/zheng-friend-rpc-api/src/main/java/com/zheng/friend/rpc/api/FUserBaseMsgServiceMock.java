@@ -4,6 +4,7 @@ import com.zheng.common.base.BaseServiceMock;
 import com.zheng.friend.dao.mapper.FUserBaseMsgMapper;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserBaseMsgExample;
+import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 
 import java.util.List;
@@ -13,6 +14,11 @@ import java.util.List;
 * Created by shuzheng on 2017/11/18.
 */
 public class FUserBaseMsgServiceMock extends BaseServiceMock<FUserBaseMsgMapper, FUserBaseMsg, FUserBaseMsgExample> implements FUserBaseMsgService {
+
+    @Override
+    public List<FUserViewRecordVo> selectViewRecordUsers(Integer userId) {
+        return null;
+    }
 
     @Override
     public FuserDetailVo selectFUserDetailVoByUserId(Integer userId) {

@@ -4,6 +4,7 @@ import com.zheng.common.base.BaseService;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserBaseMsgExample;
 import com.zheng.friend.dao.vo.FUserMemberRelVo;
+import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 
 import java.util.List;
@@ -15,6 +16,12 @@ import java.util.List;
 public interface FUserBaseMsgService extends BaseService<FUserBaseMsg, FUserBaseMsgExample> {
 
 
+
+
+    /**
+     * 选择访问记录
+     */
+    public  List<FUserViewRecordVo> selectViewRecordUsers(Integer userId);
 
     /**
      * 根据用户id获取用户详情

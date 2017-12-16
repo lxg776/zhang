@@ -3,6 +3,7 @@ package com.zheng.friend.rpc.mapper;
 
 import com.zheng.friend.dao.model.FUserViewRecord;
 import com.zheng.friend.dao.vo.FUserMemberRelVo;
+import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,6 +22,6 @@ public interface FUserBaseMsgExtMapper {
 
     public List<FuserDetailVo> selectRecommendUsers(HashMap map);
 
-    public List<FUserViewRecord> selectViewRecordUsers(@Param("userId") Integer userId);
+    public List<FUserViewRecordVo> selectViewRecordUsers(@Param("userId") Integer userId);
 
 }

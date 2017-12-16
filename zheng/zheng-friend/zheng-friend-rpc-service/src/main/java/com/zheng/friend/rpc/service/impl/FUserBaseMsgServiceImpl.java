@@ -5,6 +5,7 @@ import com.zheng.common.base.BaseServiceImpl;
 import com.zheng.friend.dao.mapper.FUserBaseMsgMapper;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserBaseMsgExample;
+import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.rpc.api.FUserBaseMsgService;
 import com.zheng.friend.rpc.mapper.FUserBaseMsgExtMapper;
@@ -43,10 +44,15 @@ public class FUserBaseMsgServiceImpl extends BaseServiceImpl<FUserBaseMsgMapper,
     @Override
     public List<FuserDetailVo> selectRecommendUsers(FuserDetailVo ucenterUser,Integer offset, Integer limit) {
 
-        HashMap<String,Object> map = new HashMap<>();
-        map.put("modle",ucenterUser);
-        map.put("offset",offset);
-        map.put("limit",limit);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("modle", ucenterUser);
+        map.put("offset", offset);
+        map.put("limit", limit);
         return fUserBaseMsgExtMapper.selectRecommendUsers(map);
+    }
+
+    public  List<FUserViewRecordVo> selectViewRecordUsers(Integer userId){
+
+        return fUserBaseMsgExtMapper.selectViewRecordUsers(userId);
     }
 }

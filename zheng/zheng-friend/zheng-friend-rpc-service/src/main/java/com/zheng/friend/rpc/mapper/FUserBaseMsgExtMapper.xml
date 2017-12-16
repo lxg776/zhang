@@ -186,6 +186,10 @@
 
 
 
+
+
+
+
     <resultMap id="userViewRecordMap" type="com.zheng.friend.dao.vo.FUserViewRecordVo">
         <id column="id" jdbcType="INTEGER" property="id" />
         <id column="base_user_id" jdbcType="INTEGER" property="fUserId" />
