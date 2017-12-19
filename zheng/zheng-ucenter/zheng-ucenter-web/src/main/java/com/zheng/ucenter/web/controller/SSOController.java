@@ -80,12 +80,20 @@ public class SSOController extends BaseController {
 
     @ApiOperation(value = "登录")
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(HttpServletRequest request) {
+    public String login(HttpServletRequest request,ModelMap modelMap) {
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         String serverSessionId = session.getId().toString();
         // 判断是否已登录，如果已登录，则回跳
         String code = RedisUtil.get(ZHENG_UPMS_SERVER_SESSION_ID + "_" + serverSessionId);
+
+
+        String lastPage  = request.getParameter("lastPage");
+
+        modelMap.put("lastPage",lastPage);
+
+
+
         // code校验值
         if (StringUtils.isNotBlank(code)) {
             // 回跳

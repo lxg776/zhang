@@ -93,15 +93,15 @@
                     window['expressinstallcallback'] = function( state ) {
                         switch(state) {
                             case 'Download.Cancelled':
-                                alert('您取消了更新！')
+                                // alert('您取消了更新！')
                                 break;
 
                             case 'Download.Failed':
-                                alert('安装失败')
+                                // alert('安装失败')
                                 break;
 
                             default:
-                                alert('安装已成功，请刷新！');
+                                // alert('安装已成功，请刷新！');
                                 break;
                         }
                         delete window['expressinstallcallback'];
@@ -470,7 +470,7 @@
                 case 'finish':
                     stats = uploader.getStats();
                     if ( stats.successNum ) {
-                        alert( '上传成功' );
+                        // alert( '上传成功' );
                     } else {
                         // 没有成功的图片，重设
                         state = 'done';

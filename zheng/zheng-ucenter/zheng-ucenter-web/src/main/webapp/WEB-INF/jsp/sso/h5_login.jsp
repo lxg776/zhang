@@ -18,11 +18,13 @@
         }
     </style>
 
+
+
 </head>
 
 <body>
 <header class="aui-bar aui-bar-nav">
-    <a class="aui-pull-left aui-btn">
+    <a class="aui-pull-left aui-btn" id="backBtn">
         <span class="aui-iconfont aui-icon-left"></span>返回
     </a>
     <div class="aui-title">靖西婚恋网</div>
@@ -61,7 +63,7 @@
 
 <div class="aui-content-padded">
     <p><div class="aui-btn aui-btn-info aui-btn-block" id="login-bt">登 录</div></p>
-    <p><div class="aui-btn aui-btn-primary aui-btn-block" style="margin-top: 1rem;">注 册</div></div>
+    <p><div class="aui-btn aui-btn-primary aui-btn-block"  id="reg_btn" style="margin-top: 1rem;">注 册</div></div>
 </div>
 
 
@@ -76,6 +78,21 @@
 <script>var BASE_PATH = '${basePath}';</script>
 <script>var BACK_URL = '${param.backurl}';</script>
 <script src="${ctx}/aui/script/login.js"></script>
+
+<script language="JavaScript">
+
+
+    $("#reg_btn").click(function(){
+        window.location.href='http://127.0.0.1:9991/h5/reg';
+    });
+
+
+    $("#backBtn").click(function(){
+        window.history.back();
+    });
+
+
+</script>
 
 <c:if test="${param.forceLogout == 1}">
     alert('您已被强制下线！');

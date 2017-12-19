@@ -64,8 +64,8 @@
 
 <div class="aui-content-padded">
 
-    <p><div class="aui-btn aui-btn-info aui-btn-block">登 录</div></p>
-    <p><div class="aui-btn aui-btn-primary aui-btn-block" style="margin-top: 1rem;">注 册</div></div>
+    <p><div class="aui-btn aui-btn-info aui-btn-block" id="login_btn">登 录</div></p>
+    <p><div class="aui-btn aui-btn-primary aui-btn-block" style="margin-top: 1rem;" id="reg_btn">注 册</div></div>
 
 
 </div>
@@ -78,6 +78,19 @@
 
 
 <%@ include file="/common/h5/js.jsp" %>
+
+<script language="JavaScript">
+
+    $("#login_btn").click(function(){
+        window.location.href='http://upms.zhangshuzheng.cn:9998/sso/login?backurl=http%3A%2F%2F127.0.0.1%3A9991%2Fu%2Findex';
+    });
+    $("#reg_btn").click(function(){
+        window.location.href='/h5/reg';
+    });
+
+
+</script>
+
 
 
 </body>
