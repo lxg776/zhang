@@ -38,4 +38,6 @@
 
     <dubbo:reference id="fUserViewRecordService" interface="com.zheng.friend.rpc.api.FUserViewRecordService" mock="true"/>
 
+    <dubbo:reference id="fUserLivingStatusService" interface="com.zheng.friend.rpc.api.FUserLivingStatusService" mock="true"/>
+
 </beans>

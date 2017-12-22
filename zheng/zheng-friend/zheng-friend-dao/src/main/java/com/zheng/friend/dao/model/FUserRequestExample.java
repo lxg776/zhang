@@ -1147,6 +1147,76 @@ public class FUserRequestExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andChildStatusIsNull() {
+            addCriterion("child_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusIsNotNull() {
+            addCriterion("child_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusEqualTo(String value) {
+            addCriterion("child_status =", value, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusNotEqualTo(String value) {
+            addCriterion("child_status <>", value, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusGreaterThan(String value) {
+            addCriterion("child_status >", value, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("child_status >=", value, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusLessThan(String value) {
+            addCriterion("child_status <", value, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusLessThanOrEqualTo(String value) {
+            addCriterion("child_status <=", value, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusLike(String value) {
+            addCriterion("child_status like", value, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusNotLike(String value) {
+            addCriterion("child_status not like", value, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusIn(List<String> values) {
+            addCriterion("child_status in", values, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusNotIn(List<String> values) {
+            addCriterion("child_status not in", values, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusBetween(String value1, String value2) {
+            addCriterion("child_status between", value1, value2, "childStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andChildStatusNotBetween(String value1, String value2) {
+            addCriterion("child_status not between", value1, value2, "childStatus");
+            return (Criteria) this;
+        }
+
         public Criteria andSmokeStatusIsNull() {
             addCriterion("smoke_status is null");
             return (Criteria) this;

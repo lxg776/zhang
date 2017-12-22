@@ -109,7 +109,14 @@ public class FUserRequest implements Serializable {
     private String drinkStatus;
 
     /**
-     * 饮酒情况
+     * 孩子情况
+     *
+     * @mbg.generated
+     */
+    private String childStatus;
+
+    /**
+     * 抽烟情况
      *
      * @mbg.generated
      */
@@ -244,6 +251,14 @@ public class FUserRequest implements Serializable {
         this.drinkStatus = drinkStatus;
     }
 
+    public String getChildStatus() {
+        return childStatus;
+    }
+
+    public void setChildStatus(String childStatus) {
+        this.childStatus = childStatus;
+    }
+
     public String getSmokeStatus() {
         return smokeStatus;
     }
@@ -281,6 +296,7 @@ public class FUserRequest implements Serializable {
         sb.append(", job=").append(job);
         sb.append(", friendRequire=").append(friendRequire);
         sb.append(", drinkStatus=").append(drinkStatus);
+        sb.append(", childStatus=").append(childStatus);
         sb.append(", smokeStatus=").append(smokeStatus);
         sb.append(", livingStatus=").append(livingStatus);
         sb.append("]");
@@ -314,6 +330,7 @@ public class FUserRequest implements Serializable {
             && (this.getJob() == null ? other.getJob() == null : this.getJob().equals(other.getJob()))
             && (this.getFriendRequire() == null ? other.getFriendRequire() == null : this.getFriendRequire().equals(other.getFriendRequire()))
             && (this.getDrinkStatus() == null ? other.getDrinkStatus() == null : this.getDrinkStatus().equals(other.getDrinkStatus()))
+            && (this.getChildStatus() == null ? other.getChildStatus() == null : this.getChildStatus().equals(other.getChildStatus()))
             && (this.getSmokeStatus() == null ? other.getSmokeStatus() == null : this.getSmokeStatus().equals(other.getSmokeStatus()))
             && (this.getLivingStatus() == null ? other.getLivingStatus() == null : this.getLivingStatus().equals(other.getLivingStatus()));
     }
@@ -337,6 +354,7 @@ public class FUserRequest implements Serializable {
         result = prime * result + ((getJob() == null) ? 0 : getJob().hashCode());
         result = prime * result + ((getFriendRequire() == null) ? 0 : getFriendRequire().hashCode());
         result = prime * result + ((getDrinkStatus() == null) ? 0 : getDrinkStatus().hashCode());
+        result = prime * result + ((getChildStatus() == null) ? 0 : getChildStatus().hashCode());
         result = prime * result + ((getSmokeStatus() == null) ? 0 : getSmokeStatus().hashCode());
         result = prime * result + ((getLivingStatus() == null) ? 0 : getLivingStatus().hashCode());
         return result;

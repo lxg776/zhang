@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class FMessageExample implements Serializable {
+public class FUserImagesExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -14,7 +14,7 @@ public class FMessageExample implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public FMessageExample() {
+    public FUserImagesExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -168,253 +168,203 @@ public class FMessageExample implements Serializable {
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdIsNull() {
-            addCriterion("from_user_id is null");
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdIsNotNull() {
-            addCriterion("from_user_id is not null");
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdEqualTo(Integer value) {
-            addCriterion("from_user_id =", value, "fromUserId");
+        public Criteria andUserIdEqualTo(Integer value) {
+            addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdNotEqualTo(Integer value) {
-            addCriterion("from_user_id <>", value, "fromUserId");
+        public Criteria andUserIdNotEqualTo(Integer value) {
+            addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdGreaterThan(Integer value) {
-            addCriterion("from_user_id >", value, "fromUserId");
+        public Criteria andUserIdGreaterThan(Integer value) {
+            addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("from_user_id >=", value, "fromUserId");
+        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdLessThan(Integer value) {
-            addCriterion("from_user_id <", value, "fromUserId");
+        public Criteria andUserIdLessThan(Integer value) {
+            addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdLessThanOrEqualTo(Integer value) {
-            addCriterion("from_user_id <=", value, "fromUserId");
+        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdIn(List<Integer> values) {
-            addCriterion("from_user_id in", values, "fromUserId");
+        public Criteria andUserIdIn(List<Integer> values) {
+            addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdNotIn(List<Integer> values) {
-            addCriterion("from_user_id not in", values, "fromUserId");
+        public Criteria andUserIdNotIn(List<Integer> values) {
+            addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdBetween(Integer value1, Integer value2) {
-            addCriterion("from_user_id between", value1, value2, "fromUserId");
+        public Criteria andUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andFromUserIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("from_user_id not between", value1, value2, "fromUserId");
+        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdIsNull() {
-            addCriterion("to_user_id is null");
+        public Criteria andImagePathIsNull() {
+            addCriterion("image_path is null");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdIsNotNull() {
-            addCriterion("to_user_id is not null");
+        public Criteria andImagePathIsNotNull() {
+            addCriterion("image_path is not null");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdEqualTo(Integer value) {
-            addCriterion("to_user_id =", value, "toUserId");
+        public Criteria andImagePathEqualTo(String value) {
+            addCriterion("image_path =", value, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdNotEqualTo(Integer value) {
-            addCriterion("to_user_id <>", value, "toUserId");
+        public Criteria andImagePathNotEqualTo(String value) {
+            addCriterion("image_path <>", value, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdGreaterThan(Integer value) {
-            addCriterion("to_user_id >", value, "toUserId");
+        public Criteria andImagePathGreaterThan(String value) {
+            addCriterion("image_path >", value, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("to_user_id >=", value, "toUserId");
+        public Criteria andImagePathGreaterThanOrEqualTo(String value) {
+            addCriterion("image_path >=", value, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdLessThan(Integer value) {
-            addCriterion("to_user_id <", value, "toUserId");
+        public Criteria andImagePathLessThan(String value) {
+            addCriterion("image_path <", value, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdLessThanOrEqualTo(Integer value) {
-            addCriterion("to_user_id <=", value, "toUserId");
+        public Criteria andImagePathLessThanOrEqualTo(String value) {
+            addCriterion("image_path <=", value, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdIn(List<Integer> values) {
-            addCriterion("to_user_id in", values, "toUserId");
+        public Criteria andImagePathLike(String value) {
+            addCriterion("image_path like", value, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdNotIn(List<Integer> values) {
-            addCriterion("to_user_id not in", values, "toUserId");
+        public Criteria andImagePathNotLike(String value) {
+            addCriterion("image_path not like", value, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdBetween(Integer value1, Integer value2) {
-            addCriterion("to_user_id between", value1, value2, "toUserId");
+        public Criteria andImagePathIn(List<String> values) {
+            addCriterion("image_path in", values, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andToUserIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("to_user_id not between", value1, value2, "toUserId");
+        public Criteria andImagePathNotIn(List<String> values) {
+            addCriterion("image_path not in", values, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentIsNull() {
-            addCriterion("msg_content is null");
+        public Criteria andImagePathBetween(String value1, String value2) {
+            addCriterion("image_path between", value1, value2, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentIsNotNull() {
-            addCriterion("msg_content is not null");
+        public Criteria andImagePathNotBetween(String value1, String value2) {
+            addCriterion("image_path not between", value1, value2, "imagePath");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentEqualTo(String value) {
-            addCriterion("msg_content =", value, "msgContent");
+        public Criteria andKeywordIsNull() {
+            addCriterion("keyword is null");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentNotEqualTo(String value) {
-            addCriterion("msg_content <>", value, "msgContent");
+        public Criteria andKeywordIsNotNull() {
+            addCriterion("keyword is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentGreaterThan(String value) {
-            addCriterion("msg_content >", value, "msgContent");
+        public Criteria andKeywordEqualTo(String value) {
+            addCriterion("keyword =", value, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentGreaterThanOrEqualTo(String value) {
-            addCriterion("msg_content >=", value, "msgContent");
+        public Criteria andKeywordNotEqualTo(String value) {
+            addCriterion("keyword <>", value, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentLessThan(String value) {
-            addCriterion("msg_content <", value, "msgContent");
+        public Criteria andKeywordGreaterThan(String value) {
+            addCriterion("keyword >", value, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentLessThanOrEqualTo(String value) {
-            addCriterion("msg_content <=", value, "msgContent");
+        public Criteria andKeywordGreaterThanOrEqualTo(String value) {
+            addCriterion("keyword >=", value, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentLike(String value) {
-            addCriterion("msg_content like", value, "msgContent");
+        public Criteria andKeywordLessThan(String value) {
+            addCriterion("keyword <", value, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentNotLike(String value) {
-            addCriterion("msg_content not like", value, "msgContent");
+        public Criteria andKeywordLessThanOrEqualTo(String value) {
+            addCriterion("keyword <=", value, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentIn(List<String> values) {
-            addCriterion("msg_content in", values, "msgContent");
+        public Criteria andKeywordLike(String value) {
+            addCriterion("keyword like", value, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentNotIn(List<String> values) {
-            addCriterion("msg_content not in", values, "msgContent");
+        public Criteria andKeywordNotLike(String value) {
+            addCriterion("keyword not like", value, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentBetween(String value1, String value2) {
-            addCriterion("msg_content between", value1, value2, "msgContent");
+        public Criteria andKeywordIn(List<String> values) {
+            addCriterion("keyword in", values, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgContentNotBetween(String value1, String value2) {
-            addCriterion("msg_content not between", value1, value2, "msgContent");
+        public Criteria andKeywordNotIn(List<String> values) {
+            addCriterion("keyword not in", values, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgStateIsNull() {
-            addCriterion("msg_state is null");
+        public Criteria andKeywordBetween(String value1, String value2) {
+            addCriterion("keyword between", value1, value2, "keyword");
             return (Criteria) this;
         }
 
-        public Criteria andMsgStateIsNotNull() {
-            addCriterion("msg_state is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgStateEqualTo(Byte value) {
-            addCriterion("msg_state =", value, "msgState");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgStateNotEqualTo(Byte value) {
-            addCriterion("msg_state <>", value, "msgState");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgStateGreaterThan(Byte value) {
-            addCriterion("msg_state >", value, "msgState");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgStateGreaterThanOrEqualTo(Byte value) {
-            addCriterion("msg_state >=", value, "msgState");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgStateLessThan(Byte value) {
-            addCriterion("msg_state <", value, "msgState");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgStateLessThanOrEqualTo(Byte value) {
-            addCriterion("msg_state <=", value, "msgState");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgStateIn(List<Byte> values) {
-            addCriterion("msg_state in", values, "msgState");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgStateNotIn(List<Byte> values) {
-            addCriterion("msg_state not in", values, "msgState");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgStateBetween(Byte value1, Byte value2) {
-            addCriterion("msg_state between", value1, value2, "msgState");
-            return (Criteria) this;
-        }
-
-        public Criteria andMsgStateNotBetween(Byte value1, Byte value2) {
-            addCriterion("msg_state not between", value1, value2, "msgState");
+        public Criteria andKeywordNotBetween(String value1, String value2) {
+            addCriterion("keyword not between", value1, value2, "keyword");
             return (Criteria) this;
         }
 

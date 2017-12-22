@@ -17,6 +17,7 @@
     <result column="job" jdbcType="VARCHAR" property="job" />
     <result column="friend_require" jdbcType="VARCHAR" property="friendRequire" />
     <result column="drink_status" jdbcType="VARCHAR" property="drinkStatus" />
+    <result column="child_status" jdbcType="VARCHAR" property="childStatus" />
     <result column="smoke_status" jdbcType="VARCHAR" property="smokeStatus" />
     <result column="living_status" jdbcType="VARCHAR" property="livingStatus" />
   </resultMap>
@@ -80,8 +81,8 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, sex, height, shape, age, income_monthly, income_year, house_state, education, 
-    marital_status, house_status, car_status, job, friend_require, drink_status, smoke_status, 
-    living_status
+    marital_status, house_status, car_status, job, friend_require, drink_status, child_status, 
+    smoke_status, living_status
   </sql>
   <select id="selectByExample" parameterType="com.zheng.friend.dao.model.FUserRequestExample" resultMap="BaseResultMap">
     select
@@ -119,13 +120,15 @@
       income_year, house_state, education, 
       marital_status, house_status, car_status, 
       job, friend_require, drink_status, 
-      smoke_status, living_status)
+      child_status, smoke_status, living_status
+      )
     values (#{userId,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, 
       #{shape,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{incomeMonthly,jdbcType=VARCHAR}, 
       #{incomeYear,jdbcType=VARCHAR}, #{houseState,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
       #{maritalStatus,jdbcType=VARCHAR}, #{houseStatus,jdbcType=VARCHAR}, #{carStatus,jdbcType=VARCHAR}, 
       #{job,jdbcType=VARCHAR}, #{friendRequire,jdbcType=VARCHAR}, #{drinkStatus,jdbcType=VARCHAR}, 
-      #{smokeStatus,jdbcType=VARCHAR}, #{livingStatus,jdbcType=VARCHAR})
+      #{childStatus,jdbcType=VARCHAR}, #{smokeStatus,jdbcType=VARCHAR}, #{livingStatus,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.friend.dao.model.FUserRequest">
     insert into f_user_request
@@ -174,6 +177,9 @@
       </if>
       <if test="drinkStatus != null">
         drink_status,
+      </if>
+      <if test="childStatus != null">
+        child_status,
       </if>
       <if test="smokeStatus != null">
         smoke_status,
@@ -227,6 +233,9 @@
       </if>
       <if test="drinkStatus != null">
         #{drinkStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="childStatus != null">
+        #{childStatus,jdbcType=VARCHAR},
       </if>
       <if test="smokeStatus != null">
         #{smokeStatus,jdbcType=VARCHAR},
@@ -290,6 +299,9 @@
       <if test="record.drinkStatus != null">
         drink_status = #{record.drinkStatus,jdbcType=VARCHAR},
       </if>
+      <if test="record.childStatus != null">
+        child_status = #{record.childStatus,jdbcType=VARCHAR},
+      </if>
       <if test="record.smokeStatus != null">
         smoke_status = #{record.smokeStatus,jdbcType=VARCHAR},
       </if>
@@ -318,6 +330,7 @@
       job = #{record.job,jdbcType=VARCHAR},
       friend_require = #{record.friendRequire,jdbcType=VARCHAR},
       drink_status = #{record.drinkStatus,jdbcType=VARCHAR},
+      child_status = #{record.childStatus,jdbcType=VARCHAR},
       smoke_status = #{record.smokeStatus,jdbcType=VARCHAR},
       living_status = #{record.livingStatus,jdbcType=VARCHAR}
     <if test="_parameter != null">
@@ -369,6 +382,9 @@
       <if test="drinkStatus != null">
         drink_status = #{drinkStatus,jdbcType=VARCHAR},
       </if>
+      <if test="childStatus != null">
+        child_status = #{childStatus,jdbcType=VARCHAR},
+      </if>
       <if test="smokeStatus != null">
         smoke_status = #{smokeStatus,jdbcType=VARCHAR},
       </if>
@@ -394,6 +410,7 @@
       job = #{job,jdbcType=VARCHAR},
       friend_require = #{friendRequire,jdbcType=VARCHAR},
       drink_status = #{drinkStatus,jdbcType=VARCHAR},
+      child_status = #{childStatus,jdbcType=VARCHAR},
       smoke_status = #{smokeStatus,jdbcType=VARCHAR},
       living_status = #{livingStatus,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}

@@ -72,7 +72,8 @@ create table f_user_request
    job                  varchar(50) comment '工作状况',
    friend_require       varchar(255) comment '对另一半得要求',
    drink_status         varchar(50) comment '饮酒情况',
-   smoke_status         varchar(50) comment '饮酒情况',
+   child_status         varchar(50) comment '孩子情况',
+   smoke_status         varchar(50) comment '抽烟情况',
    living_status        varchar(50) comment '是否与父母同住',
    primary key (user_id)
 
