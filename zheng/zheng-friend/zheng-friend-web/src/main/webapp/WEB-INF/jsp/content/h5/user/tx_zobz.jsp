@@ -31,7 +31,7 @@
 
 
 <div class="aui-content aui-margin-b-15" style="margin-top: 2.5rem;">
-    <form  id="regForm" action="/h5/txZobz" method="post" >
+    <form  id="regForm" action="/u/txZobz" method="post" >
     <ul class="aui-list aui-form-list">
 
         <li class="aui-list-item">
@@ -54,29 +54,29 @@
 
                 <div class="aui-list-item-input">
                     <select name="age_min">
-                        <option>不限</option>
-                        <option>20</option>
-                        <option>21</option>
-                        <option>22</option>
-                        <option>23</option>
-                        <option>24</option>
-                        <option>25</option>
-                        <option>26</option>
-                        <option>27</option>
-                        <option>28</option>
-                        <option>29</option>
-                        <option>30</option>
-                        <option>31</option>
-                        <option>32</option>
-                        <option>33</option>
-                        <option>34</option>
-                        <option>35</option>
-                        <option>36</option>
-                        <option>37</option>
-                        <option>38</option>
-                        <option>39</option>
-                        <option>40</option>
-                        <option>40以上</option>
+                        <option value="不限">不限</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                        <option value="32">32</option>
+                        <option value="33">33</option>
+                        <option value="34">34</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option  value="39">39</option>
+                        <option  value="40">40</option>
+
                     </select>
                 </div>
             </div>
@@ -88,29 +88,28 @@
 
                 <div class="aui-list-item-input">
                     <select name="age_max">
-                        <option>不限</option>
-                        <option>20</option>
-                        <option>21</option>
-                        <option>22</option>
-                        <option>23</option>
-                        <option>24</option>
-                        <option>25</option>
-                        <option>26</option>
-                        <option>27</option>
-                        <option>28</option>
-                        <option>29</option>
-                        <option>30</option>
-                        <option>31</option>
-                        <option>32</option>
-                        <option>33</option>
-                        <option>34</option>
-                        <option>35</option>
-                        <option>36</option>
-                        <option>37</option>
-                        <option>38</option>
-                        <option>39</option>
-                        <option>40</option>
-                        <option>40以上</option>
+                        <option value="不限">不限</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                        <option value="32">32</option>
+                        <option value="33">33</option>
+                        <option value="34">34</option>
+                        <option value="35">35</option>
+                        <option value="36">36</option>
+                        <option value="37">37</option>
+                        <option value="38">38</option>
+                        <option  value="39">39</option>
+                        <option  value="40">40</option>
                     </select>
                 </div>
             </div>
@@ -136,7 +135,7 @@
                 </div>
 
                 <div class="aui-list-item-input">
-                    <input type="number" placeholder="不限" name="height_max">>
+                    <input type="number" placeholder="不限" name="height_max">
                 </div>
             </div>
         </li>
@@ -325,19 +324,30 @@
     function tijiao() {
 
 
-        if ($("input[name='birthDate']").val() == "") {
-            msg("请填您的出生日期");
-            $("input[name='birthDate']").focus();
-            return
+        var age_min = $("select[name='age_min']").val();
+        var age_max = $("select[name='age_max']").val();
+
+
+        if((age_min !="不限")||(age_max !="不限")){
+            if(parseFloat(age_min)>parseFloat(age_max)){
+                msg("年龄的范围填错了");
+                return;
+            }
+        }
+
+        var height_min = $("input[name='height_min']").val();
+        var height_max = $("input[name='height_max']").val();
+
+
+        if((height_min !="不限")||(height_max !="不限")){
+            if(parseFloat(height_min)>parseFloat(height_max)){
+                msg("身高的范围填错了");
+                return;
+            }
         }
 
 
 
-        if ($("input[name='height']").val() == "") {
-            msg("请填写您的身高");
-            $("input[name='height']").focus();
-            return
-        }
 
 
         $("#regForm").submit();

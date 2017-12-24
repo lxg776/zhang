@@ -1,10 +1,14 @@
 package com.zheng.cms.admin.controller.h5;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.util.StringUtil;
+import com.zheng.cms.admin.shiro.UpmsSessionDao;
 import com.zheng.cms.common.constant.FriendResult;
 import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.MD5Util;
+import com.zheng.common.util.PropertiesFileUtil;
+import com.zheng.common.util.RedisUtil;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserLivingStatus;
 import com.zheng.friend.dao.model.FUserRequest;
@@ -17,9 +21,17 @@ import com.zheng.ucenter.dao.model.UcenterUser;
 import com.zheng.ucenter.dao.model.UcenterUserExample;
 import com.zheng.ucenter.rpc.api.UcenterIdentificaionService;
 import com.zheng.ucenter.rpc.api.UcenterUserService;
+import com.zheng.upms.client.shiro.session.UpmsSession;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+
+
 import org.apache.shiro.SecurityUtils;
+
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +44,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.util.UUID;
 
 /**
  * 后台controller
@@ -46,6 +60,13 @@ public class IndexController extends BaseController {
 	private static Logger _log = LoggerFactory.getLogger(IndexController.class);
 	private int pageSize=15;
 
+	// 全局会话key
+	private final static String ZHENG_UPMS_SERVER_SESSION_ID = "zheng-ucenter-server-session-id";
+	// 全局会话key列表
+	private final static String ZHENG_UPMS_SERVER_SESSION_IDS = "zheng-ucenter-server-session-ids";
+	// code key
+	private final static String ZHENG_UPMS_SERVER_CODE = "zheng-ucenter-server-code";
+
 
 	@Autowired
 	UcenterUserService ucenterUserService;
@@ -57,6 +78,8 @@ public class IndexController extends BaseController {
 	FUserRequestService fUserRequestService;
 	@Autowired
 	FUserLivingStatusService fUserLivingStatusService;
+	@Autowired
+	UpmsSessionDao upmsSessionDao;
 
 	/**
 	 * 首页
@@ -83,6 +106,17 @@ public class IndexController extends BaseController {
 		return "/content/h5/user/regiter.jsp";
 	}
 
+	private UcenterUser getUctenuser(String userName,HttpSession session){
+
+		UcenterUser ucenterUser = (UcenterUser) session.getAttribute(userName);
+		if(ucenterUser==null){
+			ucenterUser	= ucenterUserService.selectUpmsUserByUsername(userName);
+			ucenterUser.setPassword("");
+		}
+		session.setAttribute(userName,ucenterUser);
+		return ucenterUser;
+	}
+
 
 	/**
 	 * 首页
@@ -90,7 +124,18 @@ public class IndexController extends BaseController {
 	 */
 	@ApiOperation(value = "后台首页")
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public String reg(HttpServletRequest request, String userName, String password, String idCard, String idCardImgs, String realName, String msgCode, HttpSession session) {
+	public String reg(HttpServletRequest request, Byte sex,String userName, String password, String idCard, String idCardImgs, String realName, String msgCode, HttpSession session) {
+
+		UcenterUser ucenterUser =null;
+
+		if(null!=SecurityUtils.getSubject().getPrincipal()){
+			String  username = (String)SecurityUtils.getSubject().getPrincipal();
+			ucenterUser= getUctenuser(username,session);
+		}
+
+
+
+
 
 		String remoteAddr="";
 
@@ -101,18 +146,32 @@ public class IndexController extends BaseController {
 			}
 		}
 
-
 		UcenterUser modle =new UcenterUser();
 		modle.setSalt("friend");
-		password =  MD5Util.MD5(modle.getSalt()+password);
-		modle.setPassword(password);
+
+		String md5Password =  MD5Util.MD5(modle.getSalt()+password);
+		modle.setPassword(md5Password);
 		modle.setUserName(userName);
 		modle.setCreateIp(remoteAddr);
-		ucenterUserService.insert(modle);
+		modle.setSex(sex);
+
+		if(null!=ucenterUser){
+			modle.setUserId(ucenterUser.getUserId());
+			ucenterUserService.updateByPrimaryKey(modle);
+		}else{
+			ucenterUserService.insert(modle);
+		}
 
 		UcenterUserExample example = new UcenterUserExample();
 		example.createCriteria().andUserNameEqualTo(userName);
 		modle=ucenterUserService.selectFirstByExample(example);
+
+		String upms_code="";
+		//登录
+		if(ucenterUser==null){
+			upms_code = login(userName);
+		}
+
 
 		UcenterIdentificaion ucenterIdentificaion = new UcenterIdentificaion();
 		ucenterIdentificaion.setUserId(modle.getUserId());
@@ -121,13 +180,37 @@ public class IndexController extends BaseController {
 		ucenterIdentificaion.setIdcardNo(idCard);
 		ucenterIdentificaion.setRealName(realName);
 
-		ucenterIdentificaionService.insert(ucenterIdentificaion);
 
-		session.setAttribute("userId",modle.getUserId());
-
-
-		return "redirect:txGrzl";
+		if(null!=ucenterUser){
+			ucenterIdentificaionService.updateByPrimaryKey(ucenterIdentificaion);
+			return "redirect:/u/txGrzl";
+		}else{
+			ucenterIdentificaionService.insert(ucenterIdentificaion);
+			return "redirect:/u/txGrzl?upms_code="+upms_code+"&upms_username="+userName;
+		}
 	}
+
+
+	private String login(String username){
+		//后台登录
+		Subject subject = SecurityUtils.getSubject();
+		Session session = subject.getSession();
+		String sessionId = session.getId().toString();
+
+		// 全局会话sessionId列表，供会话管理
+		RedisUtil.lpush(ZHENG_UPMS_SERVER_SESSION_IDS, sessionId.toString());
+		// 默认验证帐号密码正确，创建code
+		String code = UUID.randomUUID().toString();
+		// 全局会话的code
+		RedisUtil.set(ZHENG_UPMS_SERVER_SESSION_ID + "_" + sessionId, code, (int) subject.getSession().getTimeout() / 1000);
+		// code校验值
+		RedisUtil.set(ZHENG_UPMS_SERVER_CODE + "_" + code, code, (int) subject.getSession().getTimeout() / 1000);
+
+		return  code;
+	}
+
+
+
 
 
 	@ApiOperation(value = "服务器校验")
@@ -165,134 +248,10 @@ public class IndexController extends BaseController {
 	}
 
 
-	/**
-	 * 填写个人资料
-	 * @return
-	 */
-	@ApiOperation(value = "填写个人资料")
-	@RequestMapping(value = "/txGrzl", method = RequestMethod.GET)
-	public String txGrzl(ModelMap modelMa,HttpSession session) {
-		Integer userId = (Integer) session.getAttribute("userId");
-		FUserBaseMsg queryObject = fUserBaseMsgService.selectByPrimaryKey(userId);
-		if(queryObject!=null){
-			modelMa.put("modle",queryObject);
-		}
-
-		return "/content/h5/user/tx_grzl.jsp";
-	}
 
 
-	/**
-	 * 填写个人资料
-	 * @return
-	 */
-	@ApiOperation(value = "填写个人资料")
-	@RequestMapping(value = "/txGrzl", method = RequestMethod.POST)
-	public String txGrzl(FUserBaseMsg fUserBaseMsg,HttpSession session) {
-
-		Integer userId = (Integer) session.getAttribute("userId");
-		FUserBaseMsg queryObject = fUserBaseMsgService.selectByPrimaryKey(userId);
-		if(queryObject!=null){
-			fUserBaseMsg.setUserId(userId);
-			fUserBaseMsgService.updateByPrimaryKey(fUserBaseMsg);
-		}else{
-			fUserBaseMsg.setUserId(userId);
-			fUserBaseMsgService.insert(fUserBaseMsg);
-		}
-
-		return "redirect:txZobz";
-	}
 
 
-	/**
-	 * 填写个人资料
-	 * @return
-	 */
-	@ApiOperation(value = "填写个人资料")
-	@RequestMapping(value = "/txZobz", method = RequestMethod.GET)
-	public String txZobz(ModelMap modelMa,HttpSession session) {
-		Integer userId = (Integer) session.getAttribute("userId");
-		FUserRequest queryObject = fUserRequestService.selectByPrimaryKey(userId);
-		if(queryObject!=null){
-			modelMa.put("modle",queryObject);
-		}
-
-		return "/content/h5/user/tx_zobz.jsp";
-	}
-
-
-	/**
-	 * 择偶信息
-	 * @return
-	 */
-	@ApiOperation(value = "择偶信息")
-	@RequestMapping(value = "/txZobz", method = RequestMethod.POST)
-	public String txZobz(FUserRequest modle,String age_min,String age_max,String height_min,String height_max,HttpSession session) {
-
-		Integer userId = (Integer) session.getAttribute("userId");
-
-		FUserRequest queryObject = fUserRequestService.selectByPrimaryKey(userId);
-		queryObject.setAge(getAgeRang(age_min,age_max));
-		queryObject.setHeight(getHeiRang(height_min,height_max));
-
-		if(queryObject!=null){
-			modle.setUserId(userId);
-			fUserRequestService.updateByPrimaryKey(modle);
-		}else{
-			modle.setUserId(userId);
-			fUserRequestService.insert(modle);
-		}
-
-		return "/content/h5/user/tx_zobz.jsp";
-	}
-
-
-	public String getAgeRang(String age_min,String age_max){
-		if("不限".equals(age_min)&&"不限".equals(age_max)){
-			return "不限";
-		}else if("不限".equals(age_min)){
-			return age_max+"以下";
-		}else if("不限".equals(age_max)){
-			return age_min+"以上";
-		}else{
-			return  age_min+"~"+age_max;
-		}
-
-	}
-
-	public String getHeiRang(String height_min, String height_max){
-		if(("不限".equals(height_min)|| StringUtil.isEmpty(height_min))&&("不限".equals(height_max)||StringUtil.isEmpty(height_max))){
-			return "不限";
-		}else if("不限".equals(height_min)|| StringUtil.isEmpty(height_min)){
-			return height_max +"以下";
-		}else if("不限".equals(height_max)||StringUtil.isEmpty(height_max)){
-			return height_min +"以上";
-		}else{
-			return  height_min +"~"+ height_max;
-		}
-
-	}
-
-	/**
-	 * 个人生活
-	 * @return
-	 */
-	@ApiOperation(value = "个人生活")
-	@RequestMapping(value = "/txXqhh", method = RequestMethod.POST)
-	public String txXqhh(FUserLivingStatus modle) {
-
-		Integer userId  = (Integer) SecurityUtils.getSubject().getPrincipal();
-
-		FUserLivingStatus queryObject = fUserLivingStatusService.selectByPrimaryKey(userId);
-		if(queryObject!=null){
-			modle.setUserId(userId);
-			fUserLivingStatusService.updateByPrimaryKeySelective(modle);
-		}else{
-			modle.setUserId(userId);
-			fUserLivingStatusService.insert(modle);
-		}
-		return "/content/h5/user/tx_xqhh.jsp";
-	}
 
 
 

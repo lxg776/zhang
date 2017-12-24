@@ -150,7 +150,7 @@
 
     <!-- 获取推荐列表 -->
     <select id="selectRecommendUsers" resultMap="listResultMap" parameterType="hashmap">
-        select     <include refid="userList_Column_List2" /> ,<include refid="userList_Column_List3" /> from ucenter_user as uc
+        select  <include refid="Base_Column_List" /> ,   <include refid="userList_Column_List2" /> ,<include refid="userList_Column_List3" /> from ucenter_user as uc
         left join f_user_base_msg as base on uc.user_id = base.user_id
         left join f_user_request as zo on uc.user_id = zo.user_id
         left join f_user_setting as s on uc.user_id = s.user_id

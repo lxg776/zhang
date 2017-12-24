@@ -33,7 +33,7 @@ public class FMessage implements Serializable {
     private String msgContent;
 
     /**
-     * 消息状况(0:未读,1:已读)
+     * 抽烟状况(0:未读,1:已读)
      *
      * @mbg.generated
      */

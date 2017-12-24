@@ -441,6 +441,18 @@
 
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
+                <div class="aui-list-item-label">
+                    我是
+                </div>
+                <div class="aui-list-item-input">
+                    <label><input class="aui-radio" type="radio" name="sex" value="1" >男生</label>
+                    <label><input class="aui-radio" type="radio" name="sex" value="2" >女生</label>
+                </div>
+            </div>
+        </li>
+
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
 
                 <div class="aui-list-item-input">
                     <input type="text" name="userName" placeholder="手机号码">
@@ -474,7 +486,8 @@
                 </div>
             </div>
         </li>
-        <input id="imgs" type="hidden" name="idCardImgs"  />
+        <%--<input id="imgs" type="hidden" name="idCardImgs"  />--%>
+        <input id="imgs" type="hidden" name="idCardImgs" value="wtf.jpeg"  />
         <div class="aui-card-list">
             <div class="aui-card-list-header" style="color: #757575; font-size: 14px;">
                 为保证注册的真实性需上传身份证图
@@ -508,7 +521,7 @@
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
                 <div class="aui-list-item-input">
-                    <input type="text" name="password" placeholder="密码">
+                    <input type="password" name="password" placeholder="密码">
                 </div>
             </div>
         </li>
@@ -517,7 +530,7 @@
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
                 <div class="aui-list-item-input">
-                    <input type="text" name="rePassword" placeholder="确认密码">
+                    <input type="password" name="rePassword" placeholder="确认密码">
                 </div>
             </div>
         </li>
@@ -559,6 +572,13 @@
 
 
     function tijiao() {
+
+
+        if ($("input[name='sex']").val() == "") {
+            msg("请填性别");
+            $("input[name='sex']").focus();
+            return
+        }
 
 
         if ($("input[name='userName']").val() == "") {
