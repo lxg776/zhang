@@ -2,6 +2,8 @@ package com.zheng.cms.admin.controller.h5;
 
 import com.github.pagehelper.util.StringUtil;
 import com.zheng.cms.admin.shiro.UpmsSessionDao;
+import com.zheng.cms.common.constant.FriendResult;
+import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserLivingStatus;
@@ -10,7 +12,9 @@ import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.rpc.api.FUserBaseMsgService;
 import com.zheng.friend.rpc.api.FUserLivingStatusService;
 import com.zheng.friend.rpc.api.FUserRequestService;
+import com.zheng.ucenter.dao.model.UcenterIdentificaionExample;
 import com.zheng.ucenter.dao.model.UcenterUser;
+import com.zheng.ucenter.dao.model.UcenterUserExample;
 import com.zheng.ucenter.rpc.api.UcenterIdentificaionService;
 import com.zheng.ucenter.rpc.api.UcenterUserService;
 import io.swagger.annotations.Api;
@@ -24,8 +28,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -71,9 +77,39 @@ public class WebController extends BaseController {
 		//系统推荐人
 		List<FuserDetailVo> recommendUserList = fUserBaseMsgService.selectRecommendUsers(myDetailVo,(pageNum-1)*pageSize,pageSize);
 		modelMap.put("recommendUserList",recommendUserList);
+		modelMap.put("pageSize",pageSize);
+
+
 
 		return "/content/h5/main.jsp";
 	}
+
+
+
+
+
+	@ApiOperation(value = "服务器校验")
+	@RequestMapping(value = "/loadRecommendUserList", method = RequestMethod.GET)
+	@ResponseBody
+	public Object loadRecommendUserList(@RequestParam(defaultValue = "1") Integer pageNum,HttpSession session,ModelMap modelMap) {
+
+		FriendResult result  = new FriendResult(FriendResultConstant.SUCCESS,null);
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		//个人详情
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		FuserDetailVo myDetailVo  = new FuserDetailVo();
+		myDetailVo.setSex(ucenterUser.getSex());
+		myDetailVo.setUserId(ucenterUser.getUserId());
+				//系统推荐人
+		List<FuserDetailVo> recommendUserList = fUserBaseMsgService.selectRecommendUsers(myDetailVo,(pageNum-1)*pageSize,pageSize);
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("dataList",recommendUserList);
+		map.put("pageNum",pageNum);
+		result.setData(map);
+		return result;
+	}
+
+
 
 
 

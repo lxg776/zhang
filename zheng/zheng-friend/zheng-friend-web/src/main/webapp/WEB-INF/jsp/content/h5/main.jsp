@@ -9,31 +9,27 @@
     <!-- end: Mobile Specific -->
 
     <%@include file="/common/h5/css-link.jsp"%>
-
+    <link id="bootstrap-style" href="${ctx}/aui/css/aui-pull-refresh.css" rel="stylesheet">
     <title>首页</title>
     <!-- start: CSS -->
-    <style type="text/css">
-        #demo {
-            background-color: #e0e0e0;
-        }
-    </style>
+
 
 </head>
 
 <body>
-<body>
 <header class="aui-bar aui-bar-nav" style="position: fixed;">
 
-    <div class="aui-title">靖西婚恋网</div>
+    <div class="aui-title" id="demo">靖西婚恋网</div>
     <a class="aui-pull-right aui-btn aui-btn-outlined">
         <span class="aui-iconfont aui-icon-search"></span>
     </a>
+
 </header>
 
-<div id="demo" style="padding-top: 2.25rem;padding-bottom: 2.25rem">
+<div style="padding-top: 2.25rem;padding-bottom: 2.25rem;background: ffffff">
 
     <div  id="page1" class="aui-content aui-margin-b-15">
-        <ul class="aui-list aui-media-list">
+        <ul class="aui-list aui-media-list" id="listUser">
             <li class="aui-list-header">
                 每日推荐
             </li>
@@ -81,6 +77,177 @@
                 </li>
             </c:forEach>
 
+
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">多张图片列表一</div>
+                    <p>借助栅格来实现图片列表</p>
+                    <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo1.png"/>
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo2.png" />
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo3.png" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">多张图片列表一</div>
+                    <p>借助栅格来实现图片列表</p>
+                    <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo1.png"/>
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo2.png" />
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo3.png" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">多张图片列表一</div>
+                    <p>借助栅格来实现图片列表</p>
+                    <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo1.png"/>
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo2.png" />
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo3.png" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">多张图片列表一</div>
+                    <p>借助栅格来实现图片列表</p>
+                    <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo1.png"/>
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo2.png" />
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo3.png" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">多张图片列表一</div>
+                    <p>借助栅格来实现图片列表</p>
+                    <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo1.png"/>
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo2.png" />
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo3.png" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">多张图片列表一</div>
+                    <p>借助栅格来实现图片列表</p>
+                    <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo1.png"/>
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo2.png" />
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo3.png" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">多张图片列表一</div>
+                    <p>借助栅格来实现图片列表</p>
+                    <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo1.png"/>
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo2.png" />
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo3.png" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">多张图片列表一</div>
+                    <p>借助栅格来实现图片列表</p>
+                    <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo1.png"/>
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo2.png" />
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo3.png" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">多张图片列表一</div>
+                    <p>借助栅格来实现图片列表</p>
+                    <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo1.png"/>
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo2.png" />
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo3.png" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-title">多张图片列表一</div>
+                    <p>借助栅格来实现图片列表</p>
+                    <div class="aui-row aui-row-padded">
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo1.png"/>
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo2.png" />
+                        </div>
+                        <div class="aui-col-xs-4">
+                            <img src="../image/demo3.png" />
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
 
@@ -90,6 +257,74 @@
     <div  id="page2" class="aui-content aui-margin-b-15 aui-hide">
 
         <section class="aui-content">
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    靖西龙潭烧烤<small>2016年7月12日</small>
+                </div>
+                <div class="aui-card-list-content">
+                    <img src="${ctx}/aui/image/l2.png" />
+                </div>
+                <div class="aui-card-list-footer">
+
+
+                    <div>报名费用:100元/人</div>
+
+                    <div>单身交友</div>
+                </div>
+
+            </div>
+
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    靖西龙潭烧烤<small>2016年7月12日</small>
+                </div>
+                <div class="aui-card-list-content">
+                    <img src="${ctx}/aui/image/l2.png" />
+                </div>
+                <div class="aui-card-list-footer">
+
+
+                    <div>报名费用:100元/人</div>
+
+                    <div>单身交友</div>
+                </div>
+
+            </div>
+
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    靖西龙潭烧烤<small>2016年7月12日</small>
+                </div>
+                <div class="aui-card-list-content">
+                    <img src="${ctx}/aui/image/l2.png" />
+                </div>
+                <div class="aui-card-list-footer">
+
+
+                    <div>报名费用:100元/人</div>
+
+                    <div>单身交友</div>
+                </div>
+
+            </div>
+
+            <div class="aui-card-list">
+                <div class="aui-card-list-header">
+                    靖西龙潭烧烤<small>2016年7月12日</small>
+                </div>
+                <div class="aui-card-list-content">
+                    <img src="${ctx}/aui/image/l2.png" />
+                </div>
+                <div class="aui-card-list-footer">
+
+
+                    <div>报名费用:100元/人</div>
+
+                    <div>单身交友</div>
+                </div>
+
+            </div>
+
             <div class="aui-card-list">
                 <div class="aui-card-list-header">
                     靖西龙潭烧烤<small>2016年7月12日</small>
@@ -398,6 +633,11 @@
 <%@ include file="/common/h5/js.jsp" %>
 
 <script type="text/javascript" src="${ctx}/aui/script/aui-tab.js" ></script>
+
+
+<script src="${ctx}/aui/script/aui-scroll.js"></script>
+
+
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
@@ -410,21 +650,33 @@
             $("#page2").addClass("aui-hide");
             $("#page3").addClass("aui-hide");
             $("#page4").addClass("aui-hide");
+
+            $('body,html').animate({scrollTop:0},100);
+
+
+
+
         }else if(ret.index==2){
             $("#page1").addClass("aui-hide");
             $("#page2").removeClass("aui-hide");
             $("#page3").addClass("aui-hide");
             $("#page4").addClass("aui-hide");
+
+            $('body,html').animate({scrollTop:0},100);
         }else if(ret.index==3){
             $("#page1").addClass("aui-hide");
             $("#page2").addClass("aui-hide");
             $("#page3").removeClass("aui-hide");
             $("#page4").addClass("aui-hide");
+
+            $('body,html').animate({scrollTop:0},100);
         }else if(ret.index==4){
             $("#page1").addClass("aui-hide");
             $("#page2").addClass("aui-hide");
             $("#page3").addClass("aui-hide");
             $("#page4").removeClass("aui-hide");
+
+            $('body,html').animate({scrollTop:0},100);
         }
     });
 
@@ -444,9 +696,127 @@
     });
 
 
+    var scroll = new auiScroll({
+        listen:true,
+        distance:200 //判断到达底部的距离，isToBottom为true
+    },function(ret){
+    if(ret.isToBottom){
+        document.getElementById("demo").textContent = "已到达底部";
+        loadMoreUser();
+    }else{
+
+    }
+
+});
+
+    var pageSize =15;
+    var currentPage =1;
+    <c:if test="${not empty pageSize}">
+    pageSize = ${pageSize}
+    </c:if>
+
+
+
+
+    function loadMoreUser() {
+        var userloadFla = false;
+
+        userCount = $("#listUser").children(".aui-list-item").length;
+        document.getElementById("demo").textContent = "滚动高度："+userCount;
+        pageNum = parseInt((userCount-1)/pageSize)+1;
+
+        if(!userloadFla){
+            $.ajax({
+                type: "GET",
+                url: "/u/loadRecommendUserList",
+                data: "pageNum="+pageNum,
+                async:false,
+                success: function(data){
+                    userloadFla=true;
+
+
+                    if(data.code==1){
+                        $.each(data.data.dataList, function(i, value) {
+                            getUserHtml(value);
+                        });
+
+
+
+
+                    }else{
+                        msg(data.message);
+                    }
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+                    userloadFla=true;
+                }
+
+            });
+        }
+    }
+
+
+    function getUserHtml(item) {
+        tempHtml = $("#tempUser").html().toString();
+        console.log(tempHtml);
+
+    }
+
+
+
 </script>
 
+
+<div id="tempUser"  style="display: none">
+    <li class="aui-list-item">
+        <div class="aui-media-list-item-inner">
+            <div class="aui-list-item-media" style="width: 7rem; height: 7rem;">
+                <img src="${ctx}/aui/image/mm.jpeg" >
+            </div>
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-text">
+                    <div class="aui-list-item-title">#nikename</div>
+
+                    <div class="aui-list-item-right aui-greed">实名</div>
+                </div>
+                <div class="aui-list-item-text">
+                    <div class="aui-list-item-text">25岁</div>
+                    <div class="aui-list-item-text">#profession</div>
+                    <div class="aui-list-item-text">#heightcm</div>
+                </div>
+
+                <div class="aui-list-item-text" style="color: #0a0c0e">
+                    择偶条件:我想找寻靖西#zo
+                </div>
+            </div>
+        </div>
+        <div class="aui-info" style="padding-top:0">
+            <div class="aui-info-item">
+                <a href="#">打招呼</a>
+            </div>
+            <div class="aui-info-item">
+                <a href="#">发信息</a>
+            </div>
+
+            <div class="aui-info-item">
+                <a href="#">帮我联系她</a>
+            </div>
+
+        </div>
+    </li>
+
+
+
+</div>
+
+
+
 </body>
+
+
+
+
+
 
 
 </html>
