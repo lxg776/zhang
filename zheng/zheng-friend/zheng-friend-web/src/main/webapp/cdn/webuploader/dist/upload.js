@@ -203,6 +203,8 @@
             }
             return pwd;
         }
+
+
         oss_policy_url = "http://127.0.0.1:9997/aliyun/oss/ky_policy";
         $.ajax({
             url: oss_policy_url,

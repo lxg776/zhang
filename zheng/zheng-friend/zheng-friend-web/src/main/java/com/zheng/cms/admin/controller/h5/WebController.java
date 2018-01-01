@@ -8,10 +8,10 @@ import com.zheng.common.base.BaseController;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserLivingStatus;
 import com.zheng.friend.dao.model.FUserRequest;
+import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
-import com.zheng.friend.rpc.api.FUserBaseMsgService;
-import com.zheng.friend.rpc.api.FUserLivingStatusService;
-import com.zheng.friend.rpc.api.FUserRequestService;
+import com.zheng.friend.dao.vo.RecentMsgVo;
+import com.zheng.friend.rpc.api.*;
 import com.zheng.ucenter.dao.model.UcenterIdentificaionExample;
 import com.zheng.ucenter.dao.model.UcenterUser;
 import com.zheng.ucenter.dao.model.UcenterUserExample;
@@ -61,6 +61,10 @@ public class WebController extends BaseController {
 	@Autowired
 	UpmsSessionDao upmsSessionDao;
 
+	@Autowired
+	FMessageService fMessageService;
+	@Autowired
+	FUserViewRecordService fUserViewRecordService;
 
 	/**
 	 * 首页
@@ -78,8 +82,13 @@ public class WebController extends BaseController {
 		List<FuserDetailVo> recommendUserList = fUserBaseMsgService.selectRecommendUsers(myDetailVo,(pageNum-1)*pageSize,pageSize);
 		modelMap.put("recommendUserList",recommendUserList);
 		modelMap.put("pageSize",pageSize);
-
-
+		modelMap.put("modle",myDetailVo);
+		//最新消息
+		List<RecentMsgVo> msgList = fMessageService.selectRecentMsgByUser(ucenterUser.getUserId());
+		modelMap.put("msgList",msgList);
+		//访问记录
+		List<FUserViewRecordVo> viewRecordList = fUserBaseMsgService.selectViewRecordUsers(ucenterUser.getUserId());
+		modelMap.put("viewRecordList",viewRecordList);
 
 		return "/content/h5/main.jsp";
 	}
@@ -329,5 +338,59 @@ public class WebController extends BaseController {
 		}
 		return "redirect:/u/index";
 	}
+
+
+
+	/**
+	 * 填写个人资料
+	 * @return
+	 */
+	@ApiOperation(value = "编辑个人资料")
+	@RequestMapping(value = "/editGrzl", method = RequestMethod.GET)
+	public String editGrzl(ModelMap modelMa,HttpSession session) {
+
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		Integer userId = ucenterUser.getUserId();
+		FUserBaseMsg queryObject = fUserBaseMsgService.selectByPrimaryKey(userId);
+		if(queryObject!=null){
+			modelMa.put("modle",queryObject);
+		}
+		modelMa.put("user",ucenterUser);
+		return "/content/h5/user/edit_grzl.jsp";
+	}
+
+
+	/**
+	 * 填写个人资料
+	 * @return
+	 */
+	@ApiOperation(value = "填写个人资料")
+	@RequestMapping(value = "/editGrzl", method = RequestMethod.POST)
+	public String editGrzl(FUserBaseMsg fUserBaseMsg,String avatar,HttpSession session){
+
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		Integer userId = ucenterUser.getUserId();
+
+		if(StringUtil.isNotEmpty(avatar)){
+			UcenterUser updateUcentUser = new UcenterUser();
+			updateUcentUser.setUserId(ucenterUser.getUserId());
+			ucenterUser.setAvatar(avatar);
+			ucenterUserService.updateByPrimaryKeySelective(updateUcentUser);
+		}
+
+		FUserBaseMsg queryObject = fUserBaseMsgService.selectByPrimaryKey(userId);
+		if(queryObject!=null){
+			fUserBaseMsg.setUserId(userId);
+			fUserBaseMsgService.updateByPrimaryKey(fUserBaseMsg);
+		}else{
+			fUserBaseMsg.setUserId(userId);
+			fUserBaseMsgService.insert(fUserBaseMsg);
+		}
+
+		return "redirect:/u/index";
+	}
+
 
 }

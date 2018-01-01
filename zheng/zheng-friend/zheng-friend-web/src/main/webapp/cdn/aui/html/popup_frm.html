@@ -27,6 +27,7 @@
 <script type="text/javascript" src="../script/aui-popup-new.js" ></script>
 <script type="text/javascript">
     var popup = new auiPopup();
+    popup.popupDiv.innerHTML = '<div class="aui-popup-arrow"></div><div class="aui-popup-content">lxg123321</div>';
     function showPopup(location){
         popup.init({
             frameBounces:true,//当前页面是否弹动，（主要针对安卓端）

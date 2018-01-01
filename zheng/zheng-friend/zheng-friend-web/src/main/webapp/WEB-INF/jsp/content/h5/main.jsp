@@ -76,178 +76,6 @@
 
                 </li>
             </c:forEach>
-
-
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">多张图片列表一</div>
-                    <p>借助栅格来实现图片列表</p>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo1.png"/>
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo3.png" />
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">多张图片列表一</div>
-                    <p>借助栅格来实现图片列表</p>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo1.png"/>
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo3.png" />
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">多张图片列表一</div>
-                    <p>借助栅格来实现图片列表</p>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo1.png"/>
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo3.png" />
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">多张图片列表一</div>
-                    <p>借助栅格来实现图片列表</p>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo1.png"/>
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo3.png" />
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">多张图片列表一</div>
-                    <p>借助栅格来实现图片列表</p>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo1.png"/>
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo3.png" />
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">多张图片列表一</div>
-                    <p>借助栅格来实现图片列表</p>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo1.png"/>
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo3.png" />
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">多张图片列表一</div>
-                    <p>借助栅格来实现图片列表</p>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo1.png"/>
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo3.png" />
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">多张图片列表一</div>
-                    <p>借助栅格来实现图片列表</p>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo1.png"/>
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo3.png" />
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">多张图片列表一</div>
-                    <p>借助栅格来实现图片列表</p>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo1.png"/>
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo3.png" />
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="aui-list-item">
-                <div class="aui-list-item-inner">
-                    <div class="aui-list-item-title">多张图片列表一</div>
-                    <p>借助栅格来实现图片列表</p>
-                    <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo1.png"/>
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="../image/demo3.png" />
-                        </div>
-                    </div>
-                </div>
-            </li>
         </ul>
     </div>
 
@@ -372,43 +200,34 @@
 
 
         <ul id="page3_p1" class="aui-list aui-media-list">
-
-
-
             <%--item--%>
+            <c:forEach var="item" items="${msgList}" >
+                <li class="aui-list-item">
+                    <div class="aui-media-list-item-inner">
 
-            <li class="aui-list-item">
-                <div class="aui-media-list-item-inner">
-
-                    <div class="aui-list-item-media" style="width: 6.0rem; height: 6.0rem;">
-                        <img src="${ctx}/aui/image/mm.jpeg" >
-                        <div class="aui-badge" style="left: 82%; top: 5%">7</div>
-                    </div>
-                    <div class="aui-list-item-inner">
-                        <div class="aui-list-item-text">
-                            <div class="aui-list-item-title">晴子</div>
-                            <div class="aui-list-item-right">2017-11-26 15:00</div>
+                        <div class="aui-list-item-media" style="width: 6.0rem; height: 6.0rem;">
+                            <img src="${ctx}/aui/image/mm.jpeg" >
+                            <div class="aui-badge" style="left: 82%; top: 5%">${item.unReadCount}</div>
                         </div>
+                        <div class="aui-list-item-inner">
+                            <div class="aui-list-item-text">
+                                <div class="aui-list-item-title">${item.fUserBaseMsg.nikename}</div>
+                                <div class="aui-list-item-right">${item.createTime}</div>
+                            </div>
 
-                        <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
-                            广西靖西市，30岁，155cm，3000元以下
+                            <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
+                                广西靖西市，30岁，${item.fUserBaseMsg.height}cm，${item.fUserBaseMsg.monthIncome}元
+                            </div>
                         </div>
                     </div>
-                </div>
-
-
-            </li>
-
-
-
-
+                </li>
+            </c:forEach>
         </ul>
 
 
         <ul id="page3_p2" class="aui-list aui-media-list aui-hide">
             <%--item--%>
-
-
+            <c:forEach var="item" items="${viewRecordList}" >
             <li class="aui-list-item">
                 <div class="aui-media-list-item-inner">
 
@@ -418,19 +237,17 @@
 
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-text">
-                            <div class="aui-list-item-title">晴子</div>
-                            <div class="aui-list-item-right">2017-11-26 15:00</div>
+                            <div class="aui-list-item-title">${item.fwUserBaseMsg.nikename}</div>
+                            <div class="aui-list-item-right">${item.viewTime}</div>
                         </div>
 
                         <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
-                            广西靖西市，30岁，155cm，3000元以下
+                            广西靖西市，30岁，${item.fwUserBaseMsg.height}cm，${item.fwUserBaseMsg.monthIncome}元
                         </div>
                     </div>
                 </div>
-
-
             </li>
-
+            </c:forEach>
 
 
 
@@ -458,12 +275,12 @@
                     </div>
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-text">
-                            <div class="aui-list-item-title">晴子</div>
+                            <div class="aui-list-item-title">${modle.fUserBaseMsg.nikename}</div>
                             <div class="aui-list-item-right">访问次数99</div>
                         </div>
 
                         <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
-                            广西靖西市，30岁，155cm，3000元以下
+                            广西靖西市，30岁，${modle.fUserBaseMsg.height}cm，${modle.fUserBaseMsg.monthIncome}元
                         </div>
                     </div>
                 </div>
@@ -496,11 +313,11 @@
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-text">
                             <div class="aui-list-item-title">个人资料</div>
-                            <div class="aui-list-item-right"><a href="#" style="font-size: 0.7rem;">编辑</a></div>
+                            <div class="aui-list-item-right"><a href="/u/editGrzl" style="font-size: 0.7rem;">编辑</a></div>
                         </div>
                         <div class="aui-list-item-text">
                             <div class="aui-list-item-left">昵称</div>
-                            <div class="aui-list-item-title">晴子</div>
+                            <div class="aui-list-item-title">${modle.fUserBaseMsg.nikename}</div>
                         </div>
 
                         <div class="aui-list-item-text">
@@ -510,38 +327,35 @@
 
                     <div class="aui-list-item-text">
                         <div class="aui-list-item-left"">学历</div>
-                    <div class="aui-list-item-title">本科</div>
+                    <div class="aui-list-item-title">${modle.fUserBaseMsg.education}</div>
 
                 </div>
 
                 <div class="aui-list-item-text">
                     <div class="aui-list-item-left"">身高</div>
-                <div class="aui-list-item-title">160cm</div>
-
+                <div class="aui-list-item-title">${modle.fUserBaseMsg.height}cm</div>
     </div>
 
     <div class="aui-list-item-text">
         <div class="aui-list-item-left"">月收入</div>
-    <div class="aui-list-item-title">3000~5000元</div>
+    <div class="aui-list-item-title">${modle.fUserBaseMsg.monthIncome}元</div>
 </div>
 
 
 
 <div class="aui-list-item-text">
     <div class="aui-list-item-left"">体型</div>
-<div class="aui-list-item-title">偏瘦</div>
+<div class="aui-list-item-title">${modle.fUserBaseMsg.shape}</div>
 </div>
 
 <div class="aui-list-item-text">
     <div class="aui-list-item-left"">婚姻状况</div>
-<div class="aui-list-item-title">未婚</div>
+<div class="aui-list-item-title">${modle.fUserBaseMsg.maritalStatus}</div>
 </div>
 
 </div>
 </div>
 </li>
-
-
 <li class="aui-list-item">
     <div class="aui-media-list-item-inner">
         <div class="aui-list-item-inner">
@@ -551,59 +365,124 @@
             </div>
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">年龄</div>
-                <div class="aui-list-item-title">32~40岁</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.age}岁</div>
             </div>
 
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">身高</div>
-                <div class="aui-list-item-title">160~180cm</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.height}cm</div>
             </div>
 
 
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">月收入</div>
-                <div class="aui-list-item-title">3000~5000元</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.incomeMonthly}元</div>
             </div>
 
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">学历</div>
-                <div class="aui-list-item-title">本科以上</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.education}</div>
             </div>
 
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">婚姻</div>
-                <div class="aui-list-item-title">未婚</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.maritalStatus}</div>
             </div>
 
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">住房情况</div>
-                <div class="aui-list-item-title">不限</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.houseStatus}</div>
             </div>
 
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">购车情况</div>
-                <div class="aui-list-item-title">不限</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.carStatus}</div>
             </div>
 
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">体型</div>
-                <div class="aui-list-item-title">不限</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.shape}</div>
             </div>
 
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">有无小孩</div>
-                <div class="aui-list-item-title">不限</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.childStatus}</div>
             </div>
 
-            <div class="aui-list-item-text">
-                <div class="aui-list-item-left">是否想要小孩</div>
-                <div class="aui-list-item-title">想</div>
-            </div>
+
 
         </div>
+
+
     </div>
 
 </li>
+
+<li class="aui-list-item">
+    <div class="aui-media-list-item-inner">
+        <div class="aui-list-item-inner">
+            <div class="aui-list-item-text">
+                <div class="aui-list-item-title">生活状态</div>
+                <div class="aui-list-item-right"><a href="#" style="font-size: 0.7rem;">编辑</a></div>
+            </div>
+            <div class="aui-list-item-text">
+                <div class="aui-list-item-left">抽烟状况</div>
+                <div class="aui-list-item-title">
+                    <c:if test="${modle.fUserLivingStatus.smokingStatus == 0 }">不抽</c:if>
+                    <c:if test="${modle.fUserLivingStatus.smokingStatus == 1 }">偶尔抽</c:if>
+                    <c:if test="${modle.fUserLivingStatus.smokingStatus == 2 }">经常抽</c:if>
+                </div>
+            </div>
+
+            <div class="aui-list-item-text">
+                <div class="aui-list-item-left">饮酒状况</div>
+                <div class="aui-list-item-title">
+                    <c:if test="${modle.fUserLivingStatus.drinkingStatus == 0 }">不喝</c:if>
+                    <c:if test="${modle.fUserLivingStatus.drinkingStatus == 1 }">偶尔喝</c:if>
+                    <c:if test="${modle.fUserLivingStatus.drinkingStatus == 2 }">经常喝</c:if>
+                </div>
+            </div>
+
+
+            <div class="aui-list-item-text">
+                <div class="aui-list-item-left">厨艺</div>
+                <div class="aui-list-item-title">
+                    <c:if test="${modle.fUserLivingStatus.cooking == 0 }">不下厨</c:if>
+                    <c:if test="${modle.fUserLivingStatus.cooking == 1 }">厨艺有待提高</c:if>
+                    <c:if test="${modle.fUserLivingStatus.cooking == 2 }">上得了厅堂</c:if>
+                    <c:if test="${modle.fUserLivingStatus.cooking == 3 }">饭店大厨级别</c:if>
+                </div>
+            </div>
+
+            <div class="aui-list-item-text">
+                <div class="aui-list-item-left">与父母同住</div>
+                <div class="aui-list-item-title">
+                    ${modle.fUserLivingStatus.liveWithParents}
+                </div>
+            </div>
+
+            <div class="aui-list-item-text">
+                <div class="aui-list-item-left">喜欢的约会</div>
+                <div class="aui-list-item-title">
+                    ${modle.fUserLivingStatus.favoriteDate}
+                </div>
+            </div>
+
+            <div class="aui-list-item-text">
+                <div class="aui-list-item-left">住房情况</div>
+                <div class="aui-list-item-title">
+                    ${modle.fUserLivingStatus.favoriteDate}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</li>
+
+
+
 </ul>
 </div>
 
@@ -723,9 +602,9 @@
 
         userCount = $("#listUser").children(".aui-list-item").length;
         document.getElementById("demo").textContent = "滚动高度："+userCount;
-        pageNum = parseInt((userCount-1)/pageSize)+1;
+        pageNum = parseInt((userCount-1)/pageSize)+2;
 
-        if(!userloadFla){
+        if(!userloadFla&&(pageNum>currentPage)){
             $.ajax({
                 type: "GET",
                 url: "/u/loadRecommendUserList",
@@ -733,16 +612,13 @@
                 async:false,
                 success: function(data){
                     userloadFla=true;
-
-
+                    currentPage = data.data.pageNum;
                     if(data.code==1){
+                        htmlString = ""
                         $.each(data.data.dataList, function(i, value) {
-                            getUserHtml(value);
+                            htmlString =htmlString + getUserHtml(value);
                         });
-
-
-
-
+                        $("#listUser").append(htmlString);
                     }else{
                         msg(data.message);
                     }
@@ -750,7 +626,6 @@
                 error:function(XMLHttpRequest, textStatus, errorThrown){
                     userloadFla=true;
                 }
-
             });
         }
     }
@@ -758,8 +633,34 @@
 
     function getUserHtml(item) {
         tempHtml = $("#tempUser").html().toString();
+        tempHtml = tempHtml.replace("#nikename",item.fUserBaseMsg.nikename);
+        tempHtml = tempHtml.replace("#profession",item.fUserBaseMsg.profession);
+        tempHtml = tempHtml.replace("#height",item.fUserBaseMsg.height);
+        tempHtml = tempHtml.replace("#height",item.fUserBaseMsg.height);
+        tempHtml = tempHtml.replace("#zo",getUserRequest(item));
         console.log(tempHtml);
+        return tempHtml;
+    }
 
+    function getUserRequest(item) {
+        tempHtml = "";
+        if(item.fUserRequest.age){
+            tempHtml = tempHtml +"年龄在"+item.fUserRequest.age+"岁,";
+        }
+        if(item.fUserRequest.height){
+            tempHtml = tempHtml +"身高"+item.fUserRequest.height+"cm,";
+        }
+        if(item.fUserRequest.incomeMonthly){
+            tempHtml = tempHtml +"月收入"+item.fUserRequest.incomeMonthly+"元,";
+        }
+
+        if(item.sex == '1'){
+            tempHtml = tempHtml +"的男性";
+        }
+        if(item.sex == '2'){
+            tempHtml = tempHtml +"的女性";
+        }
+        return tempHtml;
     }
 
 
@@ -780,7 +681,7 @@
                     <div class="aui-list-item-right aui-greed">实名</div>
                 </div>
                 <div class="aui-list-item-text">
-                    <div class="aui-list-item-text">25岁</div>
+                    <div class="aui-list-item-text">#age岁</div>
                     <div class="aui-list-item-text">#profession</div>
                     <div class="aui-list-item-text">#heightcm</div>
                 </div>
@@ -804,8 +705,6 @@
 
         </div>
     </li>
-
-
 
 </div>
 
