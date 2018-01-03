@@ -1,5 +1,6 @@
 package com.zheng.upms.rpc.service;
 
+import com.zheng.common.util.RedisUtil;
 import com.zheng.upms.dao.mapper.UpmsUserMapper;
 import com.zheng.upms.dao.model.*;
 import com.zheng.upms.rpc.api.UpmsPermissionService;
@@ -41,19 +42,8 @@ public class UpmsServiceTest {
 
     @Test
     public void index() {
-        UpmsUser upmsUser = new UpmsUser();
-        upmsUser.setAvatar("");
-        upmsUser.setCtime(System.currentTimeMillis());
-        upmsUser.setEmail("");
-        upmsUser.setLocked((byte) 0);
-        upmsUser.setPassword("xxx");
-        upmsUser.setPhone("");
-        upmsUser.setRealname("zsz");
-        upmsUser.setSex((byte) 1);
-        upmsUser.setSalt("");
-        upmsUser.setUsername("zsz");
-        upmsUserService.insertSelective(upmsUser);
-        System.out.println(upmsUser.getUserId());
+        RedisUtil.set("wtf999", "123",10000);
+
     }
 
     @Test

@@ -27,24 +27,7 @@ public class ApiTest {
     @Test
     public void test01(){
 
-//
-//        List<FUserViewRecordVo> userList = fUserBaseMsgService.selectViewRecordUsers(6);
-//        if(null!=userList){
-//            for(int i=0;i<userList.size();i++){
-//                System.out.println(userList.get(i).getFwUserBaseMsg().getNikename());
-//            }
-//        }
-//        System.out.println(vo.getUserId());
-//        System.out.println(vo.getLastLoginTime());
-        FUserBaseMsg record = new FUserBaseMsg();
 
-        record.setUserId(9);
-        record.setHeight(162.5f);
-        fUserBaseMsgService.insert(record);
-
-
-        // record.setViewTime(new Date());
-     //   fUserViewRecordService.insertSelective(record);
     }
 
 

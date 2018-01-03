@@ -8,6 +8,10 @@ import java.util.UUID;
  */
 public class MD5Util {
 
+    public  static void main(String args[]){
+        System.out.print(MD5("lxg123321"));
+    }
+
     public final static String MD5(String content) {
         //用于加密的字符
         char md5String[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',

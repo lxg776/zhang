@@ -7,9 +7,21 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
 
-    <dubbo:application name="zheng-cms-rpc-service"/>
 
-    <dubbo:registry address="zookeeper://zkserver:2181"/>
+    <!-- 配置进行解密  -->
+    <bean id="propertyConfigurer" class="com.zheng.common.plugin.EncryptPropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:redis.properties</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <dubbo:application name="zheng-firend-rpc-service"/>
+
+    <dubbo:registry address="zookeeper://222.84.231.82:64005"/>
 
     <dubbo:protocol name="dubbo" port="20882"/>
 
