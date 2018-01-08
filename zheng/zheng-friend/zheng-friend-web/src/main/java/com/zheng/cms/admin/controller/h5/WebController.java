@@ -5,9 +5,7 @@ import com.zheng.cms.admin.shiro.UpmsSessionDao;
 import com.zheng.cms.common.constant.FriendResult;
 import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
-import com.zheng.friend.dao.model.FUserBaseMsg;
-import com.zheng.friend.dao.model.FUserLivingStatus;
-import com.zheng.friend.dao.model.FUserRequest;
+import com.zheng.friend.dao.model.*;
 import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.dao.vo.RecentMsgVo;
@@ -19,6 +17,7 @@ import com.zheng.ucenter.rpc.api.UcenterIdentificaionService;
 import com.zheng.ucenter.rpc.api.UcenterUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Example;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +47,8 @@ public class WebController extends BaseController {
 	private int pageSize=15;
 
 
+	public final static String imageBase = "http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com/";
+
 	@Autowired
 	FUserBaseMsgService fUserBaseMsgService;
 	@Autowired
@@ -65,6 +66,9 @@ public class WebController extends BaseController {
 	FMessageService fMessageService;
 	@Autowired
 	FUserViewRecordService fUserViewRecordService;
+
+	@Autowired
+	FUserImagesService fUserImagesService;
 
 	/**
 	 * 首页
@@ -89,7 +93,13 @@ public class WebController extends BaseController {
 		//访问记录
 		List<FUserViewRecordVo> viewRecordList = fUserBaseMsgService.selectViewRecordUsers(ucenterUser.getUserId());
 		modelMap.put("viewRecordList",viewRecordList);
-
+		//个人相册
+		FUserImagesExample example = new FUserImagesExample();
+		example.createCriteria().andUserIdEqualTo(ucenterUser.getUserId()).andKeywordEqualTo("photo");
+		example.setOrderByClause("create_time desc");
+		List<FUserImages> userImages = fUserImagesService.selectByExample(example);
+		modelMap.put("userImages",userImages);
+		modelMap.put("imageBase",imageBase);
 		return "/content/h5/main.jsp";
 	}
 
@@ -347,18 +357,35 @@ public class WebController extends BaseController {
 	 */
 	@ApiOperation(value = "编辑个人资料")
 	@RequestMapping(value = "/editGrzl", method = RequestMethod.GET)
-	public String editGrzl(ModelMap modelMa,HttpSession session) {
+	public String editGrzl(ModelMap modelMap,HttpSession session) {
 
 		String  username = (String) SecurityUtils.getSubject().getPrincipal();
 		UcenterUser ucenterUser = getUctenuser(username,session);
 		Integer userId = ucenterUser.getUserId();
 		FUserBaseMsg queryObject = fUserBaseMsgService.selectByPrimaryKey(userId);
 		if(queryObject!=null){
-			modelMa.put("modle",queryObject);
+			modelMap.put("modle",queryObject);
 		}
-		modelMa.put("user",ucenterUser);
+		ucenterUser = ucenterUserService.selectByPrimaryKey(ucenterUser.getUserId());
+		modelMap.put("user",ucenterUser);
+		modelMap.put("imageBase",imageBase);
+
+
+		FUserImagesExample example = new FUserImagesExample();
+		example.createCriteria().andUserIdEqualTo(ucenterUser.getUserId()).andKeywordEqualTo("photo");
+		example.setOrderByClause("create_time desc");
+		List<FUserImages> userImages = fUserImagesService.selectByExample(example);
+		modelMap.put("userImages",userImages);
+
+
+
 		return "/content/h5/user/edit_grzl.jsp";
 	}
+
+
+
+
+
 
 
 	/**
@@ -367,16 +394,45 @@ public class WebController extends BaseController {
 	 */
 	@ApiOperation(value = "填写个人资料")
 	@RequestMapping(value = "/editGrzl", method = RequestMethod.POST)
-	public String editGrzl(FUserBaseMsg fUserBaseMsg,String avatar,HttpSession session){
+	public String editGrzl(FUserBaseMsg fUserBaseMsg,String avatar,String deletePhoto, String addPhoto,HttpSession session){
 
 		String  username = (String) SecurityUtils.getSubject().getPrincipal();
 		UcenterUser ucenterUser = getUctenuser(username,session);
 		Integer userId = ucenterUser.getUserId();
+		//删除相册图片
+		if(StringUtil.isNotEmpty(deletePhoto)){
+			String pathes[] = deletePhoto.split(",");
+			if(pathes!=null){
+				for(int i=0;i<pathes.length;i++){
+					String itemString = pathes[i];
+					FUserImagesExample example = new FUserImagesExample();
+					example.createCriteria().andUserIdEqualTo(ucenterUser.getUserId()).andImagePathEqualTo(itemString).andKeywordEqualTo("photo");
+					fUserImagesService.deleteByExample(example);
+				}
+			}
+		}
+
+		//添加相册图片
+		if(StringUtil.isNotEmpty(addPhoto)){
+			String pathes[] = addPhoto.split(",");
+			if(pathes!=null){
+				for(int i=0;i<pathes.length;i++){
+					String itemString = pathes[i];
+					FUserImages userImages =new FUserImages();
+					userImages.setImagePath(itemString);
+					userImages.setUserId(ucenterUser.getUserId());
+					userImages.setKeyword("photo");
+					fUserImagesService.insert(userImages);
+				}
+			}
+		}
+
+
 
 		if(StringUtil.isNotEmpty(avatar)){
 			UcenterUser updateUcentUser = new UcenterUser();
 			updateUcentUser.setUserId(ucenterUser.getUserId());
-			ucenterUser.setAvatar(avatar);
+			updateUcentUser.setAvatar(avatar);
 			ucenterUserService.updateByPrimaryKeySelective(updateUcentUser);
 		}
 
@@ -389,8 +445,143 @@ public class WebController extends BaseController {
 			fUserBaseMsgService.insert(fUserBaseMsg);
 		}
 
+
+
+
 		return "redirect:/u/index";
 	}
+
+
+
+
+	/**
+	 * 填写个人资料
+	 * @return
+	 */
+	@ApiOperation(value = "编辑个人资料")
+	@RequestMapping(value = "/editZobz", method = RequestMethod.GET)
+	public String editZobz(ModelMap modelMap,HttpSession session) {
+
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		Integer userId = ucenterUser.getUserId();
+		FUserRequest queryObject = fUserRequestService.selectByPrimaryKey(userId);
+
+		if(queryObject!=null){
+			String height = queryObject.getHeight();
+			if(StringUtil.isNotEmpty(height)){
+				String heightArray[] = height.split("~");
+				if(heightArray.length==2){
+					modelMap.put("height_min",heightArray[0]);
+					modelMap.put("height_max",heightArray[1]);
+				}else if(heightArray.length == 1){
+					if(heightArray[0].contains("以上")){
+						modelMap.put("height_min",heightArray[0].substring(0,heightArray[0].lastIndexOf("以上")));
+					}else if(heightArray[0].contains("以下")){
+						modelMap.put("height_max",heightArray[0].substring(0,heightArray[0].lastIndexOf("以下")));
+					}
+				}
+
+				String age = queryObject.getAge();
+				String ageArray[] = age.split("~");
+				if(ageArray.length==2){
+					modelMap.put("age_min",ageArray[0]);
+					modelMap.put("age_max",ageArray[1]);
+				}else if(heightArray.length == 1){
+					if(heightArray[0].contains("以上")){
+						modelMap.put("age_min",ageArray[0].substring(0,heightArray[0].lastIndexOf("以上")));
+						modelMap.put("age_max","不限");
+					}else if(heightArray[0].contains("以下")){
+						modelMap.put("age_min","不限");
+						modelMap.put("age_max",ageArray[0].substring(0,heightArray[0].lastIndexOf("以下")));
+					}
+				}
+
+			}
+			modelMap.put("modle",queryObject);
+
+		}
+
+		return "/content/h5/user/edit_zobz.jsp";
+	}
+
+
+
+	/**
+	 * 编辑择偶条件
+	 * @return
+	 */
+	@ApiOperation(value = "编辑择偶条件")
+	@RequestMapping(value = "/editZobz", method = RequestMethod.POST)
+	public String editZobz(FUserRequest fUserRequest,String age_min,String age_max,String height_min,String height_max,HttpSession session){
+
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		Integer userId = ucenterUser.getUserId();
+
+		FUserRequest queryObject = fUserRequestService.selectByPrimaryKey(userId);
+
+		fUserRequest.setAge(getAgeRang(age_min,age_max));
+		fUserRequest.setHeight(getHeiRang(height_min,height_max));
+
+		if(queryObject!=null){
+			fUserRequest.setUserId(userId);
+			fUserRequestService.updateByPrimaryKey(fUserRequest);
+		}else{
+			fUserRequest.setUserId(userId);
+			fUserRequestService.insert(fUserRequest);
+		}
+
+
+
+		return "redirect:/u/index";
+	}
+
+
+	/**
+	 * 填写个人资料
+	 * @return
+	 */
+	@ApiOperation(value = "填写个人生活")
+	@RequestMapping(value = "/editShzk", method = RequestMethod.GET)
+	public String editShzk(ModelMap modelMa,HttpSession session) {
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		Integer userId = ucenterUser.getUserId();
+		FUserLivingStatus queryObject = fUserLivingStatusService.selectByPrimaryKey(userId);
+		if(queryObject!=null){
+			modelMa.put("modle",queryObject);
+		}
+
+		return "/content/h5/user/tx_shzk.jsp";
+	}
+
+
+
+
+
+	/**
+	 * 个人生活
+	 * @return
+	 */
+	@ApiOperation(value = "个人生活")
+	@RequestMapping(value = "/editShzk", method = RequestMethod.POST)
+	public String editShzk(FUserLivingStatus modle,HttpSession session) {
+
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		Integer userId = ucenterUser.getUserId();
+		FUserLivingStatus queryObject = fUserLivingStatusService.selectByPrimaryKey(userId);
+		if(queryObject!=null){
+			modle.setUserId(userId);
+			fUserLivingStatusService.updateByPrimaryKeySelective(modle);
+		}else{
+			modle.setUserId(userId);
+			fUserLivingStatusService.insert(modle);
+		}
+		return "redirect:txXqhh";
+	}
+
 
 
 }

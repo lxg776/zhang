@@ -40,6 +40,7 @@
 
     <resultMap id="fUserRequest" type="com.zheng.friend.dao.model.FUserRequest">
         <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="r_age" jdbcType="VARCHAR" property="age" />
         <result column="r_sex" jdbcType="VARCHAR" property="sex" />
         <result column="r_height" jdbcType="VARCHAR" property="height" />
         <result column="r_shape" jdbcType="VARCHAR" property="shape" />
@@ -55,6 +56,7 @@
         <result column="r_drink_status" jdbcType="VARCHAR" property="drinkStatus" />
         <result column="r_smoke_status" jdbcType="VARCHAR" property="smokeStatus" />
         <result column="r_living_status" jdbcType="VARCHAR" property="livingStatus" />
+        <result column="r_child_status" jdbcType="VARCHAR" property="childStatus" />
     </resultMap>
 
 
@@ -90,8 +92,8 @@
     </sql>
 
     <sql id="Base_Column_List3">
-        zo.sex as r_sex,zo.height as r_height,zo.shape as r_shape,zo.income_monthly as r_income_monthly,zo.income_year as r_income_year,zo.house_state as r_house_state,zo.education as r_education,zo.marital_status as r_marital_status,zo.house_status as r_house_status,zo.car_status as r_car_status,zo.job as r_job,zo.friend_require as r_friend_require,
-        zo.drink_status as r_drink_status,zo.smoke_status as r_smoke_status,zo.living_status as r_living_status
+       zo.age as r_age,zo.sex as r_sex,zo.height as r_height,zo.shape as r_shape,zo.income_monthly as r_income_monthly,zo.income_year as r_income_year,zo.house_state as r_house_state,zo.education as r_education,zo.marital_status as r_marital_status,zo.house_status as r_house_status,zo.car_status as r_car_status,zo.job as r_job,zo.friend_require as r_friend_require,
+        zo.drink_status as r_drink_status,zo.smoke_status as r_smoke_status,zo.living_status as r_living_status,zo.child_status as r_child_status
     </sql>
 
     <sql id="Base_Column_List4">

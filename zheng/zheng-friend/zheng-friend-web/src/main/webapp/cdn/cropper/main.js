@@ -1,6 +1,5 @@
 $(function () {
 
-    'use strict';
     var popup = new auiPopup();
 
     var console = window.console || { log: function () {} };
@@ -57,9 +56,9 @@ $(function () {
             var files = this.files;
             var file;
 
-            if (!$image.data('cropper')) {
-                return;
-            }
+            // if (!$image.data('cropper')) {
+            //     return;
+            // }
 
             if (files && files.length) {
                 file = files[0];
@@ -67,7 +66,7 @@ $(function () {
 
                 if (/^image\/\w+$/.test(file.type)) {
                     uploadedImageType = file.type;
-
+                    var uploadedImageURL;
                     if (uploadedImageURL) {
                         URL.revokeObjectURL(uploadedImageURL);
                     }
@@ -111,7 +110,7 @@ $(function () {
 
 
 
-    var uploader = WebUploader.create({
+    var txUploader = WebUploader.create({
         // 选完文件后，是否自动上传。
         auto: false,
         // swf文件路径
@@ -125,18 +124,22 @@ $(function () {
         method:'POST',
     });
 
-    uploader.on('uploadBeforeSend', function (obj, data, headers) {
+    txUploader.on('uploadBeforeSend', function (obj, data, headers) {
 
 
     });
 
 
-    uploader.on('uploadSuccess', function(file, json){
-        $("#avatar").val( uploader.options.formData.key);
+
+
+
+
+    txUploader.on('uploadSuccess', function(file, json){
+        $("#avatar").val( txUploader.options.formData.key);
 
     });
 
-    uploader.onUploadProgress = function (file, percentage) {
+    txUploader.onUploadProgress = function (file, percentage) {
             console.log(percentage);
     };
 
@@ -158,17 +161,17 @@ $(function () {
             success: function (kyData) {
                 var suffix = get_suffix(fileName);
                 var random_name = random_string();
-                uploader.options.server = kyData.action;
-                uploader.options.formData.key=kyData.dir + "/" + random_name + suffix;
-                uploader.options.formData.policy=kyData.policy;
-                uploader.options.formData.signature=kyData.signature;
-                uploader.options.formData.action=kyData.action;
-                uploader.options.formData.dir=kyData.dir;
-                uploader.options.formData.OSSAccessKeyId=kyData.OSSAccessKeyId;
-                uploader.options.formData.callback=kyData.callback;
+                txUploader.options.server = kyData.action;
+                txUploader.options.formData.key=kyData.dir + "/" + random_name + suffix;
+                txUploader.options.formData.policy=kyData.policy;
+                txUploader.options.formData.signature=kyData.signature;
+                txUploader.options.formData.action=kyData.action;
+                txUploader.options.formData.dir=kyData.dir;
+                txUploader.options.formData.OSSAccessKeyId=kyData.OSSAccessKeyId;
+                txUploader.options.formData.callback=kyData.callback;
 
-                uploader.addFile(uploadFile);
-                uploader.upload();
+                txUploader.addFile(uploadFile);
+                txUploader.upload();
 
             }
         });

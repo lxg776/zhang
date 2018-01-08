@@ -9,7 +9,7 @@
 
     <dubbo:application name="zheng-upms-rpc-service"/>
 
-    <dubbo:registry address="zookeeper://192.168.10.7:64005"/>
+    <dubbo:registry address="zookeeper://222.84.231.82:64005"/>
 
     <dubbo:protocol name="dubbo" port="20881"/>
 

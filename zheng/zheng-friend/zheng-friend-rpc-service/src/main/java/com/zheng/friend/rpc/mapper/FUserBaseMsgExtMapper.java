@@ -1,8 +1,7 @@
 package com.zheng.friend.rpc.mapper;
 
 
-import com.zheng.friend.dao.model.FUserViewRecord;
-import com.zheng.friend.dao.vo.FUserMemberRelVo;
+
 import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import org.apache.ibatis.annotations.Param;

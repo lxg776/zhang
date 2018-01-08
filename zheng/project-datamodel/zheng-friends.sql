@@ -103,9 +103,9 @@ create table f_user_view_record
 create table f_user_images
 (
    id                  int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
-   user_id             int(10) unsigned NOT NULL  COMMENT '访问人id',
-   imnage_path         varchar(255) comment '基本信息能否显示(0:能,1:不能)',
-   key                 varchar(10)  comment '择偶要求能否显示(0:能,1:不能)',
+   user_id             int(10) unsigned NOT NULL  COMMENT '用户id',
+   imnage_path         varchar(255) comment '图片的地址',
+   key                 varchar(10)  comment '关键字',
    create_time          timestamp default CURRENT_TIMESTAMP comment '注册时间',
    primary key (id)
 );

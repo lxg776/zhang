@@ -293,15 +293,13 @@
                 </div>
                 <div class="aui-card-list-content-padded aui-border-b aui-border-t">
                     <div class="aui-row aui-row-padded">
-                        <div class="aui-col-xs-4">
-                            <img src="${ctx}/aui/image/l1.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="${ctx}/aui/image/l2.png" />
-                        </div>
-                        <div class="aui-col-xs-4">
-                            <img src="${ctx}/aui/image/l3.png" />
-                        </div>
+                        <c:if test="${list == null}">
+                            <c:forEach var="item" items="${userImages}">
+                                <div class="aui-col-xs-4">
+                                    <img src="${imageBase}${item.imagePath}"/>
+                                </div>
+                            </c:forEach>
+                        </c:if>
                     </div>
                 </div>
 
@@ -321,7 +319,7 @@
                         </div>
 
                         <div class="aui-list-item-text">
-                            <div class="aui-list-item-left"">年龄</div>
+                            <div class="aui-list-item-left">年龄</div>
                         <div class="aui-list-item-title">26岁</div>
                     </div>
 
@@ -361,7 +359,7 @@
         <div class="aui-list-item-inner">
             <div class="aui-list-item-text">
                 <div class="aui-list-item-title">择偶条件</div>
-                <div class="aui-list-item-right"><a href="#" style="font-size: 0.7rem;">编辑</a></div>
+                <div class="aui-list-item-right"><a href="/u/editZobz" style="font-size: 0.7rem;">编辑</a></div>
             </div>
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">年龄</div>
@@ -423,7 +421,7 @@
         <div class="aui-list-item-inner">
             <div class="aui-list-item-text">
                 <div class="aui-list-item-title">生活状态</div>
-                <div class="aui-list-item-right"><a href="#" style="font-size: 0.7rem;">编辑</a></div>
+                <div class="aui-list-item-right"><a href="/u/editShzk" style="font-size: 0.7rem;">编辑</a></div>
             </div>
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">抽烟状况</div>

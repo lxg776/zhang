@@ -40,8 +40,8 @@
                     性别
                 </div>
                 <div class="aui-list-item-input">
-                    <label><input class="aui-radio" type="radio" name="sex" checked>男</label>
-                    <label><input class="aui-radio" type="radio" name="sex">女</label>
+                    <label><input class="aui-radio" type="radio" name="sex"  value="1" checked>男</label>
+                    <label><input class="aui-radio" type="radio" name="sex" value="2" >女</label>
                 </div>
             </div>
         </li>
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="aui-list-item-input">
-                    <select name="age_min">
+                   <select name="age_min">
                         <option value="不限">不限</option>
                         <option value="20">20</option>
                         <option value="21">21</option>

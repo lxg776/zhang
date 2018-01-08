@@ -68,4 +68,8 @@
     <bean id="fMessageServiceImpl" class="com.zheng.friend.rpc.service.impl.FMessageServiceImpl"/>
     <dubbo:service interface="com.zheng.friend.rpc.api.FMessageService" ref="fMessageServiceImpl" timeout="10000"/>
 
+    <!-- 用户图片库 -->
+    <bean id="fUserImagesServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserImagesServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserImagesService" ref="fUserImagesServiceImpl" timeout="10000"/>
+
 </beans>
