@@ -19,4 +19,16 @@
     <bean id="payVendorService" class="com.zheng.pay.rpc.service.impl.PayVendorServiceImpl"/>
     <dubbo:service interface="com.zheng.pay.rpc.api.PayVendorService" ref="payVendorService" timeout="10000"/>
 
+
+    <!-- 订单服务 -->
+    <bean id="payInOrderService" class="com.zheng.pay.rpc.service.impl.PayInOrderServiceImpl"/>
+    <dubbo:service interface="com.zheng.pay.rpc.api.PayInOrderService" ref="payInOrderService" timeout="10000"/>
+
+    <!-- 订单详情服务 -->
+    <bean id="payInOrderDetailService" class="com.zheng.pay.rpc.service.impl.PayInOrderDetailServiceImpl"/>
+    <dubbo:service interface="com.zheng.pay.rpc.api.PayInOrderDetailService" ref="payInOrderDetailService" timeout="10000"/>
+
+
+
+
 </beans>

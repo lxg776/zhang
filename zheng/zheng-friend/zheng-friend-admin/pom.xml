@@ -24,6 +24,12 @@
             <type>jar</type>
         </dependency>
 
+        <dependency>
+            <groupId>com.zheng</groupId>
+            <artifactId>zheng-pay-rpc-api</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+        </dependency>
 
 
         <dependency>

@@ -32,6 +32,17 @@ create table f_user_account
 
 )
 
+create table f_sms_message
+(
+   id                   int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+   phone_no             varchar(100) comment '手机号',
+   operation            varchar(100) comment '操作',
+   appid                varchar(100) comment '应用id',
+   sms_code                 varchar(100) comment '短信验证码',
+   create_time          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   primary key (id)
+)
+
 
 create table f_user_living_status
 (
@@ -110,6 +121,24 @@ create table f_user_images
    primary key (id)
 );
 
+
+
+create table f_contact
+(
+   id                  int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+   f_user_id             int(10) unsigned NOT NULL  COMMENT '来自用户',
+   t_user_id             int(10) unsigned NOT NULL  COMMENT '要求联系的用户',
+   contact_count      int(10) unsigned  DEFAULT 1 COMMENT '联系次数',
+   both_status       tinyint(4) default 0 comment '双方状况(0:不是双方,1双方都要去联系对方)',
+   remarks             text COMMENT '备注',
+   create_time          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   primary key (id)
+);
+
+
+
+
+
 create table f_user_setting
 (
    user_id              int unsigned not null comment '编号',
@@ -118,9 +147,22 @@ create table f_user_setting
    show_friend_request            tinyint(4) default 0 comment '择偶要求能否显示(0:能,1:不能)',
    show_living_status            tinyint(4) default 0 comment '生活状况能否显示(0:能,1:不能)',
    show_favorite            tinyint(4) default 0 comment '生活状况能否显示(0:能,1:不能)',
+   msg_read_status      tinyint(4) default 0  comment '能否查看收件箱(0:不能,1:可以)',
+   msg_send_status      tinyint(4) default 0  comment '能否发送邮件(0:不能,1:可以)',
+   view_msg_status      tinyint(4) default 1  comment '能否访问用户资料(0:不能,1:可以)',
+   hongniang_status     tinyint(4) default 0  comment '是否开通红娘服务(0:不能,1:可以)',
+   historyview_status   tinyint(4) default 1  comment '能否查看访问记录(0:不能,1:可以)',
    primary key (user_id)
 );
 
+
+create table f_user_order
+(
+   id                  int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+   user_id              int unsigned not null comment '用户id',
+   pay_in_order_id              int unsigned not null comment '订单id',
+   primary key (id)
+);
 
 
 create table f_activity

@@ -174,7 +174,7 @@ public class SnowflakeIdWorker {
 	 */
 	public static void main(String[] args) {
 		long start = System.currentTimeMillis();
-		SnowflakeIdWorker idWorker0 = new SnowflakeIdWorker(22, 0);
+		SnowflakeIdWorker idWorker0 = new SnowflakeIdWorker(1, 0);
 		for (int i = 0; i < 10; i++) {
 			long id = idWorker0.nextId();
 			System.out.println(id);

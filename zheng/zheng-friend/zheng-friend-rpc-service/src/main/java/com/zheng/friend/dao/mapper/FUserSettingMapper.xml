@@ -8,6 +8,11 @@
     <result column="show_friend_request" jdbcType="TINYINT" property="showFriendRequest" />
     <result column="show_living_status" jdbcType="TINYINT" property="showLivingStatus" />
     <result column="show_favorite" jdbcType="TINYINT" property="showFavorite" />
+    <result column="msg_read_status" jdbcType="TINYINT" property="msgReadStatus" />
+    <result column="msg_send_status" jdbcType="TINYINT" property="msgSendStatus" />
+    <result column="view_msg_status" jdbcType="TINYINT" property="viewMsgStatus" />
+    <result column="hongniang_status" jdbcType="TINYINT" property="hongniangStatus" />
+    <result column="historyview_status" jdbcType="TINYINT" property="historyviewStatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +74,8 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, show_index_page, show_base_msg, show_friend_request, show_living_status, 
-    show_favorite
+    show_favorite, msg_read_status, msg_send_status, view_msg_status, hongniang_status, 
+    historyview_status
   </sql>
   <select id="selectByExample" parameterType="com.zheng.friend.dao.model.FUserSettingExample" resultMap="BaseResultMap">
     select
@@ -103,11 +109,13 @@
   </delete>
   <insert id="insert" parameterType="com.zheng.friend.dao.model.FUserSetting">
     insert into f_user_setting (user_id, show_index_page, show_base_msg, 
-      show_friend_request, show_living_status, show_favorite
-      )
+      show_friend_request, show_living_status, show_favorite, 
+      msg_read_status, msg_send_status, view_msg_status, 
+      hongniang_status, historyview_status)
     values (#{userId,jdbcType=INTEGER}, #{showIndexPage,jdbcType=TINYINT}, #{showBaseMsg,jdbcType=TINYINT}, 
-      #{showFriendRequest,jdbcType=TINYINT}, #{showLivingStatus,jdbcType=TINYINT}, #{showFavorite,jdbcType=TINYINT}
-      )
+      #{showFriendRequest,jdbcType=TINYINT}, #{showLivingStatus,jdbcType=TINYINT}, #{showFavorite,jdbcType=TINYINT}, 
+      #{msgReadStatus,jdbcType=TINYINT}, #{msgSendStatus,jdbcType=TINYINT}, #{viewMsgStatus,jdbcType=TINYINT}, 
+      #{hongniangStatus,jdbcType=TINYINT}, #{historyviewStatus,jdbcType=TINYINT})
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.friend.dao.model.FUserSetting">
     insert into f_user_setting
@@ -130,6 +138,21 @@
       <if test="showFavorite != null">
         show_favorite,
       </if>
+      <if test="msgReadStatus != null">
+        msg_read_status,
+      </if>
+      <if test="msgSendStatus != null">
+        msg_send_status,
+      </if>
+      <if test="viewMsgStatus != null">
+        view_msg_status,
+      </if>
+      <if test="hongniangStatus != null">
+        hongniang_status,
+      </if>
+      <if test="historyviewStatus != null">
+        historyview_status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -149,6 +172,21 @@
       </if>
       <if test="showFavorite != null">
         #{showFavorite,jdbcType=TINYINT},
+      </if>
+      <if test="msgReadStatus != null">
+        #{msgReadStatus,jdbcType=TINYINT},
+      </if>
+      <if test="msgSendStatus != null">
+        #{msgSendStatus,jdbcType=TINYINT},
+      </if>
+      <if test="viewMsgStatus != null">
+        #{viewMsgStatus,jdbcType=TINYINT},
+      </if>
+      <if test="hongniangStatus != null">
+        #{hongniangStatus,jdbcType=TINYINT},
+      </if>
+      <if test="historyviewStatus != null">
+        #{historyviewStatus,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -179,6 +217,21 @@
       <if test="record.showFavorite != null">
         show_favorite = #{record.showFavorite,jdbcType=TINYINT},
       </if>
+      <if test="record.msgReadStatus != null">
+        msg_read_status = #{record.msgReadStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.msgSendStatus != null">
+        msg_send_status = #{record.msgSendStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.viewMsgStatus != null">
+        view_msg_status = #{record.viewMsgStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.hongniangStatus != null">
+        hongniang_status = #{record.hongniangStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.historyviewStatus != null">
+        historyview_status = #{record.historyviewStatus,jdbcType=TINYINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -191,7 +244,12 @@
       show_base_msg = #{record.showBaseMsg,jdbcType=TINYINT},
       show_friend_request = #{record.showFriendRequest,jdbcType=TINYINT},
       show_living_status = #{record.showLivingStatus,jdbcType=TINYINT},
-      show_favorite = #{record.showFavorite,jdbcType=TINYINT}
+      show_favorite = #{record.showFavorite,jdbcType=TINYINT},
+      msg_read_status = #{record.msgReadStatus,jdbcType=TINYINT},
+      msg_send_status = #{record.msgSendStatus,jdbcType=TINYINT},
+      view_msg_status = #{record.viewMsgStatus,jdbcType=TINYINT},
+      hongniang_status = #{record.hongniangStatus,jdbcType=TINYINT},
+      historyview_status = #{record.historyviewStatus,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -214,6 +272,21 @@
       <if test="showFavorite != null">
         show_favorite = #{showFavorite,jdbcType=TINYINT},
       </if>
+      <if test="msgReadStatus != null">
+        msg_read_status = #{msgReadStatus,jdbcType=TINYINT},
+      </if>
+      <if test="msgSendStatus != null">
+        msg_send_status = #{msgSendStatus,jdbcType=TINYINT},
+      </if>
+      <if test="viewMsgStatus != null">
+        view_msg_status = #{viewMsgStatus,jdbcType=TINYINT},
+      </if>
+      <if test="hongniangStatus != null">
+        hongniang_status = #{hongniangStatus,jdbcType=TINYINT},
+      </if>
+      <if test="historyviewStatus != null">
+        historyview_status = #{historyviewStatus,jdbcType=TINYINT},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -223,7 +296,12 @@
       show_base_msg = #{showBaseMsg,jdbcType=TINYINT},
       show_friend_request = #{showFriendRequest,jdbcType=TINYINT},
       show_living_status = #{showLivingStatus,jdbcType=TINYINT},
-      show_favorite = #{showFavorite,jdbcType=TINYINT}
+      show_favorite = #{showFavorite,jdbcType=TINYINT},
+      msg_read_status = #{msgReadStatus,jdbcType=TINYINT},
+      msg_send_status = #{msgSendStatus,jdbcType=TINYINT},
+      view_msg_status = #{viewMsgStatus,jdbcType=TINYINT},
+      hongniang_status = #{hongniangStatus,jdbcType=TINYINT},
+      historyview_status = #{historyviewStatus,jdbcType=TINYINT}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />

@@ -86,7 +86,9 @@
 						<c:forEach var="item" items="${page.dataList}" >
 							<tr>
 								<td style="width: 100px;">${item.userId}</td>
-								<td style="width: 200px;">${item.userName}</td>
+								<td style="width: 200px;">
+									<a href="${ctx}/manage/member/userDetail?userId=${item.userId}" style="color: #0033FF">${item.userName}</a>
+								</td>
 								<c:if test="${item.sex == 0}">	<td style="width: 200px;">未知</td></c:if>
 								<c:if test="${item.sex == 1}"><td style="width: 200px;">男</td></c:if>
 								<c:if test="${item.sex == 2}"><td style="width: 200px;">女</td></c:if>

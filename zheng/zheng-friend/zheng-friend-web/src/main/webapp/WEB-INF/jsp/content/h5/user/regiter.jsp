@@ -459,7 +459,8 @@
                 </div>
 
                 <div class="aui-list-item-label">
-                    <a href="#">获取验证码</a>
+                    <a href="javascript:;"  onclick="gegSms()"  id="sMSCodeBtn" >获取验证码</a>
+                    <label id="showTimeLabel" style="display: none">60s</label>
                 </div>
             </div>
         </li>
@@ -500,7 +501,7 @@
                         <div class="queueList">
                             <div id="dndArea" class="placeholder">
                                 <div id="filePicker"></div>
-                                <p>最多可选10张</p>
+
                             </div>
                         </div>
                         <div class="statusBar" style="display:none;">
@@ -649,12 +650,13 @@
 
         idCard = $("input[name='idCard']").val();
         userName = $("input[name='userName']").val();
+        code = $("input[name='msgCode']").val();
 
 
         $.ajax({
             type: "POST",
             url: "/h5/checkUserName",
-            data: "idCard="+idCard+"&userName="+userName,
+            data: "idCard="+idCard+"&userName="+userName+"&code="+code,
             async:false,
             success: function(data){
                 if(data.code==1){
@@ -666,7 +668,44 @@
         });
 
 
+    }
 
+    //获取短信验证码
+    function gegSms() {
+
+        if ($("input[name='userName']").val() == "") {
+            msg("请填写手机号码");
+            $("input[name='userName']").focus();
+            return
+        }
+        phoneNo =$("input[name='userName']").val();
+        data = "phoneNo="+phoneNo;
+        $.ajax({
+            type: "POST",
+            url: "/h5/gegSms",
+            data: data,
+            success: function(data){
+              showTime(60);
+            }
+        });
+
+
+    }
+
+
+    //显示倒计时
+    function showTime(time) {
+        if(time == 0){
+            $("#sMSCodeBtn").show();
+            $("#showTimeLabel").hide();
+        }else{
+            $("#showTimeLabel").html(time+"s");
+            $("#sMSCodeBtn").hide();
+            $("#showTimeLabel").show();
+            window.setTimeout(function(){
+                showTime(time -1);
+            },1000);
+        }
 
 
     }

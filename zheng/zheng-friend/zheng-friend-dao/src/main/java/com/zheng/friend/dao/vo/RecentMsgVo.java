@@ -34,4 +34,26 @@ public class RecentMsgVo extends FMessage{
     public void settUserBaseMsg(FUserBaseMsg tUserBaseMsg) {
         this.tUserBaseMsg = tUserBaseMsg;
     }
+
+
+    public int getShowFla() {
+        return showFla;
+    }
+
+    public void setShowFla(int showFla) {
+        this.showFla = showFla;
+    }
+
+    // 0 left  1 right
+    private int showFla =1;
+
+    private String showDate;
+
+    public String getShowDate() {
+        return showDate;
+    }
+
+    public void setShowDate(String showDate) {
+        this.showDate = showDate;
+    }
 }

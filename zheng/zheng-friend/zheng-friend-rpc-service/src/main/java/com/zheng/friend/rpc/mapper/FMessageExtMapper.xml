@@ -34,8 +34,8 @@
       select * from
        (select m.id,m.msg_content,m.from_user_id,m.to_user_id,m.create_time,base.*  from f_message
         as m left join f_user_base_msg as base on m.from_user_id = base.user_id
-        where to_user_id = #{userId,jdbcType=INTEGER} and msg_state = 0  order by m.id desc) as d left join (select from_user_id , count(id) as unReadCount  from f_message
-        where to_user_id = #{userId,jdbcType=INTEGER} and msg_state = 0  group by from_user_id) as t on d.from_user_id = t.from_user_id;
+        where to_user_id = #{userId,jdbcType=INTEGER}  order by m.id desc) as d left join (select from_user_id , count(id) as unReadCount  from f_message
+        where to_user_id = #{userId,jdbcType=INTEGER} and msg_state = 0  group by from_user_id) as t on d.from_user_id = t.from_user_id ORDER BY d.create_time desc;
   </select>
 
 

@@ -89,6 +89,13 @@ public class FMemberType implements Serializable {
     private Date createTime;
 
     /**
+     * 是否显示(0:不能,1:可以)
+     *
+     * @mbg.generated
+     */
+    private Byte showStatus;
+
+    /**
      * 类型简介
      *
      * @mbg.generated
@@ -193,6 +200,14 @@ public class FMemberType implements Serializable {
         this.createTime = createTime;
     }
 
+    public Byte getShowStatus() {
+        return showStatus;
+    }
+
+    public void setShowStatus(Byte showStatus) {
+        this.showStatus = showStatus;
+    }
+
     public String getInfo() {
         return info;
     }
@@ -219,6 +234,7 @@ public class FMemberType implements Serializable {
         sb.append(", price=").append(price);
         sb.append(", serviceDays=").append(serviceDays);
         sb.append(", createTime=").append(createTime);
+        sb.append(", showStatus=").append(showStatus);
         sb.append(", info=").append(info);
         sb.append("]");
         return sb.toString();
@@ -248,6 +264,7 @@ public class FMemberType implements Serializable {
             && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
             && (this.getServiceDays() == null ? other.getServiceDays() == null : this.getServiceDays().equals(other.getServiceDays()))
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getShowStatus() == null ? other.getShowStatus() == null : this.getShowStatus().equals(other.getShowStatus()))
             && (this.getInfo() == null ? other.getInfo() == null : this.getInfo().equals(other.getInfo()));
     }
 
@@ -267,6 +284,7 @@ public class FMemberType implements Serializable {
         result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
         result = prime * result + ((getServiceDays() == null) ? 0 : getServiceDays().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
+        result = prime * result + ((getShowStatus() == null) ? 0 : getShowStatus().hashCode());
         result = prime * result + ((getInfo() == null) ? 0 : getInfo().hashCode());
         return result;
     }

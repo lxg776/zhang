@@ -3,18 +3,15 @@ package com.zheng.cms.admin.controller.h5;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.util.StringUtil;
 import com.zheng.cms.admin.shiro.UpmsSessionDao;
+import com.zheng.cms.admin.util.SmsUtil;
 import com.zheng.cms.common.constant.FriendResult;
 import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.MD5Util;
 import com.zheng.common.util.PropertiesFileUtil;
 import com.zheng.common.util.RedisUtil;
-import com.zheng.friend.dao.model.FUserBaseMsg;
-import com.zheng.friend.dao.model.FUserLivingStatus;
-import com.zheng.friend.dao.model.FUserRequest;
-import com.zheng.friend.rpc.api.FUserBaseMsgService;
-import com.zheng.friend.rpc.api.FUserLivingStatusService;
-import com.zheng.friend.rpc.api.FUserRequestService;
+import com.zheng.friend.dao.model.*;
+import com.zheng.friend.rpc.api.*;
 import com.zheng.ucenter.dao.model.UcenterIdentificaion;
 import com.zheng.ucenter.dao.model.UcenterIdentificaionExample;
 import com.zheng.ucenter.dao.model.UcenterUser;
@@ -27,6 +24,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 
+import org.apache.commons.lang.math.RandomUtils;
 import org.apache.shiro.SecurityUtils;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -45,6 +43,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -81,6 +80,12 @@ public class IndexController extends BaseController {
 	@Autowired
 	UpmsSessionDao upmsSessionDao;
 
+	@Autowired
+	FUserSettingService fUserSettingService;
+
+	@Autowired
+	FSmsMessageService fSmsMessageService;
+
 	/**
 	 * 首页
 	 * @return
@@ -116,6 +121,46 @@ public class IndexController extends BaseController {
 		session.setAttribute(userName,ucenterUser);
 		return ucenterUser;
 	}
+
+
+
+	/**
+	 * 获取验证码
+	 * @return
+	 */
+	@ApiOperation(value = "给其他人发送信息")
+	@RequestMapping(value = "/gegSms", method = RequestMethod.POST)
+	@ResponseBody
+	public Object gegSms(FSmsMessage fSmsMessage) {
+
+		String code = SmsUtil.randomCheckCode(4);
+		fSmsMessage.setSmsCode(code);
+		fSmsMessage.setAppid("friends");
+		fSmsMessage.setOperation("register");
+
+		FriendResult result =new FriendResult(FriendResultConstant.SUCCESS,null);
+		result.setMessage("短信获取成功");
+		try {
+			int returnCode =SmsUtil.getSMS(fSmsMessage.getPhoneNo(),fSmsMessage.getSmsCode());
+			if(returnCode==200){
+				fSmsMessageService.insert(fSmsMessage);
+			}else{
+				result.setCode(FriendResultConstant.FAILED.code);
+				result.setMessage("短信获取失败");
+			}
+		} catch (Exception e) {
+			result.setCode(FriendResultConstant.FAILED.code);
+			result.setMessage("短信获取失败");
+			return result;
+		}
+
+		return result;
+	}
+
+
+
+
+
 
 
 	/**
@@ -186,6 +231,21 @@ public class IndexController extends BaseController {
 			return "redirect:/u/txGrzl";
 		}else{
 			ucenterIdentificaionService.insert(ucenterIdentificaion);
+
+			//随机一个昵称
+			FUserBaseMsg fUserBaseMsg = new FUserBaseMsg();
+			fUserBaseMsg.setNikename(SmsUtil.randomCheckCode(7));
+			fUserBaseMsgService.insert(fUserBaseMsg);
+
+			//设置显示选项
+			FUserSetting fUserSetting =new FUserSetting();
+			fUserSetting.setShowIndexPage((byte)0);
+			fUserSetting.setShowBaseMsg((byte)0);
+			fUserSetting.setShowFavorite((byte)0);
+			fUserSetting.setShowFriendRequest((byte)0);
+			fUserSetting.setShowLivingStatus((byte)0);
+			fUserSettingService.insert(fUserSetting);
+
 			return "redirect:/u/txGrzl?upms_code="+upms_code+"&upms_username="+userName;
 		}
 	}
@@ -216,7 +276,7 @@ public class IndexController extends BaseController {
 	@ApiOperation(value = "服务器校验")
 	@RequestMapping(value = "/checkUserName", method = RequestMethod.POST)
 	@ResponseBody
-	public Object checkUserName(String userName,String idCard) {
+	public Object checkUserName(String userName,String idCard,String code) {
 
 		FriendResult result  = new FriendResult(FriendResultConstant.SUCCESS,null);
 		UcenterUserExample ucExample  =  new UcenterUserExample();
@@ -240,6 +300,27 @@ public class IndexController extends BaseController {
 			result.setMessage("身份证已经被使用过了");
 			return result;
 
+		}
+
+		FSmsMessage fSmsMessage = new FSmsMessage();
+		fSmsMessage.setPhoneNo(userName);
+		fSmsMessage.setSmsCode(code);
+		FSmsMessageExample example =new FSmsMessageExample();
+		example.createCriteria().andPhoneNoEqualTo(fSmsMessage.getPhoneNo()).andAppidEqualTo("friends").andOperationEqualTo("register");
+		example.setOrderByClause("create_time desc");
+		FSmsMessage queryModle = fSmsMessageService.selectFirstByExample(example);
+		int  distance = (int) SmsUtil.differentDateByMillisecond(queryModle.getCreateTime(),new Date());
+
+		if(!queryModle.getSmsCode().equals(fSmsMessage.getSmsCode())){
+			result.setCode(FriendResultConstant.FAILED.code);
+			result.setMessage("短信验证码不正确!");
+			return result;
+		}
+
+		if(distance>1000*60*2){
+			result.setCode(FriendResultConstant.FAILED.code);
+			result.setMessage("短信验证码超过有效期，请重新获取！");
+			return result;
 		}
 
 

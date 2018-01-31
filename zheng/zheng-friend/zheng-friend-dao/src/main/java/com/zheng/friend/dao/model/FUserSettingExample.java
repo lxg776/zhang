@@ -466,6 +466,306 @@ public class FUserSettingExample implements Serializable {
             addCriterion("show_favorite not between", value1, value2, "showFavorite");
             return (Criteria) this;
         }
+
+        public Criteria andMsgReadStatusIsNull() {
+            addCriterion("msg_read_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusIsNotNull() {
+            addCriterion("msg_read_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusEqualTo(Byte value) {
+            addCriterion("msg_read_status =", value, "msgReadStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusNotEqualTo(Byte value) {
+            addCriterion("msg_read_status <>", value, "msgReadStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusGreaterThan(Byte value) {
+            addCriterion("msg_read_status >", value, "msgReadStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("msg_read_status >=", value, "msgReadStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusLessThan(Byte value) {
+            addCriterion("msg_read_status <", value, "msgReadStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("msg_read_status <=", value, "msgReadStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusIn(List<Byte> values) {
+            addCriterion("msg_read_status in", values, "msgReadStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusNotIn(List<Byte> values) {
+            addCriterion("msg_read_status not in", values, "msgReadStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusBetween(Byte value1, Byte value2) {
+            addCriterion("msg_read_status between", value1, value2, "msgReadStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgReadStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("msg_read_status not between", value1, value2, "msgReadStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusIsNull() {
+            addCriterion("msg_send_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusIsNotNull() {
+            addCriterion("msg_send_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusEqualTo(Byte value) {
+            addCriterion("msg_send_status =", value, "msgSendStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusNotEqualTo(Byte value) {
+            addCriterion("msg_send_status <>", value, "msgSendStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusGreaterThan(Byte value) {
+            addCriterion("msg_send_status >", value, "msgSendStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("msg_send_status >=", value, "msgSendStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusLessThan(Byte value) {
+            addCriterion("msg_send_status <", value, "msgSendStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("msg_send_status <=", value, "msgSendStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusIn(List<Byte> values) {
+            addCriterion("msg_send_status in", values, "msgSendStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusNotIn(List<Byte> values) {
+            addCriterion("msg_send_status not in", values, "msgSendStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusBetween(Byte value1, Byte value2) {
+            addCriterion("msg_send_status between", value1, value2, "msgSendStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgSendStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("msg_send_status not between", value1, value2, "msgSendStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusIsNull() {
+            addCriterion("view_msg_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusIsNotNull() {
+            addCriterion("view_msg_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusEqualTo(Byte value) {
+            addCriterion("view_msg_status =", value, "viewMsgStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusNotEqualTo(Byte value) {
+            addCriterion("view_msg_status <>", value, "viewMsgStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusGreaterThan(Byte value) {
+            addCriterion("view_msg_status >", value, "viewMsgStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("view_msg_status >=", value, "viewMsgStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusLessThan(Byte value) {
+            addCriterion("view_msg_status <", value, "viewMsgStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("view_msg_status <=", value, "viewMsgStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusIn(List<Byte> values) {
+            addCriterion("view_msg_status in", values, "viewMsgStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusNotIn(List<Byte> values) {
+            addCriterion("view_msg_status not in", values, "viewMsgStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusBetween(Byte value1, Byte value2) {
+            addCriterion("view_msg_status between", value1, value2, "viewMsgStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andViewMsgStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("view_msg_status not between", value1, value2, "viewMsgStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusIsNull() {
+            addCriterion("hongniang_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusIsNotNull() {
+            addCriterion("hongniang_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusEqualTo(Byte value) {
+            addCriterion("hongniang_status =", value, "hongniangStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusNotEqualTo(Byte value) {
+            addCriterion("hongniang_status <>", value, "hongniangStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusGreaterThan(Byte value) {
+            addCriterion("hongniang_status >", value, "hongniangStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("hongniang_status >=", value, "hongniangStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusLessThan(Byte value) {
+            addCriterion("hongniang_status <", value, "hongniangStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("hongniang_status <=", value, "hongniangStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusIn(List<Byte> values) {
+            addCriterion("hongniang_status in", values, "hongniangStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusNotIn(List<Byte> values) {
+            addCriterion("hongniang_status not in", values, "hongniangStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusBetween(Byte value1, Byte value2) {
+            addCriterion("hongniang_status between", value1, value2, "hongniangStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHongniangStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("hongniang_status not between", value1, value2, "hongniangStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusIsNull() {
+            addCriterion("historyview_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusIsNotNull() {
+            addCriterion("historyview_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusEqualTo(Byte value) {
+            addCriterion("historyview_status =", value, "historyviewStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusNotEqualTo(Byte value) {
+            addCriterion("historyview_status <>", value, "historyviewStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusGreaterThan(Byte value) {
+            addCriterion("historyview_status >", value, "historyviewStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("historyview_status >=", value, "historyviewStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusLessThan(Byte value) {
+            addCriterion("historyview_status <", value, "historyviewStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("historyview_status <=", value, "historyviewStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusIn(List<Byte> values) {
+            addCriterion("historyview_status in", values, "historyviewStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusNotIn(List<Byte> values) {
+            addCriterion("historyview_status not in", values, "historyviewStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusBetween(Byte value1, Byte value2) {
+            addCriterion("historyview_status between", value1, value2, "historyviewStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andHistoryviewStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("historyview_status not between", value1, value2, "historyviewStatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria implements Serializable {

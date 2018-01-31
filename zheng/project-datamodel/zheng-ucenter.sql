@@ -75,7 +75,8 @@ create table f_member_type
    msg_send_status      tinyint(4) unsigned comment '能否发送邮件(0:不能,1:可以)',
    view_msg_status      tinyint(4) unsigned comment '能否访问用户资料(0:不能,1:可以)',
    hongniang_status      tinyint(4) unsigned comment '是否开通红娘服务(0:不能,1:可以)',
-   historyview_status  tinyint(4) unsigned comment '能否查看访问记录(0:不能,1:可以)',
+   historyview_status   tinyint(4) unsigned comment '能否查看访问记录(0:不能,1:可以)',
+   show_status          tinyint(4) default 1  comment '是否显示(0:不能,1:可以)';
    level                int unsigned DEFAULT 10 comment '等级',
    price                float  comment '开通价格',
    service_days         int  comment '服务天数',

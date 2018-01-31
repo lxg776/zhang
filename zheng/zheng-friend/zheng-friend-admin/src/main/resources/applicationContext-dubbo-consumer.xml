@@ -37,4 +37,9 @@
     <dubbo:reference id="fUserSettingService" interface="com.zheng.friend.rpc.api.FUserSettingService" mock="true"/>
 
     <dubbo:reference id="fUserLivingStatusService" interface="com.zheng.friend.rpc.api.FUserLivingStatusService" mock="true"/>
+
+    <dubbo:reference id="payVendorService" interface="com.zheng.pay.rpc.api.PayVendorService" mock="true"/>
+
+    <dubbo:reference id="fContactService" interface="com.zheng.friend.rpc.api.FContactService" mock="true"/>
+
 </beans>

@@ -1,0 +1,28 @@
+<resultMap id="fUserRequest" type="com.zheng.friend.dao.model.FUserRequest">
+  <id column="tur_user_id" jdbcType="INTEGER" property="userId" />
+  <result column="tur_age" jdbcType="VARCHAR" property="age" />
+  <result column="tur_sex" jdbcType="VARCHAR" property="sex" />
+  <result column="tur_height" jdbcType="VARCHAR" property="height" />
+  <result column="tur_shape" jdbcType="VARCHAR" property="shape" />
+  <result column="tur_income_monthly" jdbcType="VARCHAR" property="incomeMonthly" />
+  <result column="tur_year_income" jdbcType="VARCHAR" property="yearIncome" />
+  <result column="tur_house_state" jdbcType="VARCHAR" property="houseState" />
+  <result column="tur_education" jdbcType="VARCHAR" property="education" />
+  <result column="tur_marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+  <result column="tur_house_status" jdbcType="VARCHAR" property="houseStatus" />
+  <result column="tur_car_status" jdbcType="VARCHAR" property="carStatus" />
+  <result column="tur_job" jdbcType="VARCHAR" property="job" />
+  <result column="tur_friend_require" jdbcType="VARCHAR" property="friendRequire" />
+  <result column="tur_drink_status" jdbcType="VARCHAR" property="drinkStatus" />
+  <result column="tur_smoke_status" jdbcType="VARCHAR" property="smokeStatus" />
+  <result column="tur_living_status" jdbcType="VARCHAR" property="livingStatus" />
+  <result column="tur_child_status" jdbcType="VARCHAR" property="childStatus" />
+</resultMap>
+
+
+
+
+<sql id="request_f_user">
+tur.user_id as tur_user_id,tur.age as tur_age,tur.sex as tur_sex,tur.height as tur_height,tur.shape as tur_shape,tur.income_monthly as tur_income_monthly,tur.income_year as tur_income_year,tur.house_state as tur_house_state,tur.education as tur_education,tur.marital_status as tur_marital_status,tur.house_status as tur_house_status,tur.car_status as tur_car_status,tur.job as tur_job,tur.friend_require as tur_friend_require,
+tur.drink_status as tur_drink_status,tur.smoke_status as tur_smoke_status,tur.living_status as tur_living_status,tur.child_status as tur_child_status
+</sql>

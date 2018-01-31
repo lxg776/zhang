@@ -54,7 +54,7 @@ public class AliyunOssController {
 	//@CrossOrigin(origins = "http://127.0.0.1:2222")
 	@GetMapping("/ky_policy")
 	@ResponseBody
-	@CrossOrigin(origins = "*", methods = RequestMethod.GET) // 该注解不支持JDK1.7
+//	@CrossOrigin(origins = "*", methods = RequestMethod.GET) // 该注解不支持JDK1.7
 	public String kyPolicy(@RequestParam(required = false) String callback,String ky) {
 		JSONObject result = aliyunOssService.policy();
 		if (StringUtils.isBlank(callback)) {

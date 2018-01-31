@@ -7,21 +7,9 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
 
+    <dubbo:application name="zheng-cms-rpc-service"/>
 
-    <!-- 配置进行解密  -->
-    <bean id="propertyConfigurer" class="com.zheng.common.plugin.EncryptPropertyPlaceholderConfigurer">
-        <property name="locations">
-            <list>
-                <value>classpath:jdbc.properties</value>
-                <value>classpath:redis.properties</value>
-            </list>
-        </property>
-    </bean>
-
-
-    <dubbo:application name="zheng-firend-rpc-service"/>
-
-    <dubbo:registry address="zookeeper://222.84.231.82:64005"/>
+    <dubbo:registry address="zookeeper://zkserver:2181"/>
 
     <dubbo:protocol name="dubbo" port="20882"/>
 
@@ -68,8 +56,22 @@
     <bean id="fMessageServiceImpl" class="com.zheng.friend.rpc.service.impl.FMessageServiceImpl"/>
     <dubbo:service interface="com.zheng.friend.rpc.api.FMessageService" ref="fMessageServiceImpl" timeout="10000"/>
 
+
     <!-- 用户图片库 -->
     <bean id="fUserImagesServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserImagesServiceImpl"/>
     <dubbo:service interface="com.zheng.friend.rpc.api.FUserImagesService" ref="fUserImagesServiceImpl" timeout="10000"/>
+
+    <!-- 用户图片库 -->
+    <bean id="fSmsMessageServiceImpl" class="com.zheng.friend.rpc.service.impl.FSmsMessageServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FSmsMessageService" ref="fSmsMessageServiceImpl" timeout="10000"/>
+
+    <!-- 用户订单 -->
+    <bean id="fUserOrderServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserOrderServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserOrderService" ref="fUserOrderServiceImpl" timeout="10000"/>
+
+
+    <!-- 用户联系请求 -->
+    <bean id="fContactServiceImpl" class="com.zheng.friend.rpc.service.impl.FContactServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FContactService" ref="fContactServiceImpl" timeout="10000"/>
 
 </beans>

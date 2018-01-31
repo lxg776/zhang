@@ -69,6 +69,17 @@ public class WebController extends BaseController {
 
 	@Autowired
 	FUserImagesService fUserImagesService;
+	@Autowired
+	FMemberTypeService fMemberTypeService;
+
+	@Autowired
+	FUserSettingService fUserSettingService;
+
+
+	@Autowired
+	FContactService fContactService;
+
+
 
 	/**
 	 * 首页
@@ -100,9 +111,56 @@ public class WebController extends BaseController {
 		List<FUserImages> userImages = fUserImagesService.selectByExample(example);
 		modelMap.put("userImages",userImages);
 		modelMap.put("imageBase",imageBase);
+
+
+
+
+		//查询会员的类型
+		FMemberTypeExample fMemberTypeExample = new FMemberTypeExample();
+		fMemberTypeExample.createCriteria().andShowStatusEqualTo((byte)1);
+		fMemberTypeExample.setOrderByClause("level desc");
+		List<FMemberType> typeList = fMemberTypeService.selectByExample(fMemberTypeExample);
+		modelMap.put("typeList",typeList);
+
+		//用户的权限
+		FUserSetting fUserSetting = fUserSettingService.selectByPrimaryKey(ucenterUser.getUserId());
+		modelMap.put("fUserSetting",fUserSetting);
+
+
+
 		return "/content/h5/main.jsp";
 	}
 
+
+	/**
+	 * 首页
+	 * @return
+	 */
+	@ApiOperation(value = "用户详情页面")
+	@RequestMapping(value = "/userDetail", method = RequestMethod.GET)
+	public String userDetail(@RequestParam(defaultValue = "1") Integer uid,HttpSession session,ModelMap modelMap) {
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		//个人详情
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		FuserDetailVo userDetail  = fUserBaseMsgService.selectFUserDetailVoByUserId(uid);
+		modelMap.put("modle",userDetail);
+		//个人相册
+		FUserImagesExample example = new FUserImagesExample();
+		example.createCriteria().andUserIdEqualTo(userDetail.getUserId()).andKeywordEqualTo("photo");
+		example.setOrderByClause("create_time desc");
+		List<FUserImages> userImages = fUserImagesService.selectByExample(example);
+		modelMap.put("userImages",userImages);
+		modelMap.put("imageBase",imageBase);
+
+		//访问记录加1
+		FUserViewRecord viewRecord =new FUserViewRecord();
+		viewRecord.setfUserId(ucenterUser.getUserId());
+		viewRecord.setbUserId(userDetail.getUserId());
+		fUserViewRecordService.insert(viewRecord);
+
+
+		return "/content/h5/user/user_detail.jsp";
+	}
 
 
 
@@ -128,6 +186,49 @@ public class WebController extends BaseController {
 		return result;
 	}
 
+	@ApiOperation(value = "红娘帮我联系她")
+	@RequestMapping(value = "/helpContact", method = RequestMethod.GET)
+	@ResponseBody
+	public Object helpContact(@RequestParam(defaultValue = "0") Integer tUserId,HttpSession session,ModelMap modelMap) {
+
+		FriendResult result  = new FriendResult(FriendResultConstant.SUCCESS,null);
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		if(tUserId==0){
+			result.setMessage("委托错误！");
+			return  result;
+		}
+
+
+		//个人详情
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		FContact fContact;
+		FContactExample example =new FContactExample();
+		Integer fuserid = ucenterUser.getUserId();
+		example.createCriteria().andFUserIdEqualTo(fuserid).andTUserIdEqualTo(tUserId);
+		fContact = fContactService.selectFirstByExample(example);
+		if(fContact==null){
+			example  = new FContactExample();
+			example.createCriteria().andFUserIdEqualTo(tUserId).andTUserIdEqualTo(fuserid);
+			fContact = fContactService.selectFirstByExample(example);
+			if(fContact!=null){
+				fContact.setBothStatus((byte)1);
+			}
+		}
+		if(fContact==null){
+			fContact =new FContact();
+			fContact.setfUserId(fuserid);
+			fContact.settUserId(tUserId);
+			fContact.setContactCount(1);
+			fContactService.insert(fContact);
+		}else{
+			fContact.setContactCount(fContact.getContactCount()+1);
+			fContactService.updateByPrimaryKey(fContact);
+		}
+
+		result.setMessage("已经委托红娘帮您联系！");
+		return result;
+	}
+
 
 
 
@@ -138,15 +239,27 @@ public class WebController extends BaseController {
 	 */
 	@ApiOperation(value = "填写个人资料")
 	@RequestMapping(value = "/txGrzl", method = RequestMethod.GET)
-	public String txGrzl(ModelMap modelMa,HttpSession session) {
+	public String txGrzl(ModelMap modelMap,HttpSession session) {
 
 		String  username = (String) SecurityUtils.getSubject().getPrincipal();
 		UcenterUser ucenterUser = getUctenuser(username,session);
 		Integer userId = ucenterUser.getUserId();
 		FUserBaseMsg queryObject = fUserBaseMsgService.selectByPrimaryKey(userId);
 		if(queryObject!=null){
-			modelMa.put("modle",queryObject);
+			modelMap.put("modle",queryObject);
 		}
+		ucenterUser = ucenterUserService.selectByPrimaryKey(ucenterUser.getUserId());
+		modelMap.put("user",ucenterUser);
+		modelMap.put("imageBase",imageBase);
+
+
+		FUserImagesExample example = new FUserImagesExample();
+		example.createCriteria().andUserIdEqualTo(ucenterUser.getUserId()).andKeywordEqualTo("photo");
+		example.setOrderByClause("create_time desc");
+		List<FUserImages> userImages = fUserImagesService.selectByExample(example);
+		modelMap.put("userImages",userImages);
+		modelMap.put("modle",queryObject);
+
 
 		return "/content/h5/user/tx_grzl.jsp";
 	}
@@ -170,12 +283,58 @@ public class WebController extends BaseController {
 	 */
 	@ApiOperation(value = "填写个人资料")
 	@RequestMapping(value = "/txGrzl", method = RequestMethod.POST)
-	public String txGrzl(FUserBaseMsg fUserBaseMsg,HttpSession session) {
+	public String txGrzl(FUserBaseMsg fUserBaseMsg,String avatar,String deletePhoto, String addPhoto,HttpSession session) {
 
 		String  username = (String) SecurityUtils.getSubject().getPrincipal();
 		UcenterUser ucenterUser = getUctenuser(username,session);
 		Integer userId = ucenterUser.getUserId();
+		//删除相册图片
+		if(StringUtil.isNotEmpty(deletePhoto)){
+			String pathes[] = deletePhoto.split(",");
+			if(pathes!=null){
+				for(int i=0;i<pathes.length;i++){
+					String itemString = pathes[i];
+					FUserImagesExample example = new FUserImagesExample();
+					example.createCriteria().andUserIdEqualTo(ucenterUser.getUserId()).andImagePathEqualTo(itemString).andKeywordEqualTo("photo");
+					fUserImagesService.deleteByExample(example);
+				}
+			}
+		}
+
+		//添加相册图片
+		if(StringUtil.isNotEmpty(addPhoto)){
+			String pathes[] = addPhoto.split(",");
+			if(pathes!=null){
+				for(int i=0;i<pathes.length;i++){
+					String itemString = pathes[i];
+					FUserImages userImages =new FUserImages();
+					userImages.setImagePath(itemString);
+					userImages.setUserId(ucenterUser.getUserId());
+					userImages.setKeyword("photo");
+					fUserImagesService.insert(userImages);
+				}
+			}
+		}
+
+
+
+		if(StringUtil.isNotEmpty(avatar)){
+			UcenterUser updateUcentUser = new UcenterUser();
+			updateUcentUser.setUserId(ucenterUser.getUserId());
+			updateUcentUser.setAvatar(avatar);
+			ucenterUserService.updateByPrimaryKeySelective(updateUcentUser);
+		}
+
 		FUserBaseMsg queryObject = fUserBaseMsgService.selectByPrimaryKey(userId);
+		if(queryObject!=null){
+			fUserBaseMsg.setUserId(userId);
+			fUserBaseMsgService.updateByPrimaryKey(fUserBaseMsg);
+		}else{
+			fUserBaseMsg.setUserId(userId);
+			fUserBaseMsgService.insert(fUserBaseMsg);
+		}
+
+
 		if(queryObject!=null){
 			fUserBaseMsg.setUserId(userId);
 			fUserBaseMsgService.updateByPrimaryKey(fUserBaseMsg);
@@ -558,6 +717,24 @@ public class WebController extends BaseController {
 
 
 
+	/**
+	 * 填写个人资料
+	 * @return
+	 */
+	@ApiOperation(value = "兴趣爱好")
+	@RequestMapping(value = "/editXqhh", method = RequestMethod.GET)
+	public String editXqhh(ModelMap modelMa,HttpSession session) {
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		Integer userId = ucenterUser.getUserId();
+		FUserLivingStatus queryObject = fUserLivingStatusService.selectByPrimaryKey(userId);
+		if(queryObject!=null){
+			modelMa.put("modle",queryObject);
+		}
+
+		return "/content/h5/user/edit_xqhh.jsp";
+	}
+
 
 
 	/**
@@ -579,7 +756,7 @@ public class WebController extends BaseController {
 			modle.setUserId(userId);
 			fUserLivingStatusService.insert(modle);
 		}
-		return "redirect:txXqhh";
+		return "redirect:/u/index";
 	}
 
 

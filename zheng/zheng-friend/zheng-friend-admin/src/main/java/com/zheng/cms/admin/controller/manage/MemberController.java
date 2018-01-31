@@ -7,6 +7,7 @@ import com.zheng.common.util.MD5Util;
 import com.zheng.common.util.StringUtil;
 import com.zheng.friend.dao.model.*;
 import com.zheng.friend.dao.vo.FUserMemberRelVo;
+import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.rpc.api.*;
 import com.zheng.ucenter.dao.model.UcenterIdentificaion;
 import com.zheng.ucenter.dao.model.UcenterUser;
@@ -85,6 +86,24 @@ public class MemberController extends BaseController{
         long total = ucenterUserService.countByExample(example);
         modelMap.put("page", PageOnterModle.getInstence(pageNum,total,pageSize,rows));
         return "/content/manage/list_member.jsp";
+    }
+
+
+    /**
+     * 用户详情
+     * @return
+     */
+    @ApiOperation(value = "后台首页")
+    @RequestMapping(value = "/userDetail", method = RequestMethod.GET)
+    public String userDetail(@RequestParam(defaultValue = "0") Integer userId,ModelMap modelMap){
+
+
+
+        FuserDetailVo fuserDetailVo = fUserBaseMsgService.selectFUserDetailVoByUserId(userId);
+
+        modelMap.put("modle",fuserDetailVo);
+
+        return "/content/manage/detail_user.jsp";
     }
 
 

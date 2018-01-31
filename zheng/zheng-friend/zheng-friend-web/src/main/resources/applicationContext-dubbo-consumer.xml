@@ -9,7 +9,7 @@
 
     <dubbo:application name="zheng-cms-admin"/>
 
-    <dubbo:registry file="./zheng-cms-admin-dubbo.cache" address="zookeeper://222.84.231.82:64005"/>
+    <dubbo:registry file="./zheng-cms-admin-dubbo.cache" address="zookeeper://zkserver:2181"/>
 
     <!-- 订阅服务 -->
     <dubbo:consumer check="false"/>
@@ -41,5 +41,21 @@
     <dubbo:reference id="fUserLivingStatusService" interface="com.zheng.friend.rpc.api.FUserLivingStatusService" mock="true"/>
 
     <dubbo:reference id="fUserImagesService" interface="com.zheng.friend.rpc.api.FUserImagesService" mock="true"/>
+
+    <dubbo:reference id="fUserSettingService" interface="com.zheng.friend.rpc.api.FUserSettingService" mock="true"/>
+
+    <dubbo:reference id="fSmsMessageService" interface="com.zheng.friend.rpc.api.FSmsMessageService" mock="true"/>
+
+    <dubbo:reference id="fContactService" interface="com.zheng.friend.rpc.api.FContactService" mock="true"/>
+
+    <dubbo:reference id="fUserOrderService" interface="com.zheng.friend.rpc.api.FUserOrderService" mock="true"/>
+
+    <dubbo:reference id="payVendorService" interface="com.zheng.pay.rpc.api.PayVendorService" mock="true"/>
+
+    <dubbo:reference id="payInOrderService" interface="com.zheng.pay.rpc.api.PayInOrderService" mock="true"/>
+
+    <dubbo:reference id="payInOrderDetailService" interface="com.zheng.pay.rpc.api.PayInOrderDetailService" mock="true"/>
+
+
 
 </beans>

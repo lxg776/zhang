@@ -152,7 +152,7 @@
 
 
                            <div class="control-group">
-                               <label class="control-label" for="typeahead">喜欢的音乐 </label>
+                               <label class="control-label" for="typeahead">喜欢的电影 </label>
                                <div class="controls">
                                    <input type="text" class="span6 typeahead" id="typeahead"
                                           name="favoriteFilm" value="${modle.favoriteFilm}" data-provide="typeahead">

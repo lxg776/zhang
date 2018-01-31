@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zheng.friend.rpc.mapper.FContactExtMapper">
+
+  <resultMap id="BaseResultMap" type="com.zheng.friend.dao.vo.FContactVo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="contact_count" jdbcType="INTEGER" property="contactCount" />
+    <result column="contact_count" jdbcType="INTEGER" property="contactCount" />
+
+    <result column="both_status" jdbcType="TINYINT" property="bothStatus" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+
+    <collection property="fUserBaseMsg" resultMap="fromUserBaseMsg" />
+    <collection property="tUserBaseMsg" resultMap="toUserBaseMsg" />
+    <collection property="fUserRequest" resultMap="fUserRequest" />
+    <collection property="tUserRequest" resultMap="tUserRequest" />
+
+  </resultMap>
+
+
+  
+
+
+  <resultMap id="fromUserBaseMsg" type="com.zheng.friend.dao.model.FUserBaseMsg">
+    <id column="f_user_id" jdbcType="INTEGER" property="userId" />
+    <result column="f_nikename" jdbcType="VARCHAR" property="nikename" />
+    <result column="f_avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="f_birth_date" jdbcType="VARCHAR" property="birthDate" />
+    <result column="f_height" jdbcType="FLOAT" property="height" />
+    <result column="f_month_income" jdbcType="VARCHAR" property="monthIncome" />
+    <result column="f_education" jdbcType="VARCHAR" property="education" />
+    <result column="f_profession" jdbcType="VARCHAR" property="profession" />
+    <result column="f_marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+  </resultMap>
+
+
+  <resultMap id="toUserBaseMsg" type="com.zheng.friend.dao.model.FUserBaseMsg">
+    <id column="t_user_id" jdbcType="INTEGER" property="userId" />
+    <result column="t_nikename" jdbcType="VARCHAR" property="nikename" />
+    <result column="t_avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="t_birth_date" jdbcType="VARCHAR" property="birthDate" />
+    <result column="t_height" jdbcType="FLOAT" property="height" />
+    <result column="t_month_income" jdbcType="VARCHAR" property="monthIncome" />
+    <result column="t_education" jdbcType="VARCHAR" property="education" />
+    <result column="t_profession" jdbcType="VARCHAR" property="profession" />
+    <result column="t_marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+  </resultMap>
+
+
+
+
+
+
+
+
+  <resultMap id="fUserRequest" type="com.zheng.friend.dao.model.FUserRequest">
+    <id column="fur_user_id" jdbcType="INTEGER" property="userId" />
+    <result column="fur_age" jdbcType="VARCHAR" property="age" />
+    <result column="fur_sex" jdbcType="VARCHAR" property="sex" />
+    <result column="fur_height" jdbcType="VARCHAR" property="height" />
+    <result column="fur_shape" jdbcType="VARCHAR" property="shape" />
+    <result column="fur_income_monthly" jdbcType="VARCHAR" property="incomeMonthly" />
+    <result column="fur_year_income" jdbcType="VARCHAR" property="yearIncome" />
+    <result column="fur_house_state" jdbcType="VARCHAR" property="houseState" />
+    <result column="fur_education" jdbcType="VARCHAR" property="education" />
+    <result column="fur_marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="fur_house_status" jdbcType="VARCHAR" property="houseStatus" />
+    <result column="fur_car_status" jdbcType="VARCHAR" property="carStatus" />
+    <result column="fur_job" jdbcType="VARCHAR" property="job" />
+    <result column="fur_friend_require" jdbcType="VARCHAR" property="friendRequire" />
+    <result column="fur_drink_status" jdbcType="VARCHAR" property="drinkStatus" />
+    <result column="fur_smoke_status" jdbcType="VARCHAR" property="smokeStatus" />
+    <result column="fur_living_status" jdbcType="VARCHAR" property="livingStatus" />
+    <result column="fur_child_status" jdbcType="VARCHAR" property="childStatus" />
+  </resultMap>
+
+
+
+
+  <sql id="request_f_user">
+    fur.user_id as fur_user_id,fur.age as fur_age,fur.sex as fur_sex,fur.height as fur_height,fur.shape as fur_shape,fur.income_monthly as fur_income_monthly,fur.income_year as fur_income_year,fur.house_state as fur_house_state,fur.education as fur_education,fur.marital_status as fur_marital_status,fur.house_status as fur_house_status,fur.car_status as fur_car_status,fur.job as fur_job,fur.friend_require as fur_friend_require,
+    fur.drink_status as fur_drink_status,fur.smoke_status as fur_smoke_status,fur.living_status as fur_living_status,fur.child_status as fur_child_status
+  </sql>
+
+
+
+  <resultMap id="tUserRequest" type="com.zheng.friend.dao.model.FUserRequest">
+    <id column="tur_user_id" jdbcType="INTEGER" property="userId" />
+    <result column="tur_age" jdbcType="VARCHAR" property="age" />
+    <result column="tur_sex" jdbcType="VARCHAR" property="sex" />
+    <result column="tur_height" jdbcType="VARCHAR" property="height" />
+    <result column="tur_shape" jdbcType="VARCHAR" property="shape" />
+    <result column="tur_income_monthly" jdbcType="VARCHAR" property="incomeMonthly" />
+    <result column="tur_year_income" jdbcType="VARCHAR" property="yearIncome" />
+    <result column="tur_house_state" jdbcType="VARCHAR" property="houseState" />
+    <result column="tur_education" jdbcType="VARCHAR" property="education" />
+    <result column="tur_marital_status" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="tur_house_status" jdbcType="VARCHAR" property="houseStatus" />
+    <result column="tur_car_status" jdbcType="VARCHAR" property="carStatus" />
+    <result column="tur_job" jdbcType="VARCHAR" property="job" />
+    <result column="tur_friend_require" jdbcType="VARCHAR" property="friendRequire" />
+    <result column="tur_drink_status" jdbcType="VARCHAR" property="drinkStatus" />
+    <result column="tur_smoke_status" jdbcType="VARCHAR" property="smokeStatus" />
+    <result column="tur_living_status" jdbcType="VARCHAR" property="livingStatus" />
+    <result column="tur_child_status" jdbcType="VARCHAR" property="childStatus" />
+  </resultMap>
+
+
+
+
+  <sql id="request_t_user">
+    tur.user_id as tur_user_id,tur.age as tur_age,tur.sex as tur_sex,tur.height as tur_height,tur.shape as tur_shape,tur.income_monthly as tur_income_monthly,tur.income_year as tur_income_year,tur.house_state as tur_house_state,tur.education as tur_education,tur.marital_status as tur_marital_status,tur.house_status as tur_house_status,tur.car_status as tur_car_status,tur.job as tur_job,tur.friend_require as tur_friend_require,
+    tur.drink_status as tur_drink_status,tur.smoke_status as tur_smoke_status,tur.living_status as tur_living_status,tur.child_status as tur_child_status
+  </sql>
+
+
+  <sql id="base_f_user">
+    fuser.user_id as f_user_id ,fuser.nikename as f_nikename,fuser.birth_date as f_birth_date,fuser.height as f_height,fuser.month_income as f_month_income,
+    fuser.education as f_education,fuser.profession as f_profession,fuser.marital_status as f_marital_status
+  </sql>
+
+
+  <sql id="base_t_user">
+    tuser.user_id as t_user_id ,tuser.nikename as t_nikename,tuser.birth_date as t_birth_date,tuser.height as t_height,tuser.month_income as t_month_income,
+    tuser.education as t_education,tuser.profession as t_profession,tuser.marital_status as t_marital_status
+  </sql>
+
+
+
+
+
+
+
+  <!-- 获取消息列表 -->
+  <select id="getContactList" resultMap="BaseResultMap" parameterType="hashmap">
+    select t.*,<include refid="base_f_user" />,<include refid="base_t_user" /> ,<include refid="request_f_user" /> ,<include refid="request_t_user" />   from f_contact as t
+    left join f_user_base_msg as fuser on t.f_user_id = fuser.user_id
+    left join f_user_request as fur on t.f_user_id = fur.user_id
+    left join f_user_base_msg as tuser on t.t_user_id = tuser.user_id
+    left join f_user_request as tur on t.t_user_id = tur.user_id
+    order by t.create_time desc limit #{offset},#{limit}
+  </select>
+
+  <!-- 获取消息列表 -->
+  <select id="getContactById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select t.*,<include refid="base_f_user" />,<include refid="base_t_user" /> ,<include refid="request_f_user" /> ,<include refid="request_t_user" />   from f_contact as t
+    left join f_user_base_msg as fuser on t.f_user_id = fuser.user_id
+    left join f_user_request as fur on t.f_user_id = fur.user_id
+    left join f_user_base_msg as tuser on t.t_user_id = tuser.user_id
+    left join f_user_request as tur on t.t_user_id = tur.user_id
+    where t.id = #{cid,jdbcType=INTEGER}
+  </select>
+
+
+
+  
+
+  <!-- 缓存 -->
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+</mapper>

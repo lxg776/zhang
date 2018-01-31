@@ -5,8 +5,6 @@ import com.zheng.friend.dao.model.FMessage;
 import com.zheng.friend.dao.model.FMessageExample;
 import com.zheng.friend.dao.vo.RecentMsgVo;
 import org.apache.ibatis.annotations.Param;
-
-import java.util.HashMap;
 import java.util.List;
 
 /**

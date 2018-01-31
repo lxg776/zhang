@@ -345,15 +345,10 @@ DROP TABLE IF EXISTS `pay_in_order`;
 CREATE TABLE `pay_in_order` (
   `pay_in_order_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pay_vendor_id` int(10) DEFAULT NULL,
-  `pay_mch_id` int(10) DEFAULT NULL,
   `amount` decimal(10,0) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `ctime` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY (`pay_in_order_id`),
-  KEY `FK_Reference_32` (`pay_vendor_id`),
-  KEY `FK_Reference_38` (`pay_mch_id`),
-  CONSTRAINT `FK_Reference_32` FOREIGN KEY (`pay_vendor_id`) REFERENCES `pay_vendor` (`pay_vendor_id`),
-  CONSTRAINT `FK_Reference_38` FOREIGN KEY (`pay_mch_id`) REFERENCES `pay_mch` (`pay_mch_id`)
+  PRIMARY KEY (`pay_in_order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='收入订单表';
 
 -- ----------------------------
@@ -378,7 +373,7 @@ CREATE TABLE `pay_in_order_detail` (
 -- ----------------------------
 -- Records of pay_in_order_detail
 -- ----------------------------
-
+alter table pay_in_order AUTO_INCREMENT=10000;
 -- ----------------------------
 -- Table structure for pay_mch
 -- ----------------------------

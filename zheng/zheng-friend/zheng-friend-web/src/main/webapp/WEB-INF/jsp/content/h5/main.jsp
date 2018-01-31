@@ -20,9 +20,9 @@
 <header class="aui-bar aui-bar-nav" style="position: fixed;">
 
     <div class="aui-title" id="demo">靖西婚恋网</div>
-    <a class="aui-pull-right aui-btn aui-btn-outlined">
-        <span class="aui-iconfont aui-icon-search"></span>
-    </a>
+
+
+
 
 </header>
 
@@ -36,6 +36,7 @@
 
             <c:forEach var="item" items="${recommendUserList}" >
                 <li class="aui-list-item">
+                    <a href="javascript:;" onclick="viewUser(${item.userId})">
                     <div class="aui-media-list-item-inner">
                         <div class="aui-list-item-media" style="width: 7rem; height: 7rem;">
                             <img src="${ctx}/aui/image/mm.jpeg" >
@@ -60,16 +61,20 @@
                             </div>
                         </div>
                     </div>
+                    </a>
+
                     <div class="aui-info" style="padding-top:0">
                         <div class="aui-info-item">
                             <a href="#">打招呼</a>
                         </div>
                         <div class="aui-info-item">
-                            <a href="#">发信息</a>
+                            <a href="javascript:;"  <c:if test="${fUserSetting.msgSendStatus == 0}">aui-popup-for="top-left" </c:if>
+                               <c:if test="${fUserSetting.msgSendStatus == 1}">onclick="sendMsg(${item.userId})"</c:if>
+                            >发信息</a>
                         </div>
 
-                        <div class="aui-info-item">
-                            <a href="#">帮我联系她</a>
+                        <div class="aui-info-item" style="padding-right: 10px;">
+                            <a href="javascript:;"  onclick="helpContact(${item.userId})" >帮我联系她</a>
                         </div>
 
                     </div>
@@ -202,17 +207,22 @@
         <ul id="page3_p1" class="aui-list aui-media-list">
             <%--item--%>
             <c:forEach var="item" items="${msgList}" >
-                <li class="aui-list-item">
+                <li class="aui-list-item" >
+                    <a href="javascript:;" onclick="getMsgList(${item.fromUserId})">
                     <div class="aui-media-list-item-inner">
 
                         <div class="aui-list-item-media" style="width: 6.0rem; height: 6.0rem;">
                             <img src="${ctx}/aui/image/mm.jpeg" >
-                            <div class="aui-badge" style="left: 82%; top: 5%">${item.unReadCount}</div>
+                            <c:if test="${item.unReadCount > 0}">
+                            <div class="aui-badge" style="left: 82%; top: 5%">
+
+                                    ${item.unReadCount}</div></c:if>
+
                         </div>
                         <div class="aui-list-item-inner">
                             <div class="aui-list-item-text">
                                 <div class="aui-list-item-title">${item.fUserBaseMsg.nikename}</div>
-                                <div class="aui-list-item-right">${item.createTime}</div>
+                                <div class="aui-list-item-right"><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd hh:mm" /></div>
                             </div>
 
                             <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
@@ -220,7 +230,9 @@
                             </div>
                         </div>
                     </div>
+                    </a>
                 </li>
+
             </c:forEach>
         </ul>
 
@@ -229,6 +241,7 @@
             <%--item--%>
             <c:forEach var="item" items="${viewRecordList}" >
             <li class="aui-list-item">
+                <a href="javascript:;" onclick="viewUser(${item.fUserId})">
                 <div class="aui-media-list-item-inner">
 
                     <div class="aui-list-item-media" style="width: 6.0rem; height: 6.0rem;">
@@ -246,6 +259,7 @@
                         </div>
                     </div>
                 </div>
+                </a>
             </li>
             </c:forEach>
 
@@ -459,17 +473,46 @@
                 </div>
             </div>
 
+        </div>
+
+
+    </div>
+
+</li>
+
+<li class="aui-list-item">
+    <div class="aui-media-list-item-inner">
+        <div class="aui-list-item-inner">
             <div class="aui-list-item-text">
-                <div class="aui-list-item-left">喜欢的约会</div>
+                <div class="aui-list-item-title">兴趣爱好</div>
+                <div class="aui-list-item-right"><a href="/u/editXqhh" style="font-size: 0.7rem;">编辑</a></div>
+            </div>
+            <div class="aui-list-item-text">
+                <div class="aui-list-item-left">喜欢的音乐</div>
                 <div class="aui-list-item-title">
-                    ${modle.fUserLivingStatus.favoriteDate}
+                    ${modle.fUserLivingStatus.favoriteMusic}
                 </div>
             </div>
 
             <div class="aui-list-item-text">
-                <div class="aui-list-item-left">住房情况</div>
+                <div class="aui-list-item-left">喜欢的电影</div>
                 <div class="aui-list-item-title">
-                    ${modle.fUserLivingStatus.favoriteDate}
+                    ${modle.fUserLivingStatus.favoriteFilm}
+                </div>
+            </div>
+
+
+            <div class="aui-list-item-text">
+                <div class="aui-list-item-left">喜欢的运动</div>
+                <div class="aui-list-item-title">
+                    ${modle.fUserLivingStatus.favoriteSports}
+                </div>
+            </div>
+
+            <div class="aui-list-item-text">
+                <div class="aui-list-item-left">喜欢的宠物</div>
+                <div class="aui-list-item-title">
+                    ${modle.fUserLivingStatus.favoritePet}
                 </div>
             </div>
         </div>
@@ -478,8 +521,6 @@
     </div>
 
 </li>
-
-
 
 </ul>
 </div>
@@ -505,6 +546,102 @@
         <div class="aui-bar-tab-label">我的</div>
     </div>
 </footer>
+
+
+<div id="tempUser"  style="display: none">
+    <li class="aui-list-item">
+        <div class="aui-media-list-item-inner">
+            <div class="aui-list-item-media" style="width: 7rem; height: 7rem;">
+                <img src="${ctx}/aui/image/mm.jpeg" >
+            </div>
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-text">
+                    <div class="aui-list-item-title">#nikename</div>
+
+                    <div class="aui-list-item-right aui-greed">实名</div>
+                </div>
+                <div class="aui-list-item-text">
+                    <div class="aui-list-item-text">#age岁</div>
+                    <div class="aui-list-item-text">#profession</div>
+                    <div class="aui-list-item-text">#heightcm</div>
+                </div>
+
+                <div class="aui-list-item-text" style="color: #0a0c0e">
+                    择偶条件:我想找寻靖西#zo
+                </div>
+            </div>
+        </div>
+        <div class="aui-info" style="padding-top:0">
+            <div class="aui-info-item">
+                <a href="#">打招呼</a>
+            </div>
+            <div class="aui-info-item">
+                <a href="javascript:;"  <c:if test="${fUserSetting.msgSendStatus == 0}">aui-popup-for="top-left" </c:if>
+                   <c:if test="${fUserSetting.msgSendStatus == 1}">onclick="sendMsg(#toUser)"</c:if>
+                   >发信息</a>
+            </div>
+
+            <div class="aui-info-item" style="padding-right: 10px;">
+                <a href="#">帮我联系她</a>
+            </div>
+
+        </div>
+    </li>
+
+</div>
+
+
+
+<%--会员弹出框--%>
+<div class="aui-popup aui-popup-top-left" style="width: 95%;display: none;" id="top-left">
+
+    <div class="aui-popup-content">
+        <div class="aui-content aui-margin-b-15" style="margin-top: 0.5rem;">
+
+            <ul class="aui-list aui-media-list">
+
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+
+                        <div class="aui-list-item-input" style="margin-bottom: 8px;">
+                            <label>开通的会员类型</label>
+                        </div>
+                        <c:forEach items="${typeList}" var="item">
+                            <div class="aui-list-item-input" style="margin-top: 10px;">
+                                <label><input class="aui-radio" type="radio" name="mTypeId" value="${item.id}" checked>&nbsp;&nbsp;&nbsp;${item.name}(${item.serviceDays}天)<span style="color: red;">¥${item.price}</span></label>
+                            </div>
+                        </c:forEach>
+
+                    </div>
+                </li>
+
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+
+                        <div class="aui-list-item-input" style="margin-bottom: 8px;">
+                            <label>支付方式</label>
+                        </div>
+
+                        <div class="aui-list-item-input" style="margin-top: 10px; position: relative; height: 85px;" >
+                            <label><input class="aui-radio" style="left: 4px; top: 30px; position: absolute"  type="radio" name="payVendorId" value="1" checked> <img src="${ctx}/aui/image/wx_pay_icon.png" style="width: 187px; left: 48px; position: absolute" /></label>
+
+                        </div>
+                        <div class="aui-list-item-input" style="margin-top: 10px; position: relative; height: 85px;" >
+                            <label><input class="aui-radio" style="left: 4px; top: 30px; position: absolute"  type="radio" name="payVendorId" value="2"  checked> <img src="${ctx}/aui/image/zfb_pay_icon.png" style="width: 187px; left: 48px; position: absolute" /></label>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="aui-content-padded">
+                <div class="aui-btn aui-btn-info aui-btn-block" id="ktBtn" style="margin-top: 1rem;">立即开通</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 </body>
 
 <%@ include file="/common/h5/js.jsp" %>
@@ -513,12 +650,18 @@
 
 
 <script src="${ctx}/aui/script/aui-scroll.js"></script>
-
+<script type="text/javascript" src="${ctx}/aui/script/aui-popup.js" ></script>
+<script type="text/javascript" src="${ctx}/aui/script/aui-dialog.js"></script>
 
 <script type="text/javascript">
     apiready = function(){
         api.parseTapmode();
     }
+
+    var popup = new auiPopup();
+
+
+
     var tab = new auiTab({
         element:document.getElementById("footer")
     },function(ret){
@@ -595,11 +738,14 @@
 
 
 
+
+
+
     function loadMoreUser() {
         var userloadFla = false;
 
         userCount = $("#listUser").children(".aui-list-item").length;
-        document.getElementById("demo").textContent = "滚动高度："+userCount;
+        //document.getElementById("demo").textContent = "滚动高度："+userCount;
         pageNum = parseInt((userCount-1)/pageSize)+2;
 
         if(!userloadFla&&(pageNum>currentPage)){
@@ -628,6 +774,55 @@
         }
     }
 
+    function helpContact(userId) {
+
+        $.ajax({
+            type: "GET",
+            url: "/u/helpContact",
+            data: "tUserId="+userId,
+            async:false,
+            success: function(data){
+                msg(data.message);
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+
+            }
+        });
+
+    }
+
+
+    $("#ktBtn").click(function () {
+        createOrder();
+    });
+
+    function  createOrder() {
+
+        var payVendorId = $("input[name='payVendorId']").val();
+       var  mTypeId = $("input[name='mTypeId']").val();
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/u/createOrder",
+            data: "payVendorId="+payVendorId+"&mTypeId="+mTypeId,
+            async:false,
+            success: function(data){
+
+                payUrl  = data.data.payUrl;
+
+                window.location.href = payUrl;
+
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                userloadFla=true;
+            }
+        });
+
+
+    }
+
 
     function getUserHtml(item) {
         tempHtml = $("#tempUser").html().toString();
@@ -636,6 +831,7 @@
         tempHtml = tempHtml.replace("#height",item.fUserBaseMsg.height);
         tempHtml = tempHtml.replace("#height",item.fUserBaseMsg.height);
         tempHtml = tempHtml.replace("#zo",getUserRequest(item));
+        tempHtml = tempHtml.replace("#toUser",item.userId);
         console.log(tempHtml);
         return tempHtml;
     }
@@ -663,52 +859,59 @@
 
 
 
+
+    
+    //获取消息列表
+    function getMsgList(fromUserId) {
+        url = "/m/msgList?fromUserId="+fromUserId;
+        window.location.href= url;
+       // console.log("wtf");
+    }
+    
+    
+
+    function  sendMsg(toUid) {
+
+        backUrl = window.location.href;
+        url = "/m/sendMsg?uid="+toUid+"&backUrl="+backUrl;
+        window.location.href = url;
+    }
+
+
+    function  viewUser(uid) {
+        url = "/u/userDetail?uid="+uid;
+        window.location.href = url;
+    }
+
+
+    var dialog = new auiDialog();
+    function msg(msg) {
+        dialog.alert({
+            title:"提示",
+            msg:msg,
+            buttons:['确定']
+        },function(ret){
+            // console.log(ret)
+        })
+    }
+
 </script>
 
 
-<div id="tempUser"  style="display: none">
-    <li class="aui-list-item">
-        <div class="aui-media-list-item-inner">
-            <div class="aui-list-item-media" style="width: 7rem; height: 7rem;">
-                <img src="${ctx}/aui/image/mm.jpeg" >
-            </div>
-            <div class="aui-list-item-inner">
-                <div class="aui-list-item-text">
-                    <div class="aui-list-item-title">#nikename</div>
-
-                    <div class="aui-list-item-right aui-greed">实名</div>
-                </div>
-                <div class="aui-list-item-text">
-                    <div class="aui-list-item-text">#age岁</div>
-                    <div class="aui-list-item-text">#profession</div>
-                    <div class="aui-list-item-text">#heightcm</div>
-                </div>
-
-                <div class="aui-list-item-text" style="color: #0a0c0e">
-                    择偶条件:我想找寻靖西#zo
-                </div>
-            </div>
-        </div>
-        <div class="aui-info" style="padding-top:0">
-            <div class="aui-info-item">
-                <a href="#">打招呼</a>
-            </div>
-            <div class="aui-info-item">
-                <a href="#">发信息</a>
-            </div>
-
-            <div class="aui-info-item">
-                <a href="#">帮我联系她</a>
-            </div>
-
-        </div>
-    </li>
-
-</div>
 
 
 
-</body>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
