@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
+
+
+    <!-- 配置进行解密  -->
+    <bean id="propertyConfigurer" class="com.zheng.common.plugin.EncryptPropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:redis.properties</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <dubbo:application name="zheng-firend-rpc-service"/>
+
+    <dubbo:registry address="zookeeper://222.84.231.82:64005"/>
+
+    <dubbo:protocol name="dubbo" port="20882"/>
+
+    <dubbo:monitor protocol="registry"/>
+
+    <!-- 文章 -->
+    <bean id="fActivityServiceImpl" class="com.zheng.friend.rpc.service.impl.FActivityServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FActivityService" ref="fActivityServiceImpl" timeout="10000"/>
+
+    <!-- 基本信息 -->
+    <bean id="fUserBaseMsgServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserBaseMsgServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserBaseMsgService" ref="fUserBaseMsgServiceImpl" timeout="10000"/>
+
+
+    <!-- 择偶要求 -->
+    <bean id="fUserRequestServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserRequestServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserRequestService" ref="fUserRequestServiceImpl" timeout="10000"/>
+
+
+    <!-- 会员类型 -->
+    <bean id="fMemberTypeServiceImpl" class="com.zheng.friend.rpc.service.impl.FMemberTypeServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FMemberTypeService" ref="fMemberTypeServiceImpl" timeout="10000"/>
+
+
+
+    <!-- 用户会员关系 -->
+    <bean id="fUserMemberRelServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserMemberRelServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserMemberRelService" ref="fUserMemberRelServiceImpl" timeout="10000"/>
+
+    <!-- 用户会员关系 -->
+    <bean id="fUserLivingStatusServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserLivingStatusServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserLivingStatusService" ref="fUserLivingStatusServiceImpl" timeout="10000"/>
+
+    <!-- 用户设置 -->
+    <bean id="fUserSettingServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserSettingServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserSettingService" ref="fUserSettingServiceImpl" timeout="10000"/>
+
+
+    <!-- 访问记录 -->
+    <bean id="fUserViewRecordServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserViewRecordServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserViewRecordService" ref="fUserViewRecordServiceImpl" timeout="10000"/>
+
+    <!-- 最近消息列表 -->
+    <bean id="fMessageServiceImpl" class="com.zheng.friend.rpc.service.impl.FMessageServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FMessageService" ref="fMessageServiceImpl" timeout="10000"/>
+
+
+
+    <bean id="fSmsMessageServiceImpl" class="com.zheng.friend.rpc.service.impl.FSmsMessageServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FSmsMessageService" ref="fSmsMessageServiceImpl" timeout="10000"/>
+
+    <!-- 用户订单 -->
+    <bean id="fUserOrderServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserOrderServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FUserOrderService" ref="fUserOrderServiceImpl" timeout="10000"/>
+
+
+    <!-- 用户联系请求 -->
+    <bean id="fContactServiceImpl" class="com.zheng.friend.rpc.service.impl.FContactServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FContactService" ref="fContactServiceImpl" timeout="10000"/>
+
+    <!-- uc******************************************* -->
+
+    <!-- 认证方式 -->
+    <bean id="ucenterOauthService" class="com.zheng.ucenter.rpc.service.impl.UcenterOauthServiceImpl"/>
+    <dubbo:service interface="com.zheng.ucenter.rpc.api.UcenterOauthService" ref="ucenterOauthService" timeout="10000"/>
+
+    <!-- 用户认证 -->
+    <bean id="ucenterUserOauthService" class="com.zheng.ucenter.rpc.service.impl.UcenterUserOauthServiceImpl"/>
+    <dubbo:service interface="com.zheng.ucenter.rpc.api.UcenterUserOauthService" ref="ucenterUserOauthService" timeout="10000"/>
+
+    <!-- 用户操作日志 -->
+    <bean id="ucenterUserLogService" class="com.zheng.ucenter.rpc.service.impl.UcenterUserLogServiceImpl"/>
+    <dubbo:service interface="com.zheng.ucenter.rpc.api.UcenterUserLogService" ref="ucenterUserLogService" timeout="10000"/>
+
+    <!-- 用户 -->
+    <bean id="uenterUserService" class="com.zheng.ucenter.rpc.service.impl.UcenterUserServiceImpl"/>
+    <dubbo:service interface="com.zheng.ucenter.rpc.api.UcenterUserService" ref="uenterUserService" timeout="10000"/>
+
+    <!-- 用户详情 -->
+    <bean id="ucenterUserDetailsService" class="com.zheng.ucenter.rpc.service.impl.UcenterUserDetailsServiceImpl"/>
+    <dubbo:service interface="com.zheng.ucenter.rpc.api.UcenterUserDetailsService" ref="ucenterUserDetailsService" timeout="10000"/>
+
+    <!-- 接口服务 -->
+    <bean id="ucenterApiService" class="com.zheng.ucenter.rpc.service.impl.UcenterApiServiceImpl"/>
+    <dubbo:service interface="com.zheng.ucenter.rpc.api.UcenterApiService" ref="ucenterApiService" timeout="10000"/>
+
+
+    <!-- 接口服务 -->
+    <bean id="ucenterIdentificaionService" class="com.zheng.ucenter.rpc.service.impl.UcenterIdentificaionServiceImpl"/>
+    <dubbo:service interface="com.zheng.ucenter.rpc.api.UcenterIdentificaionService" ref="ucenterIdentificaionService" timeout="10000"/>
+
+
+    <!-- upms******************************************* -->
+
+    <!-- 系统 -->
+    <bean id="upmsSystemService" class="com.zheng.upms.rpc.service.impl.UpmsSystemServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsSystemService" ref="upmsSystemService" timeout="10000"/>
+
+    <!-- 组织 -->
+    <bean id="upmsOrganizationService" class="com.zheng.upms.rpc.service.impl.UpmsOrganizationServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsOrganizationService" ref="upmsOrganizationService" timeout="10000"/>
+
+    <!-- 用户组织 -->
+    <bean id="upmsUserOrganizationService" class="com.zheng.upms.rpc.service.impl.UpmsUserOrganizationServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsUserOrganizationService" ref="upmsUserOrganizationService" timeout="10000"/>
+
+    <!-- 用户 -->
+    <bean id="upmsUserService" class="com.zheng.upms.rpc.service.impl.UpmsUserServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsUserService" ref="upmsUserService" timeout="10000"/>
+
+    <!-- 角色 -->
+    <bean id="upmsRoleService" class="com.zheng.upms.rpc.service.impl.UpmsRoleServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsRoleService" ref="upmsRoleService" timeout="10000"/>
+
+    <!-- 权限 -->
+    <bean id="upmsPermissionService" class="com.zheng.upms.rpc.service.impl.UpmsPermissionServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsPermissionService" ref="upmsPermissionService" timeout="10000"/>
+
+    <!-- 角色权限 -->
+    <bean id="upmsRolePermissionService" class="com.zheng.upms.rpc.service.impl.UpmsRolePermissionServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsRolePermissionService" ref="upmsRolePermissionService" timeout="10000"/>
+
+    <!-- 用户权限 -->
+    <bean id="upmsUserPermissionService" class="com.zheng.upms.rpc.service.impl.UpmsUserPermissionServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsUserPermissionService" ref="upmsUserPermissionService" timeout="10000"/>
+
+    <!-- 用户角色 -->
+    <bean id="upmsUserRoleService" class="com.zheng.upms.rpc.service.impl.UpmsUserRoleServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsUserRoleService" ref="upmsUserRoleService" timeout="10000"/>
+
+    <!-- 操作日志 -->
+    <bean id="upmsLogService" class="com.zheng.upms.rpc.service.impl.UpmsLogServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsLogService" ref="upmsLogService" timeout="10000"/>
+
+    <!-- 接口服务 -->
+    <bean id="upmsApiService" class="com.zheng.upms.rpc.service.impl.UpmsApiServiceImpl"/>
+    <dubbo:service interface="com.zheng.upms.rpc.api.UpmsApiService" ref="upmsApiService" timeout="10000"/>
+
+
+    <!-- upms******************************************* -->
+    <!-- 支付方式服务 -->
+    <bean id="payVendorService" class="com.zheng.pay.rpc.service.impl.PayVendorServiceImpl"/>
+    <dubbo:service interface="com.zheng.pay.rpc.api.PayVendorService" ref="payVendorService" timeout="10000"/>
+
+
+    <!-- 订单服务 -->
+    <bean id="payInOrderService" class="com.zheng.pay.rpc.service.impl.PayInOrderServiceImpl"/>
+    <dubbo:service interface="com.zheng.pay.rpc.api.PayInOrderService" ref="payInOrderService" timeout="10000"/>
+
+    <!-- 订单详情服务 -->
+    <bean id="payInOrderDetailService" class="com.zheng.pay.rpc.service.impl.PayInOrderDetailServiceImpl"/>
+    <dubbo:service interface="com.zheng.pay.rpc.api.PayInOrderDetailService" ref="payInOrderDetailService" timeout="10000"/>
+
+</beans>

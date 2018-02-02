@@ -27,6 +27,7 @@
         <module>zheng-friend-admin</module>
         <module>zheng-friend-common</module>
         <module>zheng-friend-web</module>
+        <module>zheng-friend-rpc-all</module>
     </modules>
 
     <dependencyManagement>
