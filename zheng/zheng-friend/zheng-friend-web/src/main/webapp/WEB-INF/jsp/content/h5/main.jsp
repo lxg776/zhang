@@ -303,7 +303,7 @@
             <div class="aui-card-list">
                 <div class="aui-card-list-header">
                     相册
-                    <div class="aui-list-item-right"><a href="#" style="font-size: 0.7rem;">编辑</a></div>
+                    <div class="aui-list-item-right"><a href="/u/editPhoto" style="font-size: 0.7rem;">编辑</a></div>
                 </div>
                 <div class="aui-card-list-content-padded aui-border-b aui-border-t">
                     <div class="aui-row aui-row-padded">
@@ -523,6 +523,13 @@
 </li>
 
 </ul>
+<ul style="margin-top: 16px">
+
+    <p><div class="aui-btn aui-btn-block aui-btn-outlined" id="logoutBtn" style="color: red;">注销登录</div></p>
+
+</ul>
+
+
 </div>
 
 </div>
@@ -654,228 +661,251 @@
 <script type="text/javascript" src="${ctx}/aui/script/aui-dialog.js"></script>
 
 <script type="text/javascript">
-    apiready = function(){
-        api.parseTapmode();
-    }
-
-    var popup = new auiPopup();
 
 
 
-    var tab = new auiTab({
-        element:document.getElementById("footer")
-    },function(ret){
-        if(ret.index==1){
-            $("#page1").removeClass("aui-hide");
-            $("#page2").addClass("aui-hide");
-            $("#page3").addClass("aui-hide");
-            $("#page4").addClass("aui-hide");
-
-            $('body,html').animate({scrollTop:0},100);
-
-
-
-
-        }else if(ret.index==2){
-            $("#page1").addClass("aui-hide");
-            $("#page2").removeClass("aui-hide");
-            $("#page3").addClass("aui-hide");
-            $("#page4").addClass("aui-hide");
-
-            $('body,html').animate({scrollTop:0},100);
-        }else if(ret.index==3){
-            $("#page1").addClass("aui-hide");
-            $("#page2").addClass("aui-hide");
-            $("#page3").removeClass("aui-hide");
-            $("#page4").addClass("aui-hide");
-
-            $('body,html').animate({scrollTop:0},100);
-        }else if(ret.index==4){
-            $("#page1").addClass("aui-hide");
-            $("#page2").addClass("aui-hide");
-            $("#page3").addClass("aui-hide");
-            $("#page4").removeClass("aui-hide");
-
-            $('body,html').animate({scrollTop:0},100);
-        }
-    });
-
-
-    var tab = new auiTab({
-        element:document.getElementById("tab"),
-    },function(ret){
-        if(ret.index==1){
-            $("#page3_p1").removeClass("aui-hide");
-            $("#page3_p2").addClass("aui-hide");
-        }else if(ret.index==2){
-            $("#page3_p1").addClass("aui-hide");
-            $("#page3_p2").removeClass("aui-hide");
+        apiready = function(){
+            api.parseTapmode();
         }
 
+        var popup = new auiPopup();
 
-    });
+
+        $("#logoutBtn").click(function () {
+            window.location.href = "/u/logout";
+        });
 
 
-    var scroll = new auiScroll({
-        listen:true,
-        distance:200 //判断到达底部的距离，isToBottom为true
-    },function(ret){
-    if(ret.isToBottom){
-        document.getElementById("demo").textContent = "已到达底部";
-        loadMoreUser();
-    }else{
 
-    }
+        var tab = new auiTab({
+            element:document.getElementById("footer")
+        },function(ret){
+            if(ret.index==1){
+                $("#page1").removeClass("aui-hide");
+                $("#page2").addClass("aui-hide");
+                $("#page3").addClass("aui-hide");
+                $("#page4").addClass("aui-hide");
 
-});
-
-    var pageSize =15;
-    var currentPage =1;
-    <c:if test="${not empty pageSize}">
-    pageSize = ${pageSize}
-    </c:if>
+                $('body,html').animate({scrollTop:0},100);
 
 
 
 
+            }else if(ret.index==2){
+                $("#page1").addClass("aui-hide");
+                $("#page2").removeClass("aui-hide");
+                $("#page3").addClass("aui-hide");
+                $("#page4").addClass("aui-hide");
+
+                $('body,html').animate({scrollTop:0},100);
+            }else if(ret.index==3){
+                $("#page1").addClass("aui-hide");
+                $("#page2").addClass("aui-hide");
+                $("#page3").removeClass("aui-hide");
+                $("#page4").addClass("aui-hide");
+
+                $('body,html').animate({scrollTop:0},100);
+            }else if(ret.index==4){
+                $("#page1").addClass("aui-hide");
+                $("#page2").addClass("aui-hide");
+                $("#page3").addClass("aui-hide");
+                $("#page4").removeClass("aui-hide");
+
+                $('body,html').animate({scrollTop:0},100);
+            }
+        });
+
+
+        var tab = new auiTab({
+            element:document.getElementById("tab"),
+        },function(ret){
+            if(ret.index==1){
+                $("#page3_p1").removeClass("aui-hide");
+                $("#page3_p2").addClass("aui-hide");
+            }else if(ret.index==2){
+                $("#page3_p1").addClass("aui-hide");
+                $("#page3_p2").removeClass("aui-hide");
+            }
+
+
+        });
+
+
+        var scroll = new auiScroll({
+            listen:true,
+            distance:200 //判断到达底部的距离，isToBottom为true
+        },function(ret){
+            if(ret.isToBottom){
+              //  document.getElementById("demo").textContent = "已到达底部";
+                loadMoreUser();
+            }else{
+
+            }
+
+        });
+
+        var pageSize =15;
+        var currentPage =1;
+        <c:if test="${not empty pageSize}">
+        pageSize = ${pageSize}
+            </c:if>
 
 
 
-    function loadMoreUser() {
-        var userloadFla = false;
 
-        userCount = $("#listUser").children(".aui-list-item").length;
-        //document.getElementById("demo").textContent = "滚动高度："+userCount;
-        pageNum = parseInt((userCount-1)/pageSize)+2;
 
-        if(!userloadFla&&(pageNum>currentPage)){
+
+
+            function loadMoreUser() {
+                var userloadFla = false;
+
+                userCount = $("#listUser").children(".aui-list-item").length;
+                //document.getElementById("demo").textContent = "滚动高度："+userCount;
+                pageNum = parseInt((userCount-1)/pageSize)+2;
+
+                if(!userloadFla&&(pageNum>currentPage)){
+                    $.ajax({
+                        type: "GET",
+                        url: "/u/loadRecommendUserList",
+                        data: "pageNum="+pageNum,
+                        async:false,
+                        success: function(data){
+                            userloadFla=true;
+                            currentPage = data.data.pageNum;
+                            if(data.code==1){
+                                htmlString = ""
+                                $.each(data.data.dataList, function(i, value) {
+                                    htmlString =htmlString + getUserHtml(value);
+                                });
+                                $("#listUser").append(htmlString);
+                            }else{
+                                msg(data.message);
+                            }
+                        },
+                        error:function(XMLHttpRequest, textStatus, errorThrown){
+                            userloadFla=true;
+                        }
+                    });
+                }
+            }
+
+        function helpContact(userId) {
+
             $.ajax({
                 type: "GET",
-                url: "/u/loadRecommendUserList",
-                data: "pageNum="+pageNum,
+                url: "/u/helpContact",
+                data: "tUserId="+userId,
                 async:false,
                 success: function(data){
-                    userloadFla=true;
-                    currentPage = data.data.pageNum;
-                    if(data.code==1){
-                        htmlString = ""
-                        $.each(data.data.dataList, function(i, value) {
-                            htmlString =htmlString + getUserHtml(value);
-                        });
-                        $("#listUser").append(htmlString);
-                    }else{
-                        msg(data.message);
-                    }
+                    msg(data.message);
+                },
+                error:function(XMLHttpRequest, textStatus, errorThrown){
+
+                }
+            });
+
+        }
+
+
+        $("#ktBtn").click(function () {
+            createOrder();
+        });
+
+        function  createOrder() {
+
+            var payVendorId = $("input[name='payVendorId']").val();
+            var  mTypeId = $("input[name='mTypeId']").val();
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "/u/createOrder",
+                data: "payVendorId="+payVendorId+"&mTypeId="+mTypeId,
+                async:false,
+                success: function(data){
+
+                    payUrl  = data.data.payUrl;
+
+                    window.location.href = payUrl;
+
                 },
                 error:function(XMLHttpRequest, textStatus, errorThrown){
                     userloadFla=true;
                 }
             });
+
+
         }
-    }
 
-    function helpContact(userId) {
 
-        $.ajax({
-            type: "GET",
-            url: "/u/helpContact",
-            data: "tUserId="+userId,
-            async:false,
-            success: function(data){
-                msg(data.message);
-            },
-            error:function(XMLHttpRequest, textStatus, errorThrown){
+        function getUserHtml(item) {
+            tempHtml = $("#tempUser").html().toString();
+            tempHtml = tempHtml.replace("#nikename",item.fUserBaseMsg.nikename);
+            tempHtml = tempHtml.replace("#profession",item.fUserBaseMsg.profession);
+            tempHtml = tempHtml.replace("#height",item.fUserBaseMsg.height);
+            tempHtml = tempHtml.replace("#height",item.fUserBaseMsg.height);
+            tempHtml = tempHtml.replace("#zo",getUserRequest(item));
+            tempHtml = tempHtml.replace("#toUser",item.userId);
+            console.log(tempHtml);
+            return tempHtml;
+        }
 
+        function getUserRequest(item) {
+            tempHtml = "";
+            if(item.fUserRequest.age){
+                tempHtml = tempHtml +"年龄在"+item.fUserRequest.age+"岁,";
             }
-        });
-
-    }
-
-
-    $("#ktBtn").click(function () {
-        createOrder();
-    });
-
-    function  createOrder() {
-
-        var payVendorId = $("input[name='payVendorId']").val();
-       var  mTypeId = $("input[name='mTypeId']").val();
-
-
-
-        $.ajax({
-            type: "POST",
-            url: "/u/createOrder",
-            data: "payVendorId="+payVendorId+"&mTypeId="+mTypeId,
-            async:false,
-            success: function(data){
-
-                payUrl  = data.data.payUrl;
-
-                window.location.href = payUrl;
-
-            },
-            error:function(XMLHttpRequest, textStatus, errorThrown){
-                userloadFla=true;
+            if(item.fUserRequest.height){
+                tempHtml = tempHtml +"身高"+item.fUserRequest.height+"cm,";
             }
-        });
+            if(item.fUserRequest.incomeMonthly){
+                tempHtml = tempHtml +"月收入"+item.fUserRequest.incomeMonthly+"元,";
+            }
 
-
-    }
-
-
-    function getUserHtml(item) {
-        tempHtml = $("#tempUser").html().toString();
-        tempHtml = tempHtml.replace("#nikename",item.fUserBaseMsg.nikename);
-        tempHtml = tempHtml.replace("#profession",item.fUserBaseMsg.profession);
-        tempHtml = tempHtml.replace("#height",item.fUserBaseMsg.height);
-        tempHtml = tempHtml.replace("#height",item.fUserBaseMsg.height);
-        tempHtml = tempHtml.replace("#zo",getUserRequest(item));
-        tempHtml = tempHtml.replace("#toUser",item.userId);
-        console.log(tempHtml);
-        return tempHtml;
-    }
-
-    function getUserRequest(item) {
-        tempHtml = "";
-        if(item.fUserRequest.age){
-            tempHtml = tempHtml +"年龄在"+item.fUserRequest.age+"岁,";
-        }
-        if(item.fUserRequest.height){
-            tempHtml = tempHtml +"身高"+item.fUserRequest.height+"cm,";
-        }
-        if(item.fUserRequest.incomeMonthly){
-            tempHtml = tempHtml +"月收入"+item.fUserRequest.incomeMonthly+"元,";
+            if(item.sex == '1'){
+                tempHtml = tempHtml +"的男性";
+            }
+            if(item.sex == '2'){
+                tempHtml = tempHtml +"的女性";
+            }
+            return tempHtml;
         }
 
-        if(item.sex == '1'){
-            tempHtml = tempHtml +"的男性";
+
+
+
+
+        //获取消息列表
+        function getMsgList(fromUserId) {
+            url = "/m/msgList?fromUserId="+fromUserId;
+            window.location.href= url;
+            // console.log("wtf");
         }
-        if(item.sex == '2'){
-            tempHtml = tempHtml +"的女性";
+
+
+
+        function  sendMsg(toUid) {
+
+            backUrl = window.location.href;
+            url = "/m/sendMsg?uid="+toUid+"&backUrl="+backUrl;
+            window.location.href = url;
         }
-        return tempHtml;
-    }
 
 
 
 
-    
-    //获取消息列表
-    function getMsgList(fromUserId) {
-        url = "/m/msgList?fromUserId="+fromUserId;
-        window.location.href= url;
-       // console.log("wtf");
-    }
-    
-    
 
-    function  sendMsg(toUid) {
-
-        backUrl = window.location.href;
-        url = "/m/sendMsg?uid="+toUid+"&backUrl="+backUrl;
-        window.location.href = url;
-    }
+        var dialog = new auiDialog();
+        function msg(msg) {
+            dialog.alert({
+                title:"提示",
+                msg:msg,
+                buttons:['确定']
+            },function(ret){
+                // console.log(ret)
+            })
+        }
 
 
     function  viewUser(uid) {
@@ -883,17 +913,6 @@
         window.location.href = url;
     }
 
-
-    var dialog = new auiDialog();
-    function msg(msg) {
-        dialog.alert({
-            title:"提示",
-            msg:msg,
-            buttons:['确定']
-        },function(ret){
-            // console.log(ret)
-        })
-    }
 
 </script>
 

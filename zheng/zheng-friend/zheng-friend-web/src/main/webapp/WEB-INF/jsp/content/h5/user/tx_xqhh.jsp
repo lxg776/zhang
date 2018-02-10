@@ -40,24 +40,10 @@
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
                 <div class="aui-list-item-label">
-                    喜欢的运动
-                </div>
-                <div class="aui-list-item-input">
-                    <input type="text" placeholder="填写">
-                </div>
-
-
-            </div>
-        </li>
-
-
-        <li class="aui-list-item">
-            <div class="aui-list-item-inner">
-                <div class="aui-list-item-label">
                     喜欢的音乐
                 </div>
                 <div class="aui-list-item-input">
-                    <input type="text" placeholder="填写">
+                    <input type="text" placeholder="填写"  name="favoriteMusic" value="${modle.favoriteMusic}" >
                 </div>
 
 
@@ -71,7 +57,7 @@
                     喜欢的电影
                 </div>
                 <div class="aui-list-item-input">
-                    <input type="text" placeholder="填写">
+                    <input type="text" placeholder="填写"  name="favoriteFilm" value="${modle.favoriteFilm}" >
                 </div>
 
 
@@ -81,15 +67,30 @@
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
                 <div class="aui-list-item-label">
-                    喜欢的宠物
+                    喜欢的运动
                 </div>
                 <div class="aui-list-item-input">
-                    <input type="text" placeholder="填写">
+                    <input type="text" placeholder="填写"  name="favoriteSports" value="${modle.favoriteSports}" >
                 </div>
 
 
             </div>
         </li>
+
+
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-label">
+                    喜欢的宠物
+                </div>
+                <div class="aui-list-item-input">
+                    <input type="text" placeholder="填写"  name="favoritePet" value="${modle.favoritePet}" >
+                </div>
+
+
+            </div>
+        </li>
+
 
 
 

@@ -205,12 +205,10 @@
         }
 
 
-        oss_policy_url = "http://127.0.0.1:9997/aliyun/oss/ky_policy";
+        oss_policy_url = "/aliyun/oss/policy";
         $.ajax({
             url: oss_policy_url,
             type: "GET",
-            dataType: "jsonp", //指定服务器返回的数据类型
-            jsonp: "ky",
             success: function (data) {
                 // var result = JSON.stringify(data); //json对象转成字符串
                 uploader.options.server=data.action;

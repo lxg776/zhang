@@ -678,6 +678,13 @@
             $("input[name='userName']").focus();
             return
         }
+
+        if(!$("input[name='userName']").val().match(/^(((1[3-9][0-9]{1})|159|153)+\d{8})$/)){
+            msg("手机格式不正确");
+            $("input[name='userName']").focus();
+            return
+        }
+
         phoneNo =$("input[name='userName']").val();
         data = "phoneNo="+phoneNo;
         $.ajax({

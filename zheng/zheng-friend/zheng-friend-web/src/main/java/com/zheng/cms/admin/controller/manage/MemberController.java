@@ -4,6 +4,7 @@ import com.zheng.cms.admin.modle.PageOnterModle;
 import com.zheng.common.base.BaseController;
 
 import com.zheng.common.util.MD5Util;
+import com.zheng.common.util.PropertiesFileUtil;
 import com.zheng.common.util.StringUtil;
 import com.zheng.friend.dao.model.*;
 import com.zheng.friend.dao.vo.FUserMemberRelVo;
@@ -103,8 +104,6 @@ public class MemberController extends BaseController{
 
 
 
-
-
     @ApiOperation(value = "活动编辑")
     @RequestMapping(value = "/editUser", method = RequestMethod.POST)
     public String createAndUpdate(@RequestParam(defaultValue = "0") String keyword, UcenterUser modle){
@@ -128,6 +127,11 @@ public class MemberController extends BaseController{
         }
         return "redirect:list";
     }
+
+
+
+
+
 
     @ApiOperation(value = "编辑")
     @RequestMapping(value = "/editIdentific", method = RequestMethod.GET)

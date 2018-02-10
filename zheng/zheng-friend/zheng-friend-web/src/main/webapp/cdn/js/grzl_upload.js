@@ -197,25 +197,18 @@ $(function () {
 
 
     //获取签名数据并上传图片
-    var oss_policy_url = "http://127.0.0.1:9997/aliyun/oss/ky_policy";
+    var oss_policy_url = "/aliyun/oss/policy";
     $.ajax({
         url: oss_policy_url,
         type: "GET",
-        dataType: "json", //指定服务器返回的数据类型
-        jsonp: "ky",
         success: function (kyData) {
-
             uploader.options.server = kyData.action;
-
             uploader.options.formData.policy=kyData.policy;
             uploader.options.formData.signature=kyData.signature;
             uploader.options.formData.action=kyData.action;
             uploader.options.formData.dir=kyData.dir;
             uploader.options.formData.OSSAccessKeyId=kyData.OSSAccessKeyId;
             uploader.options.formData.callback=kyData.callback;
-
-
-
         }
     });
 

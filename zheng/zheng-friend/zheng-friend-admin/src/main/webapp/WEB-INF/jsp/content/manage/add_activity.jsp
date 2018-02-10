@@ -27,6 +27,9 @@
     <!-- end: Favicon -->
     <link href="/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
 
+    <link href="/editor/themes/default/css/ueditor.css" rel="stylesheet" >
+
+
 </head>
 
 <body>
@@ -89,16 +92,6 @@
                                 <div class="controls">
                                     <input type="text" class="span6 typeahead" id="typeahead"
                                            name="title" value="${modle.title}" data-provide="typeahead">
-
-                                </div>
-                            </div>
-
-
-                            <div class="control-group">
-                                <label class="control-label" for="typeahead">活动内容 </label>
-                                <div class="controls">
-                                    <input type="text" class="span6 typeahead" id="typeahead"
-                                           name="content" value="${modle.content}" data-provide="typeahead">
 
                                 </div>
                             </div>
@@ -187,6 +180,16 @@
                                 </div>
                             </div>
 
+                            <div class="control-group">
+                                <label class="control-label" for="typeahead">活动内容 </label>
+                                <div class="controls">
+                                    <script id="editor" type="text/plain" style="width:600px;height:600px;" > </script>
+                                </div>
+                            </div>
+
+
+
+
 
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-primary">保存</button>
@@ -268,7 +271,53 @@
 
 
 </script>
+                                    <script type="text/javascript" charset="utf-8" src="/editor/ueditor.config.js"></script>
+                                    <script type="text/javascript" charset="utf-8" src="/editor/ueditor.all.js"> </script>
+                                    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+                                    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+                                    <script type="text/javascript" charset="utf-8" src="/editor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+
+   // var ue = UE.getEditor('editor');
+
+    var basePath = "${ctx}";
+    //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor');
+    UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+    UE.Editor.prototype.getActionUrl = function(action) {
+        if (action == '/manage/ue/images') {
+            return basePath + '/manage/ue/images';
+        } else {
+            return this._bkGetActionUrl.call(this, action);
+        }
+    }
+
+//    UE.Editor.prototype.getActionUrl = function(action) {
+//        if (action == '/manage/ue/images') {
+//            return basePath + 'manage/ue/images';
+//        } else {
+//            return this._bkGetActionUrl.call(this, action);
+//        }
+//    }
+
+//    $.ajax({
+//        url:'http://127.0.0.1:2222//manage/ue/dispatch?action=config',
+//        type:'GET', //GET
+//
+//
+//        success:function(data,textStatus,jqXHR){
+//            console.log(data)
+//
+//        },
+//        error:function(xhr,textStatus){
+//            console.log('错误')
+//
+//        },
+//
+//    })
 
 
+</script>
 </body>
 </html>

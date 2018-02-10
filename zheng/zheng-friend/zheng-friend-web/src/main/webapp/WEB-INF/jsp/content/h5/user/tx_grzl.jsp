@@ -488,6 +488,24 @@
                     </div>
                 </div>
             </li>
+
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label">
+                        体型
+                    </div>
+                    <div class="aui-list-item-input">
+                        <select name="shape">
+                            <option value="不限"  <c:if test="${modle.shape =='不限' }"> selected="selected" </c:if>  >不限</option>
+                            <option value="偏瘦" <c:if test="${modle.shape =='偏瘦' }"> selected="selected" </c:if> >偏瘦</option>
+                            <option value="一般"  <c:if test="${modle.shape =='一般' }"> selected="selected" </c:if> >一般</option>
+                            <option value="偏胖"  <c:if test="${modle.shape =='偏胖' }"> selected="selected" </c:if>  >偏胖</option>
+                            <option value="强壮"  <c:if test="${modle.shape =='强壮' }"> selected="selected" </c:if> >强壮</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
                     <div class="aui-list-item-label">
@@ -624,7 +642,7 @@
 
         <div class="aui-content-padded">
 
-            <div class="aui-btn aui-btn-info aui-btn-block" id="regBtn" style="margin-top: 1rem;">保存</div>
+            <div class="aui-btn aui-btn-info aui-btn-block" id="regBtn" style="margin-top: 1rem;">下一步</div>
 
 
         </div>

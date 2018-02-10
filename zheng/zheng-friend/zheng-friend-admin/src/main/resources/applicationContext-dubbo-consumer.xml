@@ -7,9 +7,9 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd ">
 
-    <dubbo:application name="zheng-cms-admin"/>
+    <dubbo:application name="zheng-friend-admin"/>
 
-    <dubbo:registry file="./zheng-cms-admin-dubbo.cache" address="zookeeper://zkserver:2181"/>
+    <dubbo:registry file="./zheng-friend-admin-dubbo.cache" address="zookeeper://222.84.231.82:64005"/>
 
     <!-- 订阅服务 -->
     <dubbo:consumer check="false"/>

@@ -152,12 +152,10 @@ $(function () {
         var  base64 = result.toDataURL(uploadedImageType);
         var uploadFile = convertBase64UrlToBlob(base64);
 
-        var oss_policy_url = "http://127.0.0.1:9997/aliyun/oss/ky_policy";
+        var oss_policy_url = "/aliyun/oss/policy";
         $.ajax({
             url: oss_policy_url,
             type: "GET",
-            dataType: "json", //指定服务器返回的数据类型
-            jsonp: "ky",
             success: function (kyData) {
                 var suffix = get_suffix(fileName);
                 var random_name = random_string();

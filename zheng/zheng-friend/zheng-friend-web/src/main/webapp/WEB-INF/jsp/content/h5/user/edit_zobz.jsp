@@ -115,7 +115,8 @@
                     </div>
 
                     <div class="aui-list-item-input">
-                        <label><input class="aui-radio" type="radio" name="maritalStatus"  value="未婚" <c:if test="${modle.maritalStatus =='不限' }"> checked </c:if> >未婚</label>
+                        <label><input class="aui-radio" type="radio" name="maritalStatus"  value="未婚" <c:if test="${modle.maritalStatus =='不限' }"> checked </c:if> >不限</label>
+                        <label><input class="aui-radio" type="radio" name="maritalStatus"  value="未婚" <c:if test="${modle.maritalStatus =='未婚' }"> checked </c:if> >未婚</label>
                         <label><input class="aui-radio" type="radio" name="maritalStatus" <c:if test="${modle.maritalStatus =='离异' }"> checked </c:if> value="离异">离异</label>
                         <label><input class="aui-radio" type="radio" name="maritalStatus" <c:if test="${modle.maritalStatus =='丧偶' }"> checked </c:if> value="丧偶" >丧偶</label>
                     </div>
@@ -239,7 +240,7 @@
                         要求对方购房情况
                     </div>
 
-                    <div class="aui-list-item-input">
+                    <div class="aui-list-item-input" style="padding-left: 16px;">
                         <select id="gfqk" name="houseStatus">
                             <option value="不限" <c:if test="${modle.houseStatus =='不限' }"> selected="selected" </c:if> >不限</option>
                             <option value="购有房屋" <c:if test="${modle.houseStatus =='购有房屋' }"> selected="selected" </c:if> >购有房屋</option>
@@ -255,7 +256,7 @@
                         要求对方购车情况
                     </div>
 
-                    <div class="aui-list-item-input">
+                    <div class="aui-list-item-input" style="padding-left: 16px;">
                         <select id="rw" name="carStatus">
                             <option value="不限" <c:if test="${modle.carStatus =='不限' }"> selected="selected" </c:if> >不限</option>
                             <option value="购有车辆" <c:if test="${modle.carStatus =='购有车辆' }"> selected="selected" </c:if>  >购有车辆</option>

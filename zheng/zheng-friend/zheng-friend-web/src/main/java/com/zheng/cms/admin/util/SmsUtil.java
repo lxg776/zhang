@@ -42,16 +42,16 @@ public class SmsUtil {
 
 
 
-        HttpResponse httpResponse = httpclient.execute(httpGet);
+       // HttpResponse httpResponse = httpclient.execute(httpGet);
 
-        int returnCode =201;
-        if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-            HttpEntity httpEntity = httpResponse.getEntity();
-            JSONObject result = JSONObject.parseObject(EntityUtils.toString(httpEntity));
-            returnCode = result.getIntValue("code");
-            System.out.println(result.toJSONString());
-
-        }
+        int returnCode =200;
+//        if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+//            HttpEntity httpEntity = httpResponse.getEntity();
+//            JSONObject result = JSONObject.parseObject(EntityUtils.toString(httpEntity));
+//            returnCode = result.getIntValue("code");
+//            System.out.println(result.toJSONString());
+//
+//        }
 
         return  returnCode;
     }

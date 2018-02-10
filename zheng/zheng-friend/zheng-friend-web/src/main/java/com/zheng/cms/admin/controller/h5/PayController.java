@@ -132,7 +132,7 @@ public class PayController extends BaseController {
 	private String xiWangPay(String oid,String appid,String key,String produceName,String money){
 		String xiweb_payurl = "https://user.xiweb.cn/run.php";
 		String notify_url = "http://www.baidu.com";
-		String return_url = "http://127.0.0.1:9991/u/userDetail?uid=7";
+		String return_url = "http://127.0.0.1:9991/u/userDetail";
 
 
 		StringBuffer sb = new StringBuffer();

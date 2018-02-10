@@ -5,19 +5,18 @@ import com.zheng.cms.admin.shiro.UpmsSessionDao;
 import com.zheng.cms.common.constant.FriendResult;
 import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
+import com.zheng.common.util.PropertiesFileUtil;
 import com.zheng.friend.dao.model.*;
 import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.dao.vo.RecentMsgVo;
 import com.zheng.friend.rpc.api.*;
-import com.zheng.ucenter.dao.model.UcenterIdentificaionExample;
 import com.zheng.ucenter.dao.model.UcenterUser;
-import com.zheng.ucenter.dao.model.UcenterUserExample;
 import com.zheng.ucenter.rpc.api.UcenterIdentificaionService;
 import com.zheng.ucenter.rpc.api.UcenterUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.Example;
+
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -131,6 +130,19 @@ public class WebController extends BaseController {
 		return "/content/h5/main.jsp";
 	}
 
+	/**
+	 * 后台首页
+	 * @return
+	 */
+	@ApiOperation(value = "后台首页")
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(){
+
+		StringBuffer sso_server_url = new StringBuffer(PropertiesFileUtil.getInstance("zheng-upms-client").get("zheng.upms.sso.server.url"));
+		sso_server_url.append("/sso/logout");
+
+		return "redirect:"+sso_server_url.toString();
+	}
 
 	/**
 	 * 首页
@@ -263,6 +275,7 @@ public class WebController extends BaseController {
 
 		return "/content/h5/user/tx_grzl.jsp";
 	}
+
 
 
 	private UcenterUser getUctenuser(String userName,HttpSession session){
@@ -610,6 +623,58 @@ public class WebController extends BaseController {
 		return "redirect:/u/index";
 	}
 
+
+	@ApiOperation(value = "活动编辑")
+	@RequestMapping(value = "/editPhoto", method = RequestMethod.GET)
+	public String editPhoto(ModelMap modelMap,HttpSession session){
+
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		UcenterUser ucenterUser = getUctenuser(username,session);
+
+
+		ucenterUser = ucenterUserService.selectByPrimaryKey(ucenterUser.getUserId());
+		modelMap.put("user",ucenterUser);
+		modelMap.put("imageBase",imageBase);
+
+
+		FUserImagesExample example = new FUserImagesExample();
+		example.createCriteria().andUserIdEqualTo(ucenterUser.getUserId()).andKeywordEqualTo("photo");
+		example.setOrderByClause("create_time desc");
+		List<FUserImages> userImages = fUserImagesService.selectByExample(example);
+		modelMap.put("userImages",userImages);
+
+		return "/content/h5/user/edit_photo.jsp";
+	}
+
+
+
+	@ApiOperation(value = "活动编辑")
+	@RequestMapping(value = "/editPhoto", method = RequestMethod.POST)
+	@ResponseBody
+	public Object editPhoto(String imgPath,String keyWord,HttpSession session){
+
+		FriendResult result =new FriendResult(FriendResultConstant.SUCCESS,null);
+
+		String  username = (String) SecurityUtils.getSubject().getPrincipal();
+		UcenterUser ucenterUser = getUctenuser(username,session);
+		ucenterUser = ucenterUserService.selectByPrimaryKey(ucenterUser.getUserId());
+
+		if("add".equals(keyWord)){
+			FUserImages userImages =new FUserImages();
+			userImages.setImagePath(imgPath);
+			userImages.setUserId(ucenterUser.getUserId());
+			userImages.setKeyword("photo");
+			fUserImagesService.insert(userImages);
+		}else if("delete".equals(keyWord)){
+			FUserImagesExample example = new FUserImagesExample();
+			example.createCriteria().andUserIdEqualTo(ucenterUser.getUserId()).andImagePathEqualTo(imgPath).andKeywordEqualTo("photo");
+			fUserImagesService.deleteByExample(example);
+		}
+
+
+
+		return  result;
+	}
 
 
 

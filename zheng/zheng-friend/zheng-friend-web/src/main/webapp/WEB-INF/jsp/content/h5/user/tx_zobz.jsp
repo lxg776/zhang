@@ -146,9 +146,10 @@
                 </div>
 
                 <div class="aui-list-item-input">
-                    <label><input class="aui-radio" type="radio" name="maritalStatus" checked>未婚</label>
-                    <label><input class="aui-radio" type="radio" name="maritalStatus">离异</label>
-                    <label><input class="aui-radio" type="radio" name="maritalStatus">丧偶</label>
+                    <label><input class="aui-radio" type="radio" name="maritalStatus"  value="未婚" <c:if test="${modle.maritalStatus =='不限' }"> checked </c:if> >不限</label>
+                    <label><input class="aui-radio" type="radio" name="maritalStatus"  value="未婚" <c:if test="${modle.maritalStatus =='未婚' }"> checked </c:if> >未婚</label>
+                    <label><input class="aui-radio" type="radio" name="maritalStatus" <c:if test="${modle.maritalStatus =='离异' }"> checked </c:if> value="离异">离异</label>
+                    <label><input class="aui-radio" type="radio" name="maritalStatus" <c:if test="${modle.maritalStatus =='丧偶' }"> checked </c:if> value="丧偶" >丧偶</label>
                 </div>
             </div>
         </li>
@@ -239,9 +240,9 @@
                 </div>
 
                 <div class="aui-list-item-input">
-                    <label><input class="aui-radio" type="radio" name="childrenStatus" checked>不限</label>
-                    <label><input class="aui-radio" type="radio" name="childrenStatus">没有</label>
-                    <label><input class="aui-radio" type="radio" name="childrenStatus">有</label>
+                    <label><input class="aui-radio" type="radio" name="childStatus" value="不限"   <c:if test="${modle.childStatus =='不限' }"> checked </c:if> >不限</label>
+                    <label><input class="aui-radio" type="radio" name="childStatus" value="没有" <c:if test="${modle.childStatus =='没有' }"> checked </c:if>  >没有</label>
+                    <label><input class="aui-radio" type="radio" name="childStatus" value="有" <c:if test="${modle.childStatus =='有' }"> checked </c:if>  >有</label>
                 </div>
             </div>
         </li>

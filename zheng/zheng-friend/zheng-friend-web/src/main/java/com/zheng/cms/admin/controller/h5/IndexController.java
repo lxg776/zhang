@@ -235,15 +235,21 @@ public class IndexController extends BaseController {
 			//随机一个昵称
 			FUserBaseMsg fUserBaseMsg = new FUserBaseMsg();
 			fUserBaseMsg.setNikename(SmsUtil.randomCheckCode(7));
+			fUserBaseMsg.setUserId(modle.getUserId());
 			fUserBaseMsgService.insert(fUserBaseMsg);
 
 			//设置显示选项
 			FUserSetting fUserSetting =new FUserSetting();
+			fUserSetting.setUserId(modle.getUserId());
 			fUserSetting.setShowIndexPage((byte)0);
 			fUserSetting.setShowBaseMsg((byte)0);
 			fUserSetting.setShowFavorite((byte)0);
 			fUserSetting.setShowFriendRequest((byte)0);
 			fUserSetting.setShowLivingStatus((byte)0);
+			fUserSetting.setMsgReadStatus((byte)0);
+			fUserSetting.setMsgSendStatus((byte)0);
+			fUserSetting.setHistoryviewStatus((byte)1);
+
 			fUserSettingService.insert(fUserSetting);
 
 			return "redirect:/u/txGrzl?upms_code="+upms_code+"&upms_username="+userName;
@@ -309,6 +315,12 @@ public class IndexController extends BaseController {
 		example.createCriteria().andPhoneNoEqualTo(fSmsMessage.getPhoneNo()).andAppidEqualTo("friends").andOperationEqualTo("register");
 		example.setOrderByClause("create_time desc");
 		FSmsMessage queryModle = fSmsMessageService.selectFirstByExample(example);
+		if(queryModle==null||queryModle.getSmsCode().equals("")){
+				result.setCode(FriendResultConstant.FAILED.code);
+				result.setMessage("短信验证码不正确!");
+				return result;
+		}
+
 		int  distance = (int) SmsUtil.differentDateByMillisecond(queryModle.getCreateTime(),new Date());
 
 		if(!queryModle.getSmsCode().equals(fSmsMessage.getSmsCode())){
@@ -322,8 +334,6 @@ public class IndexController extends BaseController {
 			result.setMessage("短信验证码超过有效期，请重新获取！");
 			return result;
 		}
-
-
 
 		return result;
 	}

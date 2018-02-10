@@ -9,7 +9,7 @@
 
     <dubbo:application name="zheng-ucenter-web"/>
 
-    <dubbo:registry file="./zheng-ucenter-web-dubbo.cache" address="zookeeper://zkserver:2181"/>
+    <dubbo:registry file="./zheng-ucenter-web-dubbo.cache" address="zookeeper://222.84.231.82:64005"/>
 
     <!-- 订阅服务 -->
     <dubbo:consumer check="false"/>
