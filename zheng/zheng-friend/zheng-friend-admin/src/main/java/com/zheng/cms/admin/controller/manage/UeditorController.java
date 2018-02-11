@@ -27,6 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,8 +91,9 @@ public class UeditorController extends BaseController {
 			String originalFilename = upfile.getOriginalFilename();
 			String ext = originalFilename.substring(originalFilename.lastIndexOf("."),originalFilename.length());
 
-
-			String fileName = String.valueOf(System.currentTimeMillis()).concat("_").concat(RandomUtils.nextInt(100)+"").concat(".").concat(ext);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			String dir = sdf.format(new Date());
+			String fileName  = "editor"+"/"+dir+"/"+String.valueOf(System.currentTimeMillis()).concat("_").concat(RandomUtils.nextInt(100)+"").concat(ext);
 			StringBuilder sb = new StringBuilder(fileName);
 
 			try {

@@ -27,7 +27,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:applicationContext*.xml,classpath*:upms-shiro.xml
+            classpath*:applicationContext*.xml,classpath*:upms-shiro2.xml
         </param-value>
     </context-param>
 

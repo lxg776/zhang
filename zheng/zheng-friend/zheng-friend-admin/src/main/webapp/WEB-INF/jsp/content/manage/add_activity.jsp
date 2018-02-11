@@ -182,8 +182,14 @@
 
                             <div class="control-group">
                                 <label class="control-label" for="typeahead">活动内容 </label>
+
+
                                 <div class="controls">
-                                    <script id="editor" type="text/plain" style="width:600px;height:600px;" > </script>
+                                           <div id="modleContent" style="display: none">
+                                               ${modle.content}
+                                           </div>
+
+                                    <script id="editor" style="width:600px;height:600px;" name="content" > </script>
                                 </div>
                             </div>
 
@@ -292,8 +298,16 @@
             return this._bkGetActionUrl.call(this, action);
         }
     }
+   $(document).ready(function(){
 
-//    UE.Editor.prototype.getActionUrl = function(action) {
+       var proinfo=$("#modleContent").html();
+       ue.ready(function() {//编辑器初始化完成再赋值
+             ue.setContent(proinfo);  //赋值给UEditor
+       });
+
+   });
+
+   //    UE.Editor.prototype.getActionUrl = function(action) {
 //        if (action == '/manage/ue/images') {
 //            return basePath + 'manage/ue/images';
 //        } else {

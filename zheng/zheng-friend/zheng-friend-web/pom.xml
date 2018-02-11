@@ -89,7 +89,7 @@
     </profiles>
 
     <build>
-        <finalName>zheng-friend-admin</finalName>
+        <finalName>zheng-friend-web</finalName>
         <filters>
             <filter>src/main/resources/profiles/${env}.properties</filter>
         </filters>
