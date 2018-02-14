@@ -95,6 +95,13 @@ public class FActivity implements Serializable {
     private Long ctime;
 
     /**
+     * 封面图片
+     *
+     * @mbg.generated
+     */
+    private String coverImage;
+
+    /**
      * 内容
      *
      * @mbg.generated
@@ -214,6 +221,14 @@ public class FActivity implements Serializable {
         this.ctime = ctime;
     }
 
+    public String getCoverImage() {
+        return coverImage;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
+
     public String getContent() {
         return content;
     }
@@ -249,6 +264,7 @@ public class FActivity implements Serializable {
         sb.append(", activityAddress=").append(activityAddress);
         sb.append(", showStatus=").append(showStatus);
         sb.append(", ctime=").append(ctime);
+        sb.append(", coverImage=").append(coverImage);
         sb.append(", content=").append(content);
         sb.append(", attention=").append(attention);
         sb.append("]");
@@ -280,6 +296,7 @@ public class FActivity implements Serializable {
             && (this.getActivityAddress() == null ? other.getActivityAddress() == null : this.getActivityAddress().equals(other.getActivityAddress()))
             && (this.getShowStatus() == null ? other.getShowStatus() == null : this.getShowStatus().equals(other.getShowStatus()))
             && (this.getCtime() == null ? other.getCtime() == null : this.getCtime().equals(other.getCtime()))
+            && (this.getCoverImage() == null ? other.getCoverImage() == null : this.getCoverImage().equals(other.getCoverImage()))
             && (this.getContent() == null ? other.getContent() == null : this.getContent().equals(other.getContent()))
             && (this.getAttention() == null ? other.getAttention() == null : this.getAttention().equals(other.getAttention()));
     }
@@ -301,6 +318,7 @@ public class FActivity implements Serializable {
         result = prime * result + ((getActivityAddress() == null) ? 0 : getActivityAddress().hashCode());
         result = prime * result + ((getShowStatus() == null) ? 0 : getShowStatus().hashCode());
         result = prime * result + ((getCtime() == null) ? 0 : getCtime().hashCode());
+        result = prime * result + ((getCoverImage() == null) ? 0 : getCoverImage().hashCode());
         result = prime * result + ((getContent() == null) ? 0 : getContent().hashCode());
         result = prime * result + ((getAttention() == null) ? 0 : getAttention().hashCode());
         return result;

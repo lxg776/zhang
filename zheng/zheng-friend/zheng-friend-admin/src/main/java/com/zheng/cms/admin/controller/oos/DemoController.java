@@ -1,4 +1,4 @@
-package com.zheng.cms.admin.oos;
+package com.zheng.cms.admin.controller.oos;
 
 import com.alibaba.fastjson.JSONObject;
 import com.aliyun.oss.OSSClient;

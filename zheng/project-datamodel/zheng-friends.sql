@@ -182,5 +182,6 @@ create table f_activity
   attention text comment '注意事项',
   show_status varchar(100) comment '显示标识',
   ctime bigint(20) DEFAULT NULL COMMENT '创建时间',
+  cover_image VARCHAR (100) comment '封面图片',
   primary key (activity_id)
 )

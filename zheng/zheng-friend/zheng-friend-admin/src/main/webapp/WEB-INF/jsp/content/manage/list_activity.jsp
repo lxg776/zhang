@@ -60,7 +60,7 @@
             </ul>
 
             <!-- 新闻栏目 -->
-            <div class="box span6" style="width: 1200px;">
+            <div class="box span6" style="width: 800px;">
                 <div class="box-header">
                     <h2>
                         <i class="halflings-icon white align-justify"></i><span

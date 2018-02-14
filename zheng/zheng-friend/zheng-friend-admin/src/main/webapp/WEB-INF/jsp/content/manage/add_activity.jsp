@@ -76,7 +76,7 @@
                 </div>
                 <!-- 新闻栏目 -->
                 <div class="box-content">
-                    <form action="edit" method="post" class="form-horizontal">
+                    <form action="doEdit" method="post" class="form-horizontal">
 
                         <input type="hidden"
                                name="keyword" value="${keyword}" />
@@ -93,7 +93,37 @@
                                     <input type="text" class="span6 typeahead" id="typeahead"
                                            name="title" value="${modle.title}" data-provide="typeahead">
 
+
                                 </div>
+                            </div>
+
+
+                            <div class="control-group">
+                                <label class="control-label" for="typeahead">封面图片 </label>
+                                <div class="controls">
+                                    <%--<input type="text" class="span6 typeahead" --%>
+                                    <%--name="title" value="${modle.title}" data-provide="typeahead">--%>
+                                        <input type="hidden" class="span6 typeahead" id="coverImage"
+                                               name="coverImage" value="${modle.coverImage}" data-provide="typeahead">
+                                    <img id="headImg"
+
+
+                                    <c:if test="${not empty modle.coverImage}">
+                                         src="${imageBase}${modle.coverImage}"
+                                    </c:if>
+                                         style="width: 200px; height:px;">
+                                        <a href="javascript:void(0);" onclick="getImage();">上传</a>
+                                </div>
+                                <input id="inputImage" type="file" placeholder="选择图片"  accept="image/*" style="display: none;" />
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">活动时间</label>
+                                <div class="controls date form_datetime" data-date-format="yyyy-mm-dd HH:ii" data-link-field="dtp_activityTime">
+                                    <input size="16" name="activityTime" type="text" value="${modle.activityTime}" id="dtp_activityTime" >
+                                    <span class="add-on"><i class="icon-remove"></i></span>
+                                    <span class="add-on"><i class="icon-th"></i></span>
+                                </div>
+
                             </div>
 
 
@@ -106,6 +136,9 @@
                                 </div>
 
                             </div>
+
+
+
 
 
                             <div class="control-group">
@@ -189,7 +222,7 @@
                                                ${modle.content}
                                            </div>
 
-                                    <script id="editor" style="width:600px;height:600px;" name="content" > </script>
+                                    <script id="editor" style="width:600px;height:400px;" name="content" > </script>
                                 </div>
                             </div>
 
@@ -235,10 +268,11 @@
 </footer>
 <!-- start: JavaScript-->
 <%@ include file="/common/s.jsp" %>
-
-
+                                <script type="text/javascript" src="${ctx}/webuploader/dist/webuploader.js"></script>
+                        <script type="text/javascript" src="/js/uploadImg.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 <script type="text/javascript" src="/bootstrap/js//locales/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+
 <script type="text/javascript">
 
 
@@ -274,6 +308,11 @@
         maxView: 1,
         forceParse: 0
     });
+
+    function getImage() {
+        document.getElementById('inputImage').click();
+    }
+
 
 
 </script>

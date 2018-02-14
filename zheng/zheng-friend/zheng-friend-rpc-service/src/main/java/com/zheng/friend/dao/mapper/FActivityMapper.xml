@@ -15,6 +15,7 @@
     <result column="activity_address" jdbcType="VARCHAR" property="activityAddress" />
     <result column="show_status" jdbcType="VARCHAR" property="showStatus" />
     <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="cover_image" jdbcType="VARCHAR" property="coverImage" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zheng.friend.dao.model.FActivity">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
@@ -80,7 +81,7 @@
   </sql>
   <sql id="Base_Column_List">
     activity_id, title, sign_time, sign_end_time, activity_time, sponsor, link_man, sign_cost, 
-    link_address, link_phone, activity_address, show_status, ctime
+    link_address, link_phone, activity_address, show_status, ctime, cover_image
   </sql>
   <sql id="Blob_Column_List">
     content, attention
@@ -138,14 +139,14 @@
       sign_end_time, activity_time, sponsor, 
       link_man, sign_cost, link_address, 
       link_phone, activity_address, show_status, 
-      ctime, content, attention
-      )
+      ctime, cover_image, content, 
+      attention)
     values (#{activityId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{signTime,jdbcType=VARCHAR}, 
       #{signEndTime,jdbcType=VARCHAR}, #{activityTime,jdbcType=VARCHAR}, #{sponsor,jdbcType=VARCHAR}, 
       #{linkMan,jdbcType=VARCHAR}, #{signCost,jdbcType=VARCHAR}, #{linkAddress,jdbcType=VARCHAR}, 
       #{linkPhone,jdbcType=VARCHAR}, #{activityAddress,jdbcType=VARCHAR}, #{showStatus,jdbcType=VARCHAR}, 
-      #{ctime,jdbcType=BIGINT}, #{content,jdbcType=LONGVARCHAR}, #{attention,jdbcType=LONGVARCHAR}
-      )
+      #{ctime,jdbcType=BIGINT}, #{coverImage,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, 
+      #{attention,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.friend.dao.model.FActivity">
     insert into f_activity
@@ -188,6 +189,9 @@
       </if>
       <if test="ctime != null">
         ctime,
+      </if>
+      <if test="coverImage != null">
+        cover_image,
       </if>
       <if test="content != null">
         content,
@@ -235,6 +239,9 @@
       </if>
       <if test="ctime != null">
         #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="coverImage != null">
+        #{coverImage,jdbcType=VARCHAR},
       </if>
       <if test="content != null">
         #{content,jdbcType=LONGVARCHAR},
@@ -292,6 +299,9 @@
       <if test="record.ctime != null">
         ctime = #{record.ctime,jdbcType=BIGINT},
       </if>
+      <if test="record.coverImage != null">
+        cover_image = #{record.coverImage,jdbcType=VARCHAR},
+      </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=LONGVARCHAR},
       </if>
@@ -318,6 +328,7 @@
       activity_address = #{record.activityAddress,jdbcType=VARCHAR},
       show_status = #{record.showStatus,jdbcType=VARCHAR},
       ctime = #{record.ctime,jdbcType=BIGINT},
+      cover_image = #{record.coverImage,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=LONGVARCHAR},
       attention = #{record.attention,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
@@ -338,7 +349,8 @@
       link_phone = #{record.linkPhone,jdbcType=VARCHAR},
       activity_address = #{record.activityAddress,jdbcType=VARCHAR},
       show_status = #{record.showStatus,jdbcType=VARCHAR},
-      ctime = #{record.ctime,jdbcType=BIGINT}
+      ctime = #{record.ctime,jdbcType=BIGINT},
+      cover_image = #{record.coverImage,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -382,6 +394,9 @@
       <if test="ctime != null">
         ctime = #{ctime,jdbcType=BIGINT},
       </if>
+      <if test="coverImage != null">
+        cover_image = #{coverImage,jdbcType=VARCHAR},
+      </if>
       <if test="content != null">
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -405,6 +420,7 @@
       activity_address = #{activityAddress,jdbcType=VARCHAR},
       show_status = #{showStatus,jdbcType=VARCHAR},
       ctime = #{ctime,jdbcType=BIGINT},
+      cover_image = #{coverImage,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
       attention = #{attention,jdbcType=LONGVARCHAR}
     where activity_id = #{activityId,jdbcType=INTEGER}
@@ -422,7 +438,8 @@
       link_phone = #{linkPhone,jdbcType=VARCHAR},
       activity_address = #{activityAddress,jdbcType=VARCHAR},
       show_status = #{showStatus,jdbcType=VARCHAR},
-      ctime = #{ctime,jdbcType=BIGINT}
+      ctime = #{ctime,jdbcType=BIGINT},
+      cover_image = #{coverImage,jdbcType=VARCHAR}
     where activity_id = #{activityId,jdbcType=INTEGER}
   </update>
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />

@@ -25,9 +25,9 @@
     <!-- start: Favicon -->
 
     <!-- end: Favicon -->
-    <link id="ie-style" href="${ctx}/webuploader-0.1.5/css/webuploader.css" rel="stylesheet">
+    <link id="ie-style" href="${ctx}/webuploader/css/webuploader.css" rel="stylesheet">
 
-    <link id="ie-style" href="${ctx}/webuploader-0.1.5/examples/image-upload/style.css" rel="stylesheet">
+    <link id="ie-style" href="${ctx}/webuploader/examples/image-upload/style.css" rel="stylesheet">
 
 
     <style type="text/css">
@@ -250,8 +250,8 @@
 
 
 </script>
-<script type="text/javascript" src="${ctx}/webuploader-0.1.5/dist/webuploader.js"></script>
-<script type="text/javascript" src="${ctx}/webuploader-0.1.5/examples/image-upload/upload.js"></script>
+<script type="text/javascript" src="${ctx}/webuploader/dist/webuploader.js"></script>
+<script type="text/javascript" src="${ctx}/webuploader/examples/image-upload/upload.js"></script>
 
 
 </body>

@@ -996,6 +996,76 @@ public class FActivityExample implements Serializable {
             addCriterion("ctime not between", value1, value2, "ctime");
             return (Criteria) this;
         }
+
+        public Criteria andCoverImageIsNull() {
+            addCriterion("cover_image is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageIsNotNull() {
+            addCriterion("cover_image is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageEqualTo(String value) {
+            addCriterion("cover_image =", value, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageNotEqualTo(String value) {
+            addCriterion("cover_image <>", value, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageGreaterThan(String value) {
+            addCriterion("cover_image >", value, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageGreaterThanOrEqualTo(String value) {
+            addCriterion("cover_image >=", value, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageLessThan(String value) {
+            addCriterion("cover_image <", value, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageLessThanOrEqualTo(String value) {
+            addCriterion("cover_image <=", value, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageLike(String value) {
+            addCriterion("cover_image like", value, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageNotLike(String value) {
+            addCriterion("cover_image not like", value, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageIn(List<String> values) {
+            addCriterion("cover_image in", values, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageNotIn(List<String> values) {
+            addCriterion("cover_image not in", values, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageBetween(String value1, String value2) {
+            addCriterion("cover_image between", value1, value2, "coverImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andCoverImageNotBetween(String value1, String value2) {
+            addCriterion("cover_image not between", value1, value2, "coverImage");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria implements Serializable {

@@ -78,6 +78,9 @@ public class WebController extends BaseController {
 	@Autowired
 	FContactService fContactService;
 
+    @Autowired
+    FActivityService fActivityService;
+
 
 
 	/**
@@ -111,7 +114,12 @@ public class WebController extends BaseController {
 		modelMap.put("userImages",userImages);
 		modelMap.put("imageBase",imageBase);
 
-
+		//活动列表
+        FActivityExample fActivityExample = new FActivityExample();
+        fActivityExample.createCriteria().andShowStatusEqualTo("show");
+        fActivityExample.setOrderByClause("ctime desc");
+        List<FActivity> fActivityList  = fActivityService.selectByExampleForOffsetPage(fActivityExample,0,pageSize);
+        modelMap.put("fActivityList",fActivityList);
 
 
 		//查询会员的类型
@@ -174,7 +182,24 @@ public class WebController extends BaseController {
 		return "/content/h5/user/user_detail.jsp";
 	}
 
+	@ApiOperation(value = "更多用户推荐")
+	@RequestMapping(value = "/loadActivityList", method = RequestMethod.GET)
+	@ResponseBody
+	public Object loadActivityList(@RequestParam(defaultValue = "1") Integer pageNum,HttpSession session,ModelMap modelMap) {
 
+		FriendResult result  = new FriendResult(FriendResultConstant.SUCCESS,null);
+		//系统推荐人
+		//活动列表
+		FActivityExample fActivityExample = new FActivityExample();
+		fActivityExample.createCriteria().andShowStatusEqualTo("show");
+		fActivityExample.setOrderByClause("ctime desc");
+		List<FActivity> fActivityList  = fActivityService.selectByExampleForOffsetPage(fActivityExample,(pageNum-1)*pageSize,pageSize);
+		HashMap<String,Object> map = new HashMap<>();
+		map.put("dataList",fActivityList);
+		map.put("pageNum",pageNum);
+		result.setData(map);
+		return result;
+	}
 
 
 	@ApiOperation(value = "服务器校验")

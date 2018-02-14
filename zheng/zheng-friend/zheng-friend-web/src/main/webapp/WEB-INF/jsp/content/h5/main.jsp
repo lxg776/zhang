@@ -88,109 +88,21 @@
     <%--page2--%>
 
     <div  id="page2" class="aui-content aui-margin-b-15 aui-hide">
-
-        <section class="aui-content">
+        <section class="aui-content" id="activityList">
+                <c:forEach var="item" items="${fActivityList}" >
             <div class="aui-card-list">
                 <div class="aui-card-list-header">
-                    靖西龙潭烧烤<small>2016年7月12日</small>
+                        ${item.title}<small>活动时间:${item.activityTime}</small>
                 </div>
                 <div class="aui-card-list-content">
-                    <img src="${ctx}/aui/image/l2.png" />
+                    <img src="${imageBase}${item.coverImage}" />
                 </div>
                 <div class="aui-card-list-footer">
-
-
-                    <div>报名费用:100元/人</div>
-
+                    <div>报名费用:${item.signCost}元/人</div>
                     <div>单身交友</div>
                 </div>
-
             </div>
-
-            <div class="aui-card-list">
-                <div class="aui-card-list-header">
-                    靖西龙潭烧烤<small>2016年7月12日</small>
-                </div>
-                <div class="aui-card-list-content">
-                    <img src="${ctx}/aui/image/l2.png" />
-                </div>
-                <div class="aui-card-list-footer">
-
-
-                    <div>报名费用:100元/人</div>
-
-                    <div>单身交友</div>
-                </div>
-
-            </div>
-
-            <div class="aui-card-list">
-                <div class="aui-card-list-header">
-                    靖西龙潭烧烤<small>2016年7月12日</small>
-                </div>
-                <div class="aui-card-list-content">
-                    <img src="${ctx}/aui/image/l2.png" />
-                </div>
-                <div class="aui-card-list-footer">
-
-
-                    <div>报名费用:100元/人</div>
-
-                    <div>单身交友</div>
-                </div>
-
-            </div>
-
-            <div class="aui-card-list">
-                <div class="aui-card-list-header">
-                    靖西龙潭烧烤<small>2016年7月12日</small>
-                </div>
-                <div class="aui-card-list-content">
-                    <img src="${ctx}/aui/image/l2.png" />
-                </div>
-                <div class="aui-card-list-footer">
-
-
-                    <div>报名费用:100元/人</div>
-
-                    <div>单身交友</div>
-                </div>
-
-            </div>
-
-            <div class="aui-card-list">
-                <div class="aui-card-list-header">
-                    靖西龙潭烧烤<small>2016年7月12日</small>
-                </div>
-                <div class="aui-card-list-content">
-                    <img src="${ctx}/aui/image/l2.png" />
-                </div>
-                <div class="aui-card-list-footer">
-
-
-                    <div>报名费用:100元/人</div>
-
-                    <div>单身交友</div>
-                </div>
-
-            </div>
-
-            <div class="aui-card-list">
-                <div class="aui-card-list-header">
-                    星歌会相亲交友<small>2016年7月12日</small>
-                </div>
-                <div class="aui-card-list-content">
-                    <img src="${ctx}/aui/image/l2.png" />
-                </div>
-                <div class="aui-card-list-footer">
-
-
-                    <div>报名费用:150元/人</div>
-
-                    <div>单身交友</div>
-                </div>
-
-            </div>
+                    </c:forEach>
         </section>
     </div>
 
@@ -338,30 +250,30 @@
                     </div>
 
                     <div class="aui-list-item-text">
-                        <div class="aui-list-item-left"">学历</div>
+                        <div class="aui-list-item-left">学历</div>
                     <div class="aui-list-item-title">${modle.fUserBaseMsg.education}</div>
 
                 </div>
 
                 <div class="aui-list-item-text">
-                    <div class="aui-list-item-left"">身高</div>
+                    <div class="aui-list-item-left">身高</div>
                 <div class="aui-list-item-title">${modle.fUserBaseMsg.height}cm</div>
     </div>
 
     <div class="aui-list-item-text">
-        <div class="aui-list-item-left"">月收入</div>
+        <div class="aui-list-item-left">月收入</div>
     <div class="aui-list-item-title">${modle.fUserBaseMsg.monthIncome}元</div>
 </div>
 
 
 
 <div class="aui-list-item-text">
-    <div class="aui-list-item-left"">体型</div>
+    <div class="aui-list-item-left">体型</div>
 <div class="aui-list-item-title">${modle.fUserBaseMsg.shape}</div>
 </div>
 
 <div class="aui-list-item-text">
-    <div class="aui-list-item-left"">婚姻状况</div>
+    <div class="aui-list-item-left">婚姻状况</div>
 <div class="aui-list-item-title">${modle.fUserBaseMsg.maritalStatus}</div>
 </div>
 
@@ -585,7 +497,7 @@
             <div class="aui-info-item">
                 <a href="javascript:;"  <c:if test="${fUserSetting.msgSendStatus == 0}">aui-popup-for="top-left" </c:if>
                    <c:if test="${fUserSetting.msgSendStatus == 1}">onclick="sendMsg(#toUser)"</c:if>
-                   >发信息</a>
+                >发信息</a>
             </div>
 
             <div class="aui-info-item" style="padding-right: 10px;">
@@ -597,7 +509,22 @@
 
 </div>
 
+<div id="tempActivity"  style="display: none">
 
+    <div class="aui-card-list">
+        <div class="aui-card-list-header">
+            #title<small>活动时间:#activityTime</small>
+        </div>
+        <div class="aui-card-list-content">
+            <img src="#img" />
+        </div>
+        <div class="aui-card-list-footer">
+            <div>报名费用:#signCost元/人</div>
+            <div>单身交友</div>
+        </div>
+    </div>
+
+</div>
 
 <%--会员弹出框--%>
 <div class="aui-popup aui-popup-top-left" style="width: 95%;display: none;" id="top-left">
@@ -675,7 +602,7 @@
             window.location.href = "/u/logout";
         });
 
-
+        var currentPage = "page1";
 
         var tab = new auiTab({
             element:document.getElementById("footer")
@@ -687,10 +614,7 @@
                 $("#page4").addClass("aui-hide");
 
                 $('body,html').animate({scrollTop:0},100);
-
-
-
-
+                currentPage = "page1";
             }else if(ret.index==2){
                 $("#page1").addClass("aui-hide");
                 $("#page2").removeClass("aui-hide");
@@ -698,20 +622,21 @@
                 $("#page4").addClass("aui-hide");
 
                 $('body,html').animate({scrollTop:0},100);
+                currentPage = "page2";
             }else if(ret.index==3){
                 $("#page1").addClass("aui-hide");
                 $("#page2").addClass("aui-hide");
                 $("#page3").removeClass("aui-hide");
                 $("#page4").addClass("aui-hide");
-
                 $('body,html').animate({scrollTop:0},100);
+                currentPage = "page3";
             }else if(ret.index==4){
                 $("#page1").addClass("aui-hide");
                 $("#page2").addClass("aui-hide");
                 $("#page3").addClass("aui-hide");
                 $("#page4").removeClass("aui-hide");
-
                 $('body,html').animate({scrollTop:0},100);
+                currentPage = "page4";
             }
         });
 
@@ -737,15 +662,19 @@
         },function(ret){
             if(ret.isToBottom){
               //  document.getElementById("demo").textContent = "已到达底部";
-                loadMoreUser();
+                if(currentPage == "page1"){
+                    loadMoreUser();
+                }else if(currentPage =="page2"){
+                    loadMoreActivity();
+                }
             }else{
-
             }
-
         });
 
         var pageSize =15;
         var currentPage =1;
+        var activity_currentPage =1;
+
         <c:if test="${not empty pageSize}">
         pageSize = ${pageSize}
             </c:if>
@@ -757,37 +686,71 @@
 
 
             function loadMoreUser() {
-                var userloadFla = false;
+            var userloadFla = false;
 
-                userCount = $("#listUser").children(".aui-list-item").length;
-                //document.getElementById("demo").textContent = "滚动高度："+userCount;
-                pageNum = parseInt((userCount-1)/pageSize)+2;
+            userCount = $("#listUser").children(".aui-list-item").length;
+            //document.getElementById("demo").textContent = "滚动高度："+userCount;
+            pageNum = parseInt((userCount-1)/pageSize)+2;
 
-                if(!userloadFla&&(pageNum>currentPage)){
-                    $.ajax({
-                        type: "GET",
-                        url: "/u/loadRecommendUserList",
-                        data: "pageNum="+pageNum,
-                        async:false,
-                        success: function(data){
-                            userloadFla=true;
-                            currentPage = data.data.pageNum;
-                            if(data.code==1){
-                                htmlString = ""
-                                $.each(data.data.dataList, function(i, value) {
-                                    htmlString =htmlString + getUserHtml(value);
-                                });
-                                $("#listUser").append(htmlString);
-                            }else{
-                                msg(data.message);
-                            }
-                        },
-                        error:function(XMLHttpRequest, textStatus, errorThrown){
-                            userloadFla=true;
+            if(!userloadFla&&(pageNum>currentPage)){
+                $.ajax({
+                    type: "GET",
+                    url: "/u/loadRecommendUserList",
+                    data: "pageNum="+pageNum,
+                    async:false,
+                    success: function(data){
+                        userloadFla=true;
+                        currentPage = data.data.pageNum;
+                        if(data.code==1){
+                            htmlString = ""
+                            $.each(data.data.dataList, function(i, value) {
+                                htmlString =htmlString + getUserHtml(value);
+                            });
+                            $("#listUser").append(htmlString);
+                        }else{
+                            msg(data.message);
                         }
-                    });
-                }
+                    },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                        userloadFla=true;
+                    }
+                });
             }
+        }
+
+        function loadMoreActivity() {
+            var activityloadFla = false;
+
+            userCount = $("#activityList").children(".aui-card-list").length;
+            //document.getElementById("demo").textContent = "滚动高度："+userCount;
+            pageNum = parseInt((userCount-1)/pageSize)+2;
+
+            if(!activityloadFla&&(pageNum>activity_currentPage)){
+                $.ajax({
+                    type: "GET",
+                    url: "/u/loadActivityList",
+                    data: "pageNum="+pageNum,
+                    async:false,
+                    success: function(data){
+                        activityloadFla=true;
+                        activity_currentPage = data.data.pageNum;
+                        if(data.code==1){
+                            htmlString = ""
+                            $.each(data.data.dataList, function(i, value) {
+                                htmlString =htmlString + getActivityHtml(value);
+                            });
+                            $("#activityList").append(htmlString);
+                        }else{
+                            msg(data.message);
+                        }
+                    },
+                    error:function(XMLHttpRequest, textStatus, errorThrown){
+                        activityloadFla=true;
+                    }
+                });
+            }
+        }
+
 
         function helpContact(userId) {
 
@@ -850,6 +813,21 @@
             console.log(tempHtml);
             return tempHtml;
         }
+
+
+
+
+        function getActivityHtml(item) {
+            tempHtml = $("#tempActivity").html().toString();
+            tempHtml = tempHtml.replace("#title",item.title);
+            tempHtml = tempHtml.replace("#activityTime",item.activityTime);
+            tempHtml = tempHtml.replace("#img","${imageBase}"+item.coverImage);
+            tempHtml = tempHtml.replace("#signCost",item.signCost);
+            console.log(tempHtml);
+            return tempHtml;
+        }
+
+
 
         function getUserRequest(item) {
             tempHtml = "";
