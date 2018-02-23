@@ -202,6 +202,16 @@ public class WebController extends BaseController {
 	}
 
 
+    @ApiOperation(value = "更多用户推荐")
+    @RequestMapping(value = "/activityDetail", method = RequestMethod.GET)
+    public String activityDetail(@RequestParam(defaultValue = "0") Integer activityId,HttpSession session,ModelMap modelMap) {
+
+        //活动详情
+        FActivity fActivity = fActivityService.selectByPrimaryKey(activityId);
+        modelMap.put("modle",fActivity);
+        return "/content/h5/user/detail_activity.jsp";
+    }
+
 	@ApiOperation(value = "服务器校验")
 	@RequestMapping(value = "/loadRecommendUserList", method = RequestMethod.GET)
 	@ResponseBody

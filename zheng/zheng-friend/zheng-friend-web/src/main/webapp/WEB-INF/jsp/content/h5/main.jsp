@@ -90,6 +90,7 @@
     <div  id="page2" class="aui-content aui-margin-b-15 aui-hide">
         <section class="aui-content" id="activityList">
                 <c:forEach var="item" items="${fActivityList}" >
+                    <a href="javascript:;" onclick="detailActivtiy(${item.activityId})">
             <div class="aui-card-list">
                 <div class="aui-card-list-header">
                         ${item.title}<small>活动时间:${item.activityTime}</small>
@@ -102,6 +103,7 @@
                     <div>单身交友</div>
                 </div>
             </div>
+                    </a>
                     </c:forEach>
         </section>
     </div>
@@ -861,6 +863,12 @@
             // console.log("wtf");
         }
 
+        //活动详情
+        function detailActivtiy(activityId) {
+            url = "/u/activityDetail?activityId="+activityId;
+            window.location.href= url;
+            // console.log("wtf");
+        }
 
 
         function  sendMsg(toUid) {
