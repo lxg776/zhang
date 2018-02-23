@@ -19,21 +19,21 @@ import java.util.*;
  * 基于redis的sessionDao，缓存共享session
  * Created by shuzheng on 2017/2/23.
  */
-public class UpmsSessionDao extends CachingSessionDAO {
+public class UcenterSessionDao extends CachingSessionDAO {
 
-    private static Logger _log = LoggerFactory.getLogger(UpmsSessionDao.class);
+    private static Logger _log = LoggerFactory.getLogger(UcenterSessionDao.class);
     // 会话key
-    private final static String ZHENG_UPMS_SHIRO_SESSION_ID = "zheng-upms-shiro-session-id";
+    private final static String ZHENG_UPMS_SHIRO_SESSION_ID = "zheng-ucenter-shiro-session-id";
     // 全局会话key
-    private final static String ZHENG_UPMS_SERVER_SESSION_ID = "zheng-upms-server-session-id";
+    private final static String ZHENG_UPMS_SERVER_SESSION_ID = "zheng-ucenter-server-session-id";
     // 全局会话列表key
-    private final static String ZHENG_UPMS_SERVER_SESSION_IDS = "zheng-upms-server-session-ids";
+    private final static String ZHENG_UPMS_SERVER_SESSION_IDS = "zheng-ucenter-server-session-ids";
     // code key
-    private final static String ZHENG_UPMS_SERVER_CODE = "zheng-upms-server-code";
+    private final static String ZHENG_UPMS_SERVER_CODE = "zheng-ucenter-server-code";
     // 局部会话key
-    private final static String ZHENG_UPMS_CLIENT_SESSION_ID = "zheng-upms-client-session-id";
+    private final static String ZHENG_UPMS_CLIENT_SESSION_ID = "zheng-ucenter-client-session-id";
     // 单点同一个code所有局部会话key
-    private final static String ZHENG_UPMS_CLIENT_SESSION_IDS = "zheng-upms-client-session-ids";
+    private final static String ZHENG_UPMS_CLIENT_SESSION_IDS = "zheng-ucenter-client-session-ids";
 
     @Override
     protected Serializable doCreate(Session session) {
@@ -127,7 +127,7 @@ public class UpmsSessionDao extends CachingSessionDAO {
                 total = total - 1;
                 continue;
             }
-            rows.add(SerializableUtil.deserialize(session));
+             rows.add(SerializableUtil.deserialize(session));
         }
         jedis.close();
         sessions.put("total", total);

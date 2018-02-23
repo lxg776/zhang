@@ -40,14 +40,14 @@ import java.util.List;
  * 重写authc过滤器
  * Created by shuzheng on 2017/3/11.
  */
-public class UpmsAuthenticationFilter extends AuthenticationFilter {
+public class UcenterAuthenticationFilter extends AuthenticationFilter {
 
-    private final static Logger _log = LoggerFactory.getLogger(UpmsAuthenticationFilter.class);
+    private final static Logger _log = LoggerFactory.getLogger(UcenterAuthenticationFilter.class);
 
     // 局部会话key
-    private final static String ZHENG_UPMS_CLIENT_SESSION_ID = "zheng-upms-client-session-id";
+    private final static String ZHENG_UPMS_CLIENT_SESSION_ID = "zheng-ucenter-client-session-id";
     // 单点同一个code所有局部会话key
-    private final static String ZHENG_UPMS_CLIENT_SESSION_IDS = "zheng-upms-client-session-ids";
+    private final static String ZHENG_UPMS_CLIENT_SESSION_IDS = "zheng-ucenter-client-session-ids";
 
 
 
