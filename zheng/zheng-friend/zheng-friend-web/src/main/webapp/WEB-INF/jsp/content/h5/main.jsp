@@ -601,7 +601,7 @@
 
 
         $("#logoutBtn").click(function () {
-            window.location.href = "/u/logout";
+            window.location.href = "${ctx}/u/logout";
         });
 
         var currentPage = "page1";
@@ -697,7 +697,7 @@
             if(!userloadFla&&(pageNum>currentPage)){
                 $.ajax({
                     type: "GET",
-                    url: "/u/loadRecommendUserList",
+                    url: "${ctx}/u/loadRecommendUserList",
                     data: "pageNum="+pageNum,
                     async:false,
                     success: function(data){
@@ -730,7 +730,7 @@
             if(!activityloadFla&&(pageNum>activity_currentPage)){
                 $.ajax({
                     type: "GET",
-                    url: "/u/loadActivityList",
+                    url: "${ctx}/u/loadActivityList",
                     data: "pageNum="+pageNum,
                     async:false,
                     success: function(data){
@@ -758,7 +758,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "/u/helpContact",
+                url: "${ctx}/u/helpContact",
                 data: "tUserId="+userId,
                 async:false,
                 success: function(data){
@@ -785,7 +785,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "/u/createOrder",
+                url: "${ctx}/u/createOrder",
                 data: "payVendorId="+payVendorId+"&mTypeId="+mTypeId,
                 async:false,
                 success: function(data){
@@ -858,14 +858,14 @@
 
         //获取消息列表
         function getMsgList(fromUserId) {
-            url = "/m/msgList?fromUserId="+fromUserId;
+            url = "${ctx}/m/msgList?fromUserId="+fromUserId;
             window.location.href= url;
             // console.log("wtf");
         }
 
         //活动详情
         function detailActivtiy(activityId) {
-            url = "/u/activityDetail?activityId="+activityId;
+            url = "${ctx}/u/activityDetail?activityId="+activityId;
             window.location.href= url;
             // console.log("wtf");
         }
@@ -874,7 +874,7 @@
         function  sendMsg(toUid) {
 
             backUrl = window.location.href;
-            url = "/m/sendMsg?uid="+toUid+"&backUrl="+backUrl;
+            url = "${ctx}/m/sendMsg?uid="+toUid+"&backUrl="+backUrl;
             window.location.href = url;
         }
 
@@ -895,7 +895,7 @@
 
 
     function  viewUser(uid) {
-        url = "/u/userDetail?uid="+uid;
+        url = "${ctx}/u/userDetail?uid="+uid;
         window.location.href = url;
     }
 

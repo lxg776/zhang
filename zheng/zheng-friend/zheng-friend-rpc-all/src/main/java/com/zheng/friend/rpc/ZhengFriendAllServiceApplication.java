@@ -14,7 +14,7 @@ public class ZhengFriendAllServiceApplication {
 
 	public static void main(String[] args) {
 		_log.info(">>>>> zheng-friends-all-service 正在启动 <<<<<");
-		new ClassPathXmlApplicationContext("classpath:META-INF/spring/*.xml");
+		new ClassPathXmlApplicationContext("classpath*:META-INF/spring/*.xml");
 		_log.info(">>>>> zheng-friends-all-service 启动完成 <<<<<");
 	}
 

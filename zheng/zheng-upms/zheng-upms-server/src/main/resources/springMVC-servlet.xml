@@ -10,14 +10,19 @@
     <!-- 根目录'/'对应页面 -->
     <mvc:view-controller path="/" view-name="/index.jsp"/>
 
-    <!-- 拦截器 -->
+    <!-- 拦截器配置 -->
     <mvc:interceptors>
-        <!-- 获取登录信息 -->
+        <!-- 后台拦截器 -->
         <mvc:interceptor>
+            <!-- 拦截路径 -->
             <mvc:mapping path="/manage/**"/>
-            <bean class="com.zheng.upms.server.interceptor.UpmsInterceptor"></bean>
+            <!-- 非拦截路径 -->
+            <mvc:exclude-mapping path="/manage/login"/>
+            <!-- 拦截器对象 -->
+            <bean id="manageInterceptor" class="com.zheng.upms.server.interceptor.ManageInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
+    <mvc:resources location="/cdn/" mapping="/**" />
 
     <!-- Jsp视图 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -27,5 +32,8 @@
         <property name="contentType" value="text/html; charset=utf-8"/>
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
     </bean>
+
+
+
 
 </beans>

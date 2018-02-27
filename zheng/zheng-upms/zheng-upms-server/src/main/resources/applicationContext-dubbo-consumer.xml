@@ -38,4 +38,33 @@
     <dubbo:reference id="upmsApiService" interface="com.zheng.upms.rpc.api.UpmsApiService" mock="true"/>
     <!-- 用户查询 -->
     <dubbo:reference id="ucenterUserService" interface="com.zheng.ucenter.rpc.api.UcenterUserService" mock="true"/>
+
+
+    <!-- 文章 -->
+    <dubbo:reference id="factivityService" interface="com.zheng.friend.rpc.api.FActivityService" mock="true"/>
+
+
+
+
+    <!-- 接口服务 -->
+    <dubbo:reference id="ucenterIdentificaionService" interface="com.zheng.ucenter.rpc.api.UcenterIdentificaionService" mock="true"/>
+
+
+
+    <dubbo:reference id="fUserBaseMsgServiceImpl" interface="com.zheng.friend.rpc.api.FUserBaseMsgService" mock="true"/>
+
+    <dubbo:reference id="fUserRequestService" interface="com.zheng.friend.rpc.api.FUserRequestService" mock="true"/>
+
+    <dubbo:reference id="fMemberTypeService" interface="com.zheng.friend.rpc.api.FMemberTypeService" mock="true"/>
+
+    <dubbo:reference id="fUserMemberRelService" interface="com.zheng.friend.rpc.api.FUserMemberRelService" mock="true"/>
+
+    <dubbo:reference id="fUserSettingService" interface="com.zheng.friend.rpc.api.FUserSettingService" mock="true"/>
+
+    <dubbo:reference id="fUserLivingStatusService" interface="com.zheng.friend.rpc.api.FUserLivingStatusService" mock="true"/>
+
+    <dubbo:reference id="payVendorService" interface="com.zheng.pay.rpc.api.PayVendorService" mock="true"/>
+
+    <dubbo:reference id="fContactService" interface="com.zheng.friend.rpc.api.FContactService" mock="true"/>
+
 </beans>
