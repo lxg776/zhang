@@ -765,7 +765,7 @@
                 return
             }
 
-            $("#regForm").attr('action',"/u/txGrzl");    //通过jquery为action属性赋值
+            $("#regForm").attr('action',"${ctx}/u/txGrzl");    //通过jquery为action属性赋值
             $("#regForm").submit();
 
 

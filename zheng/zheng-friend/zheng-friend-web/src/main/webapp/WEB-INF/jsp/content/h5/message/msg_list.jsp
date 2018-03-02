@@ -89,7 +89,7 @@
     <ul class="aui-list aui-media-list" id="listUser">
 
 
-        <form id="sendForm" action="/m/sendMsg" method="post">
+        <form id="sendForm" action="${ctx}/m/sendMsg" method="post">
             <input name="toUserId" type="hidden" value="${toUser.userId}"/>
             <input name="backUrl" type="hidden" value="${backUrl}">
             <li class="aui-list-item">
@@ -153,7 +153,7 @@
 
         data = "toUserId="+toUserId+"&backUrl="+backUrl+"&msgContent="+msgContent;
         //获取签名数据并上传图片
-        url = "/m/sendMsg";
+        url = "${ctx}/m/sendMsg";
 
         $.ajax({
             url: url,

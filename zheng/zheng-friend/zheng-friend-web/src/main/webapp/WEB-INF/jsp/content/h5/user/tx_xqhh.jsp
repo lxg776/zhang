@@ -32,7 +32,7 @@
 
 <div class="aui-content aui-margin-b-15" style="margin-top: 2.5rem;">
 
-    <form id="regForm" action="/u/txXqhh" method="post">
+    <form id="regForm" action="${ctx}/u/txXqhh" method="post">
     <ul class="aui-list aui-form-list">
 
 

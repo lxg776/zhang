@@ -217,7 +217,7 @@
             <div class="aui-card-list">
                 <div class="aui-card-list-header">
                     相册
-                    <div class="aui-list-item-right"><a href="/u/editPhoto" style="font-size: 0.7rem;">编辑</a></div>
+                    <div class="aui-list-item-right"><a href="${ctx}/u/editPhoto" style="font-size: 0.7rem;">编辑</a></div>
                 </div>
                 <div class="aui-card-list-content-padded aui-border-b aui-border-t">
                     <div class="aui-row aui-row-padded">
@@ -239,7 +239,7 @@
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-text">
                             <div class="aui-list-item-title">个人资料</div>
-                            <div class="aui-list-item-right"><a href="/u/editGrzl" style="font-size: 0.7rem;">编辑</a></div>
+                            <div class="aui-list-item-right"><a href="${ctx}/u/editGrzl" style="font-size: 0.7rem;">编辑</a></div>
                         </div>
                         <div class="aui-list-item-text">
                             <div class="aui-list-item-left">昵称</div>
@@ -287,7 +287,7 @@
         <div class="aui-list-item-inner">
             <div class="aui-list-item-text">
                 <div class="aui-list-item-title">择偶条件</div>
-                <div class="aui-list-item-right"><a href="/u/editZobz" style="font-size: 0.7rem;">编辑</a></div>
+                <div class="aui-list-item-right"><a href="${ctx}/u/editZobz" style="font-size: 0.7rem;">编辑</a></div>
             </div>
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">年龄</div>
@@ -349,7 +349,7 @@
         <div class="aui-list-item-inner">
             <div class="aui-list-item-text">
                 <div class="aui-list-item-title">生活状态</div>
-                <div class="aui-list-item-right"><a href="/u/editShzk" style="font-size: 0.7rem;">编辑</a></div>
+                <div class="aui-list-item-right"><a href="${ctx}/u/editShzk" style="font-size: 0.7rem;">编辑</a></div>
             </div>
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">抽烟状况</div>
@@ -399,7 +399,7 @@
         <div class="aui-list-item-inner">
             <div class="aui-list-item-text">
                 <div class="aui-list-item-title">兴趣爱好</div>
-                <div class="aui-list-item-right"><a href="/u/editXqhh" style="font-size: 0.7rem;">编辑</a></div>
+                <div class="aui-list-item-right"><a href="${ctx}/u/editXqhh" style="font-size: 0.7rem;">编辑</a></div>
             </div>
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">喜欢的音乐</div>
@@ -593,7 +593,28 @@
 
 
 
-        apiready = function(){
+   // $(window).load(function () {
+   //                 dispLog("Load Event");
+   //              }).ready(function () {
+   //     console.log("Ready Event");
+   //     $("#btnSetColor").click(function () {
+   //                      $("a").css("color", "red");
+   //                      });
+   //              }).bind("pageshow", function () {
+   //     console.log("PageShow Event");
+   //              }).bind("pagehide", function () {
+   //     console.log("PageHide Event");
+   //              });
+
+     $(document).ready(function () {
+        if(tempRet){
+            changePage(tempRet);
+        }
+
+       }
+     );
+
+    apiready = function(){
             api.parseTapmode();
         }
 
@@ -605,19 +626,28 @@
         });
 
         var currentPage = "page1";
+        var tempRet = null;
 
         var tab = new auiTab({
             element:document.getElementById("footer")
         },function(ret){
-            if(ret.index==1){
+            changePage(ret.index);
+        });
+
+
+        function changePage(index) {
+            indexUrl = "${ctx}/u/index";
+
+            if(index==1){
                 $("#page1").removeClass("aui-hide");
                 $("#page2").addClass("aui-hide");
                 $("#page3").addClass("aui-hide");
                 $("#page4").addClass("aui-hide");
 
                 $('body,html').animate({scrollTop:0},100);
-                currentPage = "page1";
-            }else if(ret.index==2){
+                window.location.href=indexUrl+"#page1"
+
+            }else if(index==2){
                 $("#page1").addClass("aui-hide");
                 $("#page2").removeClass("aui-hide");
                 $("#page3").addClass("aui-hide");
@@ -625,22 +655,25 @@
 
                 $('body,html').animate({scrollTop:0},100);
                 currentPage = "page2";
-            }else if(ret.index==3){
+                window.location.href=indexUrl+"#page2"
+            }else if(index==3){
                 $("#page1").addClass("aui-hide");
                 $("#page2").addClass("aui-hide");
                 $("#page3").removeClass("aui-hide");
                 $("#page4").addClass("aui-hide");
                 $('body,html').animate({scrollTop:0},100);
                 currentPage = "page3";
-            }else if(ret.index==4){
+                window.location.href=indexUrl+"#page3"
+            }else if(index==4){
                 $("#page1").addClass("aui-hide");
                 $("#page2").addClass("aui-hide");
                 $("#page3").addClass("aui-hide");
                 $("#page4").removeClass("aui-hide");
                 $('body,html').animate({scrollTop:0},100);
                 currentPage = "page4";
+                window.location.href=indexUrl+"#page4"
             }
-        });
+        }
 
 
         var tab = new auiTab({

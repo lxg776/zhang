@@ -613,7 +613,8 @@
 
 
     });
-
+    var editPhotoUrl = "${ctx}/u/editPhoto";
+    var oss_policy_url = "${ctx}/aliyun/oss/policy";
 </script>
 
 <script type="text/javascript" src="${ctx}/js/editPhoto_upload.js"></script>

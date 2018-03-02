@@ -60,7 +60,7 @@
             </ul>
 
             <!-- 新闻栏目 -->
-            <div class="box span6" style="width: 1200px;">
+            <div class="box span6" style="width: 850px;">
                 <div class="box-header">
                     <h2>
                         <i class="halflings-icon white align-justify"></i><span
@@ -76,7 +76,7 @@
                         <thead>
                         <tr>
                             <th style="width: 100px;">id</th>
-                            <th style="width: 800px;">联系人</th>
+                            <th style="width: 400px;">联系人</th>
                             <th style="width: 100px;">被联系人</th>
                             <th style="width: 100px;">次数</th>
                             <th style="width: 100px;">标识</th>

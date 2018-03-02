@@ -172,7 +172,7 @@ $(function () {
 
     function editPhoto(imgPath,keyWord) {
         //获取签名数据并上传图片
-        var editPhotoUrl = "/u/editPhoto";
+
         data = "imgPath="+imgPath+"&keyWord="+keyWord;
         $.ajax({
             url: editPhotoUrl,
@@ -228,8 +228,7 @@ $(function () {
 
 
 
-    //获取签名数据并上传图片
-    var oss_policy_url = "/aliyun/oss/policy";
+
     $.ajax({
         url: oss_policy_url,
         type: "GET",

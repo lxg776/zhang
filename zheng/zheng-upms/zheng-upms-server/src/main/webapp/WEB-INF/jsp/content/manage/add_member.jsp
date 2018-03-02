@@ -73,7 +73,7 @@
                 </div>
                 <!-- 新闻栏目 -->
                 <div class="box-content">
-                    <form action="/manage/member/editUser" method="post" class="form-horizontal">
+                    <form action="${ctx}/manage/member/editUser" method="post" class="form-horizontal">
                         <input type="hidden"
                                name="keyword" value="${keyword}" />
 

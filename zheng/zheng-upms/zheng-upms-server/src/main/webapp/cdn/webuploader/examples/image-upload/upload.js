@@ -204,6 +204,7 @@
             return pwd;
         }
         oss_policy_url = "/aliyun/oss/policy";
+      //  oss_policy_url = "/zheng-upms-server/aliyun/oss/policy";
         $.ajax({
             url: oss_policy_url,
             type: "GET",

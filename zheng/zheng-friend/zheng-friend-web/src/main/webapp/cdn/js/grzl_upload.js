@@ -10,7 +10,7 @@ $(function () {
         // 选完文件后，是否自动上传。
         auto: false,
         // swf文件路径
-        swf: '${ctx}/webuploader/dist/Uploader.swf',
+        swf: '/webuploader/dist/Uploader.swf',
         // 只允许选择图片文件。
         accept: {
             title: 'Images',
@@ -197,7 +197,7 @@ $(function () {
 
 
     //获取签名数据并上传图片
-    var oss_policy_url = "/aliyun/oss/policy";
+
     $.ajax({
         url: oss_policy_url,
         type: "GET",

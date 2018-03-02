@@ -31,7 +31,7 @@
 
 
 <div class="aui-content aui-margin-b-15" style="margin-top: 2.5rem;">
-    <form  id="regForm" action="/u/editZobz" method="post" >
+    <form  id="regForm" action="${ctx}/u/editZobz" method="post" >
         <ul class="aui-list aui-form-list">
 
             <li class="aui-list-item">

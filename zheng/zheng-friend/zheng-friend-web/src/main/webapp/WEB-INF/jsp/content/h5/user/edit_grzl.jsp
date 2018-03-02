@@ -765,7 +765,7 @@
                 return
             }
 
-            $("#regForm").attr('action',"/u/editGrzl");    //通过jquery为action属性赋值
+            $("#regForm").attr('action',"${ctx}/u/editGrzl");    //通过jquery为action属性赋值
             $("#regForm").submit();
 
 
@@ -812,7 +812,7 @@
 
 
     });
-
+    var oss_policy_url = "${ctx}/aliyun/oss/policy";
 </script>
 
 <script type="text/javascript" src="${ctx}/js/grzl_upload.js"></script>
