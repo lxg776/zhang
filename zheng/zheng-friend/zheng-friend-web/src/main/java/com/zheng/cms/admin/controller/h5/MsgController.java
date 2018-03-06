@@ -3,11 +3,13 @@ package com.zheng.cms.admin.controller.h5;
 import com.zheng.cms.common.constant.FriendResult;
 import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
+import com.zheng.friend.dao.model.FGreetingTemp;
 import com.zheng.friend.dao.model.FMessage;
 import com.zheng.friend.dao.model.FMessageExample;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.dao.vo.RecentMsgVo;
+import com.zheng.friend.rpc.api.FGreetingTempService;
 import com.zheng.friend.rpc.api.FMessageService;
 import com.zheng.friend.rpc.api.FUserBaseMsgService;
 import com.zheng.ucenter.dao.model.UcenterUser;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -45,6 +48,9 @@ public class MsgController extends BaseController {
 
     @Autowired
     FMessageService fMessageService;
+
+    @Autowired
+    FGreetingTempService fGreetingTempService;
 
 
     /**
@@ -143,7 +149,7 @@ public class MsgController extends BaseController {
     @ApiOperation(value = "给其他人发送信息")
     @RequestMapping(value = "/sendMsg", method = RequestMethod.POST)
     @ResponseBody
-    public Object sendMsg(FMessage fMessage,String backUrl,HttpSession session) {
+    public Object sendMsg(FMessage fMessage,HttpSession session) {
 
         String  username = (String) SecurityUtils.getSubject().getPrincipal();
         UcenterUser ucenterUser = getUctenuser(username,session);
@@ -160,6 +166,40 @@ public class MsgController extends BaseController {
         return result;
     }
 
+
+    /**
+     * 发送问候语
+     * @return
+     */
+    @ApiOperation(value = "发送问候语")
+    @RequestMapping(value = "/sendGreeting", method = RequestMethod.POST)
+    @ResponseBody
+    public Object sendGreeting(@RequestParam(defaultValue = "0") Integer greetingId, @RequestParam(defaultValue = "0") Integer friendId, HttpSession session) {
+        //生成订单
+        String  username = (String) SecurityUtils.getSubject().getPrincipal();
+        UcenterUser ucenterUser = getUctenuser(username,session);
+        Integer userId = ucenterUser.getUserId();
+
+        FriendResult result  = new FriendResult(FriendResultConstant.SUCCESS,null);
+
+        FGreetingTemp fGreetingTemp =  fGreetingTempService.selectByPrimaryKey(greetingId);
+        if(null!=fGreetingTemp){
+            FMessage fMessage =new FMessage();
+            fMessage.setFromUserId(userId);
+            fMessage.setToUserId(friendId);
+            byte state = 0;
+            fMessage.setMsgState(state);
+            fMessage.setMsgContent(fGreetingTemp.getContent());
+            fMessageService.insert(fMessage);
+            result.setMessage("发送成功");
+        }else{
+            result.setMessage("发送失败");
+        }
+
+
+        return result;
+
+    }
 
 
 
