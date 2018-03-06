@@ -64,6 +64,10 @@
     <bean id="fUserImagesService" class="com.zheng.friend.rpc.service.impl.FUserImagesServiceImpl"/>
     <dubbo:service interface="com.zheng.friend.rpc.api.FUserImagesService" ref="fUserImagesService" timeout="10000"/>
 
+    <!-- 问候模板 -->
+    <bean id="fGreetingTempService" class="com.zheng.friend.rpc.service.impl.FGreetingTempServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FGreetingTempService" ref="fGreetingTempService" timeout="10000"/>
+
     <!-- 访问记录 -->
     <bean id="fUserViewRecordServiceImpl" class="com.zheng.friend.rpc.service.impl.FUserViewRecordServiceImpl"/>
     <dubbo:service interface="com.zheng.friend.rpc.api.FUserViewRecordService" ref="fUserViewRecordServiceImpl" timeout="10000"/>

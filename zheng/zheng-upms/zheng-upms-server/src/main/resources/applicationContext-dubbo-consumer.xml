@@ -67,4 +67,5 @@
 
     <dubbo:reference id="fContactService" interface="com.zheng.friend.rpc.api.FContactService" mock="true"/>
 
+    <dubbo:reference id="fGreetingTempService" interface="com.zheng.friend.rpc.api.FGreetingTempService" mock="true"/>
 </beans>

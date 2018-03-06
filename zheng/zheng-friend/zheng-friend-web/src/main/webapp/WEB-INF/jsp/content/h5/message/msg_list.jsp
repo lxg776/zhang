@@ -81,7 +81,7 @@
 
 
 <%--上传头像--%>
-<div class="aui-popup aui-popup-top-left" style="width: 95%;" id="top-left">
+<div class="aui-popup aui-popup-top-left" style="width: 95%;display: none;" id="top-left">
     <div class="aui-popup-content">
 <div class="aui-content aui-margin-b-15" style="margin-top: 2.5rem;">
 

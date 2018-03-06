@@ -32,6 +32,20 @@ create table f_user_account
 
 )
 
+create table f_greeting_temp
+(
+   id                   int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',
+   content              varchar(255) comment '问候内容',
+   sort                 int(4) comment '排序',
+   create_time          timestamp default CURRENT_TIMESTAMP comment '创建时间',
+   show_status       tinyint(4) default 1 comment '显示状态(0:不显示,1:显示)',
+   primary key (id)
+)
+
+
+
+
+
 create table f_sms_message
 (
    id                   int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '编号',

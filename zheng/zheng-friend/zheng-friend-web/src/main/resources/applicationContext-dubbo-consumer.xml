@@ -77,7 +77,7 @@
     <dubbo:reference id="upmsUserRoleService" interface="com.zheng.upms.rpc.api.UpmsUserRoleService" mock="true"/>
     <!-- 操作日志 -->
     <dubbo:reference id="upmsLogService" interface="com.zheng.upms.rpc.api.UpmsLogService" mock="true"/>
-
-
+    <!-- 问候语 -->
+    <dubbo:reference id="fGreetingTempService" interface="com.zheng.friend.rpc.api.FGreetingTempService" mock="true"/>
 
 </beans>

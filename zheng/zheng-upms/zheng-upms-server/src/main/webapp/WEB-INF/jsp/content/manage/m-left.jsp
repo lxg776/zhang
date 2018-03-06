@@ -16,7 +16,7 @@
 				</ul>
 			</li>
 
-
+			<li><a href="${ctx}/manage/greeting/list"><i class="icon-tasks"></i><span class="hidden-tablet">问候语管理</span></a></li>
 		</ul>
 	</div>
 </div>

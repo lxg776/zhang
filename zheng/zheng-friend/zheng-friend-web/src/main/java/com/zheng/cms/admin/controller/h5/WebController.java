@@ -81,7 +81,8 @@ public class WebController extends BaseController {
     @Autowired
     FActivityService fActivityService;
 
-
+	@Autowired
+	FGreetingTempService fGreetingTempService;
 
 	/**
 	 * 首页
@@ -133,7 +134,12 @@ public class WebController extends BaseController {
 		FUserSetting fUserSetting = fUserSettingService.selectByPrimaryKey(ucenterUser.getUserId());
 		modelMap.put("fUserSetting",fUserSetting);
 
-
+		//问候语
+		FGreetingTempExample fGreetingTempExample =new FGreetingTempExample();
+		fGreetingTempExample.createCriteria().andShowStatusEqualTo((byte)1);
+		fGreetingTempExample.setOrderByClause("sort desc");
+		List<FGreetingTemp> greetingTempList  = fGreetingTempService.selectByExample(fGreetingTempExample);
+		modelMap.put("greetingTempList",greetingTempList);
 
 		return "/content/h5/main.jsp";
 	}

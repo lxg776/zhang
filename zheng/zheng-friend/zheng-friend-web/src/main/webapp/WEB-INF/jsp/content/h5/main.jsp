@@ -65,7 +65,7 @@
 
                     <div class="aui-info" style="padding-top:0">
                         <div class="aui-info-item">
-                            <a href="#">打招呼</a>
+                            <a href="javascript:;" aui-popup-for="top-buttom">打招呼</a>
                         </div>
                         <div class="aui-info-item">
                             <a href="javascript:;"  <c:if test="${fUserSetting.msgSendStatus == 0}">aui-popup-for="top-left" </c:if>
@@ -578,6 +578,38 @@
 
 </div>
 
+
+<%--会员弹出框--%>
+<div class="aui-popup aui-popup-bottom-left" style="width: 95%;display: none;" id="top-buttom">
+
+    <div class="aui-popup-content">
+        <div class="aui-content aui-margin-b-15" style="margin-top: 0.5rem;">
+
+            <ul class="aui-list aui-media-list">
+
+                <li class="aui-list-item">
+                    <div class="aui-list-item-inner">
+                        <div class="aui-list-item-input" style="margin-bottom: 8px;">
+                            <label>问候语</label>
+                        </div>
+                        <c:forEach items="${greetingTempList}" var="item">
+                            <div class="aui-list-item-input" style="margin-top: 10px;">
+                                <label><input class="aui-radio" type="radio" name="mTypeId" value="${item.id}" checked>&nbsp;&nbsp;&nbsp;${item.content}</label>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="aui-content-padded">
+                <div class="aui-btn aui-btn-info aui-btn-block" id="greetingBtn" style="margin-top: 1rem;">发送</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
 </body>
 
 <%@ include file="/common/h5/js.jsp" %>
@@ -607,10 +639,7 @@
    //              });
 
      $(document).ready(function () {
-        if(tempRet){
-            changePage(tempRet);
-        }
-
+         changePageByUrl(window.location.href);
        }
      );
 
@@ -633,6 +662,28 @@
         },function(ret){
             changePage(ret.index);
         });
+
+        function changePageByUrl(url){
+            if(url.endsWith("page1")){
+                changePage(1);
+                changeActivity(1);
+            }else if(url.endsWith("page2")){
+                changePage(2);
+                changeActivity(2);
+            }else if(url.endsWith("page3")){
+                changePage(3);
+                changeActivity(3);
+            }else if(url.endsWith("page4")){
+                changePage(4);
+                changeActivity(4);
+            }
+        }
+
+        function changeActivity(index) {
+
+            $("#footer").children(".aui-bar-tab-item").removeClass("aui-active");
+            $("#footer").children(".aui-bar-tab-item").eq(index-1).addClass("aui-active");
+        }
 
 
         function changePage(index) {
