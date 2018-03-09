@@ -478,6 +478,8 @@
                 <div class="aui-btn aui-btn-info" aui-popup-for="top-left" style="margin-right: 2rem;">修改头像</div>
             </div>
         </li>
+
+
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
                 <div class="aui-list-item-label">

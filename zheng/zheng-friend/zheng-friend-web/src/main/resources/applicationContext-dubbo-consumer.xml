@@ -50,6 +50,12 @@
 
     <dubbo:reference id="fUserOrderService" interface="com.zheng.friend.rpc.api.FUserOrderService" mock="true"/>
 
+    <dubbo:reference id="fAreasService" interface="com.zheng.friend.rpc.api.FAreasService" mock="true"/>
+
+    <dubbo:reference id="fProvincesService" interface="com.zheng.friend.rpc.api.FProvincesService" mock="true"/>
+
+    <dubbo:reference id="fCitiesService" interface="com.zheng.friend.rpc.api.FCitiesService" mock="true"/>
+
     <dubbo:reference id="payVendorService" interface="com.zheng.pay.rpc.api.PayVendorService" mock="true"/>
 
     <dubbo:reference id="payInOrderService" interface="com.zheng.pay.rpc.api.PayInOrderService" mock="true"/>

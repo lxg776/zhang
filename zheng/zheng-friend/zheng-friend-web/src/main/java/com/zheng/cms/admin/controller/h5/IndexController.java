@@ -257,6 +257,10 @@ public class IndexController extends BaseController {
 	}
 
 
+
+
+
+
 	private String login(String username){
 		//后台登录
 		Subject subject = SecurityUtils.getSubject();

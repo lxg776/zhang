@@ -416,7 +416,7 @@
         #uploader .statusBar .btns .uploadBtn.disabled {
             pointer-events: none;
             opacity: 0.6;
-
+        }
 
     </style>
 
@@ -447,6 +447,45 @@
                 <div class="aui-list-item-input">
                     <label><input class="aui-radio" type="radio" name="sex" value="1" >男生</label>
                     <label><input class="aui-radio" type="radio" name="sex" value="2" >女生</label>
+                </div>
+            </div>
+        </li>
+
+        <li class="aui-list-item">   <label class="aui-list-item-label" style="font-size: 18px;color: #212121;">地区 </label></li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-label" style="color: #757575; font-size: 12px; width: 30px;">
+                    省
+                </div>
+
+                <div class="aui-list-item-input">
+                    <select style="font-size: 14px; width: 100px;" id="province">
+                        <option value="1101">广西壮族自治区</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-label" style="color: #757575; font-size: 12px;width: 30px;">
+                    市
+                </div>
+
+                <div class="aui-list-item-input">
+                    <select name="age_max" style="font-size: 14px;width: 80px;" id="citys">>
+                        <option value="不限">百色市</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-label" style="color: #757575; font-size: 12px;width: 30px;">
+                    区/县
+                </div>
+
+                <div class="aui-list-item-input" >
+                    <select name="age_max"  style="font-size: 14px;width: 100px;" id="areas">
+                        <option value="不限">靖西市</option>
+                    </select>
                 </div>
             </div>
         </li>
@@ -570,6 +609,96 @@
     $("#regBtn").click(function(){
         tijiao();
     });
+
+
+    $(document).ready(function(){
+        initCityData();
+    });
+
+    var  dProvinceId="450000";
+    var  dcityid = "451000";
+    var  dAreaid = "451025";
+
+    //初始化城市数据
+    function initCityData(){
+        $("#province").empty();
+
+        $.ajax({
+            url: "${ctx}/c/provinceList",
+            type: "GET",
+            dataType:'json',
+            success:function(data){
+                $.each(data.data.dataList,function(i,item){
+                    if(item.provinceid == dProvinceId ){
+                        $("#province").append(" <option value='" + item.provinceid + "'   selected='selected'> " + item.province + "</option>");
+                    }else{
+                        $("#province").append(" <option value='" + item.provinceid + "' > " + item.province + "</option>");
+                    }
+                });
+            }
+        });
+        getCityList(dProvinceId,dcityid,dAreaid);
+       // getAreasList(cityid,areaid);
+
+    }
+
+    //获取区县
+    $("#province").change(function () {//当选择城市的下拉选的时候，区域进行联动
+        getCityList($("#province").val(),"");
+    });
+
+    //获取区县
+    $("#citys").change(function () {//当选择城市的下拉选的时候，区域进行联动
+        getAreasList($("#citys").val(),"");
+    });
+
+
+    function getAreasList(cityid,defaultId) {
+        $("#areas").empty();
+        data = "cityid="+cityid;
+        $.ajax({
+            url: "${ctx}/c/areasList",
+            type: "GET",
+            data:data,
+            dataType:'json',
+            success:function(data){
+                $.each(data.data.dataList,function(i,item){
+                    if(defaultId&&item.areaid == defaultId ){
+                        $("#areas").append(" <option value='" + item.areaid + "'   selected='selected'> " + item.area + "</option>");
+                    }else{
+                        $("#areas").append(" <option value='" + item.areaid + "' > " + item.area + "</option>");
+                    }
+
+                });
+            }
+        });
+    }
+
+    function getCityList(provinceid,defaultId,dareaid) {
+        $("#citys").empty();
+        data = "provinceid="+provinceid;
+        $.ajax({
+            url: "${ctx}/c/cityList",
+            type: "GET",
+            data:data,
+            dataType:'json',
+            success:function(data){
+                $.each(data.data.dataList,function(i,item){
+                    if(defaultId&&item.cityid == defaultId ){
+                        $("#citys").append(" <option value='" + item.cityid + "'   selected='selected'> " + item.city + "</option>");
+                        getAreasList(defaultId,dareaid);
+                    }else{
+                        $("#citys").append(" <option value='" + item.cityid + "' > " + item.city + "</option>");
+                        if(i==0){
+                            getAreasList(item.cityid,"");
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+
 
 
     function tijiao() {

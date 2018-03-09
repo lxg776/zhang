@@ -83,13 +83,15 @@
 
 
     $("#reg_btn").click(function(){
-        window.location.href='http://127.0.0.1:9991/h5/reg';
+        window.location.href='${ctx}/h5/reg';
     });
 
 
     $("#backBtn").click(function(){
         window.history.back();
     });
+
+
 
 
 </script>

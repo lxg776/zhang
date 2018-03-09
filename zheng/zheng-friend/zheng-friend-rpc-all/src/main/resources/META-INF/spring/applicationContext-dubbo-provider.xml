@@ -90,6 +90,19 @@
     <bean id="fContactServiceImpl" class="com.zheng.friend.rpc.service.impl.FContactServiceImpl"/>
     <dubbo:service interface="com.zheng.friend.rpc.api.FContactService" ref="fContactServiceImpl" timeout="10000"/>
 
+
+    <!-- 城市数据 -->
+    <bean id="fCitiesServiceImpl" class="com.zheng.friend.rpc.service.impl.FCitiesServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FCitiesService" ref="fCitiesServiceImpl" timeout="10000"/>
+
+    <!-- 区域数据 -->
+    <bean id="fAreasServiceImpl" class="com.zheng.friend.rpc.service.impl.FAreasServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FAreasService" ref="fAreasServiceImpl" timeout="10000"/>
+
+    <!-- 省份数据 -->
+    <bean id="fProvincesServiceImpl" class="com.zheng.friend.rpc.service.impl.FProvincesServiceImpl"/>
+    <dubbo:service interface="com.zheng.friend.rpc.api.FProvincesService" ref="fProvincesServiceImpl" timeout="10000"/>
+
     <!-- uc******************************************* -->
 
     <!-- 认证方式 -->
