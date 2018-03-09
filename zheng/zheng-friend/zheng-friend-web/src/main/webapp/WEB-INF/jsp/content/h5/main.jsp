@@ -65,7 +65,7 @@
 
                     <div class="aui-info" style="padding-top:0">
                         <div class="aui-info-item">
-                            <a href="javascript:;" aui-popup-for="top-buttom">打招呼</a>
+                            <a href="javascript:;"  onclick="sendGreetToUser(${item.userId})">打招呼</a>
                         </div>
                         <div class="aui-info-item">
                             <a href="javascript:;"  <c:if test="${fUserSetting.msgSendStatus == 0}">aui-popup-for="top-left" </c:if>
@@ -592,9 +592,10 @@
                         <div class="aui-list-item-input" style="margin-bottom: 8px;">
                             <label>问候语</label>
                         </div>
+                        <input type="hidden" id="gtoUserId" />
                         <c:forEach items="${greetingTempList}" var="item">
                             <div class="aui-list-item-input" style="margin-top: 10px;">
-                                <label><input class="aui-radio" type="radio" name="mTypeId" value="${item.id}" checked>&nbsp;&nbsp;&nbsp;${item.content}</label>
+                                <label><input class="aui-radio" type="radio" name="greeting" value="${item.id}" checked>&nbsp;&nbsp;&nbsp;${item.content}</label>
                             </div>
                         </c:forEach>
                     </div>
@@ -860,6 +861,34 @@
             createOrder();
         });
 
+         $("#greetingBtn").click(function () {
+                sendGreeting();
+         });
+
+
+       //发送问候语
+       function sendGreeting() {
+           var greetingId = $("input[name='greeting']").val();
+           var friendId = $("#gtoUserId").val();
+           popup.hide();
+           $.ajax({
+               type: "POST",
+               url: "${ctx}/m/sendGreeting",
+               data: "greetingId="+greetingId+"&friendId="+friendId,
+               success: function(data){
+                   msg(data.message);
+               },
+               error:function(XMLHttpRequest, textStatus, errorThrown){
+                   popup.hide();
+               }
+           });
+
+
+       }
+
+
+
+        //创建订单
         function  createOrder() {
 
             var payVendorId = $("input[name='payVendorId']").val();
@@ -961,6 +990,26 @@
             url = "${ctx}/m/sendMsg?uid="+toUid+"&backUrl="+backUrl;
             window.location.href = url;
         }
+
+
+        function  sendGreetToUser(toUid) {
+                $("#gtoUserId").val(toUid);
+                showPopDiv = document.getElementById("top-buttom");
+                if(showPopDiv){
+                if(showPopDiv.className.indexOf("aui-popup-in") > -1 || document.querySelector(".aui-popup-in")){
+                    popup.hide(showPopDiv);
+                }else{
+                    popup.show(showPopDiv);
+                }
+                 }else{
+                return;
+              }
+
+
+
+
+        }
+
 
 
 
