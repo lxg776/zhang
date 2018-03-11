@@ -23,4 +23,9 @@ public class FMessageServiceMock extends BaseServiceMock<FMessageMapper, FMessag
     public List<RecentMsgVo> selectMsgRecord(Integer fromUserId, Integer toUserId) {
         return null;
     }
+
+    @Override
+    public long selectunReadCountByUserId(Integer userId, byte state) {
+        return 0;
+    }
 }

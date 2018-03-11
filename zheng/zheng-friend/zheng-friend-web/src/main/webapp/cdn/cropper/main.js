@@ -22,7 +22,9 @@ $(function () {
 
 
 
-
+    $("#closeHeadBtn").click(function(){
+        popup.hide();
+    });
 
     // Cropper
     $image.on({

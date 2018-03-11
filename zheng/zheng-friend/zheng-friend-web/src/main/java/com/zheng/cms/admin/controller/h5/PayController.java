@@ -116,6 +116,8 @@ public class PayController extends BaseController {
 		payInOrderDetail.setProductPrice((long) (fMemberType.getPrice()*100));
 		payInOrderDetail.setRemark("member");
 		payInOrderDetailService.insert(payInOrderDetail);
+	//	payVendor.setAppsecret("245638e9e5a8d0fcf175304a27e771a3");
+		//orderId=10005;
 		String payUrl = xiWangPay(orderId+"",payVendor.getAppid(),payVendor.getAppsecret(),productName,total+"");
 
 		HashMap<String,String> data = new HashMap<>();
@@ -129,11 +131,16 @@ public class PayController extends BaseController {
 
 
 
+	//917245638e9e5a8d0fcf175304a27e771a310005720000http://www.baidu.comhttp://127.0.0.1:9991/u/userDetail
+	//https://user.xiweb.cn/run.php?item=app&a=pay_h5&oid=10025&type=weixin&uid=917&money=720000&otid=10025&key=e88938bc227c8491a0352362aebaf376&subject=砖石会员180天&notify_url=http://www.baidu.com&return_url=http://127.0.0.1:9991/u/userDetail
+	//https://user.xiweb.cn/run.php?item=app&a=pay_h5&oid=10005&type=weixin&uid=917&money=720000&otid=10005&key=e88938bc227c8491a0352362aebaf376&subject=砖石会员180天&notify_url=http://www.baidu.com&return_url=http://127.0.0.1:9991/u/userDetail
+
+	//917245638e9e5a8d0fcf175304a27e771a31000572000010005720000http://www.baidu.comhttp://127.0.0.1:9991/u/userDetail
+	//https://user.xiweb.cn/run.php?item=app&a=pay_h5&oid=10005&type=weixin&uid=917&money=720000&otid=10005&key=30d2c8a6c55fa8052c7a7ae251b23083&subject=砖石会员180天&notify_url=http://www.baidu.com&return_url=http://127.0.0.1:9991/u/userDetail
 
 
-
-
-
+	//https://user.xiweb.cn/run.php?item=app&a=pay_h5&oid=10027&type=weixin&uid=917&money=720000&otid=10027&key=f78358118d37cc75a7e323578cfa459d&subject=砖石会员180天&notify_url=http://www.baidu.com&return_url=http://127.0.0.1:9991/u/userDetail
+	//917321245638e9e5a8d0fcf175304a27e771a310027720000http://www.baidu.comhttp://127.0.0.1:9991/u/userDetail
 
 	private String xiWangPay(String oid,String appid,String key,String produceName,String money){
 		String xiweb_payurl = "https://user.xiweb.cn/run.php";
@@ -150,9 +157,19 @@ public class PayController extends BaseController {
 		sb.append("&money="+money);
 		sb.append("&otid="+oid);
 
-		String setKey = appid + key + oid + money + notify_url +return_url;
+		//String setKey = appid + key + oid+""+ money + notify_url +return_url;
+		StringBuffer sbKey =new StringBuffer();
+		sbKey.append(appid);
+		sbKey.append(key);
+		sbKey.append(oid);
+		sbKey.append(money);
+		sbKey.append(notify_url);
+		sbKey.append(return_url);
+
+		String setKey="";
+
 		try {
-			setKey = MD5Util.getMD5(setKey);
+			setKey = MD5Util.getMD5(sbKey.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -163,6 +180,10 @@ public class PayController extends BaseController {
 		sb.append("&return_url="+return_url);
 
 		return  sb.toString();
+	}
+
+	private void callback(){
+
 	}
 
 

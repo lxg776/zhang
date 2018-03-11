@@ -36,6 +36,8 @@ public class FUserBaseMsgServiceImpl extends BaseServiceImpl<FUserBaseMsgMapper,
     FUserBaseMsgExtMapper fUserBaseMsgExtMapper;
     @Override
     public FuserDetailVo selectFUserDetailVoByUserId(Integer userId) {
+
+
         return fUserBaseMsgExtMapper.selectFUserDetailVoByUserId(userId);
 
 

@@ -39,7 +39,18 @@
                     <a href="javascript:;" onclick="viewUser(${item.userId})">
                     <div class="aui-media-list-item-inner">
                         <div class="aui-list-item-media" style="width: 7rem; height: 7rem;">
-                            <img src="${ctx}/aui/image/mm.jpeg" >
+                            <c:if test="${not empty item.avatar}">
+                                <img src="${imageBase}${item.avatar}" >
+                            </c:if>
+                            <c:if test="${empty item.avatar}">
+                            <c:if test="${item.sex == 1}">
+                                <img src="${ctx}/image/default_man_icon.png" >
+                            </c:if>
+                                <c:if test="${item.sex == 2}">
+                                    <img src="${ctx}/image/default_woman_icon.png" >
+
+                                </c:if>
+                            </c:if>
                         </div>
                         <div class="aui-list-item-inner">
                             <div class="aui-list-item-text">
@@ -55,7 +66,7 @@
 
                             <div class="aui-list-item-text" style="color: #0a0c0e">
                                 择偶条件:我想找寻靖西<c:if test="${not empty item.fUserRequest.age}">年龄在${item.fUserRequest.age}岁,</c:if>
-                                <c:if test="${not empty item.fUserRequest.height}">身高${item.fUserRequest.height}cm，</c:if>
+                                <c:if test="${not empty item.fUserRequest.height}">身高${item.fUserRequest.height}<c:if test="${item.fUserRequest.height!='不限'}">cm</c:if>，</c:if>
                                 <c:if test="${not empty item.fUserRequest.incomeMonthly}">月收入
                                     ${item.fUserRequest.incomeMonthly}元</c:if>的<c:if test="${item.sex == 1}">男性</c:if><c:if test="${item.sex == 2}">女性</c:if>
                             </div>
@@ -165,7 +176,7 @@
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-text">
                             <div class="aui-list-item-title">${item.fwUserBaseMsg.nikename}</div>
-                            <div class="aui-list-item-right">${item.viewTime}</div>
+                            <div class="aui-list-item-right"><fmt:formatDate value="${item.viewTime}" pattern="yyyy-MM-dd hh:mm" /></div>
                         </div>
 
                         <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
@@ -199,12 +210,23 @@
                 <div class="aui-media-list-item-inner">
 
                     <div class="aui-list-item-media" style="width: 6.0rem; height: 6.0rem;">
-                        <img src="${ctx}/aui/image/mm.jpeg" >
+                        <c:if test="${not empty modle.avatar}">
+                            <img src="${imageBase}${modle.avatar}" >
+                        </c:if>
+                        <c:if test="${empty modle.avatar}">
+                            <c:if test="${modle.sex == 1}">
+                                <img src="${ctx}/image/default_man_icon.png" >
+                            </c:if>
+                            <c:if test="${modle.sex == 2}">
+                                <img src="${ctx}/image/default_woman_icon.png" >
+
+                            </c:if>
+                        </c:if>
                     </div>
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-text">
                             <div class="aui-list-item-title">${modle.fUserBaseMsg.nikename}</div>
-                            <div class="aui-list-item-right">访问次数99</div>
+                            <div class="aui-list-item-right" style="display: none;">访问次数99</div>
                         </div>
 
                         <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
@@ -457,7 +479,7 @@
         <div class="aui-bar-tab-label">活动</div>
     </div>
     <div class="aui-bar-tab-item" tapmode>
-        <div class="aui-badge">99</div>
+        <c:if test="${unReadCount > 0}"><div class="aui-badge">${unReadCount}</div></c:if>
         <i class="aui-iconfont aui-icon-comment"></i>
         <div class="aui-bar-tab-label">消息</div>
     </div>
@@ -537,14 +559,18 @@
             <ul class="aui-list aui-media-list">
 
                 <li class="aui-list-item">
+
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title">开通的会员类型</div>
+
+                        <div class="aui-list-item-right" style="padding-right: 16px;"><i class="aui-iconfont aui-icon-close"  id="payCloseBtn"></i></div>
+                    </div>
                     <div class="aui-list-item-inner">
 
-                        <div class="aui-list-item-input" style="margin-bottom: 8px;">
-                            <label>开通的会员类型</label>
-                        </div>
+
                         <c:forEach items="${typeList}" var="item">
                             <div class="aui-list-item-input" style="margin-top: 10px;">
-                                <label><input class="aui-radio" type="radio" name="mTypeId" value="${item.id}" checked>&nbsp;&nbsp;&nbsp;${item.name}(${item.serviceDays}天)<span style="color: red;">¥${item.price}</span></label>
+                                <label><input class="aui-radio" type="radio" name="mTypeId" value="${item.id}">&nbsp;&nbsp;&nbsp;${item.name}(${item.serviceDays}天)<span style="color: red;">¥${item.price}</span></label>
                             </div>
                         </c:forEach>
 
@@ -559,11 +585,11 @@
                         </div>
 
                         <div class="aui-list-item-input" style="margin-top: 10px; position: relative; height: 85px;" >
-                            <label><input class="aui-radio" style="left: 4px; top: 30px; position: absolute"  type="radio" name="payVendorId" value="1" checked> <img src="${ctx}/aui/image/wx_pay_icon.png" style="width: 187px; left: 48px; position: absolute" /></label>
+                            <label><input class="aui-radio" style="left: 4px; top: 30px; position: absolute"  type="radio" name="payVendorId" value="1" > <img src="${ctx}/aui/image/wx_pay_icon.png" style="width: 187px; left: 48px; position: absolute" /></label>
 
                         </div>
                         <div class="aui-list-item-input" style="margin-top: 10px; position: relative; height: 85px;" >
-                            <label><input class="aui-radio" style="left: 4px; top: 30px; position: absolute"  type="radio" name="payVendorId" value="2"  checked> <img src="${ctx}/aui/image/zfb_pay_icon.png" style="width: 187px; left: 48px; position: absolute" /></label>
+                            <label><input class="aui-radio" style="left: 4px; top: 30px; position: absolute"  type="radio" name="payVendorId" value="2"> <img src="${ctx}/aui/image/zfb_pay_icon.png" style="width: 187px; left: 48px; position: absolute" /></label>
 
                         </div>
                     </div>
@@ -588,10 +614,14 @@
             <ul class="aui-list aui-media-list">
 
                 <li class="aui-list-item">
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title">问候语</div>
+
+                        <div class="aui-list-item-right" style="padding-right: 16px;"><i class="aui-iconfont aui-icon-close"  id="greetingCloseBtn"></i></div>
+                    </div>
                     <div class="aui-list-item-inner">
-                        <div class="aui-list-item-input" style="margin-bottom: 8px;">
-                            <label>问候语</label>
-                        </div>
+
+
                         <input type="hidden" id="gtoUserId" />
                         <c:forEach items="${greetingTempList}" var="item">
                             <div class="aui-list-item-input" style="margin-top: 10px;">
@@ -865,6 +895,15 @@
                 sendGreeting();
          });
 
+        $("#greetingCloseBtn").click(function () {
+                popup.hide();
+         });
+        $("#payCloseBtn").click(function () {
+                popup.hide();
+         });
+
+
+
 
        //发送问候语
        function sendGreeting() {
@@ -891,8 +930,8 @@
         //创建订单
         function  createOrder() {
 
-            var payVendorId = $("input[name='payVendorId']").val();
-            var  mTypeId = $("input[name='mTypeId']").val();
+            var payVendorId = $("input[name='payVendorId']:checked").val();
+            var  mTypeId = $("input[name='mTypeId']:checked").val();
 
 
 

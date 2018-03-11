@@ -170,7 +170,7 @@
 
 
     <sql id="user_view_List">
-      r.b_user_id as r_b_user_id,base.user_id as base_user_id,base.nikename,base.avatar as b_avatar,base.birth_date,base.height,base.month_income,base.education,base.marital_status
+      r.view_time as r_view_time, r.b_user_id as r_b_user_id,base.user_id as base_user_id,base.nikename,base.avatar as b_avatar,base.birth_date,base.height,base.month_income,base.education,base.marital_status
     </sql>
 
 
@@ -196,6 +196,7 @@
         <id column="id" jdbcType="INTEGER" property="id" />
         <id column="base_user_id" jdbcType="INTEGER" property="fUserId" />
         <id column="b_user_id" jdbcType="INTEGER" property="bUserId" />
+        <id column="r_view_time" jdbcType="DATE" property="viewTime" javaType="java.util.Date" />
         <collection property="fwUserBaseMsg" resultMap="fUserBaseMsgList" />
     </resultMap>
 

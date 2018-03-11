@@ -141,7 +141,13 @@ public class WebController extends BaseController {
 		List<FGreetingTemp> greetingTempList  = fGreetingTempService.selectByExample(fGreetingTempExample);
 		modelMap.put("greetingTempList",greetingTempList);
 
+		//未读记录数
+		long unReadCount = fMessageService.selectunReadCountByUserId(ucenterUser.getUserId(),(byte)0);
+		modelMap.put("unReadCount",unReadCount);
+
 		return "/content/h5/main.jsp";
+
+
 	}
 
 	/**
@@ -170,6 +176,8 @@ public class WebController extends BaseController {
 		UcenterUser ucenterUser = getUctenuser(username,session);
 		FuserDetailVo userDetail  = fUserBaseMsgService.selectFUserDetailVoByUserId(uid);
 		modelMap.put("modle",userDetail);
+
+
 		//个人相册
 		FUserImagesExample example = new FUserImagesExample();
 		example.createCriteria().andUserIdEqualTo(userDetail.getUserId()).andKeywordEqualTo("photo");
@@ -183,6 +191,14 @@ public class WebController extends BaseController {
 		viewRecord.setfUserId(ucenterUser.getUserId());
 		viewRecord.setbUserId(userDetail.getUserId());
 		fUserViewRecordService.insert(viewRecord);
+
+
+		//问候语
+		FGreetingTempExample fGreetingTempExample =new FGreetingTempExample();
+		fGreetingTempExample.createCriteria().andShowStatusEqualTo((byte)1);
+		fGreetingTempExample.setOrderByClause("sort desc");
+		List<FGreetingTemp> greetingTempList  = fGreetingTempService.selectByExample(fGreetingTempExample);
+		modelMap.put("greetingTempList",greetingTempList);
 
 
 		return "/content/h5/user/user_detail.jsp";

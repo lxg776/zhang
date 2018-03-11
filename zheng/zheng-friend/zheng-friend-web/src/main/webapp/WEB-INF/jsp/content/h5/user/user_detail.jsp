@@ -34,19 +34,47 @@
                 <div class="aui-media-list-item-inner">
 
                     <div class="aui-list-item-media" style="width: 6.0rem; height: 6.0rem;">
-                        <img src="${ctx}/aui/image/mm.jpeg" >
+                        <c:if test="${not empty modle.avatar}">
+                            <img src="${imageBase}${modle.avatar}" >
+                        </c:if>
+                        <c:if test="${empty modle.avatar}">
+                            <c:if test="${modle.sex == 1}">
+                                <img src="${ctx}/image/default_man_icon.png" >
+                            </c:if>
+                            <c:if test="${modle.sex == 2}">
+                                <img src="${ctx}/image/default_woman_icon.png" >
+
+                            </c:if>
+                        </c:if>
                     </div>
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-text">
                             <div class="aui-list-item-title">${modle.fUserBaseMsg.nikename}</div>
-                            <div class="aui-list-item-right">访问次数99</div>
+                            <div class="aui-list-item-right"></div>
                         </div>
 
                         <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
                             广西靖西市，30岁，${modle.fUserBaseMsg.height}cm，${modle.fUserBaseMsg.monthIncome}元
                         </div>
                     </div>
+
                 </div>
+                <div class="aui-info" style="padding-top:0">
+                    <div class="aui-info-item">
+                        <a href="javascript:;"  onclick="sendGreetToUser(${modle.userId})">打招呼</a>
+                    </div>
+                    <div class="aui-info-item">
+                        <a href="javascript:;"  <c:if test="${fUserSetting.msgSendStatus == 0}">aui-popup-for="top-left" </c:if>
+                           <c:if test="${fUserSetting.msgSendStatus == 1}">onclick="sendMsg(${modle.userId})"</c:if>
+                        >发信息</a>
+                    </div>
+
+                    <div class="aui-info-item" style="padding-right: 10px;">
+                        <a href="javascript:;"  onclick="helpContact(${modle.userId})" >帮我联系她</a>
+                    </div>
+
+                </div>
+
             </li>
 
             <div class="aui-card-list">
@@ -274,24 +302,152 @@
 </ul>
 </div>
 </div>
+
+
+
+<%--会员弹出框--%>
+<div class="aui-popup aui-popup-bottom-left" style="width: 95%;display: none;" id="top-buttom">
+
+    <div class="aui-popup-content">
+        <div class="aui-content aui-margin-b-15" style="margin-top: 0.5rem;">
+
+            <ul class="aui-list aui-media-list">
+
+                <li class="aui-list-item">
+                    <div class="aui-list-item-text">
+                        <div class="aui-list-item-title">问候语</div>
+
+                        <div class="aui-list-item-right" style="padding-right: 16px;"><i class="aui-iconfont aui-icon-close"  id="greetingCloseBtn"></i></div>
+                    </div>
+                    <div class="aui-list-item-inner">
+
+
+                        <input type="hidden" id="gtoUserId" />
+                        <c:forEach items="${greetingTempList}" var="item">
+                            <div class="aui-list-item-input" style="margin-top: 10px;">
+                                <label><input class="aui-radio" type="radio" name="greeting" value="${item.id}" checked>&nbsp;&nbsp;&nbsp;${item.content}</label>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="aui-content-padded">
+                <div class="aui-btn aui-btn-info aui-btn-block" id="greetingBtn" style="margin-top: 1rem;">发送</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 </body>
 
 <%@ include file="/common/h5/js.jsp" %>
 
-
-
+<script type="text/javascript" src="${ctx}/aui/script/aui-dialog.js"></script>
+<script type="text/javascript" src="${ctx}/aui/script/aui-popup.js" ></script>
 
 <script type="text/javascript">
 
 
-
+    var popup = new auiPopup();
 
     $("#backBtn").click(function(){
         window.history.back();
     });
 
+    function helpContact(userId) {
+
+        $.ajax({
+            type: "GET",
+            url: "${ctx}/u/helpContact",
+            data: "tUserId="+userId,
+            async:false,
+            success: function(data){
+                msg(data.message);
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+
+            }
+        });
+
+    }
 
 
+    $("#ktBtn").click(function () {
+        createOrder();
+    });
+
+    $("#greetingBtn").click(function () {
+        sendGreeting();
+    });
+
+
+    $("#greetingCloseBtn").click(function () {
+        popup.hide();
+    });
+    $("#payCloseBtn").click(function () {
+        popup.hide();
+    });
+
+
+    //发送问候语
+    function  sendGreetToUser(toUid) {
+        $("#gtoUserId").val(toUid);
+        showPopDiv = document.getElementById("top-buttom");
+        if(showPopDiv){
+            if(showPopDiv.className.indexOf("aui-popup-in") > -1 || document.querySelector(".aui-popup-in")){
+                popup.hide(showPopDiv);
+            }else{
+                popup.show(showPopDiv);
+            }
+        }else{
+            return;
+        }
+
+
+
+
+    }
+
+
+    //发送问候语
+    function sendGreeting() {
+        var greetingId = $("input[name='greeting']").val();
+        var friendId = $("#gtoUserId").val();
+        popup.hide();
+        $.ajax({
+            type: "POST",
+            url: "${ctx}/m/sendGreeting",
+            data: "greetingId="+greetingId+"&friendId="+friendId,
+            success: function(data){
+                msg(data.message);
+            },
+            error:function(XMLHttpRequest, textStatus, errorThrown){
+                popup.hide();
+            }
+        });
+
+
+    }
+
+    var dialog = new auiDialog();
+    function msg(msg) {
+        dialog.alert({
+            title:"提示",
+            msg:msg,
+            buttons:['确定']
+        },function(ret){
+            // console.log(ret)
+        })
+    }
+
+    function  sendMsg(toUid) {
+
+        backUrl = window.location.href;
+        url = "${ctx}/m/sendMsg?uid="+toUid+"&backUrl="+backUrl;
+        window.location.href = url;
+    }
 </script>
 
 

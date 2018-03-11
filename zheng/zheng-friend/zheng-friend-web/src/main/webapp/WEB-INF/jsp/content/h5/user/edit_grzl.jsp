@@ -612,7 +612,7 @@
 
 
 
-        <div class="aui-card-list">
+        <div class="aui-card-list" style="display: none;">
             <div class="aui-card-list-header" style="color: #757575; font-size: 14px;">
                 相册
                 <div class="aui-list-item-right">
@@ -660,8 +660,18 @@
             <div class="aui-content aui-margin-b-15" style="margin-top: 0.5rem;">
 
                 <ul class="aui-list aui-form-list">
-                    <li class="aui-list-header">修改头像</li>
+                    <li class="aui-list-item">
+
+                    <div class="aui-list-item-text" style="width: 100%;">
+                        <div class="aui-list-item-title">修改头像</div>
+
+                        <div class="aui-list-item-right" style="padding-right: 16px;"><i class="aui-iconfont aui-icon-close"  id="closeHeadBtn"></i></div>
+                    </div>
+                    </li>
                 <li class="aui-list-item">
+
+
+
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-input">
                             <p><div class="aui-btn aui-btn-primary" id="selectImage">选择图片</div></p>
@@ -738,6 +748,11 @@
         $("#regBtn").click(function(){
             tijiao();
         });
+
+
+
+
+
         $("#selectImage").click(function(){
 
             document.getElementById('inputImage').click();

@@ -59,4 +59,16 @@ public class FMessageServiceImpl extends BaseServiceImpl<FMessageMapper, FMessag
        return fMessageExtMapper.selectMsgRecord(map);
 
     }
+
+
+
+    @Override
+    public long selectunReadCountByUserId( Integer toUserId,byte state){
+
+        FMessageExample messageExample =new FMessageExample();
+        messageExample.createCriteria().andToUserIdEqualTo(toUserId).andMsgStateEqualTo(state);
+
+        return fMessageMapper.countByExample(messageExample);
+    }
+
 }

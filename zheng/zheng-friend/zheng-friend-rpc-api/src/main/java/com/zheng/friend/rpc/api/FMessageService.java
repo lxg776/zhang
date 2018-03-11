@@ -16,4 +16,6 @@ public interface FMessageService extends BaseService<FMessage, FMessageExample> 
     public List<RecentMsgVo> selectRecentMsgByUser(@Param("userId") Integer userId);
 
     public List<RecentMsgVo> selectMsgRecord(@Param("fromUserId") Integer fromUserId,@Param("toUserId") Integer toUserId);
+
+    public long selectunReadCountByUserId(Integer userId,byte state);
 }

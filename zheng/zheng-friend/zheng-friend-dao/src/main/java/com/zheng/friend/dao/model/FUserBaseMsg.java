@@ -138,6 +138,14 @@ public class FUserBaseMsg implements Serializable {
 
     private String avatar;
 
+    private String fromCity;
+
+    private Integer fromCityId;
+
+    private Integer fromAreaId;
+
+    private String fromArea;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUserId() {
@@ -300,6 +308,38 @@ public class FUserBaseMsg implements Serializable {
         this.avatar = avatar;
     }
 
+    public String getFromCity() {
+        return fromCity;
+    }
+
+    public void setFromCity(String fromCity) {
+        this.fromCity = fromCity;
+    }
+
+    public Integer getFromCityId() {
+        return fromCityId;
+    }
+
+    public void setFromCityId(Integer fromCityId) {
+        this.fromCityId = fromCityId;
+    }
+
+    public Integer getFromAreaId() {
+        return fromAreaId;
+    }
+
+    public void setFromAreaId(Integer fromAreaId) {
+        this.fromAreaId = fromAreaId;
+    }
+
+    public String getFromArea() {
+        return fromArea;
+    }
+
+    public void setFromArea(String fromArea) {
+        this.fromArea = fromArea;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -326,6 +366,10 @@ public class FUserBaseMsg implements Serializable {
         sb.append(", soliloquy=").append(soliloquy);
         sb.append(", declaration=").append(declaration);
         sb.append(", avatar=").append(avatar);
+        sb.append(", fromCity=").append(fromCity);
+        sb.append(", fromCityId=").append(fromCityId);
+        sb.append(", fromAreaId=").append(fromAreaId);
+        sb.append(", fromArea=").append(fromArea);
         sb.append("]");
         return sb.toString();
     }
@@ -361,7 +405,11 @@ public class FUserBaseMsg implements Serializable {
             && (this.getChildrenStatus() == null ? other.getChildrenStatus() == null : this.getChildrenStatus().equals(other.getChildrenStatus()))
             && (this.getSoliloquy() == null ? other.getSoliloquy() == null : this.getSoliloquy().equals(other.getSoliloquy()))
             && (this.getDeclaration() == null ? other.getDeclaration() == null : this.getDeclaration().equals(other.getDeclaration()))
-            && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()));
+            && (this.getAvatar() == null ? other.getAvatar() == null : this.getAvatar().equals(other.getAvatar()))
+            && (this.getFromCity() == null ? other.getFromCity() == null : this.getFromCity().equals(other.getFromCity()))
+            && (this.getFromCityId() == null ? other.getFromCityId() == null : this.getFromCityId().equals(other.getFromCityId()))
+            && (this.getFromAreaId() == null ? other.getFromAreaId() == null : this.getFromAreaId().equals(other.getFromAreaId()))
+            && (this.getFromArea() == null ? other.getFromArea() == null : this.getFromArea().equals(other.getFromArea()));
     }
 
     @Override
@@ -388,6 +436,10 @@ public class FUserBaseMsg implements Serializable {
         result = prime * result + ((getSoliloquy() == null) ? 0 : getSoliloquy().hashCode());
         result = prime * result + ((getDeclaration() == null) ? 0 : getDeclaration().hashCode());
         result = prime * result + ((getAvatar() == null) ? 0 : getAvatar().hashCode());
+        result = prime * result + ((getFromCity() == null) ? 0 : getFromCity().hashCode());
+        result = prime * result + ((getFromCityId() == null) ? 0 : getFromCityId().hashCode());
+        result = prime * result + ((getFromAreaId() == null) ? 0 : getFromAreaId().hashCode());
+        result = prime * result + ((getFromArea() == null) ? 0 : getFromArea().hashCode());
         return result;
     }
 }
