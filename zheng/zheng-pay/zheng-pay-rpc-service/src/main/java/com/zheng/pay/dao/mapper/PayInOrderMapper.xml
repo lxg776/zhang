@@ -7,6 +7,7 @@
     <result column="amount" jdbcType="DECIMAL" property="amount" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="ctime" jdbcType="BIGINT" property="ctime" />
+    <result column="call_back" jdbcType="VARCHAR" property="callBack" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    pay_in_order_id, pay_vendor_id, amount, status, ctime
+    pay_in_order_id, pay_vendor_id, amount, status, ctime, call_back
   </sql>
   <select id="selectByExample" parameterType="com.zheng.pay.dao.model.PayInOrderExample" resultMap="BaseResultMap">
     select
@@ -101,9 +102,11 @@
   </delete>
   <insert id="insert" parameterType="com.zheng.pay.dao.model.PayInOrder">
     insert into pay_in_order (pay_in_order_id, pay_vendor_id, amount, 
-      status, ctime)
+      status, ctime, call_back
+      )
     values (#{payInOrderId,jdbcType=INTEGER}, #{payVendorId,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, 
-      #{status,jdbcType=TINYINT}, #{ctime,jdbcType=BIGINT})
+      #{status,jdbcType=TINYINT}, #{ctime,jdbcType=BIGINT}, #{callBack,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.pay.dao.model.PayInOrder">
     insert into pay_in_order
@@ -123,6 +126,9 @@
       <if test="ctime != null">
         ctime,
       </if>
+      <if test="callBack != null">
+        call_back,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="payInOrderId != null">
@@ -139,6 +145,9 @@
       </if>
       <if test="ctime != null">
         #{ctime,jdbcType=BIGINT},
+      </if>
+      <if test="callBack != null">
+        #{callBack,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -166,6 +175,9 @@
       <if test="record.ctime != null">
         ctime = #{record.ctime,jdbcType=BIGINT},
       </if>
+      <if test="record.callBack != null">
+        call_back = #{record.callBack,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -177,7 +189,8 @@
       pay_vendor_id = #{record.payVendorId,jdbcType=INTEGER},
       amount = #{record.amount,jdbcType=DECIMAL},
       status = #{record.status,jdbcType=TINYINT},
-      ctime = #{record.ctime,jdbcType=BIGINT}
+      ctime = #{record.ctime,jdbcType=BIGINT},
+      call_back = #{record.callBack,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -197,6 +210,9 @@
       <if test="ctime != null">
         ctime = #{ctime,jdbcType=BIGINT},
       </if>
+      <if test="callBack != null">
+        call_back = #{callBack,jdbcType=VARCHAR},
+      </if>
     </set>
     where pay_in_order_id = #{payInOrderId,jdbcType=INTEGER}
   </update>
@@ -205,7 +221,8 @@
     set pay_vendor_id = #{payVendorId,jdbcType=INTEGER},
       amount = #{amount,jdbcType=DECIMAL},
       status = #{status,jdbcType=TINYINT},
-      ctime = #{ctime,jdbcType=BIGINT}
+      ctime = #{ctime,jdbcType=BIGINT},
+      call_back = #{callBack,jdbcType=VARCHAR}
     where pay_in_order_id = #{payInOrderId,jdbcType=INTEGER}
   </update>
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />

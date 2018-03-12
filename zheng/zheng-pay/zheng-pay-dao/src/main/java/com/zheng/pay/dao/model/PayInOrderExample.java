@@ -406,6 +406,76 @@ public class PayInOrderExample implements Serializable {
             addCriterion("ctime not between", value1, value2, "ctime");
             return (Criteria) this;
         }
+
+        public Criteria andCallBackIsNull() {
+            addCriterion("call_back is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackIsNotNull() {
+            addCriterion("call_back is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackEqualTo(String value) {
+            addCriterion("call_back =", value, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackNotEqualTo(String value) {
+            addCriterion("call_back <>", value, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackGreaterThan(String value) {
+            addCriterion("call_back >", value, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackGreaterThanOrEqualTo(String value) {
+            addCriterion("call_back >=", value, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackLessThan(String value) {
+            addCriterion("call_back <", value, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackLessThanOrEqualTo(String value) {
+            addCriterion("call_back <=", value, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackLike(String value) {
+            addCriterion("call_back like", value, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackNotLike(String value) {
+            addCriterion("call_back not like", value, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackIn(List<String> values) {
+            addCriterion("call_back in", values, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackNotIn(List<String> values) {
+            addCriterion("call_back not in", values, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackBetween(String value1, String value2) {
+            addCriterion("call_back between", value1, value2, "callBack");
+            return (Criteria) this;
+        }
+
+        public Criteria andCallBackNotBetween(String value1, String value2) {
+            addCriterion("call_back not between", value1, value2, "callBack");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria implements Serializable {

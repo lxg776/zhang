@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -51,6 +53,8 @@ public class PayController extends BaseController {
 
 
 	public final static String imageBase = "http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com/";
+
+	public final static String DATE_FORMAT = "yyyy年MM月dd日 HH:mm:SS";
 
 
 	public final static byte STATUS_CREATE = '1';//订单创建
@@ -73,6 +77,11 @@ public class PayController extends BaseController {
 
 	@Autowired
 	PayInOrderDetailService payInOrderDetailService;
+
+	@Autowired
+	FUserMemberRelService fUserMemberRelService;
+
+
 
 
 	/**
@@ -102,10 +111,11 @@ public class PayController extends BaseController {
 		long total = (long) (fMemberType.getPrice()*100);
 		payInOrder.setAmount(total);
 		payInOrderService.insert(payInOrder);
-
 		PayInOrderExample payInOrderExample  = new PayInOrderExample();
 		payInOrderExample.createCriteria().andCtimeEqualTo(ctime);
 		payInOrder = payInOrderService.selectFirstByExample(payInOrderExample);
+		payInOrder.setCallBack(bulidCallback("u",ucenterUser.getUserId()+"",payVendorId+"",mTypeId+""));
+
 		Integer orderId  = payInOrder.getPayInOrderId();
 		//生成订单详情
 		PayInOrderDetail payInOrderDetail  = new PayInOrderDetail();
@@ -115,6 +125,7 @@ public class PayController extends BaseController {
 		payInOrderDetail.setProductCount(1);
 		payInOrderDetail.setProductPrice((long) (fMemberType.getPrice()*100));
 		payInOrderDetail.setRemark("member");
+
 		payInOrderDetailService.insert(payInOrderDetail);
 	//	payVendor.setAppsecret("245638e9e5a8d0fcf175304a27e771a3");
 		//orderId=10005;
@@ -131,16 +142,94 @@ public class PayController extends BaseController {
 
 
 
-	//917245638e9e5a8d0fcf175304a27e771a310005720000http://www.baidu.comhttp://127.0.0.1:9991/u/userDetail
-	//https://user.xiweb.cn/run.php?item=app&a=pay_h5&oid=10025&type=weixin&uid=917&money=720000&otid=10025&key=e88938bc227c8491a0352362aebaf376&subject=砖石会员180天&notify_url=http://www.baidu.com&return_url=http://127.0.0.1:9991/u/userDetail
-	//https://user.xiweb.cn/run.php?item=app&a=pay_h5&oid=10005&type=weixin&uid=917&money=720000&otid=10005&key=e88938bc227c8491a0352362aebaf376&subject=砖石会员180天&notify_url=http://www.baidu.com&return_url=http://127.0.0.1:9991/u/userDetail
+	/**
+	 * 创建订单
+	 * @return
+	 */
+	@ApiOperation(value = "回调方法")
+	@RequestMapping(value = "/payCallBack", method = RequestMethod.POST)
+	@ResponseBody
+	public Object payCallBack(@RequestParam(defaultValue = "0") String oid,@RequestParam(defaultValue = "0") String money,String key,HttpSession session) {
+		//生成订单
+		FriendResult result  = new FriendResult(FriendResultConstant.SUCCESS,null);
+		PayInOrder payInOrder = payInOrderService.selectByPrimaryKey(Integer.parseInt(oid));
 
-	//917245638e9e5a8d0fcf175304a27e771a31000572000010005720000http://www.baidu.comhttp://127.0.0.1:9991/u/userDetail
-	//https://user.xiweb.cn/run.php?item=app&a=pay_h5&oid=10005&type=weixin&uid=917&money=720000&otid=10005&key=30d2c8a6c55fa8052c7a7ae251b23083&subject=砖石会员180天&notify_url=http://www.baidu.com&return_url=http://127.0.0.1:9991/u/userDetail
+		String callBack = payInOrder.getCallBack();
+
+		//处理回调
+		handleByCallback(callBack,oid,money,key);
 
 
-	//https://user.xiweb.cn/run.php?item=app&a=pay_h5&oid=10027&type=weixin&uid=917&money=720000&otid=10027&key=f78358118d37cc75a7e323578cfa459d&subject=砖石会员180天&notify_url=http://www.baidu.com&return_url=http://127.0.0.1:9991/u/userDetail
-	//917321245638e9e5a8d0fcf175304a27e771a310027720000http://www.baidu.comhttp://127.0.0.1:9991/u/userDetail
+
+		return result;
+
+
+	}
+
+
+	private String bulidCallback(String k,String uid,String payVendorId,String mTypeId){
+		StringBuffer sb =new StringBuffer();
+		sb.append(k+"&");
+		sb.append(uid+"&");
+		sb.append(payVendorId+"&");
+		sb.append(mTypeId);
+		return sb.toString();
+	}
+
+
+	private void handleByCallback(String callBack,String oid,String money,String backKey){
+		String args[] = callBack.split("&");
+		if(null!=args){
+
+			if(args[0].equals("u")&&args.length==4){
+				//更新会员等级
+
+				String uid=args[1];
+				String payVendorId = args[2];
+				String mTypeId = args[3];
+
+				PayVendor payVendor = payVendorService.selectByPrimaryKey(Integer.parseInt(payVendorId));
+				String appsecret =payVendor.getAppsecret();
+
+				StringBuffer sb =new StringBuffer();
+
+				String state = "1";
+				sb.append(oid);
+				sb.append(state);
+				sb.append(money);
+				sb.append(appsecret);
+				try {
+					String  setKey = MD5Util.getMD5(uid+MD5Util.MD5(sb.toString()));
+					if(backKey.equals(setKey)){
+						//更新订单状态
+						PayInOrder payInOrder = payInOrderService.selectByPrimaryKey(Integer.parseInt(oid));
+						payInOrder.setStatus(ORDER_FINISH);
+						payInOrderService.updateByPrimaryKey(payInOrder);
+						//设置会员关系
+						FMemberType fMemberType = fMemberTypeService.selectByPrimaryKey(Integer.parseInt(mTypeId));
+						FUserMemberRel fUserMemberRel =new FUserMemberRel();
+						fUserMemberRel.setUserId(Integer.parseInt(uid));
+						fUserMemberRel.setMemberTypeId(mTypeId);
+						SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+						String begDate = sdf.format(new Date());
+						fUserMemberRel.setBegTime(begDate);
+
+						Calendar calendar = Calendar.getInstance();
+						calendar.add(Calendar.DATE, 100);
+						Date endDate = calendar.getTime();
+						String endDateString = sdf.format(endDate);
+						fUserMemberRel.setBegTime(endDateString);
+						fUserMemberRel.setEndStatus((byte)0);
+						fUserMemberRelService.insert(fUserMemberRel);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
+	}
+
 
 	private String xiWangPay(String oid,String appid,String key,String produceName,String money){
 		String xiweb_payurl = "https://user.xiweb.cn/run.php";

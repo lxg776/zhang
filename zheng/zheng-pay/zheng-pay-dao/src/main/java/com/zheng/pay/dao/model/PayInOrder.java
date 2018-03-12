@@ -13,6 +13,8 @@ public class PayInOrder implements Serializable {
 
     private Long ctime;
 
+    private String callBack;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getPayInOrderId() {
@@ -55,6 +57,14 @@ public class PayInOrder implements Serializable {
         this.ctime = ctime;
     }
 
+    public String getCallBack() {
+        return callBack;
+    }
+
+    public void setCallBack(String callBack) {
+        this.callBack = callBack;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -66,6 +76,7 @@ public class PayInOrder implements Serializable {
         sb.append(", amount=").append(amount);
         sb.append(", status=").append(status);
         sb.append(", ctime=").append(ctime);
+        sb.append(", callBack=").append(callBack);
         sb.append("]");
         return sb.toString();
     }
@@ -86,7 +97,8 @@ public class PayInOrder implements Serializable {
             && (this.getPayVendorId() == null ? other.getPayVendorId() == null : this.getPayVendorId().equals(other.getPayVendorId()))
             && (this.getAmount() == null ? other.getAmount() == null : this.getAmount().equals(other.getAmount()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getCtime() == null ? other.getCtime() == null : this.getCtime().equals(other.getCtime()));
+            && (this.getCtime() == null ? other.getCtime() == null : this.getCtime().equals(other.getCtime()))
+            && (this.getCallBack() == null ? other.getCallBack() == null : this.getCallBack().equals(other.getCallBack()));
     }
 
     @Override
@@ -98,6 +110,7 @@ public class PayInOrder implements Serializable {
         result = prime * result + ((getAmount() == null) ? 0 : getAmount().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCtime() == null) ? 0 : getCtime().hashCode());
+        result = prime * result + ((getCallBack() == null) ? 0 : getCallBack().hashCode());
         return result;
     }
 }
