@@ -5,6 +5,7 @@ import com.zheng.cms.common.constant.FriendResult;
 import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.MD5Util;
+import com.zheng.common.util.PropertiesFileUtil;
 import com.zheng.friend.dao.model.*;
 
 import com.zheng.friend.rpc.api.*;
@@ -110,11 +111,12 @@ public class PayController extends BaseController {
 		payInOrder.setCtime(ctime);
 		long total = (long) (fMemberType.getPrice()*100);
 		payInOrder.setAmount(total);
+		payInOrder.setCallBack(bulidCallback("u",ucenterUser.getUserId()+"",payVendorId+"",mTypeId+""));
 		payInOrderService.insert(payInOrder);
+
 		PayInOrderExample payInOrderExample  = new PayInOrderExample();
 		payInOrderExample.createCriteria().andCtimeEqualTo(ctime);
 		payInOrder = payInOrderService.selectFirstByExample(payInOrderExample);
-		payInOrder.setCallBack(bulidCallback("u",ucenterUser.getUserId()+"",payVendorId+"",mTypeId+""));
 
 		Integer orderId  = payInOrder.getPayInOrderId();
 		//生成订单详情
@@ -147,7 +149,7 @@ public class PayController extends BaseController {
 	 * @return
 	 */
 	@ApiOperation(value = "回调方法")
-	@RequestMapping(value = "/payCallBack", method = RequestMethod.POST)
+	@RequestMapping(value = "/payCallBack", method = RequestMethod.GET)
 	@ResponseBody
 	public Object payCallBack(@RequestParam(defaultValue = "0") String oid,@RequestParam(defaultValue = "0") String money,String key,HttpSession session) {
 		//生成订单
@@ -199,7 +201,7 @@ public class PayController extends BaseController {
 				sb.append(money);
 				sb.append(appsecret);
 				try {
-					String  setKey = MD5Util.getMD5(uid+MD5Util.MD5(sb.toString()));
+					String  setKey = MD5Util.getMD5(uid+MD5Util.getMD5(sb.toString()));
 					if(backKey.equals(setKey)){
 						//更新订单状态
 						PayInOrder payInOrder = payInOrderService.selectByPrimaryKey(Integer.parseInt(oid));
@@ -209,7 +211,7 @@ public class PayController extends BaseController {
 						FMemberType fMemberType = fMemberTypeService.selectByPrimaryKey(Integer.parseInt(mTypeId));
 						FUserMemberRel fUserMemberRel =new FUserMemberRel();
 						fUserMemberRel.setUserId(Integer.parseInt(uid));
-						fUserMemberRel.setMemberTypeId(mTypeId);
+						fUserMemberRel.setMemberTypeId(Integer.parseInt(mTypeId));
 						SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 						String begDate = sdf.format(new Date());
 						fUserMemberRel.setBegTime(begDate);
@@ -233,7 +235,7 @@ public class PayController extends BaseController {
 
 	private String xiWangPay(String oid,String appid,String key,String produceName,String money){
 		String xiweb_payurl = "https://user.xiweb.cn/run.php";
-		String notify_url = "http://www.baidu.com";
+		String notify_url = PropertiesFileUtil.getInstance("config").get("pay.callback");
 		String return_url = "http://127.0.0.1:9991/u/userDetail";
 
 

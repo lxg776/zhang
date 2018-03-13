@@ -10,6 +10,20 @@ public class MD5Util {
 
     public static void main(String args[]) {
         System.out.print(MD5("lxg123321"));
+        String oid="10075";
+        String uid="6";
+        String money="20";
+        String key = "245638e9e5a8d0fcf175304a27e771a3";
+        StringBuilder sb =new StringBuilder();
+        sb.append(oid);
+        sb.append("1");
+        sb.append(key);
+        try {
+            System.out.print(MD5Util.getMD5(uid+MD5Util.getMD5(sb.toString())));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public final static String MD5(String content) {
