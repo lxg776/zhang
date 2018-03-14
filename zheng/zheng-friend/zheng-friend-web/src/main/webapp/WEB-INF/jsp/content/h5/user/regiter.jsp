@@ -451,6 +451,46 @@
             </div>
         </li>
 
+        <li class="aui-list-item">   <label class="aui-list-item-label" style="font-size: 18px;color: #212121;">出生日期 </label></li>
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-label" style="color: #757575; font-size: 12px; width: 30px;">
+                    年
+                </div>
+
+                <div class="aui-list-item-input">
+                    <select style="font-size: 14px; width: 100px;" id="selYear">
+                        <option value="1101">广西壮族自治区</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-label" style="color: #757575; font-size: 12px;width: 30px;">
+                    月
+                </div>
+
+                <div class="aui-list-item-input">
+                    <select name="fromCityId" style="font-size: 14px;width: 80px;" id="selMonth">
+                        <option value="不限">百色市</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-label" style="color: #757575; font-size: 12px;width: 30px;">
+                    日
+                </div>
+
+                <div class="aui-list-item-input" >
+                    <select name="fromCityId"  style="font-size: 14px;width: 100px;" id="selDay">
+                        <option value="不限">靖西市</option>
+                    </select>
+                </div>
+            </div>
+        </li>
+
+
         <li class="aui-list-item">   <label class="aui-list-item-label" style="font-size: 18px;color: #212121;">地区 </label></li>
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
@@ -471,7 +511,7 @@
                 </div>
 
                 <div class="aui-list-item-input">
-                    <select name="age_max" style="font-size: 14px;width: 80px;" id="citys">>
+                    <select name="fromCityId" style="font-size: 14px;width: 80px;" id="citys">>
                         <option value="不限">百色市</option>
                     </select>
                 </div>
@@ -483,7 +523,7 @@
                 </div>
 
                 <div class="aui-list-item-input" >
-                    <select name="age_max"  style="font-size: 14px;width: 100px;" id="areas">
+                    <select name="fromCityId"  style="font-size: 14px;width: 100px;" id="areas">
                         <option value="不限">靖西市</option>
                     </select>
                 </div>
@@ -596,7 +636,7 @@
 
 <%@ include file="/common/h5/js.jsp" %>
 <script src="${ctx}/aui/script/aui-dialog.js"></script>
-
+<script src="${ctx}/js/reg_date.js"></script>
 <script language="JavaScript">
 
 
@@ -855,6 +895,13 @@
            // console.log(ret)
         })
     }
+
+
+    var selYear = window.document.getElementById("selYear");
+    var selMonth = window.document.getElementById("selMonth");
+    var selDay = window.document.getElementById("selDay");
+    // 新建一个DateSelector类的实例，将三个select对象传进去
+    new DateSelector(selYear, selMonth, selDay, 1980, 1, 17);
 
 </script>
 

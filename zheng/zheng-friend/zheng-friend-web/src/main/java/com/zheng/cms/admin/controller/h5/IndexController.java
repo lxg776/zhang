@@ -86,6 +86,13 @@ public class IndexController extends BaseController {
 	@Autowired
 	FSmsMessageService fSmsMessageService;
 
+
+	@Autowired
+	FCitiesService fCitiesService;
+
+	@Autowired
+	FAreasService fAreasService;
+
 	/**
 	 * 首页
 	 * @return
@@ -169,7 +176,7 @@ public class IndexController extends BaseController {
 	 */
 	@ApiOperation(value = "后台首页")
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public String reg(HttpServletRequest request, Byte sex,String userName, String password, String idCard, String idCardImgs, String realName, String msgCode, HttpSession session) {
+	public String reg(HttpServletRequest request, Byte sex,String userName, String password, String idCard, String idCardImgs, String realName, String msgCode,Integer fromCityId,Integer fAreasId,  HttpSession session) {
 
 		UcenterUser ucenterUser =null;
 
@@ -236,6 +243,19 @@ public class IndexController extends BaseController {
 			FUserBaseMsg fUserBaseMsg = new FUserBaseMsg();
 			fUserBaseMsg.setNikename(SmsUtil.randomCheckCode(7));
 			fUserBaseMsg.setUserId(modle.getUserId());
+
+			FCities cities = fCitiesService.selectByPrimaryKey(fromCityId);
+			if(cities!=null){
+				fUserBaseMsg.setFromCity(cities.getCity());
+				fUserBaseMsg.setFromCityId(Integer.parseInt(cities.getCityid()));
+
+			}
+			FAreas fAreas = fAreasService.selectByPrimaryKey(fAreasId);
+			if(fAreas!=null){
+				fUserBaseMsg.setFromArea(fAreas.getArea());
+				fUserBaseMsg.setFromAreaId(Integer.parseInt(fAreas.getAreaid()));
+			}
+
 			fUserBaseMsgService.insert(fUserBaseMsg);
 
 			//设置显示选项

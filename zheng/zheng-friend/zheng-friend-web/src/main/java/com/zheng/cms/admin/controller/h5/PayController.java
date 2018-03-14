@@ -236,7 +236,7 @@ public class PayController extends BaseController {
 	private String xiWangPay(String oid,String appid,String key,String produceName,String money){
 		String xiweb_payurl = "https://user.xiweb.cn/run.php";
 		String notify_url = PropertiesFileUtil.getInstance("config").get("pay.callback");
-		String return_url = "http://127.0.0.1:9991/u/userDetail";
+		String return_url = "http://www.baidu.com";
 
 
 		StringBuffer sb = new StringBuffer();
@@ -273,9 +273,7 @@ public class PayController extends BaseController {
 		return  sb.toString();
 	}
 
-	private void callback(){
 
-	}
 
 
 
