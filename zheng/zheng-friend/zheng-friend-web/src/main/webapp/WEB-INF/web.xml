@@ -73,8 +73,7 @@
 
     <!-- 欢迎页面 -->
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>/h5/index</welcome-file>
     </welcome-file-list>
 
     <!-- 错误页面 -->

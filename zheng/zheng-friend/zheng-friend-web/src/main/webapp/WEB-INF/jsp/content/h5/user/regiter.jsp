@@ -454,38 +454,44 @@
         <li class="aui-list-item">   <label class="aui-list-item-label" style="font-size: 18px;color: #212121;">出生日期 </label></li>
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
+
+
+                <div class="aui-list-item-input">
+                    <select style="font-size: 14px; width: 80px;" id="selYear">
+
+                    </select>
+                </div>
+
                 <div class="aui-list-item-label" style="color: #757575; font-size: 12px; width: 30px;">
                     年
                 </div>
-
-                <div class="aui-list-item-input">
-                    <select style="font-size: 14px; width: 100px;" id="selYear">
-                        <option value="1101">广西壮族自治区</option>
-                    </select>
-                </div>
             </div>
 
             <div class="aui-list-item-inner">
-                <div class="aui-list-item-label" style="color: #757575; font-size: 12px;width: 30px;">
-                    月
-                </div>
+
 
                 <div class="aui-list-item-input">
                     <select name="fromCityId" style="font-size: 14px;width: 80px;" id="selMonth">
-                        <option value="不限">百色市</option>
+
                     </select>
+                </div>
+
+                <div class="aui-list-item-label" style="color: #757575; font-size: 12px;width: 30px;">
+                    月
                 </div>
             </div>
 
             <div class="aui-list-item-inner">
-                <div class="aui-list-item-label" style="color: #757575; font-size: 12px;width: 30px;">
-                    日
-                </div>
+
 
                 <div class="aui-list-item-input" >
-                    <select name="fromCityId"  style="font-size: 14px;width: 100px;" id="selDay">
-                        <option value="不限">靖西市</option>
+                    <select name="fromCityId"  style="font-size: 14px;width: 80px;" id="selDay">
+
                     </select>
+                </div>
+
+                <div class="aui-list-item-label" style="color: #757575; font-size: 12px;width: 30px;">
+                    日
                 </div>
             </div>
         </li>
@@ -500,7 +506,7 @@
 
                 <div class="aui-list-item-input">
                     <select style="font-size: 14px; width: 100px;" id="province">
-                        <option value="1101">广西壮族自治区</option>
+
                     </select>
                 </div>
             </div>
@@ -511,8 +517,8 @@
                 </div>
 
                 <div class="aui-list-item-input">
-                    <select name="fromCityId" style="font-size: 14px;width: 80px;" id="citys">>
-                        <option value="不限">百色市</option>
+                    <select name="fromCityId" style="font-size: 14px;width: 80px;" id="citys">
+
                     </select>
                 </div>
             </div>
@@ -523,8 +529,8 @@
                 </div>
 
                 <div class="aui-list-item-input" >
-                    <select name="fromCityId"  style="font-size: 14px;width: 100px;" id="areas">
-                        <option value="不限">靖西市</option>
+                    <select name="fAreasId"  style="font-size: 14px;width: 100px;" id="areas">
+
                     </select>
                 </div>
             </div>
@@ -543,7 +549,7 @@
                 </div>
             </div>
         </li>
-
+        <input type="hidden"  name="birthDay" value="">
         <li class="aui-list-item">
             <div class="aui-list-item-inner">
                 <div class="aui-list-item-input">
@@ -727,9 +733,10 @@
                     if(defaultId&&item.cityid == defaultId ){
                         $("#citys").append(" <option value='" + item.cityid + "'   selected='selected'> " + item.city + "</option>");
                         getAreasList(defaultId,dareaid);
+                        return;
                     }else{
                         $("#citys").append(" <option value='" + item.cityid + "' > " + item.city + "</option>");
-                        if(i==0){
+                        if(!defaultId&&i==0){
                             getAreasList(item.cityid,"");
                         }
                     }
@@ -776,6 +783,13 @@
         }
 
 
+
+
+
+
+
+
+
         if(!$("input[name='idCard']").val().match(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/)){
             msg("身份证格式不正确");
             $("input[name='idCard']").focus();
@@ -820,6 +834,14 @@
         idCard = $("input[name='idCard']").val();
         userName = $("input[name='userName']").val();
         code = $("input[name='msgCode']").val();
+
+
+        year = $("#selYear").val();
+        month = $("#selMonth").val();
+        day = $("#selDay").val();
+        brithDay = year+"-"+month+"-"+day;
+        $("input[name='birthDay']").val(brithDay);
+
 
 
         $.ajax({

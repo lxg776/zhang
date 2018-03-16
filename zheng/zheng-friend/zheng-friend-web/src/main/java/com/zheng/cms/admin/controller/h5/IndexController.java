@@ -102,7 +102,7 @@ public class IndexController extends BaseController {
 	public String index(@RequestParam(defaultValue = "1") Integer pageNum,ModelMap modelMap) {
 
 
-		return "/content/h5/first.jsp";
+		return "/sso/h5_login.jsp";
 	}
 
 
@@ -176,7 +176,7 @@ public class IndexController extends BaseController {
 	 */
 	@ApiOperation(value = "后台首页")
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-	public String reg(HttpServletRequest request, Byte sex,String userName, String password, String idCard, String idCardImgs, String realName, String msgCode,Integer fromCityId,Integer fAreasId,  HttpSession session) {
+	public String reg(HttpServletRequest request, Byte sex,String userName, String password, String idCard, String idCardImgs, String realName, String msgCode,Integer fromCityId,Integer fAreasId,String birthDay, HttpSession session) {
 
 		UcenterUser ucenterUser =null;
 
@@ -213,10 +213,11 @@ public class IndexController extends BaseController {
 		}else{
 			ucenterUserService.insert(modle);
 		}
-
 		UcenterUserExample example = new UcenterUserExample();
 		example.createCriteria().andUserNameEqualTo(userName);
 		modle=ucenterUserService.selectFirstByExample(example);
+
+
 
 		String upms_code="";
 		//登录
@@ -232,31 +233,33 @@ public class IndexController extends BaseController {
 		ucenterIdentificaion.setIdcardNo(idCard);
 		ucenterIdentificaion.setRealName(realName);
 
-
 		if(null!=ucenterUser){
 			ucenterIdentificaionService.updateByPrimaryKey(ucenterIdentificaion);
 			return "redirect:/u/txGrzl";
 		}else{
 			ucenterIdentificaionService.insert(ucenterIdentificaion);
-
 			//随机一个昵称
 			FUserBaseMsg fUserBaseMsg = new FUserBaseMsg();
 			fUserBaseMsg.setNikename(SmsUtil.randomCheckCode(7));
 			fUserBaseMsg.setUserId(modle.getUserId());
+			fUserBaseMsg.setBirthDate(birthDay);
+			FCitiesExample fCitiesExample =new FCitiesExample();
+			fCitiesExample.createCriteria().andCityidEqualTo(fromCityId+"");
+			FCities cities = fCitiesService.selectFirstByExample(fCitiesExample);
 
-			FCities cities = fCitiesService.selectByPrimaryKey(fromCityId);
 			if(cities!=null){
 				fUserBaseMsg.setFromCity(cities.getCity());
 				fUserBaseMsg.setFromCityId(Integer.parseInt(cities.getCityid()));
-
 			}
-			FAreas fAreas = fAreasService.selectByPrimaryKey(fAreasId);
+
+
+			FAreasExample fAreasExample =new FAreasExample();
+			fAreasExample.createCriteria().andAreaidEqualTo(fAreasId+"");
+			FAreas fAreas = fAreasService.selectFirstByExample(fAreasExample);
 			if(fAreas!=null){
 				fUserBaseMsg.setFromArea(fAreas.getArea());
 				fUserBaseMsg.setFromAreaId(Integer.parseInt(fAreas.getAreaid()));
 			}
-
-			fUserBaseMsgService.insert(fUserBaseMsg);
 
 			//设置显示选项
 			FUserSetting fUserSetting =new FUserSetting();
@@ -270,6 +273,8 @@ public class IndexController extends BaseController {
 			fUserSetting.setMsgSendStatus((byte)0);
 			fUserSetting.setHistoryviewStatus((byte)1);
 
+
+			fUserBaseMsgService.insert(fUserBaseMsg);
 			fUserSettingService.insert(fUserSetting);
 
 			return "redirect:/u/txGrzl?upms_code="+upms_code+"&upms_username="+userName;
