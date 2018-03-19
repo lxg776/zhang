@@ -49,6 +49,16 @@ public class RecentMsgVo extends FMessage{
 
     private String showDate;
 
+    private String age;
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
     public String getShowDate() {
         return showDate;
     }

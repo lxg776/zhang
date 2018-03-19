@@ -18,6 +18,15 @@ public class FuserDetailVo extends UcenterUser {
 
     private UcenterIdentificaion ucenterIdentificaion;
 
+    private String age;
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
 
     public FUserRequest getfUserRequest() {
         return fUserRequest;

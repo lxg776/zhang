@@ -252,6 +252,7 @@ public class WebController extends BaseController {
 		HashMap<String,Object> map = new HashMap<>();
 		map.put("dataList",recommendUserList);
 		map.put("pageNum",pageNum);
+		map.put("imageBase",imageBase);
 		result.setData(map);
 		return result;
 	}

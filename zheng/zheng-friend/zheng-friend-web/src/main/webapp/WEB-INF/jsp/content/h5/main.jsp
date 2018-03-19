@@ -59,7 +59,7 @@
                                 <div class="aui-list-item-right aui-greed">实名</div>
                             </div>
                             <div class="aui-list-item-text">
-                                <div class="aui-list-item-text">25岁</div>
+                                <div class="aui-list-item-text">${item.age}岁</div>
                                 <div class="aui-list-item-text">${item.fUserBaseMsg.profession}</div>
                                 <div class="aui-list-item-text">${item.fUserBaseMsg.height}cm</div>
                             </div>
@@ -151,7 +151,7 @@
                             </div>
 
                             <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
-                                广西靖西市，30岁，${item.fUserBaseMsg.height}cm，${item.fUserBaseMsg.monthIncome}元
+                                广西靖西市，${item.age}岁，${item.fUserBaseMsg.height}cm，${item.fUserBaseMsg.monthIncome}元
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                         </div>
 
                         <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
-                            广西靖西市，30岁，${item.fwUserBaseMsg.height}cm，${item.fwUserBaseMsg.monthIncome}元
+                            广西靖西市，${item.age}岁，${item.fwUserBaseMsg.height}cm，${item.fwUserBaseMsg.monthIncome}元
                         </div>
                     </div>
                 </div>
@@ -230,7 +230,7 @@
                         </div>
 
                         <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
-                            广西靖西市，30岁，${modle.fUserBaseMsg.height}cm，${modle.fUserBaseMsg.monthIncome}元
+                            广西靖西市，${modle.age}岁，${modle.fUserBaseMsg.height}cm，${modle.fUserBaseMsg.monthIncome}元
                         </div>
                     </div>
                 </div>
@@ -270,7 +270,7 @@
 
                         <div class="aui-list-item-text">
                             <div class="aui-list-item-left">年龄</div>
-                        <div class="aui-list-item-title">26岁</div>
+                        <div class="aui-list-item-title">${modle.age}岁</div>
                     </div>
 
                     <div class="aui-list-item-text">
@@ -495,7 +495,7 @@
     <li class="aui-list-item">
         <div class="aui-media-list-item-inner">
             <div class="aui-list-item-media" style="width: 7rem; height: 7rem;">
-                <img src="${ctx}/aui/image/mm.jpeg" >
+                <img src="#image" >
             </div>
             <div class="aui-list-item-inner">
                 <div class="aui-list-item-text">
@@ -654,7 +654,7 @@
 
 <script type="text/javascript">
 
-
+    var  imageBase = "${imageBase}";
 
    // $(window).load(function () {
    //                 dispLog("Load Event");
@@ -685,7 +685,7 @@
             window.location.href = "${ctx}/u/logout";
         });
 
-        var currentPage = "page1";
+
         var tempRet = null;
 
         var tab = new auiTab({
@@ -727,6 +727,7 @@
                 $("#page4").addClass("aui-hide");
 
                 $('body,html').animate({scrollTop:0},100);
+
                 window.location.href=indexUrl+"#page1"
 
             }else if(index==2){
@@ -736,7 +737,7 @@
                 $("#page4").addClass("aui-hide");
 
                 $('body,html').animate({scrollTop:0},100);
-                currentPage = "page2";
+
                 window.location.href=indexUrl+"#page2"
             }else if(index==3){
                 $("#page1").addClass("aui-hide");
@@ -744,7 +745,7 @@
                 $("#page3").removeClass("aui-hide");
                 $("#page4").addClass("aui-hide");
                 $('body,html').animate({scrollTop:0},100);
-                currentPage = "page3";
+
                 window.location.href=indexUrl+"#page3"
             }else if(index==4){
                 $("#page1").addClass("aui-hide");
@@ -752,7 +753,7 @@
                 $("#page3").addClass("aui-hide");
                 $("#page4").removeClass("aui-hide");
                 $('body,html').animate({scrollTop:0},100);
-                currentPage = "page4";
+
                 window.location.href=indexUrl+"#page4"
             }
         }
@@ -779,12 +780,17 @@
         },function(ret){
             if(ret.isToBottom){
               //  document.getElementById("demo").textContent = "已到达底部";
-                if(currentPage == "page1"){
+                url = window.location.href;
+
+                if(url.endsWith("page1")){
                     loadMoreUser();
-                }else if(currentPage =="page2"){
+                }else if(url.endsWith("page2")){
                     loadMoreActivity();
                 }
+
             }else{
+
+
             }
         });
 
@@ -964,6 +970,9 @@
             tempHtml = tempHtml.replace("#height",item.fUserBaseMsg.height);
             tempHtml = tempHtml.replace("#zo",getUserRequest(item));
             tempHtml = tempHtml.replace("#toUser",item.userId);
+            tempHtml = tempHtml.replace("#age",item.age);
+            tempHtml = tempHtml.replace("#age",item.age);
+            tempHtml = tempHtml.replace("#image",imageBase+item.avatar);
             console.log(tempHtml);
             return tempHtml;
         }
