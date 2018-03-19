@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -116,11 +117,11 @@ public class WebController extends BaseController {
 		modelMap.put("imageBase",imageBase);
 
 		//活动列表
-        FActivityExample fActivityExample = new FActivityExample();
-        fActivityExample.createCriteria().andShowStatusEqualTo("show");
-        fActivityExample.setOrderByClause("ctime desc");
-        List<FActivity> fActivityList  = fActivityService.selectByExampleForOffsetPage(fActivityExample,0,pageSize);
-        modelMap.put("fActivityList",fActivityList);
+		FActivityExample fActivityExample = new FActivityExample();
+		fActivityExample.createCriteria().andShowStatusEqualTo("show");
+		fActivityExample.setOrderByClause("ctime desc");
+		List<FActivity> fActivityList  = fActivityService.selectByExampleForOffsetPage(fActivityExample,0,pageSize);
+		modelMap.put("fActivityList",fActivityList);
 
 
 		//查询会员的类型
@@ -224,15 +225,15 @@ public class WebController extends BaseController {
 	}
 
 
-    @ApiOperation(value = "更多用户推荐")
-    @RequestMapping(value = "/activityDetail", method = RequestMethod.GET)
-    public String activityDetail(@RequestParam(defaultValue = "0") Integer activityId,HttpSession session,ModelMap modelMap) {
+	@ApiOperation(value = "更多用户推荐")
+	@RequestMapping(value = "/activityDetail", method = RequestMethod.GET)
+	public String activityDetail(@RequestParam(defaultValue = "0") Integer activityId,HttpSession session,ModelMap modelMap) {
 
-        //活动详情
-        FActivity fActivity = fActivityService.selectByPrimaryKey(activityId);
-        modelMap.put("modle",fActivity);
-        return "/content/h5/user/detail_activity.jsp";
-    }
+		//活动详情
+		FActivity fActivity = fActivityService.selectByPrimaryKey(activityId);
+		modelMap.put("modle",fActivity);
+		return "/content/h5/user/detail_activity.jsp";
+	}
 
 	@ApiOperation(value = "服务器校验")
 	@RequestMapping(value = "/loadRecommendUserList", method = RequestMethod.GET)
@@ -246,7 +247,7 @@ public class WebController extends BaseController {
 		FuserDetailVo myDetailVo  = new FuserDetailVo();
 		myDetailVo.setSex(ucenterUser.getSex());
 		myDetailVo.setUserId(ucenterUser.getUserId());
-				//系统推荐人
+		//系统推荐人
 		List<FuserDetailVo> recommendUserList = fUserBaseMsgService.selectRecommendUsers(myDetailVo,(pageNum-1)*pageSize,pageSize);
 		HashMap<String,Object> map = new HashMap<>();
 		map.put("dataList",recommendUserList);
@@ -834,7 +835,7 @@ public class WebController extends BaseController {
 			modelMa.put("modle",queryObject);
 		}
 
-		return "/content/h5/user/tx_shzk.jsp";
+		return "/content/h5/user/edit_shzk.jsp";
 	}
 
 
@@ -845,13 +846,13 @@ public class WebController extends BaseController {
 	 */
 	@ApiOperation(value = "兴趣爱好")
 	@RequestMapping(value = "/editXqhh", method = RequestMethod.GET)
-	public String editXqhh(ModelMap modelMa,HttpSession session) {
+	public String editXqhh(ModelMap modelMap,HttpSession session) {
 		String  username = (String) SecurityUtils.getSubject().getPrincipal();
 		UcenterUser ucenterUser = getUctenuser(username,session);
 		Integer userId = ucenterUser.getUserId();
 		FUserLivingStatus queryObject = fUserLivingStatusService.selectByPrimaryKey(userId);
 		if(queryObject!=null){
-			modelMa.put("modle",queryObject);
+			modelMap.put("modle",queryObject);
 		}
 
 		return "/content/h5/user/edit_xqhh.jsp";
@@ -881,6 +882,10 @@ public class WebController extends BaseController {
 		return "redirect:/u/index";
 	}
 
+	public String redirectByPath(String path){
+		long dateString = new Date().getTime();
+		return "redirect:"+path+"?d="+dateString;
+	}
 
 
 }

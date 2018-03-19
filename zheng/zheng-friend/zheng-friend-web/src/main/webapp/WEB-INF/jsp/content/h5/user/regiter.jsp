@@ -471,7 +471,7 @@
 
 
                 <div class="aui-list-item-input">
-                    <select name="fromCityId" style="font-size: 14px;width: 80px;" id="selMonth">
+                    <select  style="font-size: 14px;width: 80px;" id="selMonth">
 
                     </select>
                 </div>
@@ -485,7 +485,7 @@
 
 
                 <div class="aui-list-item-input" >
-                    <select name="fromCityId"  style="font-size: 14px;width: 80px;" id="selDay">
+                    <select style="font-size: 14px;width: 80px;" id="selDay">
 
                     </select>
                 </div>
@@ -573,7 +573,7 @@
             </div>
         </li>
         <%--<input id="imgs" type="hidden" name="idCardImgs"  />--%>
-        <input id="imgs" type="hidden" name="idCardImgs" value="wtf.jpeg"  />
+        <input id="imgs" type="hidden" name="idCardImgs" />
         <div class="aui-card-list">
             <div class="aui-card-list-header" style="color: #757575; font-size: 14px;">
                 为保证注册的真实性需上传身份证图
@@ -923,7 +923,7 @@
     var selMonth = window.document.getElementById("selMonth");
     var selDay = window.document.getElementById("selDay");
     // 新建一个DateSelector类的实例，将三个select对象传进去
-    new DateSelector(selYear, selMonth, selDay, 1980, 1, 17);
+    new DateSelector(selYear, selMonth, selDay, 1985, 1, 1);
 
 </script>
 

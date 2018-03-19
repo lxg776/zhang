@@ -150,7 +150,9 @@ public class UpmsAuthenticationFilter extends AuthenticationFilter {
                         try {
                             // client无密认证
                             String username = request.getParameter("upms_username");
-                            subject.login(new UsernamePasswordToken(username, ""));
+                            UserPassTypeToken userPassTypeToken =  new UserPassTypeToken(username, "");
+                            userPassTypeToken.setDoType(UserPassTypeToken.NO_CHECK_PASSWORD);
+                            subject.login(userPassTypeToken);
                             HttpServletResponse httpServletResponse = WebUtils.toHttp(response);
                             httpServletResponse.sendRedirect(backUrl.toString());
                             return true;

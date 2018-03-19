@@ -243,6 +243,7 @@ public class IndexController extends BaseController {
 			fUserBaseMsg.setNikename(SmsUtil.randomCheckCode(7));
 			fUserBaseMsg.setUserId(modle.getUserId());
 			fUserBaseMsg.setBirthDate(birthDay);
+
 			FCitiesExample fCitiesExample =new FCitiesExample();
 			fCitiesExample.createCriteria().andCityidEqualTo(fromCityId+"");
 			FCities cities = fCitiesService.selectFirstByExample(fCitiesExample);

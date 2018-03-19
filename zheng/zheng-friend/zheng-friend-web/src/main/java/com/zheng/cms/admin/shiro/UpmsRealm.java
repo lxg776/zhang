@@ -59,12 +59,18 @@ public class UpmsRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+
+        String checkType="";
+
+        if(authenticationToken instanceof  UserPassTypeToken){
+            UserPassTypeToken userPassTypeToken = (UserPassTypeToken) authenticationToken;
+            checkType = userPassTypeToken.getDoType();
+        }
+
         String username = (String) authenticationToken.getPrincipal();
         String password = new String((char[]) authenticationToken.getCredentials());
-        // client无密认证
-        String upmsType = PropertiesFileUtil.getInstance("zheng-upms-client").get("zheng.upms.type");
 
-        if ("client".equals(upmsType)) {
+        if (checkType.equals(UserPassTypeToken.NO_CHECK_PASSWORD)) {
             return new SimpleAuthenticationInfo(username, password, getName());
         }
         // 查询用户信息
