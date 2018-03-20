@@ -156,13 +156,81 @@ public class PayController extends BaseController {
 	}
 
 
+	/**
+	 * payResult
+	 * @return
+	 */
+	@ApiOperation(value = "支付结果")
+	@RequestMapping(value = "/payResult", method = RequestMethod.GET)
+	public String payResult(@RequestParam(defaultValue = "0") String oid, @RequestParam(defaultValue = "0") String money, String key,ModelMap modelMap){
+
+
+		if(null==key||"".equals(key)){
+			return "/content/h5/user/pay_fail.jsp";
+		}
+
+		PayInOrder payInOrder = payInOrderService.selectByPrimaryKey(Integer.parseInt(oid));
+
+		long ctime =payInOrder.getCtime();
+		Date orderDate = new Date(ctime);
+
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String dateStr = sdf.format(orderDate);
+
+
+		String callBack = payInOrder.getCallBack();
+		String args[] = callBack.split("&");
+		if(null!=args){
+
+			if(args[0].equals("u")&&args.length==4){
+				//更新会员等级
+
+				String uid=args[1];
+				String payVendorId = args[2];
+				String mTypeId = args[3];
+
+				PayVendor payVendor = payVendorService.selectByPrimaryKey(Integer.parseInt(payVendorId));
+				String appsecret =payVendor.getAppsecret();
+
+				StringBuffer sb =new StringBuffer();
+
+				String state = "1";
+				sb.append(oid);
+				sb.append(state);
+				sb.append(money);
+				sb.append(appsecret);
+				try {
+					String  setKey = MD5Util.getMD5(payVendor.getAppid()+MD5Util.getMD5(sb.toString()));
+
+					if(key.equals(setKey)){
+						//更新订单状态
+						FMemberType fMemberType = fMemberTypeService.selectByPrimaryKey(Integer.parseInt(mTypeId));
+						modelMap.put("orderName",fMemberType.getName());
+						modelMap.put("days",fMemberType.getServiceDays());
+						modelMap.put("money",money);
+						modelMap.put("date",dateStr);
+						return "/content/h5/user/pay_success.jsp";
+					}
+
+				} catch (Exception e) {
+					e.printStackTrace();
+					return "/content/h5/user/pay_fail.jsp";
+				}
+
+			}
+
+		}
+		return "/content/h5/user/pay_fail.jsp";
+
+
+	}
 
 
 
 	private String xiWangPay(String oid,String appid,String key,String produceName,String money){
 		String xiweb_payurl = "https://user.xiweb.cn/run.php";
 		String notify_url = PropertiesFileUtil.getInstance("config").get("pay.callback");
-		String return_url = "http://www.baidu.com";
+		String return_url = PropertiesFileUtil.getInstance("config").get("pay.result");
 
 
 		StringBuffer sb = new StringBuffer();
