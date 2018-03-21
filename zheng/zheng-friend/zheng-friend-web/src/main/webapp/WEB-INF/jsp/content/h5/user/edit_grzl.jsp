@@ -599,11 +599,11 @@
 
                 <div class="aui-list-item-input">
                     <select name="monthIncome">
-                        <option value="3000以下" <c:if test="${modle.monthIncome=='3000以下'}"> selected="selected"</c:if>  >3000以下</option>
-                        <option value="3000~5000"  <c:if test="${modle.monthIncome=='3000~5000'}"> selected="selected"</c:if>  >3000~5000</option>
-                        <option value="5000~8000" <c:if test="${modle.monthIncome=='5000~8000'}"> selected="selected"</c:if>  >5000~8000</option>
-                        <option value="8000~12000" <c:if test="${modle.monthIncome=='8000~12000'}"> selected="selected"</c:if> >8000~12000</option>
-                        <option value="12000以上" <c:if test="${modle.monthIncome=='12000以上'}"> selected="selected"</c:if> >12000以上</option>
+                        <option value="3000元以下" <c:if test="${modle.monthIncome=='3000元以下'}"> selected="selected"</c:if>  >3000元以下</option>
+                        <option value="3000元~5000元"  <c:if test="${modle.monthIncome=='3000元~5000元'}"> selected="selected"</c:if>  >3000元~5000元</option>
+                        <option value="5000元~8000元" <c:if test="${modle.monthIncome=='5000元~8000元'}"> selected="selected"</c:if>  >5000元~8000元</option>
+                        <option value="8000元~12000元" <c:if test="${modle.monthIncome=='8000元~12000元'}"> selected="selected"</c:if> >8000元~12000元</option>
+                        <option value="12000元以上" <c:if test="${modle.monthIncome=='12000元以上'}"> selected="selected"</c:if> >12000元以上</option>
                     </select>
                 </div>
             </div>

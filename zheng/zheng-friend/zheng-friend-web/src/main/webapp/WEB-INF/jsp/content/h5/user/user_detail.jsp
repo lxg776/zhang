@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
-                            广西靖西市，30岁，${modle.fUserBaseMsg.height}cm，${modle.fUserBaseMsg.monthIncome}元
+                            广西靖西市，30岁，${modle.fUserBaseMsg.height}cm，${modle.fUserBaseMsg.monthIncome}
                         </div>
                     </div>
 
@@ -127,7 +127,7 @@
 
     <div class="aui-list-item-text">
         <div class="aui-list-item-left"">月收入</div>
-    <div class="aui-list-item-title">${modle.fUserBaseMsg.monthIncome}元</div>
+    <div class="aui-list-item-title">${modle.fUserBaseMsg.monthIncome}</div>
 </div>
 
 
@@ -165,7 +165,7 @@
 
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">月收入</div>
-                <div class="aui-list-item-title">${modle.fUserRequest.incomeMonthly}元</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.incomeMonthly}</div>
             </div>
 
             <div class="aui-list-item-text">

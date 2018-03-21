@@ -54,7 +54,7 @@
                             择偶条件:我想找寻靖西<c:if test="${not empty toUser.fUserRequest.age}">年龄在${toUser.fUserRequest.age}岁,</c:if>
                             <c:if test="${not empty toUser.fUserRequest.height}">身高${toUser.fUserRequest.height}cm，</c:if>
                             <c:if test="${not empty toUser.fUserRequest.incomeMonthly}">月收入
-                                ${toUser.fUserRequest.incomeMonthly}元</c:if>的<c:if test="${toUser.sex == 1}">男性</c:if><c:if
+                                ${toUser.fUserRequest.incomeMonthly}</c:if>的<c:if test="${toUser.sex == 1}">男性</c:if><c:if
                                 test="${toUser.sex == 2}">女性</c:if>
                         </div>
                     </div>

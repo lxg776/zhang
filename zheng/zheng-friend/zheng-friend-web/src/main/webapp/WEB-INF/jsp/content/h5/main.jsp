@@ -68,7 +68,7 @@
                                 择偶条件:我想找寻靖西<c:if test="${not empty item.fUserRequest.age}">年龄在${item.fUserRequest.age}岁,</c:if>
                                 <c:if test="${not empty item.fUserRequest.height}">身高${item.fUserRequest.height}<c:if test="${item.fUserRequest.height!='不限'}">cm</c:if>，</c:if>
                                 <c:if test="${not empty item.fUserRequest.incomeMonthly}">月收入
-                                    ${item.fUserRequest.incomeMonthly}元</c:if>的<c:if test="${item.sex == 1}">男性</c:if><c:if test="${item.sex == 2}">女性</c:if>
+                                    ${item.fUserRequest.incomeMonthly}</c:if>的<c:if test="${item.sex == 1}">男性</c:if><c:if test="${item.sex == 2}">女性</c:if>
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                             </div>
 
                             <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
-                                广西靖西市，${item.age}岁，${item.fUserBaseMsg.height}cm，${item.fUserBaseMsg.monthIncome}元
+                                广西靖西市，${item.age}岁，${item.fUserBaseMsg.height}cm，${item.fUserBaseMsg.monthIncome}
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                         </div>
 
                         <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
-                            广西靖西市，${item.age}岁，${item.fwUserBaseMsg.height}cm，${item.fwUserBaseMsg.monthIncome}元
+                            广西靖西市，${item.age}岁，${item.fwUserBaseMsg.height}cm，${item.fwUserBaseMsg.monthIncome}
                         </div>
                     </div>
                 </div>
@@ -230,7 +230,7 @@
                         </div>
 
                         <div class="aui-list-item-text" style="color:#757575;font-size: 14px;">
-                            广西靖西市，${modle.age}岁，${modle.fUserBaseMsg.height}cm，${modle.fUserBaseMsg.monthIncome}元
+                            广西靖西市，${modle.age}岁，${modle.fUserBaseMsg.height}cm，${modle.fUserBaseMsg.monthIncome}
                         </div>
                     </div>
                 </div>
@@ -286,7 +286,7 @@
 
     <div class="aui-list-item-text">
         <div class="aui-list-item-left">月收入</div>
-    <div class="aui-list-item-title">${modle.fUserBaseMsg.monthIncome}元</div>
+    <div class="aui-list-item-title">${modle.fUserBaseMsg.monthIncome}</div>
 </div>
 
 
@@ -324,7 +324,7 @@
 
             <div class="aui-list-item-text">
                 <div class="aui-list-item-left">月收入</div>
-                <div class="aui-list-item-title">${modle.fUserRequest.incomeMonthly}元</div>
+                <div class="aui-list-item-title">${modle.fUserRequest.incomeMonthly}</div>
             </div>
 
             <div class="aui-list-item-text">
@@ -1001,7 +1001,7 @@
                 tempHtml = tempHtml +"身高"+item.fUserRequest.height+"cm,";
             }
             if(item.fUserRequest.incomeMonthly){
-                tempHtml = tempHtml +"月收入"+item.fUserRequest.incomeMonthly+"元,";
+                tempHtml = tempHtml +"月收入"+item.fUserRequest.incomeMonthly+",";
             }
 
             if(item.sex == '1'){
