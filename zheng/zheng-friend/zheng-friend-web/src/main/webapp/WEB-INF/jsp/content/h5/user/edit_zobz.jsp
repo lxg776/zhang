@@ -45,6 +45,50 @@
                     </div>
                 </div>
             </li>
+
+            <li class="aui-list-item">   <label class="aui-list-item-label" style="font-size: 18px;color: #212121;">地区 </label></li>
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label" style="color: #757575; font-size: 12px; width: 30px;">
+                        省
+                    </div>
+
+                    <div class="aui-list-item-input">
+                        <select name="fromProvinceId"  style="font-size: 14px; width: 100px;" id="province">
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label" style="color: #757575; font-size: 12px;width: 30px;">
+                        市
+                    </div>
+
+                    <div class="aui-list-item-input">
+                        <select name="fromCityId" style="font-size: 14px;width: 80px;" id="citys">
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="aui-list-item-inner">
+                    <div class="aui-list-item-label" style="color: #757575; font-size: 12px;width: 30px;">
+                        区/县
+                    </div>
+
+                    <div class="aui-list-item-input" >
+                        <select name="fromAreaId"  style="font-size: 14px;width: 100px;" id="areas">
+
+                        </select>
+                    </div>
+                </div>
+            </li>
+
+
+
+
+
             <li class="aui-list-item">   <div class="aui-list-item-label" style="font-size: 18px;color: #212121;">年龄（岁） </label></li>
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
@@ -324,6 +368,7 @@
 <%@ include file="/common/h5/js.jsp" %>
 
 <script src="${ctx}/aui/script/aui-dialog.js"></script>
+<script src="${ctx}/js/city_list.js"></script>
 
 <script language="JavaScript">
 
@@ -336,6 +381,28 @@
     });
     $("#regBtn").click(function(){
         tijiao();
+    });
+
+
+
+    $(document).ready(function(){
+        initCityData(true);
+    });
+
+    var  dProvinceId="450000";
+    var  dcityid = "451000";
+    var  dAreaid = "451025";
+
+    ctx = "${ctx}";
+
+    //获取区县
+    $("#province").change(function () {//当选择城市的下拉选的时候，区域进行联动
+        getCityList($("#province").val(),"","",true);
+    });
+
+    //获取区县
+    $("#citys").change(function () {//当选择城市的下拉选的时候，区域进行联动
+        getAreasList($("#citys").val(),"",true);
     });
 
 

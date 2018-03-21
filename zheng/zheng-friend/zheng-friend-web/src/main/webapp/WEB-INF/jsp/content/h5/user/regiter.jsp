@@ -643,6 +643,7 @@
 <%@ include file="/common/h5/js.jsp" %>
 <script src="${ctx}/aui/script/aui-dialog.js"></script>
 <script src="${ctx}/js/reg_date.js"></script>
+<script src="${ctx}/js/city_list.js"></script>
 <script language="JavaScript">
 
 
@@ -665,28 +666,7 @@
     var  dcityid = "451000";
     var  dAreaid = "451025";
 
-    //初始化城市数据
-    function initCityData(){
-        $("#province").empty();
-
-        $.ajax({
-            url: "${ctx}/c/provinceList",
-            type: "GET",
-            dataType:'json',
-            success:function(data){
-                $.each(data.data.dataList,function(i,item){
-                    if(item.provinceid == dProvinceId ){
-                        $("#province").append(" <option value='" + item.provinceid + "'   selected='selected'> " + item.province + "</option>");
-                    }else{
-                        $("#province").append(" <option value='" + item.provinceid + "' > " + item.province + "</option>");
-                    }
-                });
-            }
-        });
-        getCityList(dProvinceId,dcityid,dAreaid);
-       // getAreasList(cityid,areaid);
-
-    }
+    ctx = "${ctx}";
 
     //获取区县
     $("#province").change(function () {//当选择城市的下拉选的时候，区域进行联动
@@ -699,51 +679,9 @@
     });
 
 
-    function getAreasList(cityid,defaultId) {
-        $("#areas").empty();
-        data = "cityid="+cityid;
-        $.ajax({
-            url: "${ctx}/c/areasList",
-            type: "GET",
-            data:data,
-            dataType:'json',
-            success:function(data){
-                $.each(data.data.dataList,function(i,item){
-                    if(defaultId&&item.areaid == defaultId ){
-                        $("#areas").append(" <option value='" + item.areaid + "'   selected='selected'> " + item.area + "</option>");
-                    }else{
-                        $("#areas").append(" <option value='" + item.areaid + "' > " + item.area + "</option>");
-                    }
 
-                });
-            }
-        });
-    }
 
-    function getCityList(provinceid,defaultId,dareaid) {
-        $("#citys").empty();
-        data = "provinceid="+provinceid;
-        $.ajax({
-            url: "${ctx}/c/cityList",
-            type: "GET",
-            data:data,
-            dataType:'json',
-            success:function(data){
-                $.each(data.data.dataList,function(i,item){
-                    if(defaultId&&item.cityid == defaultId ){
-                        $("#citys").append(" <option value='" + item.cityid + "'   selected='selected'> " + item.city + "</option>");
-                        getAreasList(defaultId,dareaid);
-                        return;
-                    }else{
-                        $("#citys").append(" <option value='" + item.cityid + "' > " + item.city + "</option>");
-                        if(!defaultId&&i==0){
-                            getAreasList(item.cityid,"");
-                        }
-                    }
-                });
-            }
-        });
-    }
+
 
 
 
@@ -846,7 +784,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/h5/checkUserName",
+            url: "${ctx}/h5/checkUserName",
             data: "idCard="+idCard+"&userName="+userName+"&code="+code,
             async:false,
             success: function(data){
@@ -904,8 +842,6 @@
                 showTime(time -1);
             },1000);
         }
-
-
     }
 
     function msg(msg) {

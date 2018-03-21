@@ -20,6 +20,12 @@
     <result column="child_status" jdbcType="VARCHAR" property="childStatus" />
     <result column="smoke_status" jdbcType="VARCHAR" property="smokeStatus" />
     <result column="living_status" jdbcType="VARCHAR" property="livingStatus" />
+    <result column="from_city" jdbcType="VARCHAR" property="fromCity" />
+    <result column="from_city_id" jdbcType="VARCHAR" property="fromCityId" />
+    <result column="from_area" jdbcType="VARCHAR" property="fromArea" />
+    <result column="from_area_id" jdbcType="VARCHAR" property="fromAreaId" />
+    <result column="from_province_id" jdbcType="VARCHAR" property="fromProvinceId" />
+    <result column="from_province" jdbcType="VARCHAR" property="fromProvince" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -82,7 +88,8 @@
   <sql id="Base_Column_List">
     user_id, sex, height, shape, age, income_monthly, income_year, house_state, education, 
     marital_status, house_status, car_status, job, friend_require, drink_status, child_status, 
-    smoke_status, living_status
+    smoke_status, living_status, from_city, from_city_id, from_area, from_area_id, from_province_id, 
+    from_province
   </sql>
   <select id="selectByExample" parameterType="com.zheng.friend.dao.model.FUserRequestExample" resultMap="BaseResultMap">
     select
@@ -120,14 +127,18 @@
       income_year, house_state, education, 
       marital_status, house_status, car_status, 
       job, friend_require, drink_status, 
-      child_status, smoke_status, living_status
+      child_status, smoke_status, living_status, 
+      from_city, from_city_id, from_area, 
+      from_area_id, from_province_id, from_province
       )
     values (#{userId,jdbcType=INTEGER}, #{sex,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, 
       #{shape,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, #{incomeMonthly,jdbcType=VARCHAR}, 
       #{incomeYear,jdbcType=VARCHAR}, #{houseState,jdbcType=VARCHAR}, #{education,jdbcType=VARCHAR}, 
       #{maritalStatus,jdbcType=VARCHAR}, #{houseStatus,jdbcType=VARCHAR}, #{carStatus,jdbcType=VARCHAR}, 
       #{job,jdbcType=VARCHAR}, #{friendRequire,jdbcType=VARCHAR}, #{drinkStatus,jdbcType=VARCHAR}, 
-      #{childStatus,jdbcType=VARCHAR}, #{smokeStatus,jdbcType=VARCHAR}, #{livingStatus,jdbcType=VARCHAR}
+      #{childStatus,jdbcType=VARCHAR}, #{smokeStatus,jdbcType=VARCHAR}, #{livingStatus,jdbcType=VARCHAR}, 
+      #{fromCity,jdbcType=VARCHAR}, #{fromCityId,jdbcType=VARCHAR}, #{fromArea,jdbcType=VARCHAR}, 
+      #{fromAreaId,jdbcType=VARCHAR}, #{fromProvinceId,jdbcType=VARCHAR}, #{fromProvince,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.friend.dao.model.FUserRequest">
@@ -187,6 +198,24 @@
       <if test="livingStatus != null">
         living_status,
       </if>
+      <if test="fromCity != null">
+        from_city,
+      </if>
+      <if test="fromCityId != null">
+        from_city_id,
+      </if>
+      <if test="fromArea != null">
+        from_area,
+      </if>
+      <if test="fromAreaId != null">
+        from_area_id,
+      </if>
+      <if test="fromProvinceId != null">
+        from_province_id,
+      </if>
+      <if test="fromProvince != null">
+        from_province,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -242,6 +271,24 @@
       </if>
       <if test="livingStatus != null">
         #{livingStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fromCity != null">
+        #{fromCity,jdbcType=VARCHAR},
+      </if>
+      <if test="fromCityId != null">
+        #{fromCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromArea != null">
+        #{fromArea,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAreaId != null">
+        #{fromAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromProvinceId != null">
+        #{fromProvinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromProvince != null">
+        #{fromProvince,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -308,6 +355,24 @@
       <if test="record.livingStatus != null">
         living_status = #{record.livingStatus,jdbcType=VARCHAR},
       </if>
+      <if test="record.fromCity != null">
+        from_city = #{record.fromCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromCityId != null">
+        from_city_id = #{record.fromCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromArea != null">
+        from_area = #{record.fromArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromAreaId != null">
+        from_area_id = #{record.fromAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromProvinceId != null">
+        from_province_id = #{record.fromProvinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fromProvince != null">
+        from_province = #{record.fromProvince,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -332,7 +397,13 @@
       drink_status = #{record.drinkStatus,jdbcType=VARCHAR},
       child_status = #{record.childStatus,jdbcType=VARCHAR},
       smoke_status = #{record.smokeStatus,jdbcType=VARCHAR},
-      living_status = #{record.livingStatus,jdbcType=VARCHAR}
+      living_status = #{record.livingStatus,jdbcType=VARCHAR},
+      from_city = #{record.fromCity,jdbcType=VARCHAR},
+      from_city_id = #{record.fromCityId,jdbcType=VARCHAR},
+      from_area = #{record.fromArea,jdbcType=VARCHAR},
+      from_area_id = #{record.fromAreaId,jdbcType=VARCHAR},
+      from_province_id = #{record.fromProvinceId,jdbcType=VARCHAR},
+      from_province = #{record.fromProvince,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -391,6 +462,24 @@
       <if test="livingStatus != null">
         living_status = #{livingStatus,jdbcType=VARCHAR},
       </if>
+      <if test="fromCity != null">
+        from_city = #{fromCity,jdbcType=VARCHAR},
+      </if>
+      <if test="fromCityId != null">
+        from_city_id = #{fromCityId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromArea != null">
+        from_area = #{fromArea,jdbcType=VARCHAR},
+      </if>
+      <if test="fromAreaId != null">
+        from_area_id = #{fromAreaId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromProvinceId != null">
+        from_province_id = #{fromProvinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="fromProvince != null">
+        from_province = #{fromProvince,jdbcType=VARCHAR},
+      </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -412,7 +501,13 @@
       drink_status = #{drinkStatus,jdbcType=VARCHAR},
       child_status = #{childStatus,jdbcType=VARCHAR},
       smoke_status = #{smokeStatus,jdbcType=VARCHAR},
-      living_status = #{livingStatus,jdbcType=VARCHAR}
+      living_status = #{livingStatus,jdbcType=VARCHAR},
+      from_city = #{fromCity,jdbcType=VARCHAR},
+      from_city_id = #{fromCityId,jdbcType=VARCHAR},
+      from_area = #{fromArea,jdbcType=VARCHAR},
+      from_area_id = #{fromAreaId,jdbcType=VARCHAR},
+      from_province_id = #{fromProvinceId,jdbcType=VARCHAR},
+      from_province = #{fromProvince,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />

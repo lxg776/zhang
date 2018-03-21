@@ -85,6 +85,14 @@ public class WebController extends BaseController {
 	@Autowired
 	FGreetingTempService fGreetingTempService;
 
+
+
+	@Autowired
+	FCitiesService fCitiesService;
+
+	@Autowired
+	FAreasService fAreasService;
+
 	/**
 	 * 首页
 	 * @return
@@ -803,6 +811,35 @@ public class WebController extends BaseController {
 		Integer userId = ucenterUser.getUserId();
 
 		FUserRequest queryObject = fUserRequestService.selectByPrimaryKey(userId);
+
+
+		FCitiesExample fCitiesExample =new FCitiesExample();
+		String fromCityId = fUserRequest.getFromCityId();
+		fCitiesExample.createCriteria().andCityidEqualTo(fromCityId+"");
+		FCities cities = fCitiesService.selectFirstByExample(fCitiesExample);
+
+		if(cities!=null){
+			fUserRequest.setFromCity(cities.getCity());
+			//fUserRequest.setFromCityId(Integer.parseInt(cities.getCityid()));
+		}
+
+
+		FAreasExample fAreasExample =new FAreasExample();
+		String fAreasId = fUserRequest.getFromAreaId();
+
+
+		if(null==fAreasId||fAreasId.equals("0")){
+			fUserRequest.setFromAreaId("0");
+			fUserRequest.setFromArea("不限");
+		}else{
+			fAreasExample.createCriteria().andAreaidEqualTo(fAreasId+"");
+			FAreas fAreas = fAreasService.selectFirstByExample(fAreasExample);
+			if(fAreas!=null){
+				fUserRequest.setFromArea(fAreas.getArea());
+				fUserRequest.setFromAreaId(fAreasId);
+			}
+		}
+
 
 		fUserRequest.setAge(getAgeRang(age_min,age_max));
 		fUserRequest.setHeight(getHeiRang(height_min,height_max));

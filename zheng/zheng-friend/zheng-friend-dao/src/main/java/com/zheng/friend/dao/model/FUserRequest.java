@@ -129,6 +129,18 @@ public class FUserRequest implements Serializable {
      */
     private String livingStatus;
 
+    private String fromCity;
+
+    private String fromCityId;
+
+    private String fromArea;
+
+    private String fromAreaId;
+
+    private String fromProvinceId;
+
+    private String fromProvince;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUserId() {
@@ -275,6 +287,54 @@ public class FUserRequest implements Serializable {
         this.livingStatus = livingStatus;
     }
 
+    public String getFromCity() {
+        return fromCity;
+    }
+
+    public void setFromCity(String fromCity) {
+        this.fromCity = fromCity;
+    }
+
+    public String getFromCityId() {
+        return fromCityId;
+    }
+
+    public void setFromCityId(String fromCityId) {
+        this.fromCityId = fromCityId;
+    }
+
+    public String getFromArea() {
+        return fromArea;
+    }
+
+    public void setFromArea(String fromArea) {
+        this.fromArea = fromArea;
+    }
+
+    public String getFromAreaId() {
+        return fromAreaId;
+    }
+
+    public void setFromAreaId(String fromAreaId) {
+        this.fromAreaId = fromAreaId;
+    }
+
+    public String getFromProvinceId() {
+        return fromProvinceId;
+    }
+
+    public void setFromProvinceId(String fromProvinceId) {
+        this.fromProvinceId = fromProvinceId;
+    }
+
+    public String getFromProvince() {
+        return fromProvince;
+    }
+
+    public void setFromProvince(String fromProvince) {
+        this.fromProvince = fromProvince;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -299,6 +359,12 @@ public class FUserRequest implements Serializable {
         sb.append(", childStatus=").append(childStatus);
         sb.append(", smokeStatus=").append(smokeStatus);
         sb.append(", livingStatus=").append(livingStatus);
+        sb.append(", fromCity=").append(fromCity);
+        sb.append(", fromCityId=").append(fromCityId);
+        sb.append(", fromArea=").append(fromArea);
+        sb.append(", fromAreaId=").append(fromAreaId);
+        sb.append(", fromProvinceId=").append(fromProvinceId);
+        sb.append(", fromProvince=").append(fromProvince);
         sb.append("]");
         return sb.toString();
     }
@@ -332,7 +398,13 @@ public class FUserRequest implements Serializable {
             && (this.getDrinkStatus() == null ? other.getDrinkStatus() == null : this.getDrinkStatus().equals(other.getDrinkStatus()))
             && (this.getChildStatus() == null ? other.getChildStatus() == null : this.getChildStatus().equals(other.getChildStatus()))
             && (this.getSmokeStatus() == null ? other.getSmokeStatus() == null : this.getSmokeStatus().equals(other.getSmokeStatus()))
-            && (this.getLivingStatus() == null ? other.getLivingStatus() == null : this.getLivingStatus().equals(other.getLivingStatus()));
+            && (this.getLivingStatus() == null ? other.getLivingStatus() == null : this.getLivingStatus().equals(other.getLivingStatus()))
+            && (this.getFromCity() == null ? other.getFromCity() == null : this.getFromCity().equals(other.getFromCity()))
+            && (this.getFromCityId() == null ? other.getFromCityId() == null : this.getFromCityId().equals(other.getFromCityId()))
+            && (this.getFromArea() == null ? other.getFromArea() == null : this.getFromArea().equals(other.getFromArea()))
+            && (this.getFromAreaId() == null ? other.getFromAreaId() == null : this.getFromAreaId().equals(other.getFromAreaId()))
+            && (this.getFromProvinceId() == null ? other.getFromProvinceId() == null : this.getFromProvinceId().equals(other.getFromProvinceId()))
+            && (this.getFromProvince() == null ? other.getFromProvince() == null : this.getFromProvince().equals(other.getFromProvince()));
     }
 
     @Override
@@ -357,6 +429,12 @@ public class FUserRequest implements Serializable {
         result = prime * result + ((getChildStatus() == null) ? 0 : getChildStatus().hashCode());
         result = prime * result + ((getSmokeStatus() == null) ? 0 : getSmokeStatus().hashCode());
         result = prime * result + ((getLivingStatus() == null) ? 0 : getLivingStatus().hashCode());
+        result = prime * result + ((getFromCity() == null) ? 0 : getFromCity().hashCode());
+        result = prime * result + ((getFromCityId() == null) ? 0 : getFromCityId().hashCode());
+        result = prime * result + ((getFromArea() == null) ? 0 : getFromArea().hashCode());
+        result = prime * result + ((getFromAreaId() == null) ? 0 : getFromAreaId().hashCode());
+        result = prime * result + ((getFromProvinceId() == null) ? 0 : getFromProvinceId().hashCode());
+        result = prime * result + ((getFromProvince() == null) ? 0 : getFromProvince().hashCode());
         return result;
     }
 }

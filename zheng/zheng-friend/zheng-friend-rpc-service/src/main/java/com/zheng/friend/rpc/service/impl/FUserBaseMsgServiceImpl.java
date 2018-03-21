@@ -2,6 +2,7 @@ package com.zheng.friend.rpc.service.impl;
 
 import com.zheng.common.annotation.BaseService;
 import com.zheng.common.base.BaseServiceImpl;
+import com.zheng.common.util.StringUtil;
 import com.zheng.friend.dao.mapper.FUserBaseMsgMapper;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserBaseMsgExample;
@@ -45,8 +46,11 @@ public class FUserBaseMsgServiceImpl extends BaseServiceImpl<FUserBaseMsgMapper,
 
         if(null!=vo&&null!=vo.getfUserBaseMsg()){
             String brithDay = vo.getfUserBaseMsg().getBirthDate();
-            String age = getAgeByString(brithDay,"");
-            vo.setAge(age);
+            if(com.github.pagehelper.util.StringUtil.isNotEmpty(brithDay)){
+                String age = getAgeByString(brithDay,"");
+                vo.setAge(age);
+            }
+
         }
         return vo;
     }
