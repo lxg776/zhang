@@ -63,8 +63,7 @@ public class PayController extends BaseController {
 	public final static byte ORDER_CANCEL = '3';//订单取消
 
 
-	@Autowired
-	FUserOrderService fUserOrderService;
+
 
 	@Autowired
 	PayVendorService payVendorService;
@@ -81,6 +80,8 @@ public class PayController extends BaseController {
 	@Autowired
 	FUserMemberRelService fUserMemberRelService;
 
+	@Autowired
+	FUserOrderService fUserOrderService;
 
 
 
@@ -118,6 +119,12 @@ public class PayController extends BaseController {
 		payInOrder = payInOrderService.selectFirstByExample(payInOrderExample);
 
 		Integer orderId  = payInOrder.getPayInOrderId();
+
+		FUserOrder fUserOrder =new FUserOrder();
+		fUserOrder.setId(ucenterUser.getUserId());
+		fUserOrder.setPayInOrderId(orderId);
+
+
 		//生成订单详情
 		PayInOrderDetail payInOrderDetail  = new PayInOrderDetail();
 		payInOrderDetail.setPayInOrderId(orderId);

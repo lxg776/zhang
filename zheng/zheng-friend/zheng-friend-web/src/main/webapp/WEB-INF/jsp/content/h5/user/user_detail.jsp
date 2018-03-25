@@ -8,7 +8,7 @@
     <%@include file="/common/h5/meta.jsp"%>
     <!-- end: Mobile Specific -->
     <%@include file="/common/h5/css-link.jsp"%>
-
+    <link rel="stylesheet" href="${ctx}/viewerjs/dist/viewer.min.css">
     <title>用户详情</title>
     <!-- start: CSS -->
 </head>
@@ -25,15 +25,15 @@
 
 <div style="padding-top: 2.25rem;padding-bottom: 2.25rem;background: #ffffff">
 
-    <%--page4--%>
+
 
     <div  id="page4" class="aui-content aui-margin-b-15">
 
-        <ul class="aui-list aui-media-list">
+        <ul class="aui-list aui-media-list" >
             <li class="aui-list-item">
                 <div class="aui-media-list-item-inner">
 
-                    <div class="aui-list-item-media" style="width: 6.0rem; height: 6.0rem;">
+                    <div class="aui-list-item-media" style="width: 6.0rem; height: 6.0rem;" >
                         <c:if test="${not empty modle.avatar}">
                             <img src="${imageBase}${modle.avatar}" >
                         </c:if>
@@ -84,13 +84,17 @@
                 </div>
                 <div class="aui-card-list-content-padded aui-border-b aui-border-t">
                     <div class="aui-row aui-row-padded">
+                        <ul id="images">
+
+
                         <c:if test="${list == null}">
                             <c:forEach var="item" items="${userImages}">
-                                <div class="aui-col-xs-4">
+                                <li class="aui-col-xs-4">
                                     <img src="${imageBase}${item.imagePath}"/>
-                                </div>
+                                </li>
                             </c:forEach>
                         </c:if>
+                        </ul>
                     </div>
                 </div>
 
@@ -346,7 +350,7 @@
 
 <script type="text/javascript" src="${ctx}/aui/script/aui-dialog.js"></script>
 <script type="text/javascript" src="${ctx}/aui/script/aui-popup.js" ></script>
-
+<script src="${ctx}/viewerjs/dist/viewer.min.js"></script>
 <script type="text/javascript">
 
 
@@ -448,6 +452,13 @@
         url = "${ctx}/m/sendMsg?uid="+toUid+"&backUrl="+backUrl;
         window.location.href = url;
     }
+
+
+
+    // View a list of images
+    var viewer = new Viewer(document.getElementById('images'));
+
+
 </script>
 
 

@@ -10,6 +10,7 @@
 
     <%@include file="/common/h5/css-link.jsp"%>
     <link id="bootstrap-style" href="${ctx}/aui/css/aui-pull-refresh.css" rel="stylesheet">
+    <link rel="stylesheet" href="${ctx}/viewerjs/dist/viewer.min.css">
     <title>首页</title>
     <!-- start: CSS -->
 
@@ -243,13 +244,15 @@
                 </div>
                 <div class="aui-card-list-content-padded aui-border-b aui-border-t">
                     <div class="aui-row aui-row-padded">
+                        <ul id="images">
                         <c:if test="${list == null}">
                             <c:forEach var="item" items="${userImages}">
-                                <div class="aui-col-xs-4">
+                                <li class="aui-col-xs-4">
                                     <img src="${imageBase}${item.imagePath}"/>
-                                </div>
+                                </li>
                             </c:forEach>
                         </c:if>
+                        </ul>
                     </div>
                 </div>
 
@@ -651,7 +654,7 @@
 <script src="${ctx}/aui/script/aui-scroll.js"></script>
 <script type="text/javascript" src="${ctx}/aui/script/aui-popup.js" ></script>
 <script type="text/javascript" src="${ctx}/aui/script/aui-dialog.js"></script>
-
+<script src="${ctx}/viewerjs/dist/viewer.min.js"></script>
 <script type="text/javascript">
 
     var  imageBase = "${imageBase}";
@@ -1080,6 +1083,8 @@
         window.location.href = url;
     }
 
+    // View a list of images
+    var viewer = new Viewer(document.getElementById('images'));
 
 </script>
 
