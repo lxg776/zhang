@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zheng.friend.rpc.mapper.FContactExtMapper">
+
+  <resultMap id="BaseResultMap" type="com.zheng.friend.dao.vo.FOrderVo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_id" jdbcType="INTEGER" property="payInOrderId" />
+    <result column="ctime" jdbcType="LONG" property="ctime" />
+    <result column="amount" jdbcType="LONG" property="amount" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="order_status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+
+  <sql id="order_field">
+        pio.pay_in_order_id as order_id ,pio.ctime as ctime,pio.amount as amount,fuo.user_id as user_id,uc.user_name as user_name ,piod.product_name as product_name ,pio.`status` as order_status
+  </sql>
+
+  <!-- 获取消息列表 -->
+  <select id="getOrderList" resultMap="BaseResultMap" parameterType="hashmap">
+    select <include refid="order_field" /> from pay_in_order as pio left join f_user_order as fuo
+    on pio.pay_in_order_id = fuo.pay_in_order_id left join ucenter_user as uc on  fuo.user_id = uc.user_id left join pay_in_order_detail as piod on
+    pio.pay_in_order_id =  piod.pay_in_order_id order by id desc limit #{offset},#{limit}
+  </select>
+
+  <!-- 缓存 -->
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+</mapper>

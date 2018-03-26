@@ -6,7 +6,7 @@ public class FOrderVo extends FUserOrder {
 
     private String userName;
     private String productName;
-    private String status;
+    private byte status;
     private Long ctime;
     private Long amount;
 
@@ -27,11 +27,11 @@ public class FOrderVo extends FUserOrder {
         this.productName = productName;
     }
 
-    public String getStatus() {
+    public byte getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(byte status) {
         this.status = status;
     }
 
