@@ -3,6 +3,14 @@ package com.zheng.pay.dao.model;
 import java.io.Serializable;
 
 public class PayInOrder implements Serializable {
+
+
+    public final static byte STATUS_CREATE = '1';//订单创建
+    public final static byte STATUS_PAY = '2';//订单支付，但未完成更改资料
+    public final static byte ORDER_FINISH = '3';//订单完成，未完成更改资料
+    public final static byte ORDER_CANCEL = '4';//订单取消
+
+
     private Integer payInOrderId;
 
     private Integer payVendorId;

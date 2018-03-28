@@ -18,6 +18,7 @@ public interface FUserOrderExtMapper {
     public List<FOrderVo> getOrderList(HashMap map);
 
 
+    public long getOrderListCount(HashMap map);
 
 
 }

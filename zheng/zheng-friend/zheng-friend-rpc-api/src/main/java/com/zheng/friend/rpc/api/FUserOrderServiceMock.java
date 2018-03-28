@@ -6,6 +6,7 @@ import com.zheng.friend.dao.model.FUserOrder;
 import com.zheng.friend.dao.model.FUserOrderExample;
 import com.zheng.friend.dao.vo.FOrderVo;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -14,9 +15,14 @@ import java.util.List;
 */
 public class FUserOrderServiceMock extends BaseServiceMock<FUserOrderMapper, FUserOrder, FUserOrderExample> implements FUserOrderService {
 
+
     @Override
-    public List<FOrderVo> getOrderList(int pageNum, int pageSize) {
+    public List<FOrderVo> getOrderList(HashMap<String, Object> map, int pageNum, int pageSize) {
         return null;
     }
 
+    @Override
+    public Long getOrderListCount(HashMap<String, Object> map) {
+        return null;
+    }
 }

@@ -1,5 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8"%>
 <%@include file="/common/taglibs.jsp"%>
+<jsp:useBean id="dateValue" class="java.util.Date"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +9,7 @@
 	<!-- start: Meta -->
 	<%@include file="/common/meta.jsp"%>
 	<!-- end: Mobile Specific -->
-	<title>管理后台</title>
+	<title>订单列表</title>
 	<%@include file="/common/css-link01.jsp"%>
 	<!-- start: CSS -->
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -55,9 +57,9 @@
 
 
 			<ul class="breadcrumb">
-				<li><i class="icon-home"></i> <a href="index.html">订单列表</a> <i
+				<li><i class="icon-home"></i> <a href="index.html">订管管理</a> <i
 						class="icon-angle-right"></i></li>
-				<li><a href="#">字段列表</a></li>
+				<li><a href="#">订单列表</a></li>
 			</ul>
 
 			<!-- 新闻栏目 -->
@@ -75,18 +77,57 @@
 					<table class="table table-bordered">
 						<thead>
 						<tr>
-							<th style="width: 100px;">用户</th>
+
 							<th style="width: 200px;">订单编号</th>
-							<th style="width: 200px;">商品名称</th>
-							<th style="width: 200px;">商品价格</th>
-							<th style="width: 200px;">下单时间</th>
-							<th style="width: 600px;">状态</th>
-							<th style="width: 600px;">操作</th>
+							<th style="width: 100px;">用户</th>
+							<th style="width: 120px;">商品名称</th>
+							<th style="width: 100px;">商品价格</th>
+							<th style="width: 100px;">下单时间</th>
+							<th style="width: 100px;">状态</th>
+							<th style="width: 200px;">操作</th>
 						</tr>
 						</thead>
 						<tbody>
 						<c:forEach var="item" items="${page.dataList}" >
+							<tr>
+								<td style="width: 100px;">${item.id}</td>
+								<td style="width: 120px;">${item.userName}</td>
+								<td style="width: 100px;">${item.productName}</td>
+								<td style="width: 100px;"><fmt:formatNumber type="number" value="${item.amount/100 }" pattern="0.00" maxFractionDigits="2"/></td>
+								<td style="width: 200px;">
+									<jsp:setProperty name="dateValue" property="time" value="${item.ctime}"/>
+									<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
+													value="${dateValue}" />
+								</td>
 
+
+
+								public final static byte STATUS_CREATE = '1';//订单创建
+								public final static byte STATUS_PAY = '2';//订单支付，但未完成更改资料
+								public final static byte ORDER_FINISH = '2';//订单完成，未完成更改资料
+								public final static byte ORDER_CANCEL = '3';//订单取消
+
+								<td style="width: 100px;">
+									<c:if test="${item.status == '1'}">
+										未付款
+									</c:if>
+
+									<c:if test="${item.status == '2'}">
+										待完成（更改资料）
+									</c:if>
+
+									<c:if test="${item.status == '3'}">
+										完成
+									</c:if>
+
+									<c:if test="${item.status == '4'}">
+										订单取消
+									</c:if>
+								</td>
+
+								<td style="width: 200px;">
+									操作</td>
+							</tr>
 						</c:forEach>
 						</tbody>
 					</table>

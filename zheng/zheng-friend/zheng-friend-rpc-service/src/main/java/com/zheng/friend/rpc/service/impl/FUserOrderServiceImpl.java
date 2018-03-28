@@ -34,17 +34,25 @@ public class FUserOrderServiceImpl extends BaseServiceImpl<FUserOrderMapper, FUs
     @Autowired
     FUserOrderExtMapper fUserOrderExtMapper;
 
-    public List<FOrderVo> getOrderList(int pageNum,int pageSize){
+    @Override
+    public List<FOrderVo> getOrderList(HashMap<String,Object> map,int pageNum,int pageSize){
+
         if(pageNum<1){
             pageNum=1;
         }
-        HashMap<String,Object> map = new HashMap<>();
+
         int offset = (pageNum-1)*pageSize;
         int limit = pageSize;
         map.put("offset",offset);
         map.put("limit",limit);
         List<FOrderVo> list = fUserOrderExtMapper.getOrderList(map);
         return list;
+    }
+
+    @Override
+    public Long getOrderListCount(HashMap<String,Object> map){
+
+        return fUserOrderExtMapper.getOrderListCount(map);
     }
 
 }

@@ -24,6 +24,18 @@
     pio.pay_in_order_id =  piod.pay_in_order_id order by id desc limit #{offset},#{limit}
   </select>
 
+
+
+  <!-- 获取消息列表 -->
+  <select id="getOrderListCount" resultType="java.lang.Long" parameterType="hashmap">
+    select count(1) from pay_in_order as pio left join f_user_order as fuo
+    on pio.pay_in_order_id = fuo.pay_in_order_id left join ucenter_user as uc on  fuo.user_id = uc.user_id left join pay_in_order_detail as piod on
+    pio.pay_in_order_id = piod.pay_in_order_id
+  </select>
+
+
+
+
   <!-- 缓存 -->
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 </mapper>
