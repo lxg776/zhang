@@ -121,8 +121,9 @@ public class PayController extends BaseController {
 		Integer orderId  = payInOrder.getPayInOrderId();
 
 		FUserOrder fUserOrder =new FUserOrder();
-		fUserOrder.setId(ucenterUser.getUserId());
+		fUserOrder.setUserId(ucenterUser.getUserId());
 		fUserOrder.setPayInOrderId(orderId);
+		fUserOrderService.insert(fUserOrder);
 
 
 		//生成订单详情
@@ -133,6 +134,10 @@ public class PayController extends BaseController {
 		payInOrderDetail.setProductCount(1);
 		payInOrderDetail.setProductPrice((long) (fMemberType.getPrice()*100));
 		payInOrderDetail.setRemark("member");
+
+
+
+
 
 		payInOrderDetailService.insert(payInOrderDetail);
 	//	payVendor.setAppsecret("245638e9e5a8d0fcf175304a27e771a3");

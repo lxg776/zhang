@@ -21,7 +21,7 @@
   <select id="getOrderList" resultMap="BaseResultMap" parameterType="hashmap">
     select <include refid="order_field" /> from pay_in_order as pio left join f_user_order as fuo
     on pio.pay_in_order_id = fuo.pay_in_order_id left join ucenter_user as uc on  fuo.user_id = uc.user_id left join pay_in_order_detail as piod on
-    pio.pay_in_order_id =  piod.pay_in_order_id order by id desc limit #{offset},#{limit}
+    pio.pay_in_order_id =  piod.pay_in_order_id order by order_id desc limit #{offset},#{limit}
   </select>
 
 

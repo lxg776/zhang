@@ -62,17 +62,75 @@
 				<li><a href="#">订单列表</a></li>
 			</ul>
 
+			<form>
+				<fieldset>
+					<legend>订单查询</legend>
+					<div class="control-group">
+
+
+
+
+							<div class="controls">
+								<span style="display:inline-block;width: 70px;">订单编号</span>
+
+								<input type="text" class="span3 typeahead"
+									   name="title"  data-provide="typeahead">
+
+							</div>
+
+						<div class="controls">
+							<span style="display:inline-block;width: 70px;">用户</span>
+
+							<input type="text" class="span3 typeahead"
+								   name="title"  data-provide="typeahead">
+
+						</div>
+
+						<div class="controls">
+							<span style="display:inline-block;width: 70px;">商品名称</span>
+
+							<input type="text" class="span3 typeahead"
+								   name="title"  data-provide="typeahead">
+
+						</div>
+
+
+						<div class="controls">
+							<span style="display:inline-block;width: 70px;">订单状态</span>
+							<select id="select01" class="chzn-select">
+								<option value="0">不限</option>
+								<option value="1">未付款</option>
+								<option value="2">待完成（更改资料）</option>
+								<option value="3">完成</option>
+								<option value="4">订单取消</option>
+							</select>
+						</div>
+
+					</div>
+
+
+					<div class="control-group">
+						<button  class="btn btn-primary">查询</button>
+						<button  class="btn btn-primary">复位</button>
+
+					</div>
+				</fieldset>
+			</form>
+
 			<!-- 新闻栏目 -->
 			<div class="box span6" style="width: 800px;">
+
 				<div class="box-header">
 					<h2>
 						<i class="halflings-icon white align-justify"></i><span
 							class="break"></span>订单列表
 					</h2>
 					<div class="box-icon">
-						<a href="${ctx}/manage/member/editUser" style="color: #FFF">添加</a>
+
 					</div>
 				</div>
+
+
 				<div class="box-content">
 					<table class="table table-bordered">
 						<thead>
@@ -81,8 +139,8 @@
 							<th style="width: 200px;">订单编号</th>
 							<th style="width: 100px;">用户</th>
 							<th style="width: 120px;">商品名称</th>
-							<th style="width: 100px;">商品价格</th>
-							<th style="width: 100px;">下单时间</th>
+							<th style="width: 150px;">商品价格（元）</th>
+							<th style="width: 150px;">下单时间</th>
 							<th style="width: 100px;">状态</th>
 							<th style="width: 200px;">操作</th>
 						</tr>
@@ -91,16 +149,15 @@
 						<c:forEach var="item" items="${page.dataList}" >
 							<tr>
 								<td style="width: 100px;">${item.payInOrderId}</td>
-								<td style="width: 120px;">${item.userName}</td>
+								<td style="width: 120px;"><a href="${ctx}/manage/member/userDetail?userId=${item.userId}">${item.userName}</td>
 								<td style="width: 100px;">${item.productName}</td>
-								<td style="width: 100px;"><fmt:formatNumber type="number" value="${item.amount/100 }" pattern="0.00" maxFractionDigits="2"/></td>
+								<td style="width: 150px;"><fmt:formatNumber type="number" value="${item.amount/100 }" pattern="0.00" maxFractionDigits="2"/></td>
 								<td style="width: 200px;">
 									<jsp:setProperty name="dateValue" property="time" value="${item.ctime}"/>
 									<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
 													value="${dateValue}" />
 								</td>
 								<td style="width: 100px;">
-										${item.status}
 									<c:if test="${item.status == 1}">
 										未付款
 									</c:if>
