@@ -10,10 +10,8 @@
     <dubbo:application name="zheng-upms-server"/>
 
     <dubbo:registry file="./zheng-upms-server-dubbo.cache" address="zookeeper://222.84.231.82:64005"/>
-
     <!-- 订阅服务 -->
     <dubbo:consumer check="false"/>
-
     <!-- 系统 -->
     <dubbo:reference id="upmsSystemService" interface="com.zheng.upms.rpc.api.UpmsSystemService" mock="true"/>
     <!-- 组织 -->
@@ -38,18 +36,10 @@
     <dubbo:reference id="upmsApiService" interface="com.zheng.upms.rpc.api.UpmsApiService" mock="true"/>
     <!-- 用户查询 -->
     <dubbo:reference id="ucenterUserService" interface="com.zheng.ucenter.rpc.api.UcenterUserService" mock="true"/>
-
-
     <!-- 文章 -->
     <dubbo:reference id="factivityService" interface="com.zheng.friend.rpc.api.FActivityService" mock="true"/>
-
-
-
-
     <!-- 接口服务 -->
     <dubbo:reference id="ucenterIdentificaionService" interface="com.zheng.ucenter.rpc.api.UcenterIdentificaionService" mock="true"/>
-
-
 
     <dubbo:reference id="fUserBaseMsgServiceImpl" interface="com.zheng.friend.rpc.api.FUserBaseMsgService" mock="true"/>
 
@@ -68,4 +58,7 @@
     <dubbo:reference id="fContactService" interface="com.zheng.friend.rpc.api.FContactService" mock="true"/>
 
     <dubbo:reference id="fGreetingTempService" interface="com.zheng.friend.rpc.api.FGreetingTempService" mock="true"/>
+
+    <dubbo:reference id="fUserOrderService" interface="com.zheng.friend.rpc.api.FUserOrderService" mock="true"/>
+
 </beans>

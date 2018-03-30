@@ -23,7 +23,7 @@
 	<!-- start: Favicon -->
 	<!-- end: Favicon -->
 	<script type="text/javascript">
-        var listUrl = "${ctx}" + "/manage/member/list?pageNum=";
+        var listUrl = "${ctx}" + "${ctx}/manage/order/list?pageNum=";
         function getDataList(pageNum) {
             window.location.href = listUrl + pageNum;
         }
@@ -90,7 +90,7 @@
 						<tbody>
 						<c:forEach var="item" items="${page.dataList}" >
 							<tr>
-								<td style="width: 100px;">${item.id}</td>
+								<td style="width: 100px;">${item.payInOrderId}</td>
 								<td style="width: 120px;">${item.userName}</td>
 								<td style="width: 100px;">${item.productName}</td>
 								<td style="width: 100px;"><fmt:formatNumber type="number" value="${item.amount/100 }" pattern="0.00" maxFractionDigits="2"/></td>
@@ -99,28 +99,21 @@
 									<fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
 													value="${dateValue}" />
 								</td>
-
-
-
-								public final static byte STATUS_CREATE = '1';//订单创建
-								public final static byte STATUS_PAY = '2';//订单支付，但未完成更改资料
-								public final static byte ORDER_FINISH = '2';//订单完成，未完成更改资料
-								public final static byte ORDER_CANCEL = '3';//订单取消
-
 								<td style="width: 100px;">
-									<c:if test="${item.status == '1'}">
+										${item.status}
+									<c:if test="${item.status == 1}">
 										未付款
 									</c:if>
 
-									<c:if test="${item.status == '2'}">
+									<c:if test="${item.status == 2}">
 										待完成（更改资料）
 									</c:if>
 
-									<c:if test="${item.status == '3'}">
+									<c:if test="${item.status == 3}">
 										完成
 									</c:if>
 
-									<c:if test="${item.status == '4'}">
+									<c:if test="${item.status == 4}">
 										订单取消
 									</c:if>
 								</td>

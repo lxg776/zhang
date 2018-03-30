@@ -48,7 +48,7 @@ try {
     buff.append("Parameter....\n");
     e = request.getParameterNames();
     while(e.hasMoreElements()){
-        key = e.nextElement();
+			key = e.nextElement();
 		buff.append(key)
 			.append("=")
 			.append(java.util.Arrays.asList(request.getParameterValues(key)))

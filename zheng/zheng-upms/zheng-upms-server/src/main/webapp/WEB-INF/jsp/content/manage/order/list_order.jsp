@@ -36,7 +36,7 @@
     <div class="row-fluid">
 
         <!-- start: Main Menu -->
-        <%@ include file="m-left.jsp"%>
+        <%@ include file="../m-left.jsp"%>
         <!-- end: Main Menu -->
 
         <noscript>
