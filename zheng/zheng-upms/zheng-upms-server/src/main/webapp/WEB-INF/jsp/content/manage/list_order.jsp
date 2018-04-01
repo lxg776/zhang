@@ -74,7 +74,7 @@
 								<span style="display:inline-block;width: 70px;">订单编号</span>
 
 								<input type="text" class="span3 typeahead"
-									   name="title"  data-provide="typeahead">
+									   name="payInOrderId"  data-provide="typeahead">
 
 							</div>
 
@@ -82,7 +82,7 @@
 							<span style="display:inline-block;width: 70px;">用户</span>
 
 							<input type="text" class="span3 typeahead"
-								   name="title"  data-provide="typeahead">
+								   name="userName"  data-provide="typeahead">
 
 						</div>
 
@@ -90,14 +90,14 @@
 							<span style="display:inline-block;width: 70px;">商品名称</span>
 
 							<input type="text" class="span3 typeahead"
-								   name="title"  data-provide="typeahead">
+								   name="productName"  data-provide="typeahead">
 
 						</div>
 
 
 						<div class="controls">
 							<span style="display:inline-block;width: 70px;">订单状态</span>
-							<select id="select01" class="chzn-select">
+							<select id="satus" class="chzn-select">
 								<option value="0">不限</option>
 								<option value="1">未付款</option>
 								<option value="2">待完成（更改资料）</option>

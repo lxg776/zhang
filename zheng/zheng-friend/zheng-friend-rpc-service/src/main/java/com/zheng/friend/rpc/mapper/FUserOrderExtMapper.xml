@@ -21,7 +21,16 @@
   <select id="getOrderList" resultMap="BaseResultMap" parameterType="hashmap">
     select <include refid="order_field" /> from pay_in_order as pio left join f_user_order as fuo
     on pio.pay_in_order_id = fuo.pay_in_order_id left join ucenter_user as uc on  fuo.user_id = uc.user_id left join pay_in_order_detail as piod on
-    pio.pay_in_order_id =  piod.pay_in_order_id order by order_id desc limit #{offset},#{limit}
+    pio.pay_in_order_id =  piod.pay_in_order_id
+
+    <trim prefix="WHERE" prefixOverrides="AND |OR">
+
+      <if test="payInOrderId != null and payInOrderId.length()>0"> AND order_id like '%#{payInOrderId}%' </if>
+      <if test="userName != null and userName.length()>0"> AND user_name like '%#{userName}%' </if>
+      <if test="product_name != null and product_name.length()>0"> AND product_name like '%#{userName}%' </if>
+      <if test="status > 0 "> AND status = '#{status}' </if>
+    </trim>
+    order by order_id desc limit #{offset},#{limit}
   </select>
 
 
@@ -31,6 +40,13 @@
     select count(1) from pay_in_order as pio left join f_user_order as fuo
     on pio.pay_in_order_id = fuo.pay_in_order_id left join ucenter_user as uc on  fuo.user_id = uc.user_id left join pay_in_order_detail as piod on
     pio.pay_in_order_id = piod.pay_in_order_id
+    <trim prefix="WHERE" prefixOverrides="AND |OR">
+      <if test="payInOrderId != null and payInOrderId.length()>0"> AND order_id like '%#{payInOrderId}%' </if>
+      <if test="userName != null and userName.length()>0"> AND user_name like '%#{userName}%' </if>
+      <if test="product_name != null and product_name.length()>0"> AND product_name like '%#{userName}%' </if>
+      <if test="status > 0 ">  AND status = '#{status}' </if>
+    </trim>
+
   </select>
 
 
@@ -38,4 +54,4 @@
 
   <!-- 缓存 -->
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-</mapper>
+</mapper> <if test="avatar != null">

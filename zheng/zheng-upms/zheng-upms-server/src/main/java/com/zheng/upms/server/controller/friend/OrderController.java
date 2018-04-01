@@ -37,9 +37,16 @@ public class OrderController  extends BaseController {
      */
     @ApiOperation(value = "后台首页")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(@RequestParam(defaultValue = "1") Integer pageNum, ModelMap modelMap) {
+    public String list(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "") String payInOrderId  ,@RequestParam(defaultValue = "") String userName,@RequestParam(defaultValue = "") String productName,@RequestParam(defaultValue = "") Byte status ,ModelMap modelMap) {
+
 
         HashMap<String,Object> map =new HashMap<>();
+        map.put("payInOrderId",payInOrderId);
+        map.put("userName",userName);
+        map.put("productName",productName);
+        map.put("status",status);
+
+
         List<FOrderVo> rows = fUserOrderService.getOrderList(map,pageNum,pageSize);
         long total = fUserOrderService.getOrderListCount(map);
         modelMap.put("page", PageOnterModle.getInstence(pageNum,total,pageSize,rows));
