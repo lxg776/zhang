@@ -23,7 +23,7 @@
 	<!-- start: Favicon -->
 	<!-- end: Favicon -->
 	<script type="text/javascript">
-        var listUrl = "${ctx}" + "${ctx}/manage/order/list?pageNum=";
+        var listUrl = "${ctx}/manage/order/list?pageNum=";
         function getDataList(pageNum) {
             window.location.href = listUrl + pageNum;
         }
@@ -97,7 +97,7 @@
 
 						<div class="controls">
 							<span style="display:inline-block;width: 70px;">订单状态</span>
-							<select id="satus" class="chzn-select">
+							<select id="status" class="chzn-select">
 								<option value="0">不限</option>
 								<option value="1">未付款</option>
 								<option value="2">待完成（更改资料）</option>
@@ -110,7 +110,7 @@
 
 
 					<div class="control-group">
-						<button  class="btn btn-primary">查询</button>
+						<button  class="btn btn-primary" id="queryBtn">查询</button>
 						<button  class="btn btn-primary">复位</button>
 
 					</div>
@@ -216,5 +216,55 @@
 </footer>
 <!-- start: JavaScript-->
 <%@ include file="/common/s.jsp"%>
+<script language="JavaScript">
+
+
+
+
+	function seacher(url){
+
+		payInOrderId = $("input[name='payInOrderId']").val();
+        userName = $("input[name='userName']").val();
+        productName = $("input[name='productName']").val();
+        status = $("select[name=status]").val();
+
+        data = "";
+        if(payInOrderId.length == 0){
+            data = "payInOrderId="+payInOrderId;
+		}
+		if(userName.length == 0){
+            if(data.length==0){
+                data = data+"&userName="+userName;
+			}else{
+                data = "userName="+userName;
+			}
+		}
+        if(productName.length == 0){
+            if(data.length==0){
+                data = data+"&productName="+productName;
+            }else{
+                data = "productName="+productName;
+            }
+        }
+        if(status != '0'){
+            if(data.length==0){
+                data = data+"&status="+status;
+            }else{
+                data = "status="+status;
+            }
+        }
+        window.location.href = url + data;
+    }
+
+
+
+	$("#queryBtn").click(function () {
+        seacher("${ctx}/manage/order/list?");
+    });
+
+
+</script>
+
+
 </body>
 </html>

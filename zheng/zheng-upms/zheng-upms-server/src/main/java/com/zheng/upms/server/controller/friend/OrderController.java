@@ -1,5 +1,6 @@
 package com.zheng.upms.server.controller.friend;
 
+import com.github.pagehelper.util.StringUtil;
 import com.zheng.common.base.BaseController;
 
 import com.zheng.friend.dao.vo.FOrderVo;
@@ -41,11 +42,16 @@ public class OrderController  extends BaseController {
 
 
         HashMap<String,Object> map =new HashMap<>();
-        map.put("payInOrderId",payInOrderId);
-        map.put("userName",userName);
-        map.put("productName",productName);
+        if(StringUtil.isNotEmpty(payInOrderId)){
+            map.put("payInOrderId","%"+payInOrderId+"%");
+        }
+        if(StringUtil.isNotEmpty(userName)){
+            map.put("userName","%"+userName+"%");
+        }
+        if(StringUtil.isNotEmpty(productName)){
+            map.put("productName","%"+productName+"%");
+        }
         map.put("status",status);
-
 
         List<FOrderVo> rows = fUserOrderService.getOrderList(map,pageNum,pageSize);
         long total = fUserOrderService.getOrderListCount(map);
