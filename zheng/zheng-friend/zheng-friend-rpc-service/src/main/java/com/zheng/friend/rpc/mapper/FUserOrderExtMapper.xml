@@ -27,9 +27,9 @@
       <if test="payInOrderId != null and payInOrderId.length()>0"> AND pio.pay_in_order_id  like #{payInOrderId} </if>
       <if test="userName != null and userName.length()>0"> AND user_name like #{userName} </if>
       <if test="productName != null and productName.length()>0"> AND product_name like #{productName} </if>
-
+      <if test="status != 0"> AND status = #{status} </if>
     </trim>
-    order by pio.pay_in_order_id  desc
+    order by pio.pay_in_order_id  desc limit #{offset},#{limit}
   </select>
 
 
@@ -39,13 +39,13 @@
     select count(1) from pay_in_order as pio left join f_user_order as fuo
     on pio.pay_in_order_id = fuo.pay_in_order_id left join ucenter_user as uc on  fuo.user_id = uc.user_id left join pay_in_order_detail as piod on
     pio.pay_in_order_id = piod.pay_in_order_id
-    <if test="payInOrderId != null and payInOrderId.length()>0"> AND pio.pay_in_order_id  like #{payInOrderId} </if>
-    <if test="userName != null and userName.length()>0"> AND user_name like #{userName} </if>
-    <if test="productName != null and productName.length()>0"> AND product_name like #{productName} </if>
-
-
+    <trim prefix="WHERE" prefixOverrides="AND |OR">
+        <if test="payInOrderId != null and payInOrderId.length()>0"> AND pio.pay_in_order_id  like #{payInOrderId} </if>
+        <if test="userName != null and userName.length()>0"> AND user_name like #{userName} </if>
+        <if test="productName != null and productName.length()>0"> AND product_name like #{productName} </if>
+        <if test="status != 0"> AND status = #{status} </if>
+    </trim>
   </select>
-
   <!-- 缓存 -->
   <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
 </mapper>

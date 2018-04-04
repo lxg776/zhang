@@ -24,8 +24,13 @@
 	<!-- end: Favicon -->
 	<script type="text/javascript">
         var listUrl = "${ctx}/manage/order/list?pageNum=";
+        var dataSearch = "${dataSearch}";
         function getDataList(pageNum) {
-            window.location.href = listUrl + pageNum;
+            if(dataSearch.length >0){
+                window.location.href = listUrl + pageNum +"&"+dataSearch;
+            }else{
+                window.location.href = listUrl + pageNum;
+            }
         }
 	</script>
 </head>
@@ -74,7 +79,7 @@
 								<span style="display:inline-block;width: 70px;">订单编号</span>
 
 								<input type="text" class="span3 typeahead"
-									   name="payInOrderId"  data-provide="typeahead">
+									   name="payInOrderId"  data-provide="typeahead" value="${payInOrderId}">
 
 							</div>
 
@@ -82,7 +87,7 @@
 							<span style="display:inline-block;width: 70px;">用户</span>
 
 							<input type="text" class="span3 typeahead"
-								   name="userName"  data-provide="typeahead">
+								   name="userName"  data-provide="typeahead" value="${userName}" >
 
 						</div>
 
@@ -90,19 +95,18 @@
 							<span style="display:inline-block;width: 70px;">商品名称</span>
 
 							<input type="text" class="span3 typeahead"
-								   name="productName"  data-provide="typeahead">
+								   name="productName"  data-provide="typeahead" value="${productName}"  >
 
 						</div>
-
 
 						<div class="controls">
 							<span style="display:inline-block;width: 70px;">订单状态</span>
 							<select id="status" class="chzn-select">
 								<option value="0">不限</option>
-								<option value="1">未付款</option>
-								<option value="2">待完成（更改资料）</option>
-								<option value="3">完成</option>
-								<option value="4">订单取消</option>
+                                <option value="1" <c:if test="status == 1">  selected </c:if> >未付款</option>
+								<option value="2" <c:if test="status == 2">  selected </c:if> >待完成</option>
+								<option value="3"<c:if test="status == 3">  selected </c:if> >完成</option>
+								<option value="4" <c:if test="status == 4">  selected </c:if> >订单取消</option>
 							</select>
 						</div>
 
@@ -112,7 +116,6 @@
 					<div class="control-group">
 						<button  class="btn btn-primary" id="queryBtn">查询</button>
 						<button  class="btn btn-primary">复位</button>
-
 					</div>
 				</fieldset>
 			</form>
