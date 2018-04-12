@@ -64,49 +64,43 @@
 
 
 
-				<fieldset>
-					<legend>用户查询</legend>
+			<fieldset>
+				<legend>用户查询</legend>
+				<div class="control-group">
+
+
+
+
+					<div class="controls">
+						<span style="display:inline-block;width: 70px;">用户名</span>
+
+						<input type="text" class="span3 typeahead"
+							   name="userName"  data-provide="typeahead" value="${userName}">
+
+					</div>
+
+
+
+					<div class="controls">
+						<span style="display:inline-block;width: 70px;">审核状态</span>
+						<select id="maritalStatus" name="maritalStatus" class="chzn-select">
+							<option value="-1">不限</option>
+							<option value="0" <c:if test="${idcardStatus =='未婚'}">  selected </c:if> >未婚</option>
+							<option value="1" <c:if test="${idcardStatus =='离异'}">  selected </c:if> >离异</option>
+
+						</select>
+					</div>
+
+
 					<div class="control-group">
-
-
-
+						<span style="display:inline-block;width: 70px;">查询城市</span>
 
 						<div class="controls">
-							<span style="display:inline-block;width: 70px;">用户名</span>
-
-							<input type="text" class="span3 typeahead"
-								   name="userName"  data-provide="typeahead" value="${userName}">
-
+							<input type="checkbox" id="optionsCheckbox2" name="queryCity"  value="search" onchange="cityShow(this)" >
 						</div>
+					</div>
 
-						<div class="controls">
-							<span style="display:inline-block;width: 70px;">昵称</span>
-
-							<input type="text" class="span3 typeahead"
-								   name="nikename"  data-provide="typeahead" value="${nikename}" >
-
-						</div>
-
-						<div class="controls">
-							<span style="display:inline-block;width: 70px;">婚姻状态</span>
-							<select id="maritalStatus" name="maritalStatus" class="chzn-select">
-								<option value="不限">不限</option>
-								<option value="未婚" <c:if test="${maritalStatus =='未婚'}">  selected </c:if> >未婚</option>
-								<option value="离异" <c:if test="${maritalStatus =='离异'}">  selected </c:if> >离异</option>
-
-							</select>
-						</div>
-
-
-						<div class="control-group">
-							<span style="display:inline-block;width: 70px;">查询城市</span>
-
-							<div class="controls">
-									<input type="checkbox" id="optionsCheckbox2" name="queryCity"  value="search" onchange="cityShow(this)" >
-							</div>
-						</div>
-
-						<div id="citydiv" style="display: none;">
+					<div id="citydiv" style="display: none;">
 						<div class="controls">
 							<span style="display:inline-block;width: 70px;">省</span>
 							<select class="chzn-select" id="province">
@@ -131,17 +125,17 @@
 
 							</select>
 						</div>
-						</div>
 					</div>
+				</div>
 
 
 
 
-					<div class="control-group">
-						<button  class="btn btn-primary" id="queryBtn">查询</button>
-						<button  class="btn btn-primary">复位</button>
-					</div>
-				</fieldset>
+				<div class="control-group">
+					<button  class="btn btn-primary" id="queryBtn">查询</button>
+					<button  class="btn btn-primary">复位</button>
+				</div>
+			</fieldset>
 
 
 
@@ -194,7 +188,7 @@
 								<td style="width: 200px;"><fmt:formatDate value="${item.createTime}" pattern="yyyy/MM/dd  HH:mm:ss" /></td>
 								<td style="width: 600px;"><a href="${ctx}/manage/member/editUser?id=${item.userId}" style="color: #0033FF">编辑用户信息</a>
 									/<a href="${ctx}/manage/member/editBaseMsg?userId=${item.userId}" style="color: #0033FF">编辑基本资料</a><br/><a href="${ctx}/manage/member/editIdentific?userId=${item.userId}" style="color: #0033FF">编辑认证信息</a>/<a href="${ctx}/manage/member//userMemberList?userId=${item.userId}" style="color: #0033FF">设置会员</a>/
-								<a href="${ctx}/manage/member/editRequestMsg?userId=${item.userId}" style="color: #0033FF">编辑择偶要求</a>/<a href="${ctx}/manage/member/editLivingStatus?userId=${item.userId}" style="color: #0033FF">编辑生活状态</a>/<a href="${ctx}/manage/member/editUserSetting?userId=${item.userId}" style="color: #0033FF">用户设置</a>/<a href="#" style="color: #0033FF">删除</a>
+									<a href="${ctx}/manage/member/editRequestMsg?userId=${item.userId}" style="color: #0033FF">编辑择偶要求</a>/<a href="${ctx}/manage/member/editLivingStatus?userId=${item.userId}" style="color: #0033FF">编辑生活状态</a>/<a href="${ctx}/manage/member/editUserSetting?userId=${item.userId}" style="color: #0033FF">用户设置</a>/<a href="#" style="color: #0033FF">删除</a>
 								</td>
 							</tr>
 						</c:forEach>
@@ -308,11 +302,11 @@
         if(areaFla == "true"){
             fromCityId = $("select[name='fromCityId']").val();
             if(fromCityId.length != 0) {
-            if(data.length!=0){
-                data = data+"&fromCityId="+fromCityId;
-            }else{
-                data = "fromCityId="+fromCityId;
-            }
+                if(data.length!=0){
+                    data = data+"&fromCityId="+fromCityId;
+                }else{
+                    data = "fromCityId="+fromCityId;
+                }
             }
             fAreasId = $("select[name='fAreasId']").val();
             if(fAreasId.length != 0) {
@@ -325,7 +319,7 @@
 
 
 
-		}
+        }
 
 
         window.location.href = url + data;
@@ -334,7 +328,7 @@
 
 
     $("#queryBtn").click(function () {
-        seacher("${ctx}/manage/member/list?");
+        seacher("${ctx}/manage/member/auditingList?");
     });
 
 

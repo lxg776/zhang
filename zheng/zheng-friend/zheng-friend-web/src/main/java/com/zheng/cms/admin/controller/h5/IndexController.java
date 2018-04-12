@@ -1,14 +1,13 @@
 package com.zheng.cms.admin.controller.h5;
 
-import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.util.StringUtil;
+
 import com.zheng.cms.admin.shiro.UpmsSessionDao;
 import com.zheng.cms.admin.util.SmsUtil;
 import com.zheng.cms.common.constant.FriendResult;
 import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.MD5Util;
-import com.zheng.common.util.PropertiesFileUtil;
+
 import com.zheng.common.util.RedisUtil;
 import com.zheng.friend.dao.model.*;
 import com.zheng.friend.rpc.api.*;
@@ -18,16 +17,16 @@ import com.zheng.ucenter.dao.model.UcenterUser;
 import com.zheng.ucenter.dao.model.UcenterUserExample;
 import com.zheng.ucenter.rpc.api.UcenterIdentificaionService;
 import com.zheng.ucenter.rpc.api.UcenterUserService;
-import com.zheng.upms.client.shiro.session.UpmsSession;
+
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 
-import org.apache.commons.lang.math.RandomUtils;
+
 import org.apache.shiro.SecurityUtils;
 
-import org.apache.shiro.authc.UsernamePasswordToken;
+
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -273,8 +272,7 @@ public class IndexController extends BaseController {
 			fUserSetting.setMsgReadStatus((byte)0);
 			fUserSetting.setMsgSendStatus((byte)0);
 			fUserSetting.setHistoryviewStatus((byte)1);
-
-
+			fUserSetting.setIdcardStatus((byte)1);
 			fUserBaseMsgService.insert(fUserBaseMsg);
 			fUserSettingService.insert(fUserSetting);
 

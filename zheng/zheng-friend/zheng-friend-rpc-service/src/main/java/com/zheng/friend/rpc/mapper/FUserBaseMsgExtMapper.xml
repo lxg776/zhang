@@ -69,6 +69,17 @@
         <result column="z_cellphone" jdbcType="VARCHAR" property="cellphone" />
     </resultMap>
 
+
+    <resultMap id="f_" type="com.zheng.ucenter.dao.model.UcenterIdentificaion">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="z_real_name" jdbcType="VARCHAR" property="realName" />
+        <result column="z_idcard_type" jdbcType="VARCHAR" property="idcardType" />
+        <result column="z_idcard_no" jdbcType="VARCHAR" property="idcardNo" />
+        <result column="z_idcard_imgs" jdbcType="VARCHAR" property="idcardImgs" />
+        <result column="z_cellphone" jdbcType="VARCHAR" property="cellphone" />
+    </resultMap>
+
+
     <resultMap id="fUserLivingStatus" type="com.zheng.friend.dao.model.FUserLivingStatus">
         <id column="user_id" jdbcType="INTEGER" property="userId" />
         <result column="l_smoking_status" jdbcType="TINYINT" property="smokingStatus" />
@@ -82,13 +93,29 @@
         <result column="l_favorite_pet" jdbcType="VARCHAR" property="favoritePet" />
     </resultMap>
 
+
+    <resultMap id="fUserSetting" type="com.zheng.friend.dao.model.FUserSetting">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="s_show_index_page" jdbcType="TINYINT" property="showIndexPage" />
+        <result column="s_show_base_msg" jdbcType="TINYINT" property="showBaseMsg" />
+        <result column="s_show_friend_request" jdbcType="TINYINT" property="showFriendRequest" />
+        <result column="s_show_living_status" jdbcType="TINYINT" property="showLivingStatus" />
+        <result column="s_show_favorite" jdbcType="TINYINT" property="showFavorite" />
+        <result column="s_idcard_status" jdbcType="TINYINT" property="idcardStatus" />
+
+
+
+    </resultMap>
+
+
+
     <sql id="Base_Column_List">
-      uc.user_id , uc.user_name,uc.avatar, uc.nickname, uc.sex, uc.last_login_time, uc.last_login_ip
+      uc.user_id , uc.user_name,uc.avatar, uc.nickname, uc.sex, uc.last_login_time, uc.last_login_ip,uc.create_time
     </sql>
 
     <sql id="Base_Column_List2">
         base.nikename,base.birth_date,base.height,base.shape,base.year_income,base.month_income,base.education,base.disposition,base.profession,base.unit_property,
-    base.work_unit,base.work_place,base.house_status,base.marital_status,base.children_status,base.soliloquy,base.declaration
+    base.work_unit,base.work_place,base.house_status,base.marital_status,base.children_status,base.soliloquy,base.declaration, base.from_city_id, base.from_area_id
     </sql>
 
     <sql id="Base_Column_List3">
@@ -107,7 +134,7 @@
 
 
     <sql id="Base_Column_List6">
-        s.show_index_page as s_show_index_page , s.show_base_msg as s_show_base_msg,s.show_friend_request as s_show_friend_request,s.show_living_status as s_show_living_status ,s.show_favorite as s_show_favorite
+        s.show_index_page as s_show_index_page , s.show_base_msg as s_show_base_msg,s.show_friend_request as s_show_friend_request,s.show_living_status as s_show_living_status ,s.show_favorite as s_show_favorite,s.idcard_status as s_idcard_status
     </sql>
 
 
@@ -134,16 +161,25 @@
         <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
         <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+
+
         <collection property="fUserBaseMsg" resultMap="fUserBaseMsg" />
         <collection property="fUserRequest" resultMap="fUserRequest" />
         <collection property="ucenterIdentificaion" resultMap="ucenterIdentificaion" />
+        <collection property="fUserSetting" resultMap="fUserSetting" />
 
     </resultMap>
 
 
 
+
+
+
+
+
     <sql id="userList_Column_List2">
-        base.nikename,base.birth_date,base.height,base.profession
+        base.nikename,base.birth_date,base.height,base.profession,base.marital_status,base.from_city, base.from_area
     </sql>
 
     <sql id="userList_Column_List3">
@@ -166,6 +202,57 @@
         </if>
         ORDER BY uc.last_login_time desc limit #{offset},#{limit}
     </select>
+
+
+
+
+
+    <!-- 获取推荐列表 -->
+    <select id="queryUsers" resultMap="listResultMap" parameterType="hashmap">
+        select  <include refid="Base_Column_List" /> ,   <include refid="userList_Column_List2" /> ,<include refid="userList_Column_List3" />,<include refid="Base_Column_List4" />,<include refid="Base_Column_List6" /> from ucenter_user as uc
+        left join f_user_base_msg as base on uc.user_id = base.user_id
+        left join f_user_request as zo on uc.user_id = zo.user_id
+        left join f_user_setting as s on uc.user_id = s.user_id
+        left join ucenter_identificaion as ic on uc.user_id = ic.user_id
+
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            <if test="userName != null and userName.length()>0"> AND uc.user_name  like #{userName} </if>
+            <if test="nikename != null and nikename.length()>0"> AND base.nikename like #{nikename} </if>
+            <if test="maritalStatus != null and maritalStatus != '-1'"> AND base.marital_status = #{maritalStatus} </if>
+            <if test="fromCityId != null and fromCityId.length()>0"> AND base.from_city_id = #{fromCityId} </if>
+            <if test="fAreasId != null and fAreasId.length()>0"> AND base.from_area_id = #{fAreasId} </if>
+            <if test="idcardStatus != null and idcardStatus != '-1'"> AND s.idcard_status = #{fAreasId} </if>
+        </trim>
+
+        ORDER BY uc.last_login_time desc
+
+        <if test="idcardStatus != null and idcardStatus.length()>0"> , s.idcard_status desc </if>
+
+        limit #{offset},#{limit}
+    </select>
+
+
+    <!-- 获取消息列表 -->
+    <select id="queryUsersCount" resultType="java.lang.Long" parameterType="hashmap">
+
+
+        select count(1) from ucenter_user as uc
+        left join f_user_base_msg as base on uc.user_id = base.user_id
+        left join f_user_request as zo on uc.user_id = zo.user_id
+        left join f_user_setting as s on uc.user_id = s.user_id
+        left join ucenter_identificaion as ic on uc.user_id = ic.user_id
+
+        <trim prefix="WHERE" prefixOverrides="AND |OR">
+            <if test="userName != null and userName.length()>0"> AND uc.user_name  like #{userName} </if>
+            <if test="nikename != null and nikename.length()>0"> AND base.nikename like #{nikename} </if>
+            <if test="maritalStatus != null and maritalStatus != '-1'"> AND base.marital_status = #{maritalStatus} </if>
+            <if test="fromCityId != null and fromCityId.length()>0"> AND base.from_city_id = #{fromCityId} </if>
+            <if test="fAreasId != null and fAreasId.length()>0"> AND base.from_area_id = #{fAreasId} </if>
+            <if test="idcardStatus != null and idcardStatus.length()>0"> AND s.idcard_status = #{fAreasId} </if>
+        </trim>
+
+    </select>
+
 
 
 

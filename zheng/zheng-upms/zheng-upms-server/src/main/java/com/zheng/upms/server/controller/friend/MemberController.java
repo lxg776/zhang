@@ -1,6 +1,7 @@
 package com.zheng.upms.server.controller.friend;
 
 
+import com.github.pagehelper.util.StringUtil;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.MD5Util;
 import com.zheng.friend.dao.model.*;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -74,18 +76,110 @@ public class MemberController extends BaseController{
      */
     @ApiOperation(value = "后台首页")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String index(@RequestParam(defaultValue = "1") Integer pageNum, ModelMap modelMap) {
+    public String index(@RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "") String userName,@RequestParam(defaultValue = "")
+            String nikename,@RequestParam(defaultValue = "-1") String maritalStatus,
+                        @RequestParam(defaultValue = "") String fromCityId,@RequestParam(defaultValue = "") String fAreasId,ModelMap modelMap) {
 
 
-        UcenterUserExample example = new UcenterUserExample();
-        example.createCriteria();
-        //fActivityExample.setOrderByClause("desc ctime");
+        HashMap<String,Object> map =new HashMap<>();
+        String dataSearch = "";
 
-        List<UcenterUser> rows = ucenterUserService.selectByExampleForOffsetPage(example, pageSize*(pageNum-1), pageSize);
-        long total = ucenterUserService.countByExample(example);
+        if(StringUtil.isNotEmpty(userName)){
+            modelMap.put("userName",userName);
+            map.put("userName","%"+userName+"%");
+            dataSearch = "userName="+userName;
+        }
+        if(StringUtil.isNotEmpty(nikename)){
+            modelMap.put("nikename",nikename);
+            map.put("nikename","%"+nikename+"%");
+            if(StringUtil.isNotEmpty(dataSearch)){
+                dataSearch = dataSearch+"&nikename="+nikename;
+            }else{
+                dataSearch = "nikename="+nikename;
+            }
+        }
+
+        if(StringUtil.isNotEmpty(maritalStatus)&&!"不限".equals(maritalStatus)){
+            modelMap.put("maritalStatus",maritalStatus);
+            map.put("maritalStatus",maritalStatus);
+            if(StringUtil.isNotEmpty(dataSearch)){
+                dataSearch = dataSearch+"&maritalStatus="+maritalStatus;
+            }else{
+                dataSearch = "maritalStatus="+maritalStatus;
+            }
+
+        }
+
+        if(StringUtil.isNotEmpty(fromCityId)){
+            modelMap.put("fromCityId",fromCityId);
+            map.put("fromCityId",fromCityId);
+            if(StringUtil.isNotEmpty(dataSearch)){
+                dataSearch = dataSearch+"&fromCityId="+fromCityId;
+            }else{
+                dataSearch = "fromCityId="+fromCityId;
+            }
+        }
+
+        if(StringUtil.isNotEmpty(fAreasId)){
+            modelMap.put("fAreasId",fAreasId);
+            map.put("fAreasId",fAreasId);
+            if(StringUtil.isNotEmpty(dataSearch)){
+                dataSearch = dataSearch+"&fAreasId="+fAreasId;
+            }else{
+                dataSearch = "fAreasId="+fAreasId;
+            }
+        }
+
+
+        List<FuserDetailVo> rows = fUserBaseMsgService.queryUsers(map,pageSize * (pageNum - 1), pageSize);
+        long total = 30;
         modelMap.put("page", PageOnterModle.getInstence(pageNum,total,pageSize,rows));
+
+
+
         return "/content/manage/list_member.jsp";
     }
+
+
+
+
+    /**
+     * 后台首页
+     * @return
+     */
+    @ApiOperation(value = "后台首页")
+    @RequestMapping(value = "/auditingList", method = RequestMethod.GET)
+    public String auditingList(@RequestParam(defaultValue = "1") Integer pageNum,@RequestParam(defaultValue = "") String userName,@RequestParam(defaultValue = "-1") String idcardStatus,ModelMap modelMap) {
+
+
+        HashMap<String,Object> map =new HashMap<>();
+        String dataSearch = "";
+
+        if(StringUtil.isNotEmpty(userName)){
+            modelMap.put("userName",userName);
+            map.put("userName","%"+userName+"%");
+            dataSearch = "userName="+userName;
+        }
+
+        if(StringUtil.isNotEmpty(idcardStatus)&&!"不限".equals(idcardStatus)){
+            modelMap.put("idcardStatus",idcardStatus);
+            map.put("idcardStatus",idcardStatus);
+            if(StringUtil.isNotEmpty(dataSearch)){
+                dataSearch = dataSearch+"&idcardStatus="+idcardStatus;
+            }else{
+                dataSearch = "idcardStatus="+idcardStatus;
+            }
+
+        }
+        modelMap.put("imageBase",imageBase);
+        List<FuserDetailVo> rows = fUserBaseMsgService.queryUsers(map,pageSize * (pageNum - 1), pageSize);
+        long total = 30;
+        modelMap.put("page", PageOnterModle.getInstence(pageNum,total,pageSize,rows));
+
+
+        return "/content/manage/list_auditing.jsp";
+    }
+
 
 
     /**

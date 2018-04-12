@@ -3,6 +3,7 @@ package com.zheng.friend.dao.vo;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserLivingStatus;
 import com.zheng.friend.dao.model.FUserRequest;
+import com.zheng.friend.dao.model.FUserSetting;
 import com.zheng.ucenter.dao.model.UcenterIdentificaion;
 import com.zheng.ucenter.dao.model.UcenterUser;
 
@@ -17,6 +18,8 @@ public class FuserDetailVo extends UcenterUser {
     private FUserLivingStatus fUserLivingStatus;
 
     private UcenterIdentificaion ucenterIdentificaion;
+
+    private FUserSetting fUserSetting;
 
     private String age;
 
@@ -48,6 +51,18 @@ public class FuserDetailVo extends UcenterUser {
         return fUserLivingStatus;
     }
 
+
+    public   String [] idcardImgs;
+
+
+    public String[] getIdcardImgs() {
+        return idcardImgs;
+    }
+
+    public void setIdcardImgs(String[] idcardImgs) {
+        this.idcardImgs = idcardImgs;
+    }
+
     public void setfUserLivingStatus(FUserLivingStatus fUserLivingStatus) {
         this.fUserLivingStatus = fUserLivingStatus;
     }
@@ -58,5 +73,13 @@ public class FuserDetailVo extends UcenterUser {
 
     public void setUcenterIdentificaion(UcenterIdentificaion ucenterIdentificaion) {
         this.ucenterIdentificaion = ucenterIdentificaion;
+    }
+
+    public FUserSetting getfUserSetting() {
+        return fUserSetting;
+    }
+
+    public void setfUserSetting(FUserSetting fUserSetting) {
+        this.fUserSetting = fUserSetting;
     }
 }

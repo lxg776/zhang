@@ -23,4 +23,8 @@ public interface FUserBaseMsgExtMapper {
 
     public List<FUserViewRecordVo> selectViewRecordUsers(@Param("userId") Integer userId);
 
+    public List<FuserDetailVo> queryUsers(HashMap map);
+
+    public Long queryUsersCount(HashMap map);
+
 }

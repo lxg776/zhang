@@ -7,6 +7,7 @@ import com.zheng.friend.dao.vo.FUserMemberRelVo;
 import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,5 +33,15 @@ public interface FUserBaseMsgService extends BaseService<FUserBaseMsg, FUserBase
      * 根据用户获取推荐用户
       */
     public List<FuserDetailVo> selectRecommendUsers(FuserDetailVo modle,Integer offset, Integer limit);
+
+
+    /**
+     * 查询用户
+     */
+    public List<FuserDetailVo> queryUsers(HashMap<String, Object> map, int offset, int pageSize);
+
+
+
+    public Long queryUsersCount(HashMap<String,Object> map);
 
 }

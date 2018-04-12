@@ -7,6 +7,7 @@ import com.zheng.friend.dao.model.FUserBaseMsgExample;
 import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,6 +28,16 @@ public class FUserBaseMsgServiceMock extends BaseServiceMock<FUserBaseMsgMapper,
 
     @Override
     public List<FuserDetailVo> selectRecommendUsers(FuserDetailVo ucenterUser, Integer offset, Integer limit) {
+        return null;
+    }
+
+    @Override
+    public List<FuserDetailVo> queryUsers(  HashMap<String, Object> map,int pageNum,int pageSize){
+        return null;
+    }
+
+    @Override
+    public Long queryUsersCount(HashMap<String, Object> map) {
         return null;
     }
 }

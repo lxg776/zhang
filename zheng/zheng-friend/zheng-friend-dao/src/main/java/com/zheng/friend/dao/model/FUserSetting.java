@@ -80,6 +80,8 @@ public class FUserSetting implements Serializable {
      */
     private Byte historyviewStatus;
 
+    private Byte idcardStatus;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUserId() {
@@ -170,6 +172,14 @@ public class FUserSetting implements Serializable {
         this.historyviewStatus = historyviewStatus;
     }
 
+    public Byte getIdcardStatus() {
+        return idcardStatus;
+    }
+
+    public void setIdcardStatus(Byte idcardStatus) {
+        this.idcardStatus = idcardStatus;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -187,6 +197,7 @@ public class FUserSetting implements Serializable {
         sb.append(", viewMsgStatus=").append(viewMsgStatus);
         sb.append(", hongniangStatus=").append(hongniangStatus);
         sb.append(", historyviewStatus=").append(historyviewStatus);
+        sb.append(", idcardStatus=").append(idcardStatus);
         sb.append("]");
         return sb.toString();
     }
@@ -213,7 +224,8 @@ public class FUserSetting implements Serializable {
             && (this.getMsgSendStatus() == null ? other.getMsgSendStatus() == null : this.getMsgSendStatus().equals(other.getMsgSendStatus()))
             && (this.getViewMsgStatus() == null ? other.getViewMsgStatus() == null : this.getViewMsgStatus().equals(other.getViewMsgStatus()))
             && (this.getHongniangStatus() == null ? other.getHongniangStatus() == null : this.getHongniangStatus().equals(other.getHongniangStatus()))
-            && (this.getHistoryviewStatus() == null ? other.getHistoryviewStatus() == null : this.getHistoryviewStatus().equals(other.getHistoryviewStatus()));
+            && (this.getHistoryviewStatus() == null ? other.getHistoryviewStatus() == null : this.getHistoryviewStatus().equals(other.getHistoryviewStatus()))
+            && (this.getIdcardStatus() == null ? other.getIdcardStatus() == null : this.getIdcardStatus().equals(other.getIdcardStatus()));
     }
 
     @Override
@@ -231,6 +243,7 @@ public class FUserSetting implements Serializable {
         result = prime * result + ((getViewMsgStatus() == null) ? 0 : getViewMsgStatus().hashCode());
         result = prime * result + ((getHongniangStatus() == null) ? 0 : getHongniangStatus().hashCode());
         result = prime * result + ((getHistoryviewStatus() == null) ? 0 : getHistoryviewStatus().hashCode());
+        result = prime * result + ((getIdcardStatus() == null) ? 0 : getIdcardStatus().hashCode());
         return result;
     }
 }

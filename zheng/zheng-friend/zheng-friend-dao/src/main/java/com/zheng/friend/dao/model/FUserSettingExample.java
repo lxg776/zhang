@@ -766,6 +766,66 @@ public class FUserSettingExample implements Serializable {
             addCriterion("historyview_status not between", value1, value2, "historyviewStatus");
             return (Criteria) this;
         }
+
+        public Criteria andIdcardStatusIsNull() {
+            addCriterion("idcard_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusIsNotNull() {
+            addCriterion("idcard_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusEqualTo(Byte value) {
+            addCriterion("idcard_status =", value, "idcardStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusNotEqualTo(Byte value) {
+            addCriterion("idcard_status <>", value, "idcardStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusGreaterThan(Byte value) {
+            addCriterion("idcard_status >", value, "idcardStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("idcard_status >=", value, "idcardStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusLessThan(Byte value) {
+            addCriterion("idcard_status <", value, "idcardStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("idcard_status <=", value, "idcardStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusIn(List<Byte> values) {
+            addCriterion("idcard_status in", values, "idcardStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusNotIn(List<Byte> values) {
+            addCriterion("idcard_status not in", values, "idcardStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusBetween(Byte value1, Byte value2) {
+            addCriterion("idcard_status between", value1, value2, "idcardStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcardStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("idcard_status not between", value1, value2, "idcardStatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria implements Serializable {

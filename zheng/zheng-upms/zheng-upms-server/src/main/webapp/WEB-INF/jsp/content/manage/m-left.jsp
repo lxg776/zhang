@@ -3,6 +3,8 @@
 <div id="sidebar-left" class="span2">
 	<div class="nav-collapse sidebar-nav">
 		<ul class="nav nav-tabs nav-stacked main-menu">
+
+			<li><a href="${ctx}/manage/member/auditingList"><i class="icon-folder-open"></i><span class="hidden-tablet">会员审核管理</span></a></li>
 			<li><a href="${ctx}/manage/member/list"><i class="icon-folder-open"></i><span class="hidden-tablet">会员管理</span></a></li>
 			<li><a href="${ctx}/manage/order/list"><i class="icon-tasks"></i><span class="hidden-tablet">订单管理</span></a></li>
 			<li><a href="${ctx}/manage/activity/list"><i class="icon-tasks"></i><span class="hidden-tablet">活动管理</span></a></li>
@@ -21,4 +23,3 @@
 		</ul>
 	</div>
 </div>
-

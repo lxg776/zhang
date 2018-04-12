@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,6 +56,38 @@ public class FUserBaseMsgServiceImpl extends BaseServiceImpl<FUserBaseMsgMapper,
         return vo;
     }
 
+
+    @Override
+    public List<FuserDetailVo> queryUsers(  HashMap<String, Object> map,int offset,int pageSize) {
+
+
+
+        //Integer offset = (pageNum-1)*pageSize;
+        map.put("offset", offset);
+        map.put("limit", pageSize);
+
+        List<FuserDetailVo>  userList = fUserBaseMsgExtMapper.queryUsers(map);
+        if(null!=userList&&userList.size()>0){
+            for(FuserDetailVo vo:userList){
+                if(null!=vo.getfUserBaseMsg()){
+                    String brithDay = vo.getfUserBaseMsg().getBirthDate();
+                    String age = getAgeByString(brithDay,"");
+                    vo.setAge(age);
+                }
+            }
+
+        }
+        return userList;
+    }
+
+    @Override
+    public Long queryUsersCount(HashMap<String, Object> map) {
+
+        return fUserBaseMsgExtMapper.queryUsersCount(map);
+
+    }
+
+
     @Override
     public List<FuserDetailVo> selectRecommendUsers(FuserDetailVo ucenterUser,Integer offset, Integer limit) {
 
@@ -71,6 +104,11 @@ public class FUserBaseMsgServiceImpl extends BaseServiceImpl<FUserBaseMsgMapper,
                     String age = getAgeByString(brithDay,"");
                     vo.setAge(age);
                 }
+                if(null!=vo.getUcenterIdentificaion()&&null!=vo.getUcenterIdentificaion().getIdcardImgs()&&vo.getUcenterIdentificaion().getIdcardImgs().length()>0){
+                    String [] imgs =  vo.getUcenterIdentificaion().getIdcardImgs().split(",");
+                    vo.setIdcardImgs(imgs);
+                }
+
             }
 
         }
@@ -99,6 +137,10 @@ public class FUserBaseMsgServiceImpl extends BaseServiceImpl<FUserBaseMsgMapper,
 
     //根据字符串计算年龄
     public String getAgeByString(String strDate,String dateFormat){
+
+        if(strDate==null){
+            return "";
+        }
 
         if(null==dateFormat||dateFormat.equals("")){
             dateFormat = "yyyy-MM-dd";
