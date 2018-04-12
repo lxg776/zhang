@@ -1,6 +1,7 @@
 package com.zheng.upms.server.controller.friend;
 
 
+import com.aliyun.oss.model.PutObjectResult;
 import com.github.pagehelper.util.StringUtil;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.MD5Util;
@@ -8,14 +9,18 @@ import com.zheng.friend.dao.model.*;
 import com.zheng.friend.dao.vo.FUserMemberRelVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.rpc.api.*;
+import com.zheng.oss.common.constant.OssConstant;
 import com.zheng.ucenter.dao.model.UcenterIdentificaion;
 import com.zheng.ucenter.dao.model.UcenterUser;
 import com.zheng.ucenter.dao.model.UcenterUserExample;
 import com.zheng.ucenter.rpc.api.UcenterIdentificaionService;
 import com.zheng.ucenter.rpc.api.UcenterUserService;
+import com.zheng.upms.common.constant.UpmsResult;
+import com.zheng.upms.common.constant.UpmsResultConstant;
 import com.zheng.upms.server.controller.modle.PageOnterModle;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +29,17 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
@@ -132,7 +145,7 @@ public class MemberController extends BaseController{
 
 
         List<FuserDetailVo> rows = fUserBaseMsgService.queryUsers(map,pageSize * (pageNum - 1), pageSize);
-        long total = 30;
+        long total = fUserBaseMsgService.queryUsersCount(map);
         modelMap.put("page", PageOnterModle.getInstence(pageNum,total,pageSize,rows));
 
 
@@ -140,6 +153,35 @@ public class MemberController extends BaseController{
         return "/content/manage/list_member.jsp";
     }
 
+
+
+
+    @ResponseBody
+    @ApiOperation(value = "设置实名状态")
+    @RequestMapping(value = "/setIdcardStatus", method = RequestMethod.POST)
+    public Object setIdcardStatus (Integer userId,String isPass){
+
+
+        UpmsResult upmsResult =new UpmsResult(UpmsResultConstant.SUCCESS,null);
+
+
+
+        FUserSettingExample example =new FUserSettingExample();
+
+        example.createCriteria().andUserIdEqualTo(userId);
+
+        FUserSetting fUserSetting = fUserSettingService.selectFirstByExample(example);
+
+        if("true".equals(isPass)){
+            fUserSetting.setIdcardStatus((byte)2);
+        }else{
+            fUserSetting.setIdcardStatus((byte)1);
+        }
+        fUserSettingService.updateByPrimaryKey(fUserSetting);
+        upmsResult.setMessage("操作成功");
+
+        return upmsResult;
+    }
 
 
 
@@ -173,7 +215,7 @@ public class MemberController extends BaseController{
         }
         modelMap.put("imageBase",imageBase);
         List<FuserDetailVo> rows = fUserBaseMsgService.queryUsers(map,pageSize * (pageNum - 1), pageSize);
-        long total = 30;
+        long total = fUserBaseMsgService.queryUsersCount(map);
         modelMap.put("page", PageOnterModle.getInstence(pageNum,total,pageSize,rows));
 
 
@@ -253,6 +295,12 @@ public class MemberController extends BaseController{
     public String editIdentific(@RequestParam(defaultValue = "0") Integer userId,ModelMap modelMap){
 
         UcenterIdentificaion modle = ucenterIdentificaionService.selectByPrimaryKey(userId);
+
+        if(modle==null){
+            modle = new UcenterIdentificaion();
+            modle.setUserId(userId);
+            ucenterIdentificaionService.insert(modle);
+        }
 
         if(null!=modle.getIdcardImgs()&&modle.getIdcardImgs().length()>0){
             String [] imgs =  modle.getIdcardImgs().split(",");

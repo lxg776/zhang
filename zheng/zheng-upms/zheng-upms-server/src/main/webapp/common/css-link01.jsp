@@ -6,4 +6,4 @@
 <link id="base-style-responsive" href="${ctx}/bootstrap/css/style-responsive.css"
 	rel="stylesheet">
 <link rel="shortcut icon" href="${ctx}/bootstrap/img/favicon.ico">
-
+<link id="bootstrap-style" href="${ctx}/bootstrap/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">

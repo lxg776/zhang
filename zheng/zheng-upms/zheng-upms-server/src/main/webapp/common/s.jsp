@@ -30,4 +30,4 @@
 <script src="${ctx}/bootstrap/js/counter.js"></script>
 <script src="${ctx}/bootstrap/js/retina.js"></script>
 <script src="${ctx}/bootstrap/js/custom.js"></script>
-
+<script src="${ctx}/bootstrap/js/plug-in.js"></script>

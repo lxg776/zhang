@@ -33,7 +33,9 @@
 <%@ include file="/common/ui/m-navbar.jsp"%>
 <!-- start: Header -->
 
-<div class="container-fluid-full">
+
+
+<div class="container-fluid-full" >
     <div class="row-fluid">
 
         <!-- start: Main Menu -->
@@ -60,6 +62,7 @@
                         class="icon-angle-right"></i></li>
                 <li><a href="#">字段列表</a></li>
             </ul>
+
 
 
 
@@ -101,7 +104,7 @@
 
 
             <!-- 新闻栏目 -->
-            <div class="box span6" style="width: 1200px;">
+            <div class="box span6" style="width: 1400px;">
                 <div class="box-header">
                     <h2>
                         <i class="halflings-icon white align-justify"></i><span
@@ -152,16 +155,16 @@
                                     </c:forEach>
                                 </th>
                                 <td style="width: 200px;"><fmt:formatDate value="${item.createTime}" pattern="yyyy/MM/dd  HH:mm:ss" /></td>
-                                <c:if test="${item.fUserSetting.idcardStatus == 0}"><td style="width: 200px;">审核通过</td></c:if>
+                                <c:if test="${item.fUserSetting.idcardStatus == 2}"><td style="width: 200px;">审核通过</td></c:if>
                                 <c:if test="${item.fUserSetting.idcardStatus == 1}"><td style="width: 200px;">审核不通过</td></c:if>
                                 <c:if test="${empty item.fUserSetting.idcardStatus}"><td style="width: 200px;">未设置</td></c:if>
 
 
 
-                                <td style="width: 600px;"><a href="${ctx}/manage/member/editUser?id=${item.userId}" style="color: #0033FF">
+                                <td style="width: 600px;"><a  href="javascript:;" onclick="javascript:setAuditing(${item.userId},'true');" style="color: #0033FF">
                                     通过审核
                                 </a>/
-                                    <a href="${ctx}/manage/member/editUser?id=${item.userId}" style="color: #0033FF">
+                                    <a href="javascript:;" onclick="javascript:setAuditing(${item.userId},'false');" style="color: #0033FF">
                                         不通过审核
                                     </a>
                                 </td>
@@ -202,6 +205,13 @@
 			</span>
     </p>
 </footer>
+
+
+
+
+
+
+
 <!-- start: JavaScript-->
 <%@ include file="/common/s.jsp"%>
 
@@ -211,7 +221,36 @@
 
     $(document).ready(function(){
         initCityData(true);
+
+
+
     });
+
+
+
+
+
+    //设置权限
+    function setAuditing(userId,isPass) {
+
+        data = "userId="+userId+"&isPass="+isPass;
+
+        $.ajax({
+            url: ctx+"/manage/member/setIdcardStatus",
+            type: "POST",
+            dataType: 'json',
+            data:data,
+            success: function (data) {
+                //刷新当前页面
+                location.replace(location.href);
+
+            }
+        });
+
+
+
+    }
+
 
     var  dProvinceId="450000";
     var  dcityid = "451000";
