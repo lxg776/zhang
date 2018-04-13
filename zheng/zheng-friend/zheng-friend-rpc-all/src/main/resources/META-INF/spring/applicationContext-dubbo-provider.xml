@@ -21,7 +21,7 @@
 
     <dubbo:application name="zheng-firend-rpc-service"/>
 
-    <dubbo:registry address="zookeeper://222.84.231.82:64005"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:64005"/>
 
     <dubbo:protocol name="dubbo" port="20882"/>
 

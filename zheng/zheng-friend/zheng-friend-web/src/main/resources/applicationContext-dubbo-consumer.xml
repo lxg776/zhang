@@ -9,7 +9,7 @@
 
     <dubbo:application name="zheng-cms-admin"/>
 
-    <dubbo:registry file="./zheng-friens-web-dubbo.cache"  address="zookeeper://222.84.231.82:64005" />
+    <dubbo:registry file="./zheng-friens-web-dubbo.cache"  address="zookeeper://127.0.0.1:64005" />
 
     <!-- 订阅服务 -->
     <dubbo:consumer check="false"/>
