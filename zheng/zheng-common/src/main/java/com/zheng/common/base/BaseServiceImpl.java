@@ -6,6 +6,7 @@ import com.zheng.common.db.DynamicDataSource;
 import com.zheng.common.util.SpringContextUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,6 +19,8 @@ import java.util.List;
  */
 public abstract class BaseServiceImpl<Mapper, Record, Example> implements BaseService<Record, Example> {
 
+
+	@Autowired
 	public Mapper mapper;
 
 	@Override

@@ -34,5 +34,6 @@
         <module>zheng-api</module>
         <module>zheng-demo</module>
         <module>zheng-friend</module>
+        <module>zheng-cpw</module>
     </modules>
 </project>
