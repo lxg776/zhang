@@ -96,10 +96,9 @@ public class CallBackCpntroller {
                 String state = "1";
                 sb.append(oid);
                 sb.append(state);
-                sb.append(money);
-                sb.append(appsecret);
+
                 try {
-                    String  setKey = MD5Util.getMD5(payVendor.getAppid()+MD5Util.getMD5(sb.toString()));
+                    String  setKey = MD5Util.getMD5(payVendor.getAppid()+MD5Util.getMD5(sb.toString())+money+appsecret);
                     if(backKey.equals(setKey)){
                         //更新订单状态
                         PayInOrder payInOrder = payInOrderService.selectByPrimaryKey(Integer.parseInt(oid));
