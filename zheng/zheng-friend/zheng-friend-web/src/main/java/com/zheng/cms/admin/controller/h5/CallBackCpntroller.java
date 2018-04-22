@@ -5,9 +5,11 @@ import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.util.MD5Util;
 import com.zheng.friend.dao.model.FMemberType;
 import com.zheng.friend.dao.model.FUserMemberRel;
+import com.zheng.friend.dao.model.FUserSetting;
 import com.zheng.friend.rpc.api.FMemberTypeService;
 import com.zheng.friend.rpc.api.FUserMemberRelService;
 import com.zheng.friend.rpc.api.FUserOrderService;
+import com.zheng.friend.rpc.api.FUserSettingService;
 import com.zheng.pay.dao.model.PayInOrder;
 import com.zheng.pay.dao.model.PayVendor;
 import com.zheng.pay.rpc.api.PayInOrderDetailService;
@@ -33,7 +35,7 @@ import java.util.Date;
 public class CallBackCpntroller {
 
 
-    public final static String DATE_FORMAT = "yyyy年MM月dd日 HH:mm:SS";
+    public final static String DATE_FORMAT = "yyyy年MM月dd日 HH:mm";
 
     public final static byte STATUS_CREATE = '1';//订单创建
     public final static byte STATUS_PAY = '2';//订单支付，但未完成更改资料
@@ -59,6 +61,9 @@ public class CallBackCpntroller {
     @Autowired
     FUserMemberRelService fUserMemberRelService;
 
+    @Autowired
+    FUserSettingService fUserSettingService;
+
     /**
      * 创建订单
      * @return
@@ -79,11 +84,13 @@ public class CallBackCpntroller {
 
     private String handleByCallback(String callBack,String oid,String money,String backKey){
         String args[] = callBack.split("&");
-        if(null!=args){
+
+        PayInOrder payInOrder = payInOrderService.selectByPrimaryKey(Integer.parseInt(oid));
+
+        if(null!=args&&payInOrder.getStatus()==STATUS_CREATE){
 
             if(args[0].equals("u")&&args.length==4){
                 //更新会员等级
-
                 String uid=args[1];
                 String payVendorId = args[2];
                 String mTypeId = args[3];
@@ -101,7 +108,7 @@ public class CallBackCpntroller {
                     String  setKey = MD5Util.getMD5(payVendor.getAppid()+MD5Util.getMD5(sb.toString())+money+appsecret);
                     if(backKey.equals(setKey)){
                         //更新订单状态
-                        PayInOrder payInOrder = payInOrderService.selectByPrimaryKey(Integer.parseInt(oid));
+
                         payInOrder.setStatus(ORDER_FINISH);
                         payInOrderService.updateByPrimaryKey(payInOrder);
                         //设置会员关系
@@ -112,14 +119,23 @@ public class CallBackCpntroller {
                         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
                         String begDate = sdf.format(new Date());
                         fUserMemberRel.setBegTime(begDate);
-
                         Calendar calendar = Calendar.getInstance();
                         calendar.add(Calendar.DATE, 100);
                         Date endDate = calendar.getTime();
                         String endDateString = sdf.format(endDate);
-                        fUserMemberRel.setBegTime(endDateString);
+                        fUserMemberRel.setBegTime(begDate);
+                        fUserMemberRel.setEndTime(endDateString);
                         fUserMemberRel.setEndStatus((byte)0);
                         fUserMemberRelService.insert(fUserMemberRel);
+                        //修改用户的权限
+
+                        //fMemberType
+                        FUserSetting fUserSetting = fUserSettingService.selectByPrimaryKey(Integer.parseInt(uid));
+                        fUserSetting.setMsgReadStatus(fMemberType.getMsgReadStatus());
+                        fUserSetting.setMsgSendStatus(fMemberType.getMsgSendStatus());
+                        fUserSetting.setHongniangStatus(fMemberType.getHistoryviewStatus());
+                        fUserSettingService.updateByPrimaryKey(fUserSetting);
+
                         return "success";
                     }
 

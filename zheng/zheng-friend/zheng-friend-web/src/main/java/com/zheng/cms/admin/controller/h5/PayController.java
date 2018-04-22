@@ -1,6 +1,7 @@
 package com.zheng.cms.admin.controller.h5;
 
 
+import com.zheng.cms.admin.util.CommonUtil;
 import com.zheng.cms.common.constant.FriendResult;
 import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
@@ -22,6 +23,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.velocity.runtime.parser.node.MathUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -209,16 +211,19 @@ public class PayController extends BaseController {
 				String state = "1";
 				sb.append(oid);
 				sb.append(state);
-				sb.append(money);
-				sb.append(appsecret);
+//				sb.append(money);
+//				sb.append(appsecret);
 				try {
-					String  setKey = MD5Util.getMD5(payVendor.getAppid()+MD5Util.getMD5(sb.toString()));
+					String  setKey = MD5Util.getMD5(payVendor.getAppid()+MD5Util.getMD5(sb.toString())+money+appsecret);
 
 					if(key.equals(setKey)){
 						//更新订单状态
 						FMemberType fMemberType = fMemberTypeService.selectByPrimaryKey(Integer.parseInt(mTypeId));
 						modelMap.put("orderName",fMemberType.getName());
 						modelMap.put("days",fMemberType.getServiceDays());
+
+						Double moneyValue = Double.parseDouble(money)/100;
+						money = CommonUtil.format3(moneyValue);
 						modelMap.put("money",money);
 						modelMap.put("date",dateStr);
 						return "/content/h5/user/pay_success.jsp";
