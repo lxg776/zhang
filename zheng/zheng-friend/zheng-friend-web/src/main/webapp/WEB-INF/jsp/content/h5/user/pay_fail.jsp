@@ -56,7 +56,11 @@
 
 
 
-
+<script  language="JavaScript">
+    $("#backBtn").click(function(){
+        window.location.href="${ctx}/u/index";
+    });
+</script>
 
 
 

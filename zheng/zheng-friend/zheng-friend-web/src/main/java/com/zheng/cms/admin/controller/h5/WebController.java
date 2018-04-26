@@ -132,6 +132,8 @@ public class WebController extends BaseController {
 		modelMap.put("fActivityList",fActivityList);
 
 
+
+
 		//查询会员的类型
 		FMemberTypeExample fMemberTypeExample = new FMemberTypeExample();
 		fMemberTypeExample.createCriteria().andShowStatusEqualTo((byte)1);

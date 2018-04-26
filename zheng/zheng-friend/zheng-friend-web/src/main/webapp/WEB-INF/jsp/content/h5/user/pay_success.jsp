@@ -66,7 +66,7 @@
 
                         <div class="aui-list-item-text">
                             <div class="aui-list-item-left">支付金额</div>
-                        <div class="aui-list-item-title">${money}</div>
+                        <div class="aui-list-item-title">${money}元</div>
                     </div>
 
                     <div class="aui-list-item-text">
@@ -81,7 +81,16 @@
     </div>
 
 </div>
+<script  language="JavaScript">
+    $("#backBtn").click(function(){
+        window.location.href="${ctx}/u/index";
+    });
 
+
+
+
+</script>
 
 </body>
+
 </html>
