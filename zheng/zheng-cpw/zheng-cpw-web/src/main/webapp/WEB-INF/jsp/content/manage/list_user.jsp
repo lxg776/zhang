@@ -91,7 +91,7 @@
                                 <td style="width: 200px;">${item.password}</td>
                                 <td style="width: 100px;">${item.sysKey}</td>
                                 <td style="width: 200px;"><fmt:formatDate value="${item.createTime}" pattern="yyyy/MM/dd  HH:mm:ss" /></td>
-                                <td style="width: 100px;"><a href="${ctx}/manage/userEdit?userId=${item.userId}" style="color: #0033FF">编辑</a>
+                                <td style="width: 100px;"><a href="${ctx}/cpw/userEdit?id=${item.userId}" style="color: #0033FF">编辑</a>
                                     /<a href="#" style="color: #0033FF">删除</a>
                                 </td>
                             </tr>
