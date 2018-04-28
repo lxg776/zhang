@@ -25,7 +25,7 @@
     <a class="aui-pull-left aui-btn" id="backBtn">
         <span class="aui-iconfont aui-icon-left"></span>返回
     </a>
-    <div class="aui-title">${fromUser.nikename}</div>
+    <div class="aui-title">${toUser.fUserBaseMsg.nikename}</div>
 
 </header>
 

@@ -2,6 +2,8 @@ package com.zheng.friend.rpc.mapper;
 
 
 
+
+import com.zheng.friend.dao.vo.FMemberTypeVo;
 import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import org.apache.ibatis.annotations.Param;
@@ -26,5 +28,8 @@ public interface FUserBaseMsgExtMapper {
     public List<FuserDetailVo> queryUsers(HashMap map);
 
     public Long queryUsersCount(HashMap map);
+
+    public List<FMemberTypeVo>  getTypeListByUserId(@Param("userId") Integer userId);
+
 
 }

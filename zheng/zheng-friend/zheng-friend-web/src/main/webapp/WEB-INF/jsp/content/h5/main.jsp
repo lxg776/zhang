@@ -32,7 +32,7 @@
     <div  id="page1" class="aui-content aui-margin-b-15">
         <ul class="aui-list aui-media-list" id="listUser">
             <li class="aui-list-header">
-                每日推荐
+                推荐列表
             </li>
 
             <c:forEach var="item" items="${recommendUserList}" >
@@ -81,7 +81,7 @@
                         </div>
                         <div class="aui-info-item">
                             <a href="javascript:;"  <c:if test="${fUserSetting.msgSendStatus == 0}">aui-popup-for="top-left" </c:if>
-                               <c:if test="${fUserSetting.msgSendStatus == 1}">onclick="sendMsg(${item.userId})"</c:if>
+                               <c:if test="${fUserSetting.msgSendStatus == 1}">onclick="getMsgList(${item.userId})"</c:if>
                             >发信息</a>
                         </div>
 

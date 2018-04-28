@@ -35,6 +35,29 @@ CREATE TABLE `cpw_user` (
   UNIQUE KEY `user_name` (`user_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
+
+create table cpw_news
+(
+   id                   int unsigned not null comment '编号',
+   title            varchar(100) comment '标题',
+   create        varchar(100) comment '创建时间',
+   cover            varchar(100) comment '',
+   link       varchar(100) comment '链接',
+   begin          varchar(100) comment '开始时间',
+   end          varchar(100) comment '房屋状况',
+   timeState             varchar(200) comment '兴趣爱好',
+   author           varchar(200) comment '特长优点',
+   source			            varchar(200) comment '标签',
+   origin               varchar(200) comment '身高',
+   content           text comment '职业',
+   bootContent       varchar(255) comment 'bootContent',
+   bootType          varchar(255) comment 'bootType',
+   readCount          varchar(255) comment '浏览次数',
+   primary key (id)
+
+)
+
+
 -- ----------------------------
 --  Records of `cpw_user`
 -- ----------------------------

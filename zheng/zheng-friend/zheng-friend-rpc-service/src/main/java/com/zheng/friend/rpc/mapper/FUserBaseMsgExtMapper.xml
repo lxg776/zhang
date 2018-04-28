@@ -108,6 +108,21 @@
     </resultMap>
 
 
+    <resultMap id="fMemberType" type="com.zheng.friend.dao.vo.FMemberTypeVo">
+
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="info" jdbcType="VARCHAR" property="info" />
+        <result column="service_days" jdbcType="INTEGER" property="serviceDays" />
+        <result column="end_time" jdbcType="TINYINT" property="endTime" />
+        <result column="beg_time" jdbcType="VARCHAR" property="begTime" />
+
+    </resultMap>
+
+
+
+
+
+
 
     <sql id="Base_Column_List">
       uc.user_id , uc.user_name,uc.avatar, uc.nickname, uc.sex, uc.last_login_time, uc.last_login_ip,uc.create_time
@@ -137,6 +152,20 @@
         s.show_index_page as s_show_index_page , s.show_base_msg as s_show_base_msg,s.show_friend_request as s_show_friend_request,s.show_living_status as s_show_living_status ,s.show_favorite as s_show_favorite,s.idcard_status as s_idcard_status
     </sql>
 
+
+    <sql id="Member_Type_List">
+        name as typeName,info,service_days, beg_time, end_time
+    </sql>
+
+
+
+    <!-- 排序上移 -->
+    <select id="getTypeListByUserId" resultMap="fMemberType" parameterType="java.lang.Integer">
+        select     <include refid="Member_Type_List" />
+        from f_user_member_rel as r  left join
+        f_member_type t on r.member_type_id = t.id
+        where r.user_id = #{userId,jdbcType=INTEGER} ORDER BY r.id desc;
+    </select>
 
 
 

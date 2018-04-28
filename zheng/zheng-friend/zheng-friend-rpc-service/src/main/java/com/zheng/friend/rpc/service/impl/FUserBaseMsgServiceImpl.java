@@ -4,8 +4,10 @@ import com.zheng.common.annotation.BaseService;
 import com.zheng.common.base.BaseServiceImpl;
 import com.zheng.common.util.StringUtil;
 import com.zheng.friend.dao.mapper.FUserBaseMsgMapper;
+import com.zheng.friend.dao.model.FMemberType;
 import com.zheng.friend.dao.model.FUserBaseMsg;
 import com.zheng.friend.dao.model.FUserBaseMsgExample;
+import com.zheng.friend.dao.vo.FMemberTypeVo;
 import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.rpc.api.FUserBaseMsgService;
@@ -40,10 +42,16 @@ public class FUserBaseMsgServiceImpl extends BaseServiceImpl<FUserBaseMsgMapper,
     FUserBaseMsgMapper fUserBaseMsgMapper;
     @Autowired
     FUserBaseMsgExtMapper fUserBaseMsgExtMapper;
+
+
+
+
     @Override
     public FuserDetailVo selectFUserDetailVoByUserId(Integer userId) {
 
         FuserDetailVo vo =fUserBaseMsgExtMapper.selectFUserDetailVoByUserId(userId);
+        List<FMemberTypeVo> typeVoList  = fUserBaseMsgExtMapper.getTypeListByUserId(userId);
+        vo.setTypeList(typeVoList);
 
         if(null!=vo&&null!=vo.getfUserBaseMsg()){
             String brithDay = vo.getfUserBaseMsg().getBirthDate();

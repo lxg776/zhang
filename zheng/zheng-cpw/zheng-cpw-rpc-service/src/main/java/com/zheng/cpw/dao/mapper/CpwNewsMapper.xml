@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zheng.cpw.dao.mapper.CpwNewsMapper">
+  <resultMap id="BaseResultMap" type="com.zheng.cpw.dao.model.CpwNews">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="begin_time" jdbcType="VARCHAR" property="beginTime" />
+    <result column="end_time" jdbcType="VARCHAR" property="endTime" />
+    <result column="time_state" jdbcType="VARCHAR" property="timeState" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="origin" jdbcType="VARCHAR" property="origin" />
+    <result column="boot_content" jdbcType="VARCHAR" property="bootContent" />
+    <result column="boot_type" jdbcType="VARCHAR" property="bootType" />
+    <result column="read_count" jdbcType="VARCHAR" property="readCount" />
+    <result column="news_column" jdbcType="VARCHAR" property="newsColumn" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zheng.cpw.dao.model.CpwNews">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, create_time, cover, link, begin_time, end_time, time_state, author, source, 
+    origin, boot_content, boot_type, read_count, news_column
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zheng.cpw.dao.model.CpwNewsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cpw_news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zheng.cpw.dao.model.CpwNewsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cpw_news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cpw_news
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from cpw_news
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zheng.cpw.dao.model.CpwNewsExample">
+    delete from cpw_news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zheng.cpw.dao.model.CpwNews">
+    insert into cpw_news (id, title, create_time, 
+      cover, link, begin_time, 
+      end_time, time_state, author, 
+      source, origin, boot_content, 
+      boot_type, read_count, news_column, 
+      content)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{cover,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{beginTime,jdbcType=VARCHAR}, 
+      #{endTime,jdbcType=VARCHAR}, #{timeState,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{source,jdbcType=VARCHAR}, #{origin,jdbcType=VARCHAR}, #{bootContent,jdbcType=VARCHAR}, 
+      #{bootType,jdbcType=VARCHAR}, #{readCount,jdbcType=VARCHAR}, #{newsColumn,jdbcType=VARCHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zheng.cpw.dao.model.CpwNews">
+    insert into cpw_news
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="cover != null">
+        cover,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="timeState != null">
+        time_state,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="origin != null">
+        origin,
+      </if>
+      <if test="bootContent != null">
+        boot_content,
+      </if>
+      <if test="bootType != null">
+        boot_type,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="newsColumn != null">
+        news_column,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null">
+        #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="timeState != null">
+        #{timeState,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="bootContent != null">
+        #{bootContent,jdbcType=VARCHAR},
+      </if>
+      <if test="bootType != null">
+        #{bootType,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=VARCHAR},
+      </if>
+      <if test="newsColumn != null">
+        #{newsColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zheng.cpw.dao.model.CpwNewsExample" resultType="java.lang.Long">
+    select count(*) from cpw_news
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update cpw_news
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cover != null">
+        cover = #{record.cover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.link != null">
+        link = #{record.link,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginTime != null">
+        begin_time = #{record.beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeState != null">
+        time_state = #{record.timeState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.author != null">
+        author = #{record.author,jdbcType=VARCHAR},
+      </if>
+      <if test="record.source != null">
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.origin != null">
+        origin = #{record.origin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bootContent != null">
+        boot_content = #{record.bootContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bootType != null">
+        boot_type = #{record.bootType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readCount != null">
+        read_count = #{record.readCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsColumn != null">
+        news_column = #{record.newsColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update cpw_news
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      cover = #{record.cover,jdbcType=VARCHAR},
+      link = #{record.link,jdbcType=VARCHAR},
+      begin_time = #{record.beginTime,jdbcType=VARCHAR},
+      end_time = #{record.endTime,jdbcType=VARCHAR},
+      time_state = #{record.timeState,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      origin = #{record.origin,jdbcType=VARCHAR},
+      boot_content = #{record.bootContent,jdbcType=VARCHAR},
+      boot_type = #{record.bootType,jdbcType=VARCHAR},
+      read_count = #{record.readCount,jdbcType=VARCHAR},
+      news_column = #{record.newsColumn,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update cpw_news
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      cover = #{record.cover,jdbcType=VARCHAR},
+      link = #{record.link,jdbcType=VARCHAR},
+      begin_time = #{record.beginTime,jdbcType=VARCHAR},
+      end_time = #{record.endTime,jdbcType=VARCHAR},
+      time_state = #{record.timeState,jdbcType=VARCHAR},
+      author = #{record.author,jdbcType=VARCHAR},
+      source = #{record.source,jdbcType=VARCHAR},
+      origin = #{record.origin,jdbcType=VARCHAR},
+      boot_content = #{record.bootContent,jdbcType=VARCHAR},
+      boot_type = #{record.bootType,jdbcType=VARCHAR},
+      read_count = #{record.readCount,jdbcType=VARCHAR},
+      news_column = #{record.newsColumn,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zheng.cpw.dao.model.CpwNews">
+    update cpw_news
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null">
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="timeState != null">
+        time_state = #{timeState,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="bootContent != null">
+        boot_content = #{bootContent,jdbcType=VARCHAR},
+      </if>
+      <if test="bootType != null">
+        boot_type = #{bootType,jdbcType=VARCHAR},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=VARCHAR},
+      </if>
+      <if test="newsColumn != null">
+        news_column = #{newsColumn,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zheng.cpw.dao.model.CpwNews">
+    update cpw_news
+    set title = #{title,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      time_state = #{timeState,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      boot_content = #{bootContent,jdbcType=VARCHAR},
+      boot_type = #{bootType,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=VARCHAR},
+      news_column = #{newsColumn,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zheng.cpw.dao.model.CpwNews">
+    update cpw_news
+    set title = #{title,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      time_state = #{timeState,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      boot_content = #{bootContent,jdbcType=VARCHAR},
+      boot_type = #{bootType,jdbcType=VARCHAR},
+      read_count = #{readCount,jdbcType=VARCHAR},
+      news_column = #{newsColumn,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+</mapper>

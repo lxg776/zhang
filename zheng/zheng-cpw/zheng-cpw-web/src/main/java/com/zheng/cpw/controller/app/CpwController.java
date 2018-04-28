@@ -91,7 +91,7 @@ public class CpwController extends BaseController {
 		CpwResult result =new CpwResult(CpwResultConstant.SUCCESS,null);
 
 		if(queryUser!=null){
-			result.setMessage("用户不存在!");
+			result.setMessage("用户已经存在!");
 			result.setCode(CpwResultConstant.FAILED.code);
 			return  result;
 		}
@@ -111,6 +111,36 @@ public class CpwController extends BaseController {
 		return result;
 	}
 
+
+
+	/**
+	 * 首页
+	 * @return
+	 */
+	@ApiOperation(value = "后台首页")
+	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
+	@ResponseBody
+	public Object changePassword(@RequestParam(defaultValue = "") String userName,@RequestParam(defaultValue = "") String password,@RequestParam(defaultValue = "") String sysKey,ModelMap modelMap) {
+
+
+		CpwUserExample cpwUserExample =new CpwUserExample();
+		cpwUserExample.createCriteria().andUserNameEqualTo(userName).andSysKeyEqualTo(sysKey);
+		CpwUser  queryUser = ucenterUserService.selectFirstByExample(cpwUserExample);
+
+		CpwResult result =new CpwResult(CpwResultConstant.SUCCESS,null);
+
+		if(queryUser==null){
+			result.setMessage("用户不存在!");
+			result.setCode(CpwResultConstant.FAILED.code);
+			return  result;
+		}
+
+
+		queryUser.setPassword(password);
+		ucenterUserService.updateByPrimaryKey(queryUser);
+		result.setMessage("密码修改成功！");
+		return result;
+	}
 
 
 	/**
@@ -142,6 +172,9 @@ public class CpwController extends BaseController {
 
 		return result;
 	}
+
+
+
 
 
 

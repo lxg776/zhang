@@ -1,17 +1,19 @@
 package com.zheng.friend.dao.vo;
 
-import com.zheng.friend.dao.model.FUserBaseMsg;
-import com.zheng.friend.dao.model.FUserLivingStatus;
-import com.zheng.friend.dao.model.FUserRequest;
-import com.zheng.friend.dao.model.FUserSetting;
+import com.zheng.friend.dao.model.*;
 import com.zheng.ucenter.dao.model.UcenterIdentificaion;
 import com.zheng.ucenter.dao.model.UcenterUser;
 
+import java.util.List;
 
 
 public class FuserDetailVo extends UcenterUser {
 
     private FUserRequest fUserRequest;
+
+
+    private List<FMemberTypeVo> typeList;
+
 
     private FUserBaseMsg fUserBaseMsg;
 
@@ -54,6 +56,14 @@ public class FuserDetailVo extends UcenterUser {
 
     public   String [] idcardImgs;
 
+
+    public List<FMemberTypeVo> getTypeList() {
+        return typeList;
+    }
+
+    public void setTypeList(List<FMemberTypeVo> typeList) {
+        this.typeList = typeList;
+    }
 
     public String[] getIdcardImgs() {
         return idcardImgs;

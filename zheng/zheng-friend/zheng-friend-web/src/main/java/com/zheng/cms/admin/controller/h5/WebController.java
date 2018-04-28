@@ -7,6 +7,7 @@ import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
 import com.zheng.common.util.PropertiesFileUtil;
 import com.zheng.friend.dao.model.*;
+import com.zheng.friend.dao.vo.FMemberTypeVo;
 import com.zheng.friend.dao.vo.FUserViewRecordVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.dao.vo.RecentMsgVo;
@@ -145,6 +146,11 @@ public class WebController extends BaseController {
 		FUserSetting fUserSetting = fUserSettingService.selectByPrimaryKey(ucenterUser.getUserId());
 		modelMap.put("fUserSetting",fUserSetting);
 
+
+		//查询会员类型
+
+
+
 		//问候语
 		FGreetingTempExample fGreetingTempExample =new FGreetingTempExample();
 		fGreetingTempExample.createCriteria().andShowStatusEqualTo((byte)1);
@@ -156,10 +162,37 @@ public class WebController extends BaseController {
 		long unReadCount = fMessageService.selectunReadCountByUserId(ucenterUser.getUserId(),(byte)0);
 		modelMap.put("unReadCount",unReadCount);
 
+
+		List<FMemberTypeVo> typeVoList = myDetailVo.getTypeList();
+		if(null!=typeList&&typeList.size()>0){
+			modelMap.put("memberTypeVo",typeVoList.get(0));
+		}
+
+
 		return "/content/h5/main.jsp";
 
 
 	}
+
+
+	/**
+	 * 后台首页
+	 * @return
+	 */
+	@ApiOperation(value = "后台首页")
+	@RequestMapping(value = "/openMenber", method = RequestMethod.GET)
+	public String openMember(ModelMap modelMap){
+
+		//查询会员的类型
+		FMemberTypeExample fMemberTypeExample = new FMemberTypeExample();
+		fMemberTypeExample.createCriteria().andShowStatusEqualTo((byte)1);
+		fMemberTypeExample.setOrderByClause("level desc");
+		List<FMemberType> typeList = fMemberTypeService.selectByExample(fMemberTypeExample);
+		modelMap.put("typeList",typeList);
+
+		return "/content/h5/user/open_member.jsp";
+	}
+
 
 	/**
 	 * 后台首页
@@ -187,8 +220,8 @@ public class WebController extends BaseController {
 		UcenterUser ucenterUser = getUctenuser(username,session);
 		FuserDetailVo userDetail  = fUserBaseMsgService.selectFUserDetailVoByUserId(uid);
 		modelMap.put("modle",userDetail);
-
-
+		FUserSetting fUserSetting =  fUserSettingService.selectByPrimaryKey(ucenterUser.getUserId());
+		modelMap.put("fUserSetting",fUserSetting);
 		//个人相册
 		FUserImagesExample example = new FUserImagesExample();
 		example.createCriteria().andUserIdEqualTo(userDetail.getUserId()).andKeywordEqualTo("photo");
@@ -202,6 +235,9 @@ public class WebController extends BaseController {
 		viewRecord.setfUserId(ucenterUser.getUserId());
 		viewRecord.setbUserId(userDetail.getUserId());
 		fUserViewRecordService.insert(viewRecord);
+
+
+
 
 
 		//问候语

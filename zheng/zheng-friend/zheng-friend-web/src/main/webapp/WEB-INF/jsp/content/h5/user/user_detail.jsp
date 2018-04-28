@@ -65,7 +65,7 @@
                     </div>
                     <div class="aui-info-item">
                         <a href="javascript:;"  <c:if test="${fUserSetting.msgSendStatus == 0}">aui-popup-for="top-left" </c:if>
-                           <c:if test="${fUserSetting.msgSendStatus == 1}">onclick="sendMsg(${modle.userId})"</c:if>
+                           <c:if test="${fUserSetting.msgSendStatus == 1}">onclick="getMsgList(${modle.userId})"</c:if>
                         >发信息</a>
                     </div>
 
@@ -453,7 +453,12 @@
         window.location.href = url;
     }
 
-
+    //获取消息列表
+    function getMsgList(fromUserId) {
+        url = "${ctx}/m/msgList?fromUserId="+fromUserId;
+        window.location.href= url;
+        // console.log("wtf");
+    }
 
     // View a list of images
     var viewer = new Viewer(document.getElementById('images'));
