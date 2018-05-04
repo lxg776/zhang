@@ -104,6 +104,16 @@ public class IndexController extends BaseController {
 		return "/sso/h5_login.jsp";
 	}
 
+	/**
+	 * 服务协议
+	 * @return
+	 */
+	@ApiOperation(value = "服务协议")
+	@RequestMapping(value = "/agreement", method = RequestMethod.GET)
+	public String agreement(){
+		return "/content/h5/user/agreement.jsp";
+	}
+
 
 	/**
 	 * 首页
@@ -207,8 +217,15 @@ public class IndexController extends BaseController {
 		modle.setSex(sex);
 
 		if(null!=ucenterUser){
-			modle.setUserId(ucenterUser.getUserId());
-			ucenterUserService.updateByPrimaryKey(modle);
+			ucenterUser=ucenterUserService.selectByPrimaryKey(ucenterUser.getUserId());
+			if(null!=ucenterUser){
+				modle.setUserId(ucenterUser.getUserId());
+				ucenterUserService.updateByPrimaryKey(modle);
+			}else{
+				SecurityUtils.getSubject().logout();
+				ucenterUserService.insert(modle);
+			}
+
 		}else{
 			ucenterUserService.insert(modle);
 		}

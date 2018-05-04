@@ -20,7 +20,7 @@
 <body>
 <header class="aui-bar aui-bar-nav" style="position: fixed;">
 
-    <div class="aui-title" id="demo">靖西婚恋网</div>
+    <div class="aui-title" id="demo">婚恋墙</div>
 
 
 
@@ -226,7 +226,7 @@
                     </div>
                     <div class="aui-list-item-inner">
                         <div class="aui-list-item-text">
-                            <div class="aui-list-item-title">${modle.fUserBaseMsg.nikename}</div>
+                            <div class="aui-list-item-title">${modle.fUserBaseMsg.nikename} <c:if test="${not empty memberTypeVo}"><font color="red">(${memberTypeVo.info})</font></c:if> </div>
                             <div class="aui-list-item-right" style="display: none;">访问次数99</div>
                         </div>
 

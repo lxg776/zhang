@@ -25,7 +25,7 @@
     <a class="aui-pull-left aui-btn">
         <span class="aui-iconfont aui-icon-left"></span>返回
     </a>
-    <div class="aui-title">靖西婚恋网</div>
+    <div class="aui-title">婚恋墙</div>
 
 </header>
 

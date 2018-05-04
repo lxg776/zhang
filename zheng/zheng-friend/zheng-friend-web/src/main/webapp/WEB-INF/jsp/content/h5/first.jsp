@@ -23,7 +23,7 @@
 <body>
 <header class="aui-bar aui-bar-nav">
 
-    <div class="aui-title">靖西婚恋网</div>
+    <div class="aui-title">婚恋墙</div>
 
 </header>
 

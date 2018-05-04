@@ -9,7 +9,7 @@
 
     <dubbo:application name="zheng-upms-server"/>
 
-    <dubbo:registry file="./zheng-upms-server-dubbo.cache" address="zookeeper://222.84.231.82:64005"/>
+    <dubbo:registry file="./zheng-upms-server-dubbo.cache" address="zookeeper://39.107.108.2:64005"/>
     <!-- 订阅服务 -->
     <dubbo:consumer check="false"/>
     <!-- 系统 -->

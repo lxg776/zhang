@@ -261,6 +261,21 @@ public class MemberController extends BaseController{
 
 
 
+    @ApiOperation(value = "活动编辑")
+    @RequestMapping(value = "/delUser", method = RequestMethod.GET)
+    public String delUser(@RequestParam(defaultValue = "0") Integer id,ModelMap modelMap){
+
+        if(id>0){
+                ucenterUserService.deleteByPrimaryKey(id);
+                ucenterIdentificaionService.deleteByPrimaryKey(id);
+                fUserBaseMsgService.deleteByPrimaryKey(id);
+                fUserRequestService.deleteByPrimaryKey(id);
+                fUserSettingService.deleteByPrimaryKey(id);
+                fUserLivingStatusService.deleteByPrimaryKey(id);
+        }
+
+        return "redirect:list";
+    }
 
 
 
@@ -272,6 +287,10 @@ public class MemberController extends BaseController{
         if("del".equals(keyword)){
             if(modle.getUserId()>0){
                 ucenterUserService.deleteByPrimaryKey(modle.getUserId());
+                fUserBaseMsgService.deleteByPrimaryKey(modle.getUserId());
+                fUserRequestService.deleteByPrimaryKey(modle.getUserId());
+                fUserSettingService.deleteByPrimaryKey(modle.getUserId());
+                fUserLivingStatusService.deleteByPrimaryKey(modle.getUserId());
             }
         }else if("update".equals(keyword)){
             if(null==modle.getPassword()||"".equals(modle.getPassword())){

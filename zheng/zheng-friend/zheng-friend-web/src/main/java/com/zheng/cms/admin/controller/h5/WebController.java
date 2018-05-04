@@ -164,7 +164,7 @@ public class WebController extends BaseController {
 
 
 		List<FMemberTypeVo> typeVoList = myDetailVo.getTypeList();
-		if(null!=typeList&&typeList.size()>0){
+		if(null!=typeVoList&&typeVoList.size()>0){
 			modelMap.put("memberTypeVo",typeVoList.get(0));
 		}
 
@@ -339,7 +339,7 @@ public class WebController extends BaseController {
 			fContactService.insert(fContact);
 		}else{
 			fContact.setContactCount(fContact.getContactCount()+1);
-			fContactService.updateByPrimaryKey(fContact);
+			fContactService.updateByPrimaryKeySelective(fContact);
 		}
 
 		result.setMessage("已经委托红娘帮您联系！");
@@ -446,20 +446,13 @@ public class WebController extends BaseController {
 		FUserBaseMsg queryObject = fUserBaseMsgService.selectByPrimaryKey(userId);
 		if(queryObject!=null){
 			fUserBaseMsg.setUserId(userId);
-			fUserBaseMsgService.updateByPrimaryKey(fUserBaseMsg);
+			fUserBaseMsgService.updateByPrimaryKeySelective(fUserBaseMsg);
 		}else{
 			fUserBaseMsg.setUserId(userId);
 			fUserBaseMsgService.insert(fUserBaseMsg);
 		}
 
 
-		if(queryObject!=null){
-			fUserBaseMsg.setUserId(userId);
-			fUserBaseMsgService.updateByPrimaryKey(fUserBaseMsg);
-		}else{
-			fUserBaseMsg.setUserId(userId);
-			fUserBaseMsgService.insert(fUserBaseMsg);
-		}
 
 		return "redirect:txZobz";
 	}
@@ -502,7 +495,7 @@ public class WebController extends BaseController {
 
 		if(queryObject!=null){
 			modle.setUserId(userId);
-			fUserRequestService.updateByPrimaryKey(modle);
+			fUserRequestService.updateByPrimaryKeySelective(modle);
 		}else{
 			modle.setUserId(userId);
 			fUserRequestService.insert(modle);
@@ -599,7 +592,7 @@ public class WebController extends BaseController {
 		if(queryObject!=null){
 			modelMa.put("modle",queryObject);
 		}
-
+		
 		return "/content/h5/user/tx_xqhh.jsp";
 	}
 
@@ -618,6 +611,7 @@ public class WebController extends BaseController {
 		FUserLivingStatus queryObject = fUserLivingStatusService.selectByPrimaryKey(userId);
 		if(queryObject!=null){
 			modle.setUserId(userId);
+			
 			fUserLivingStatusService.updateByPrimaryKeySelective(modle);
 		}else{
 			modle.setUserId(userId);
@@ -716,7 +710,7 @@ public class WebController extends BaseController {
 		FUserBaseMsg queryObject = fUserBaseMsgService.selectByPrimaryKey(userId);
 		if(queryObject!=null){
 			fUserBaseMsg.setUserId(userId);
-			fUserBaseMsgService.updateByPrimaryKey(fUserBaseMsg);
+			fUserBaseMsgService.updateByPrimaryKeySelective(fUserBaseMsg);
 		}else{
 			fUserBaseMsg.setUserId(userId);
 			fUserBaseMsgService.insert(fUserBaseMsg);
@@ -884,7 +878,7 @@ public class WebController extends BaseController {
 
 		if(queryObject!=null){
 			fUserRequest.setUserId(userId);
-			fUserRequestService.updateByPrimaryKey(fUserRequest);
+			fUserRequestService.updateByPrimaryKeySelective(fUserRequest);
 		}else{
 			fUserRequest.setUserId(userId);
 			fUserRequestService.insert(fUserRequest);
@@ -950,7 +944,7 @@ public class WebController extends BaseController {
 		FUserLivingStatus queryObject = fUserLivingStatusService.selectByPrimaryKey(userId);
 		if(queryObject!=null){
 			modle.setUserId(userId);
-			fUserLivingStatusService.updateByPrimaryKeySelective(modle);
+			fUserLivingStatusService.updateByPrimaryKey(modle);
 		}else{
 			modle.setUserId(userId);
 			fUserLivingStatusService.insert(modle);

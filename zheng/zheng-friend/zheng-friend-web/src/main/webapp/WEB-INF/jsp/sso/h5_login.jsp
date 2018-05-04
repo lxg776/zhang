@@ -27,7 +27,7 @@
     <a class="aui-pull-left aui-btn" id="backBtn">
         <span class="aui-iconfont aui-icon-left"></span>返回
     </a>
-    <div class="aui-title">靖西婚恋网</div>
+    <div class="aui-title">婚恋墙</div>
 
 </header>
 
@@ -68,6 +68,9 @@
 
 
 
+<div class="aui-card-list-header aui-padded-t-5 aui-padded-b-5" >
+    实名上墙 |  非诚勿扰  |  找到你的另一半
+</div>
 
 
 

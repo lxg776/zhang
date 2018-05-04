@@ -148,7 +148,7 @@
                                 <th style="width: 200px;">${item.fUserBaseMsg.height}cm</th>
                                 <th style="width: 200px;">${item.ucenterIdentificaion.idcardNo}</th>
                                 <th style="width: 300px;">
-                                    <c:forEach var="it" items="${item.idcardImgs}" varStatus="go" >
+                                    <c:forEach var="it" items="${item.ucenterIdentificaion.idcardImgs}" varStatus="go" >
                                         <div class="imgDiv" id="imgDiv${go.index}">
                                             <img src="${imageBase}${it}"  d-value="${it}"/>
                                         </div>

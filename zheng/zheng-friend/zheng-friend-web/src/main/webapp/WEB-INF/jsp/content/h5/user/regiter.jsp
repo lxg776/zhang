@@ -428,7 +428,7 @@
     <a class="aui-pull-left aui-btn" id="backBtn">
         <span class="aui-iconfont aui-icon-left"></span>返回
     </a>
-    <div class="aui-title">靖西婚恋网</div>
+    <div class="aui-title">婚恋网</div>
 
 </header>
 
@@ -621,6 +621,17 @@
             </div>
         </li>
 
+
+        <li class="aui-list-item">
+            <div class="aui-list-item-inner">
+                <div class="aui-list-item-label" style="width: 80%;">
+                    我同意并遵守 <a href="${ctx}/h5/agreement">《婚恋墙服务协议》</a>
+                </div>
+                <div class="aui-list-item-input" style="width: 80px;">
+                    <input type="checkbox" class="aui-switch" name="isAgreement" value="true">
+                </div>
+            </div>
+        </li>
     </ul>
     </form>
 </div>
@@ -687,6 +698,10 @@
 
 
     function tijiao() {
+
+
+
+
 
 
         if ($("input[name='sex']").val() == "") {
@@ -769,6 +784,21 @@
         }
 
 
+        if ($("input[name='password']").val() != $("input[name='rePassword']").val()) {
+            msg("两次密码输入不一致!");
+            $("input[name='rePassword']").focus();
+            return
+        }
+
+        isAgreement = $("input[name='isAgreement']:checked").val();
+
+        if(isAgreement!='true'){
+            msg("请同意服务协议");
+            $("input[name='isAgreement']").focus();
+            return
+        }
+
+
         idCard = $("input[name='idCard']").val();
         userName = $("input[name='userName']").val();
         code = $("input[name='msgCode']").val();
@@ -778,9 +808,14 @@
         month = $("#selMonth").val();
         day = $("#selDay").val();
         brithDay = year+"-"+month+"-"+day;
+
+        year = $("#selYear").val();
+        month = $("#selMonth").val();
+        day = $("#selDay").val();
+        brithDay = year+"-"+month+"-"+day;
+
+
         $("input[name='birthDay']").val(brithDay);
-
-
 
         $.ajax({
             type: "POST",
@@ -821,7 +856,12 @@
             url: "/h5/gegSms",
             data: data,
             success: function(data){
-              showTime(60);
+              if(data.code==1){
+                  showTime(60);
+              }else{
+                  msg(data.message);
+              }
+
             }
         });
 
