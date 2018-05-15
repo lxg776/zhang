@@ -1,0 +1,27 @@
+<scroll-view scroll-y >
+
+      <view class="item-view"> 
+          <image src='/img/default_man_icon.png' class='item-img' mode='aspectFit'></image>
+      </view>
+
+      <view class='m-item-inner item-t1-view'>
+      <text>soul.e</text>
+      <text class='text-readname'>实名</text>
+      </view>
+       <view class='m-item-inner item-t2-view'>
+      <text class='text-info'>30岁</text>
+         <text class='text-info'>程序员</text>
+            <text class='text-info'>160cm</text>
+   
+      </view>
+
+
+ <view class='m-item-inner item-buttom-view'>
+   <button class='item-buttom-button'>打招呼</button>
+   <button class='item-buttom-button'>发信息</button>
+    <button class='item-buttom-button'>联系他</button>        
+  </view>
+     
+</scroll-view>
+
+

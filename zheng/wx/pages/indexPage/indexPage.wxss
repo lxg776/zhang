@@ -1,0 +1,79 @@
+/**index.wxss**/
+
+.section{
+
+  padding-bottom: 16px;
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+
+ 
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+
+.head-content{
+  position: relative;
+  width: 100%;
+  height: 120px;
+    
+}
+
+
+
+.head-text{
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+
+.head-img{
+  position: absolute;
+  top: 8px;
+  left: 60px;
+  width: 110px;
+  height: 110px;
+}
+
+.head-btn{
+  position: absolute;
+  top: 8px;
+  left: 200px;
+ 
+}
+
+
+.wx-switch-input{
+  width:60px !important;
+  height:25px !important;
+}
+/*白色样式（false的样式）*/
+.wx-switch-input::before{
+   width:60px !important;
+  height:25px !important;
+}
+/*绿色样式（true的样式）*/
+.wx-switch-input::after{
+    width:60px !important;
+  height:25px !important;
+  
+  
+}

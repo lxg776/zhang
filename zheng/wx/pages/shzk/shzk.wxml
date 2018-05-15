@@ -1,0 +1,56 @@
+<view class="section">
+ 
+
+       <view class="aui-list-item aui-list-item-inner"> <text class="m-left">抽烟状况</text> <radio-group name="radio-group">
+      <label><radio value="radio1"/>不抽 </label>
+      <label><radio value="radio2"/>偶尔抽 </label>
+     <label><radio value="radio2"/>经常抽 </label>
+    </radio-group> </view>
+
+
+         <view class="aui-list-item aui-list-item-inner"> <text class="m-left">饮酒状况</text> <radio-group name="radio-group">
+      <label><radio value="radio1"/>不喝 </label>
+      <label><radio value="radio2"/>偶尔喝 </label>
+     <label><radio value="radio2"/>经常喝 </label>
+    </radio-group> </view>
+
+
+        <picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">厨艺 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+          </view>
+        </picker>
+
+
+             <picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">与父母同住 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+
+
+           <picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">喜欢的约会 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+
+</picker>
+
+
+
+  
+
+
+ <button style=' margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' >完成</button> 
+
+</view>

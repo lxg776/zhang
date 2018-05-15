@@ -1,0 +1,65 @@
+<view class="section">
+ 
+  <view class="flex-wrp" style="flex-direction:row;">
+
+    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">我是</text>  <radio-group name="radio-group">
+      <label><radio value="radio1"/>男生</label>
+      <label><radio value="radio2"/>女生</label>
+    </radio-group></view>
+  </view>
+ 
+<picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="m-left">出生日期 </text> <text>{{dates}}</text>
+  </view>
+</picker>
+
+<picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="m-left">地区 </text> <text>{{dates}}</text>
+  </view>
+</picker>
+ 
+
+   <view class="aui-list-item aui-list-item-inner">
+    <input name="input" class='m-left' placeholder="手机号码"></input>
+   
+   
+    <button class='common_button'>获取验证码</button> 
+  </view>
+ 
+
+     <view class="aui-list-item aui-list-item-inner">
+    <input name="input" class='m-left' placeholder="验证码"></input>
+  </view>
+
+
+     <view class="aui-list-item aui-list-item-inner">
+    <input name="input" class='m-left' placeholder="真实姓名"></input>
+      </view>
+
+     <view class="aui-list-item aui-list-item-inner">
+    <input name="input" class='m-left' placeholder="身份证号码"></input>
+      </view>
+
+
+       <view class="aui-list-item aui-list-item-inner">
+        <text class="m-left" style="color:#757575; font-size:10px;padding-bottom: 10px;">
+                为保证注册的真实性需上传身份证图
+             </text>
+    <button class='common_button' style="with:50px;">上传</button> 
+  </view>
+  <view class="photo_content">
+    <image class='s1_image' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525879436187&di=931133d3783a49b56c75261940d714a7&imgtype=0&src=http%3A%2F%2Fimg.12584.cn%2Fnews%2Fsz%2F201603%2F0d1c512cc08dab0e3ac2a6657e1e89d2.jpg'></image>
+
+        <image class='s1_image' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525879436187&di=931133d3783a49b56c75261940d714a7&imgtype=0&src=http%3A%2F%2Fimg.12584.cn%2Fnews%2Fsz%2F201603%2F0d1c512cc08dab0e3ac2a6657e1e89d2.jpg'></image>
+  
+  </view>
+
+  <view class="aui-list-item aui-list-item-inner"> <text class="m-left" style='font-size:14px;'>我同意并准守《婚恋墙服务协议》</text>  <switch ></switch></view>
+ 
+
+
+ <button style=' margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' >完成</button> 
+
+</view>

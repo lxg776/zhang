@@ -1,0 +1,7 @@
+/* zobz.wxss */
+
+.small_size14{
+  color: #dddddd;
+  font-size: 14px;
+
+}

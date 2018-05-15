@@ -1,0 +1,171 @@
+<view class="section">
+ 
+
+       <view class="aui-list-item aui-list-item-inner"> <text class="m-left">性别</text> <radio-group name="radio-group">
+      <label><radio value="radio1"/>男  </label>
+      <label><radio value="radio2"/>女  </label>
+     
+    </radio-group> </view>
+
+
+        <picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">地区 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+
+
+
+  <view class="flex-wrp" style="flex-direction:row;">
+
+    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">年龄范围（岁）</text> </view>
+  </view>
+
+    <view class="aui-list-item aui-list-item-inner"> <picker mode="selector" range='{{ageArray}}'><view class="aui-list-item aui-list-item-inner" style='width:160px;'>
+      <text class="select-text small_size14">年龄(以上) </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view></picker> <picker mode="selector" range='{{ageArray}}'><view class="aui-list-item aui-list-item-inner" style='width:160px;'>
+      <text class="select-text small_size14">年龄(以下) </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view></picker> </view>
+
+
+  <view class="flex-wrp" style="flex-direction:row;">
+
+    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">身高范围（cm）</text> </view>
+  </view>
+
+
+    <view class="aui-list-item aui-list-item-inner"> <view class="aui-list-item aui-list-item-inner" style='width:160px;'>
+      <text class="select-text small_size14">身高(以上) </text> <input name="input" class='select-input' placeholder="不限"></input>
+      
+  </view> <view class="aui-list-item aui-list-item-inner" style='width:160px;'>
+      <text class="select-text small_size14">身高(以下) </text> <input name="input" class='select-input' placeholder="不限"></input>
+      
+  </view> </view>
+
+
+    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">婚姻</text> <radio-group name="radio-group">
+     <label><radio value="radio1"/>不限  </label>
+      <label><radio value="radio1"/>未婚  </label>
+      <label><radio value="radio2"/>离异  </label>
+       <label><radio value="radio2"/>丧偶  </label>
+    </radio-group> </view>
+
+ 
+<picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">体型 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+
+
+
+
+
+      <view class="aui-list-item aui-list-item-inner"> <text class="m-left">职业</text> <input name="input" class='m-left' placeholder="填写职业"></input> </view>
+ 
+
+    <picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">单位性质 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+
+    <picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">学历 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+    <picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">月收入(元) </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+   <view class="aui-list-item aui-list-item-inner"> <text class="m-left">孩子</text> <radio-group name="radio-group">
+    <label><radio value="radio1"/>不限  </label>
+      <label><radio value="radio1"/>没有  </label>
+      <label><radio value="radio2"/>有  </label>
+     
+    </radio-group> </view>
+ 
+
+
+ 
+<picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">与父母同住情况 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+
+<picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">要求对方的购房情况 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+<picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">要求对方的购车情况 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+
+<picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">是否抽烟 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+
+
+<picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">是否喝酒 </text> <text class="select-text" 
+      style='left:130px;'
+      >{{dates}}</text>
+      <image class='select-arrow' src='/img/arrow-left.png'></image>
+  </view>
+</picker>
+
+
+ <button style=' margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' >完成</button> 
+
+</view>
