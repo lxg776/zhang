@@ -34,6 +34,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+     servsers: "http://127.0.0.1:9991"
   }
+   
 })

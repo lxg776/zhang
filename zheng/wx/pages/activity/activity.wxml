@@ -1,0 +1,46 @@
+<scroll-view scroll-y  style='background: #f5f5f5;'>
+
+      <view class="activity-div"> 
+          <view class='item'>
+                <view class='text-div'>
+                <text class='black_2b'>test007</text>
+                
+                 </view>
+
+                <image src='http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com/20180214/RAMZ9WHKSy4CRI3aq8A8O7pZ0JjqK9mf.jpg'
+mode='widthFix' class='item-img'></image>
+
+          <view class='text-div'>
+                <text class='black_2b size14'>费用100元/人</text>
+                 <text class='black_2b size14'>活动时间:2018-02-14 15:49:43</text>
+                 </view>
+
+
+          </view>
+
+            <view class='item' style=' margin-top: 10px;'>
+                <view class='text-div'>
+                <text class='black_2b'>test007</text>
+                
+                 </view>
+
+                <image src='http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com/20180214/RAMZ9WHKSy4CRI3aq8A8O7pZ0JjqK9mf.jpg'
+mode='widthFix' class='item-img'></image>
+
+          <view class='text-div'>
+                <text class='black_2b size14'>费用100元/人</text>
+                 <text class='black_2b size14'>活动时间:2018-02-14 15:49:43</text>
+                 </view>
+
+
+          </view>
+          
+   
+      </view>
+
+
+
+     
+</scroll-view>
+
+

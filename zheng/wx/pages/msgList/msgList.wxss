@@ -1,10 +1,43 @@
 /**index.wxss**/
 
+
+
+.aui-tab {
+    position: relative;
+    background-color: #ffffff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-align-self: center;
+    align-self: center;
+}
+
+.aui-tab-item {
+    width: 100%;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    position: relative;
+    font-size: 0.7rem;
+    text-align: center;
+    color: #757575;
+    margin-left: -1px;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+}
+
+.aui-tab-item.aui-active {
+    color: #ec407a;
+    border-bottom: 4rpx solid #ec407a;
+}
+
 .item-view{
   width: 100%;
-  height: 368rpx;
+  height: 300rpx;
   position: relative;
-  background: #fff;
+  background: #ffffff;
+
 
     border: none;
     background-size: 100% 1px;
@@ -33,13 +66,9 @@
 
 .item-buttom-button{
   width: 160rpx;
-  height: 30rpx;
-  font-size: 30rpx;
+  height: 60rpx;
+  font-size: 24rpx;
   margin: 8rpx;
-  text-align: center;
-  line-height: 30rpx;
-  color: #0062cc;
- 
  
 }
 

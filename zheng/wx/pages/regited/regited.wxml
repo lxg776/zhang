@@ -1,3 +1,4 @@
+<scroll-view scroll-y="{{isScroll}}"  style='height:{{sHeight}}' >
 <view class="section">
  
   <view class="flex-wrp" style="flex-direction:row;">
@@ -14,11 +15,12 @@
   </view>
 </picker>
 
-<picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
-  <view class="aui-list-item aui-list-item-inner">
-      <text class="m-left">地区 </text> <text>{{dates}}</text>
+
+  <view class="aui-list-item aui-list-item-inner" >
+       <input name="input" class='m-left' placeholder="地区选择" bindfocus="open"></input>
   </view>
-</picker>
+
+  
  
 
    <view class="aui-list-item aui-list-item-inner">
@@ -47,12 +49,22 @@
         <text class="m-left" style="color:#757575; font-size:10px;padding-bottom: 10px;">
                 为保证注册的真实性需上传身份证图
              </text>
-    <button class='common_button' style="with:50px;">上传</button> 
+    <button class='common_button' style="with:50px;" bindtap='selectPhoto'>上传</button> 
   </view>
   <view class="photo_content">
-    <image class='s1_image' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525879436187&di=931133d3783a49b56c75261940d714a7&imgtype=0&src=http%3A%2F%2Fimg.12584.cn%2Fnews%2Fsz%2F201603%2F0d1c512cc08dab0e3ac2a6657e1e89d2.jpg'></image>
 
-        <image class='s1_image' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525879436187&di=931133d3783a49b56c75261940d714a7&imgtype=0&src=http%3A%2F%2Fimg.12584.cn%2Fnews%2Fsz%2F201603%2F0d1c512cc08dab0e3ac2a6657e1e89d2.jpg'></image>
+
+
+<block wx:for="{{imgList}}" wx:for-index="idx"  wx:key="key" wx:for-item="item" >
+  <view class='s1_view'>
+       <image class='s1_close' src='/img/close.png' bindtap='deletePhoto' data-idx = '{{idx}}'  ></image>
+       <image class='s1_image' src='{{item}}'></image> 
+  </view>
+  
+</block>
+    <!-- <image class='s1_image' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525879436187&di=931133d3783a49b56c75261940d714a7&imgtype=0&src=http%3A%2F%2Fimg.12584.cn%2Fnews%2Fsz%2F201603%2F0d1c512cc08dab0e3ac2a6657e1e89d2.jpg'></image> -->
+
+       
   
   </view>
 
@@ -60,6 +72,26 @@
  
 
 
- <button style=' margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' >完成</button> 
+ <button style=' margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' bindtap='finishRegedit' >完成</button> 
 
 </view>
+
+
+<view wx:if="{{condition}}" class="citypicker">
+  <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange" class="citybody">
+    <view class="cityheader">
+      <view bindtap="open" class="city-cancel">取消</view>
+      <view bindtap="open" class="city-true">确定</view>
+    </view>
+    <picker-view-column>
+      <view wx:for="{{provinces}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{countys}}" wx:key="item" style="line-height: 50px;padding-left:10px;">{{item}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>
+</scroll-view>

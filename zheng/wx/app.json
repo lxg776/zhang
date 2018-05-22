@@ -1,11 +1,15 @@
 {
   "pages":[
+    "pages/regited/regited",
     "pages/main/main",
+    "pages/activity/activity",
+    "pages/msgList/msgList",
+    "pages/mine/mine",
     "pages/xqhh/xqhh",
     "pages/shzk/shzk",
     "pages/zobz/zobz",
     "pages/grzl/grzl",
-    "pages/regited/regited",
+   
    
     "pages/logs/logs"
   ],
@@ -28,19 +32,19 @@
       },
       
       {
-        "pagePath": "pages/shzk/shzk",
+        "pagePath": "pages/activity/activity",
         "iconPath": "img/acticity_unselect.png",
         "selectedIconPath": "img/activity_select.png",  
         "text": "活动"
       },
       {
-        "pagePath": "pages/shzk/shzk",
+        "pagePath": "pages/msgList/msgList",
         "iconPath": "img/message_unselect.png",
         "selectedIconPath": "img/message_select.png",
         "text": "消息"
       },
       {
-        "pagePath": "pages/shzk/shzk",
+        "pagePath": "pages/mine/mine",
         "iconPath": "img/user_unselect.png",
         "selectedIconPath": "img/user_select.png",
         "text": "我的"

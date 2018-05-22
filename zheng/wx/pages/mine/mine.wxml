@@ -1,0 +1,170 @@
+<scroll-view scroll-y  style='background: #fff;'>
+
+      <view class="msg-div aui-list-item"> 
+          <image src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526483867106&di=cb7b8d4b3928a1c2aed7cdbe865cb2ed&imgtype=0&src=http%3A%2F%2Fimg.woyaogexing.com%2Ftouxiang%2Fkatong%2F20140120%2Fbd6beb8032ef6b0c%2521200x200.jpg' class='head-img' mode='widthFix' ></image>
+          <view class='t1-div'><text class='size14'>我是谁</text>
+           <text class='size14' style='color:red;'>(黄金会员)</text>
+          </view>
+
+           <view class='t2-div'><text class='size14 black_dd'>广西靖西市，岁，185.0cm，3000元以下</text></view>
+      </view>
+       <view class='m-item-inner item-t1-view'>
+      <text>相册</text>
+       <a class='b_text'>上传</a>      
+      </view>
+      <view class='photo_list aui-list-item'>
+      
+          <image src='http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com/20180302/PBIbHsxFIOGnfzf9aL6hdUjsszw246ET.jpg' class='photo_item' mode='widthFix' ></image>
+      
+                <image src='http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com/20180302/PBIbHsxFIOGnfzf9aL6hdUjsszw246ET.jpg' class='photo_item' mode='widthFix' ></image>
+                          <image src='http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com/20180302/PBIbHsxFIOGnfzf9aL6hdUjsszw246ET.jpg' class='photo_item' mode='widthFix' ></image>
+
+                          <image src='http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com/20180302/PBIbHsxFIOGnfzf9aL6hdUjsszw246ET.jpg' class='photo_item' mode='widthFix' ></image>
+
+                          <image src='http://jxwbb.oss-cn-zhangjiakou.aliyuncs.com/20180302/PBIbHsxFIOGnfzf9aL6hdUjsszw246ET.jpg' class='photo_item' mode='widthFix' ></image>
+      </view>
+
+  <view class='info_list aui-list-item'> 
+  <view class='m-item-inner item-t1-view'>
+      <text>个人资料</text>
+       <a class='b_text'>编辑</a>      
+      </view>
+    
+
+
+      <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>昵称</text>
+       <a class='right_text'>998</a>      
+      </view>
+   
+
+    <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>年龄</text>
+       <a class='right_text'>998</a>      
+      </view>
+   
+
+    <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>学历</text>
+       <a class='right_text'>998</a>      
+      </view>
+   
+
+    <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>身高</text>
+       <a class='right_text'>998</a>      
+      </view>
+
+       <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>月收入</text>
+       <a class='right_text'>998</a>      
+      </view>
+
+       <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>体型</text>
+       <a class='right_text'>998</a>      
+      </view>
+
+       <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>婚姻状况</text>
+       <a class='right_text'>998</a>      
+      </view>
+    
+     </view>
+
+      <view class='info_list aui-list-item'> 
+  <view class='m-item-inner item-t1-view'>
+      <text>择偶条件</text>
+       <a class='b_text'>编辑</a>      
+      </view>
+    
+
+
+      <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>年龄</text>
+       <a class='right_text'>998</a>      
+      </view>
+   
+
+    <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>身高</text>
+       <a class='right_text'>998</a>      
+      </view>
+   
+
+    <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>月收入</text>
+       <a class='right_text'>998</a>      
+      </view>
+   
+
+    <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>学历</text>
+       <a class='right_text'>998</a>      
+      </view>
+
+       <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>婚姻</text>
+       <a class='right_text'>998</a>      
+      </view>
+
+       <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>住房情况</text>
+       <a class='right_text'>998</a>      
+      </view>
+
+       <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>购车状况</text>
+       <a class='right_text'>998</a>      
+      </view>
+
+        <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>体型</text>
+       <a class='right_text'>998</a>      
+      </view>
+        <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>有无小孩</text>
+       <a class='right_text'>998</a>      
+      </view>
+    
+     </view>
+
+
+      <view class='info_list aui-list-item'> 
+  <view class='m-item-inner item-t1-view'>
+      <text>生活状态</text>
+       <a class='b_text'>编辑</a>      
+      </view>
+    
+
+
+      <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>抽烟状况</text>
+       <a class='right_text'>998</a>      
+      </view>
+   
+
+    <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>饮酒状况</text>
+       <a class='right_text'>998</a>      
+      </view>
+   
+
+    <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>厨艺</text>
+       <a class='right_text'>998</a>      
+      </view>
+   
+
+    <view class='text-item-inner item-t1-view'>
+      <text class='left_text'>与父母同住</text>
+       <a class='right_text'>998</a>      
+      </view>
+
+      
+    
+     </view>
+
+</scroll-view>
+
+
