@@ -1,4 +1,5 @@
 /**index.wxss**/
+@import '../../template/areaSelect.wxss';
 
 .activity-div{
   width: 100%;

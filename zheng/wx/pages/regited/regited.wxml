@@ -1,4 +1,4 @@
-<scroll-view scroll-y="{{isScroll}}"  style='height:{{sHeight}}' >
+<!-- <scroll-view scroll-y="{{isScroll}}"  style='height:{{sHeight}}' >
 <view class="section">
  
   <view class="flex-wrp" style="flex-direction:row;">
@@ -62,7 +62,7 @@
   </view>
   
 </block>
-    <!-- <image class='s1_image' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525879436187&di=931133d3783a49b56c75261940d714a7&imgtype=0&src=http%3A%2F%2Fimg.12584.cn%2Fnews%2Fsz%2F201603%2F0d1c512cc08dab0e3ac2a6657e1e89d2.jpg'></image> -->
+     <image class='s1_image' src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1525879436187&di=931133d3783a49b56c75261940d714a7&imgtype=0&src=http%3A%2F%2Fimg.12584.cn%2Fnews%2Fsz%2F201603%2F0d1c512cc08dab0e3ac2a6657e1e89d2.jpg'></image> 
 
        
   
@@ -94,4 +94,13 @@
     </picker-view-column>
   </picker-view>
 </view>
-</scroll-view>
+
+</scroll-view> -->
+
+
+<view class="show">{{areaPicker.address}}</view>
+
+<button bindtap="areaSelect.initCityData" >获取已选择的城市信息</button>
+
+<import src="../../template/areaSelect.wxml"/>
+<template is="areaPicker" data="{{...areaPicker}}" />

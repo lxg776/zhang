@@ -1,5 +1,9 @@
-//index.js
-//获取应用实例
+
+
+
+var areaSelect = require('../../template/areaSelect.js');
+
+
 const app = getApp()
 
 Page({
@@ -10,7 +14,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     imgList:[],
-    provinces: ["广东","广西"],
+    provinces: [{ "id": 1, "provinceid": "110000", "province": "北京市" }, { "id": 2, "provinceid": "120000", "province": "天津市" }],
     province: "",
     citys: ["广东", "广西"],
     city: "",
@@ -29,6 +33,7 @@ Page({
     })
   },
   onLoad: function () {
+    var self = this;  
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -56,6 +61,18 @@ Page({
       })
     }
     let sh = (750 / wx.getSystemInfoSync().screenWidth) * wx.getSystemInfoSync().screenHeight*0.9;
+    areaSelect.initCityData(
+      function(e){
+        if(e.data.code==1){
+          let p = e.data.data.dataList;
+          self.setData({
+            'areaPicker.provinces': p
+          })
+        }
+      
+
+      }
+    );
 
     this.setData({
       sHeight: sh+"rpx",

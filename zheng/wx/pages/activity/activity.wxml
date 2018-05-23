@@ -37,10 +37,13 @@ mode='widthFix' class='item-img'></image>
           
    
       </view>
-
+<import src="../../template/areaSelect.wxml"/>
+<template is="areaPicker" data="{{...areaPicker}}" />
 
 
      
 </scroll-view>
+
+
 
 

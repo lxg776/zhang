@@ -1,8 +1,19 @@
+import initAreaPicker, { getSelectedAreaData } from '../../template/areaSelect';
+
 //index.js
 //获取应用实例
 const app = getApp()
 
 Page({
+  onShow: () => {
+    initAreaPicker({
+      // hideDistrict: true, // 是否隐藏区县选择栏，默认显示
+    });
+  },
+  getSelecedData() {
+    console.table(getSelectedAreaData());
+  }
+  ,
   data: {
     datas:'1990',
     motto: 'Hello World',
