@@ -3,13 +3,17 @@ const ctx = 'http://127.0.0.1:9991';
 
 
 function getUrl(url,callback){
-  wx.request({
-    url: url,
-    method: 'GET',
-    success: function (res) {
-      // success
-      callback(res);
-    }
+  // wx.request({
+  //   url: url,
+  //   method: 'GET',
+  //   success: function (res) {
+  //     // success
+  //     callback(res);
+  //   }
+  // })
+  const self = _getCurrentPage();
+  self.setData({
+    areaPicker: { name: 111 }
   })
 }
 
@@ -50,19 +54,7 @@ module.exports = {
 
 
 
-// /**
-//  * @param {function} fun 接口
-//  * @param {object} options 接口参数
-//  * @returns {Promise} Promise对象
-//  */
-// function fetch(options) {
-//   options = options || {};
-//   return new Promise((resolve, reject) => {
-//     options.success = resolve;
-//     options.fail = reject;
-//     wx.request(options);
-//   });
-// }
+
 
 // const API = 'http://japi.zto.cn/zto/api_utf8/baseArea?msg_type=GET_AREA&data=';
 
@@ -180,11 +172,56 @@ module.exports = {
 //   }
 // };
 
-// function _getCurrentPage() {
-//   const pages = getCurrentPages();
-//   const last = pages.length - 1;
-//   return pages[last];
-// }
+function _getCurrentPage() {
+  const pages = getCurrentPages();
+  const last = pages.length - 1;
+  return pages[last];
+}
+
+export default(config = {}) =>{
+  const self = _getCurrentPage();
+  self.setData({
+    'areaPicker.hideDistrict': !config.hideDistrict
+  });
+
+  self.config = config;
+
+  fetch({
+    url: ctx + '"/c/provinceList"',
+    method: 'GET'
+  }).then((province) => {
+    if (province.data.code==1){
+      const provinces = province.data.data.dataList;
+      const firstProvince = provinces[0];
+      /**
+		 * 默认选择获取的省份第一个省份数据
+		 */
+      self.setData({
+        'areaPicker.provinces': provinces,
+        'areaPicker.selectedProvince.index': 0,
+        'areaPicker.selectedProvince.code': firstProvince.provinceid,
+        'areaPicker.selectedProvince.fullName': firstProvince.province,
+      });
+
+      //const dataWithDot = conf.addDot(province.data.result);
+
+    }
+})}
+
+
+/**
+ * @param {function} fun 接口
+ * @param {object} options 接口参数
+ * @returns {Promise} Promise对象
+ */
+function fetch(options) {
+  options = options || {};
+  return new Promise((resolve, reject) => {
+    options.success = resolve;
+    options.fail = reject;
+    wx.request(options);
+  });
+}
 
 // export const getSelectedAreaData = () => {
 //   const self = _getCurrentPage();

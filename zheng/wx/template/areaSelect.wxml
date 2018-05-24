@@ -1,4 +1,4 @@
-<template name="areaPicker">
+ <template name="areaPicker">
 	<picker-view class="picker-view" indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
 		<picker-view-column>
 			<view wx:for="{{provinces}}" wx:key="province" class="addr-item">{{province}}</view>
@@ -10,4 +10,6 @@
 			<view wx:for="{{districtData}}" wx:key="code" class="addr-item">{{item.fullNameDot}}</view>
 		</picker-view-column>
 	</picker-view>
-</template>
+</template> 
+
+

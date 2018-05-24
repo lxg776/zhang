@@ -14,17 +14,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     imgList:[],
-    provinces: [{ "id": 1, "provinceid": "110000", "province": "北京市" }, { "id": 2, "provinceid": "120000", "province": "天津市" }],
-    province: "",
-    citys: ["广东", "广西"],
-    city: "",
-    countys: ["广东", "广西"],
-    county: '',
-    value: [0, 0, 0],
-    values: [0, 0, 0],
-    condition: false,
-    isScroll:true,
-    sHeight:'500rpx',
+   
   },
   //事件处理函数
   bindViewTap: function() {
@@ -62,16 +52,7 @@ Page({
     }
     let sh = (750 / wx.getSystemInfoSync().screenWidth) * wx.getSystemInfoSync().screenHeight*0.9;
     areaSelect.initCityData(
-      function(e){
-        if(e.data.code==1){
-          let p = e.data.data.dataList;
-          self.setData({
-            'areaPicker.provinces': p
-          })
-        }
       
-
-      }
     );
 
     this.setData({
