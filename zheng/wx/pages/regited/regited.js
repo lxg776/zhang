@@ -1,7 +1,5 @@
+import initAreaPicker, { getSelectedAreaData } from '../../template/areaSelect';
 
-
-
-var areaSelect = require('../../template/areaSelect.js');
 
 
 const app = getApp()
@@ -21,6 +19,11 @@ Page({
     wx.navigateTo({
       url: '../logs/logs'
     })
+  },
+  onShow: () => {
+    initAreaPicker({
+      // hideDistrict: true, // 是否隐藏区县选择栏，默认显示
+    });
   },
   onLoad: function () {
     var self = this;  
@@ -51,9 +54,6 @@ Page({
       })
     }
     let sh = (750 / wx.getSystemInfoSync().screenWidth) * wx.getSystemInfoSync().screenHeight*0.9;
-    areaSelect.initCityData(
-      
-    );
 
     this.setData({
       sHeight: sh+"rpx",
@@ -150,11 +150,31 @@ Page({
 
   },
   open: function () {
-    console.log("wtf999");
-
     this.setData({
-      condition: !this.data.condition,
+      'areaPicker.condition': !this.data.areaPicker.condition,
       isScroll: !this.data.isScroll
+    })
+
+    if (this.data.mAddressValue) {
+      this.setData({
+        'areaPicker.value': this.data.mAddressValue
+      })
+    }         
+
+  },
+  close: function () {
+    this.setData({
+      'areaPicker.condition': !this.data.areaPicker.condition,
+      isScroll: !this.data.isScroll
+    })
+  },
+
+  selectCity: function (e) {
+    this.setData({
+      'areaPicker.condition': !this.data.areaPicker.condition,
+      isScroll: !this.data.isScroll,
+      mAddress: this.data.areaPicker.address,
+      mAddressValue: this.data.areaPicker.value,
     })
   },
 
