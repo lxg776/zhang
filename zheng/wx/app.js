@@ -36,6 +36,14 @@ App({
   globalData: {
     userInfo: null,
      servsers: "http://127.0.0.1:9991"
+  },
+  getUrlData: function (options){
+    options = options || {};
+    return new Promise((resolve, reject) => {
+      options.success = resolve;
+      options.fail = reject;
+      wx.request(options);
+    });
   }
    
 })

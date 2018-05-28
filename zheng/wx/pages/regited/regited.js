@@ -12,6 +12,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     imgList:[],
+  
    
   },
   //事件处理函数
@@ -177,5 +178,41 @@ Page({
       mAddressValue: this.data.areaPicker.value,
     })
   },
+  aliyunOOs:function(handle){
+    let self = this;
+    let timestamp = Date.parse(new Date());  
+    if(this.data.oos){
+      if (timestamp <= this.data.oos.expireEndTime){
+            // if(handle){
+            //   handle(this.data.oos);
+            // }
+        }else{
+        app.getUrlData({
+          url: app.globalData.servsers + '/aliyun/oss/policy',
+          method: 'GET'
+        }).then((data) => {
+          self.setData({
+            'oos': data.data
+          });
+        });
+        // if (handle) {
+        //   handle(this.data.oos);
+        // }
+        }
+    }else{
+      app.getUrlData({
+        url: app.globalData.servsers + '/aliyun/oss/policy',
+        method: 'GET'
+      }).then((data) => {
+        self.setData({
+          'oos': data.data
+        });
+      });
+      // if (handle) {
+      //   handle(this.data.oos);
+      // }
+    }
+
+  }
 
 })

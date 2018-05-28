@@ -2,28 +2,6 @@ const ctx = 'http://127.0.0.1:9991';
 
 
 
-// function getUrl(url,callback){
-//   // wx.request({
-//   //   url: url,
-//   //   method: 'GET',
-//   //   success: function (res) {
-//   //     // success
-//   //     callback(res);
-//   //   }
-//   // })
-//   const self = _getCurrentPage();
-//   self.setData({
-//     areaPicker: { name: 111 }
-//   })
-// }
-
-// function initCityData(e) {
-
-//   getUrl(ctx + '/c/provinceList', e);
-
-// }
-
-
 export const getSelectedAreaData = () => {
   const self = _getCurrentPage();
   return self.data.areaPicker.selected;
@@ -31,36 +9,6 @@ export const getSelectedAreaData = () => {
 
 
 
- 
-
-  // $.ajax({
-  //   url: ctx + "/c/provinceList",
-  //   type: "GET",
-  //   dataType: 'json',
-  //   success: function (data) {
-  //     $.each(data.data.dataList, function (i, item) {
-  //       if (item.provinceid == dProvinceId) {
-  //         $("#province").append(" <option value='" + item.provinceid + "'   selected='selected'> " + item.province + "</option>");
-  //       } else {
-  //         $("#province").append(" <option value='" + item.provinceid + "' > " + item.province + "</option>");
-  //       }
-  //     });
-  //   }
-  // });
-
-  // if (fla) {
-  //   getCityList(dProvinceId, dcityid, "", fla);
-  // } else {
-  //   getCityList(dProvinceId, dcityid, dAreaid);
-  // }
-  // getAreasList(cityid,areaid);
-
-
-
-
-
-
-// const API = 'http://japi.zto.cn/zto/api_utf8/baseArea?msg_type=GET_AREA&data=';
 
 const conf = {
 
@@ -225,6 +173,9 @@ export default(config = {}) =>{
     
       const provinces = province.data.data.dataList;
       const firstProvince = provinces[0];
+
+
+      
       /**
 		 * 默认选择获取的省份第一个省份数据
 		 */

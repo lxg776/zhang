@@ -63,6 +63,7 @@ public class AliyunOssService {
 			result.put("dir", dir);
 			result.put("callback", callbackData);
 			result.put("action", action);
+			result.put("expireEndTime",expireEndTime);
 		} catch (Exception e) {
 			_log.error("签名生成失败", e);
 		}

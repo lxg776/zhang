@@ -51,7 +51,7 @@
         <text class="m-left" style="color:#757575; font-size:10px;padding-bottom: 10px;">
                 为保证注册的真实性需上传身份证图
              </text>
-    <button class='common_button' style="with:50px;" bindtap='selectPhoto'>上传</button> 
+    <button class='common_button' style="with:50px;" bindtap='aliyunOOs'>上传</button> 
   </view>
   <view class="photo_content">
 
