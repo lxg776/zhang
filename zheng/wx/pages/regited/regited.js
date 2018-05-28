@@ -102,7 +102,7 @@ Page({
 
   },
   selectPhoto:function(e){
-    var imgList = this.data.imgList;
+    let imgList = this.data.imgList;
     
     // imgList.push("991");
     // this.setData({
@@ -110,15 +110,15 @@ Page({
     // });
     var self = this;  
     wx.chooseImage({
-     
       success: function(res) {
         var path = res.tempFilePaths;
         imgList.push(path);
-        console.log(imgList);
         self.setData({
           imgList: imgList,
-       });
-
+          tempFiles: res.tempFilePaths,
+        });
+        self.aliyunOOs(self.uploadImgFile);
+        
       },
       fail:function(res){
 
@@ -178,14 +178,69 @@ Page({
       mAddressValue: this.data.areaPicker.value,
     })
   },
+  get_suffix: function (filename){
+    var pos = filename.lastIndexOf('.');
+    var suffix = '';
+    if (pos != -1) {
+      suffix = filename.substring(pos);
+    }
+    return suffix;
+  },
+  random_string:function(len){
+    len = len || 32;
+    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let maxPos = chars.length;
+    let pwd = '';
+    for (var i = 0; i < len; i++) {
+      pwd += chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return pwd;
+  },
+
+
+
+
+  uploadImgFile:function(oos){
+
+    for (var i = 0; i < this.data.tempFiles.length; i++) {
+      let itemFile = this.data.tempFiles[i];
+
+      let suffix = this.get_suffix(itemFile[0]);
+      let random_name = this.random_string();
+      let key = oos.dir + "/" + random_name + suffix;
+
+      wx.uploadFile({
+        url: oos.action,
+        filePath: itemFile,
+        name: 'file',
+        formData: {
+          'key': key,
+          'policy': oos.policy,
+          'OSSAccessKeyId': oos.OSSAccessKeyId,
+          'signature': oos.signature,
+          'success_action_status': '200',
+        },
+        success: function (res) {
+          console.log('success');
+
+        },
+        fail: function (err) {
+         // console.log('file');
+        },
+      });
+
+    } 
+
+   
+  },
   aliyunOOs:function(handle){
     let self = this;
     let timestamp = Date.parse(new Date());  
     if(this.data.oos){
       if (timestamp <= this.data.oos.expireEndTime){
-            // if(handle){
-            //   handle(this.data.oos);
-            // }
+            if(handle){
+              handle(this.data.oos);
+            }
         }else{
         app.getUrlData({
           url: app.globalData.servsers + '/aliyun/oss/policy',
@@ -195,9 +250,9 @@ Page({
             'oos': data.data
           });
         });
-        // if (handle) {
-        //   handle(this.data.oos);
-        // }
+        if (handle) {
+          handle(data.data);
+        }
         }
     }else{
       app.getUrlData({
@@ -207,10 +262,11 @@ Page({
         self.setData({
           'oos': data.data
         });
+        if (handle) {
+          handle(this.data.oos);
+        }
       });
-      // if (handle) {
-      //   handle(this.data.oos);
-      // }
+     
     }
 
   }
