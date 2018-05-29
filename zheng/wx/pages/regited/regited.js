@@ -112,12 +112,27 @@ Page({
     wx.chooseImage({
       success: function(res) {
         var path = res.tempFilePaths;
-        imgList.push(path);
+      
+
+        for (let i = 0; i < res.tempFilePaths.length;i++){
+
+          let fileObject = {
+            url: '',
+            id: '',
+          }
+          let itemPath = res.tempFilePaths[i];
+          fileObject.url = itemPath;
+          fileObject.id = self.random_string(4);
+          imgList.push(fileObject);
+        }
+
+
+        //imgList.push(path);
         self.setData({
           imgList: imgList,
           tempFiles: res.tempFilePaths,
         });
-        self.aliyunOOs(self.uploadImgFile);
+       // self.aliyunOOs(self.uploadImgFile);
         
       },
       fail:function(res){

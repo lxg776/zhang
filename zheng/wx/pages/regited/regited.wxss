@@ -117,10 +117,19 @@
 .s1_image{
   width: 200rpx;
   height: 200rpx;
-  top: 10rpx;
-  left: 10rpx;
+  top: 20rpx;
+  left: 20rpx;
   position: absolute;
 }
+.s1_process{
+   position: absolute;
+   width: 200rpx;
+   left: 40rpx;
+   top: 230rpx;
+   height: 12rpx;
+}
+
+
 
 .photo_content{
     width: 100%;

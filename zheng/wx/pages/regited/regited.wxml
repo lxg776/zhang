@@ -60,7 +60,8 @@
 <block wx:for="{{imgList}}" wx:for-index="idx"  wx:key="key" wx:for-item="item" >
   <view class='s1_view'>
        <image class='s1_close' src='/img/close.png' bindtap='deletePhoto' data-idx = '{{idx}}'  ></image>
-       <image class='s1_image' src='{{item}}'></image> 
+       <image class='s1_image' src='{{item.url}}'></image>
+       <progress percent="100" class='s1_process' id='{{item.id}}'  /> 
   </view>
   
 </block>
