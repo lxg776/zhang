@@ -61,7 +61,8 @@
   <view class='s1_view'>
        <image class='s1_close' src='/img/close.png' bindtap='deletePhoto' data-idx = '{{idx}}'  ></image>
        <image class='s1_image' src='{{item.url}}'></image>
-       <progress percent="100" class='s1_process' id='{{item.id}}'  /> 
+      
+       <progress percent="{{item.percent}}" class='s1_process' /> 
   </view>
   
 </block>

@@ -12,6 +12,7 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     imgList:[],
+    tempFiles:[],
   
    
   },
@@ -103,7 +104,7 @@ Page({
   },
   selectPhoto:function(e){
     let imgList = this.data.imgList;
-    
+    let tempImgList = [];
     // imgList.push("991");
     // this.setData({
     //     imgList: imgList,
@@ -113,26 +114,28 @@ Page({
       success: function(res) {
         var path = res.tempFilePaths;
       
-
         for (let i = 0; i < res.tempFilePaths.length;i++){
-
           let fileObject = {
             url: '',
             id: '',
+            percent:0,
           }
           let itemPath = res.tempFilePaths[i];
           fileObject.url = itemPath;
           fileObject.id = self.random_string(4);
+          fileObject.percent=30;
           imgList.push(fileObject);
+          tempImgList.push(fileObject);
         }
+       
 
 
         //imgList.push(path);
         self.setData({
           imgList: imgList,
-          tempFiles: res.tempFilePaths,
+          tempFiles: tempImgList,
         });
-       // self.aliyunOOs(self.uploadImgFile);
+        self.aliyunOOs(self.uploadImgFile);
         
       },
       fail:function(res){
@@ -211,22 +214,18 @@ Page({
     }
     return pwd;
   },
-
-
-
-
-  uploadImgFile:function(oos){
-
+  uploadImgFile: function (self,oos){
+   
     for (var i = 0; i < this.data.tempFiles.length; i++) {
       let itemFile = this.data.tempFiles[i];
 
-      let suffix = this.get_suffix(itemFile[0]);
+      let suffix = this.get_suffix(itemFile.url);
       let random_name = this.random_string();
       let key = oos.dir + "/" + random_name + suffix;
 
-      wx.uploadFile({
+      let task = wx.uploadFile({
         url: oos.action,
-        filePath: itemFile,
+        filePath: itemFile.url,
         name: 'file',
         formData: {
           'key': key,
@@ -243,6 +242,29 @@ Page({
          // console.log('file');
         },
       });
+      
+      task.onProgressUpdate((res) => {
+        let imgList = self.data.imgList;
+
+
+     
+
+        for (var i = 0; i < imgList.length; i++) {
+          let item = imgList[i];
+          if (item.url == itemFile.url ){
+            item.percent = res.progress;
+          }
+        }
+        self.setData({
+          imgList:imgList,
+        });
+
+          
+         console.log('上传进度', res.progress)
+          // console.log('已经上传的数据长度', res.totalBytesSent)
+          // console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+        })  
+
 
     } 
 
@@ -254,7 +276,7 @@ Page({
     if(this.data.oos){
       if (timestamp <= this.data.oos.expireEndTime){
             if(handle){
-              handle(this.data.oos);
+              handle(self,this.data.oos);
             }
         }else{
         app.getUrlData({
@@ -266,7 +288,7 @@ Page({
           });
         });
         if (handle) {
-          handle(data.data);
+          handle(self,data.data);
         }
         }
     }else{
@@ -278,7 +300,7 @@ Page({
           'oos': data.data
         });
         if (handle) {
-          handle(this.data.oos);
+          handle(self,this.data.oos);
         }
       });
      

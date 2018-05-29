@@ -193,6 +193,7 @@ export default(config = {}) =>{
         })).then((city) => {
 
           const cityes = city.data.data.dataList;
+          if(cityes){
           const firstCity = cityes[0];
           self.setData({
             'areaPicker.cityData': cityes,
@@ -232,7 +233,7 @@ export default(config = {}) =>{
           console.error(e);
         });
 
-
+          }
 
         })
   })
