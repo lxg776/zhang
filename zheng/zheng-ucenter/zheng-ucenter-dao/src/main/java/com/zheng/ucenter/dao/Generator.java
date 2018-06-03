@@ -14,7 +14,7 @@ public class Generator {
 
 	// 根据命名规范，只修改此常量值即可
 	private static String MODULE = "zheng-ucenter";
-	private static String DATABASE = "zheng";
+	private static String DATABASE = "web6_gxbs_net";
 	private static String TABLE_PREFIX = "ucenter_";
 	private static String PACKAGE_NAME = "com.zheng.ucenter";
 	private static String JDBC_DRIVER = PropertiesFileUtil.getInstance("generator").get("generator.jdbc.driver");

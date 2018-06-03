@@ -5,11 +5,9 @@
     <id column="user_oauth_id" jdbcType="INTEGER" property="userOauthId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="oauth_id" jdbcType="INTEGER" property="oauthId" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zheng.ucenter.dao.model.UcenterUserOauth">
-    <result column="open_id" jdbcType="VARBINARY" property="openId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,27 +68,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_oauth_id, user_id, oauth_id, status, create_time
+    user_oauth_id, user_id, oauth_id, open_id, status, create_time
   </sql>
-  <sql id="Blob_Column_List">
-    open_id
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.zheng.ucenter.dao.model.UcenterUserOauthExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from ucenter_user_oauth
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.zheng.ucenter.dao.model.UcenterUserOauthExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -105,11 +84,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from ucenter_user_oauth
     where user_oauth_id = #{userOauthId,jdbcType=INTEGER}
   </select>
@@ -125,10 +102,10 @@
   </delete>
   <insert id="insert" parameterType="com.zheng.ucenter.dao.model.UcenterUserOauth">
     insert into ucenter_user_oauth (user_oauth_id, user_id, oauth_id, 
-      status, create_time, open_id
+      open_id, status, create_time
       )
     values (#{userOauthId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{oauthId,jdbcType=INTEGER}, 
-      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{openId,jdbcType=VARBINARY}
+      #{openId,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zheng.ucenter.dao.model.UcenterUserOauth">
@@ -143,14 +120,14 @@
       <if test="oauthId != null">
         oauth_id,
       </if>
+      <if test="openId != null">
+        open_id,
+      </if>
       <if test="status != null">
         status,
       </if>
       <if test="createTime != null">
         create_time,
-      </if>
-      <if test="openId != null">
-        open_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -163,14 +140,14 @@
       <if test="oauthId != null">
         #{oauthId,jdbcType=INTEGER},
       </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="openId != null">
-        #{openId,jdbcType=VARBINARY},
       </if>
     </trim>
   </insert>
@@ -192,28 +169,16 @@
       <if test="record.oauthId != null">
         oauth_id = #{record.oauthId,jdbcType=INTEGER},
       </if>
+      <if test="record.openId != null">
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=TINYINT},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.openId != null">
-        open_id = #{record.openId,jdbcType=VARBINARY},
-      </if>
     </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map">
-    update ucenter_user_oauth
-    set user_oauth_id = #{record.userOauthId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      oauth_id = #{record.oauthId,jdbcType=INTEGER},
-      status = #{record.status,jdbcType=TINYINT},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      open_id = #{record.openId,jdbcType=VARBINARY}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -223,6 +188,7 @@
     set user_oauth_id = #{record.userOauthId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       oauth_id = #{record.oauthId,jdbcType=INTEGER},
+      open_id = #{record.openId,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -238,31 +204,23 @@
       <if test="oauthId != null">
         oauth_id = #{oauthId,jdbcType=INTEGER},
       </if>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="openId != null">
-        open_id = #{openId,jdbcType=VARBINARY},
-      </if>
     </set>
-    where user_oauth_id = #{userOauthId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zheng.ucenter.dao.model.UcenterUserOauth">
-    update ucenter_user_oauth
-    set user_id = #{userId,jdbcType=INTEGER},
-      oauth_id = #{oauthId,jdbcType=INTEGER},
-      status = #{status,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      open_id = #{openId,jdbcType=VARBINARY}
     where user_oauth_id = #{userOauthId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zheng.ucenter.dao.model.UcenterUserOauth">
     update ucenter_user_oauth
     set user_id = #{userId,jdbcType=INTEGER},
       oauth_id = #{oauthId,jdbcType=INTEGER},
+      open_id = #{openId,jdbcType=VARCHAR},
       status = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where user_oauth_id = #{userOauthId,jdbcType=INTEGER}

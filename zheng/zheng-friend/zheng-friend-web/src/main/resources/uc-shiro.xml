@@ -19,12 +19,14 @@
             <util:map>
                 <entry key="authc" value-ref="upmsAuthenticationFilter"/>
                 <entry key="msg_authc" value-ref="msgAuthenticationFilter"/>
+                <entry key="wx_authc" value-ref="wxAuthenticationFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitions">
             <value>
                 /u/** = upmsSessionForceLogout,authc
                 /m/** = upmsSessionForceLogout,msg_authc
+                /wx/** = wx_authc
                 /druid/** = user
                 /swagger-ui.html = user
                 /resources/** = anon
@@ -33,12 +35,17 @@
         </property>
     </bean>
 
+
+
+
     <!-- 重写authc过滤器 -->
     <bean id="upmsAuthenticationFilter" class="com.zheng.cms.admin.shiro.UpmsAuthenticationFilter"/>
 
     <!-- 重写authc过滤器 -->
     <bean id="msgAuthenticationFilter" class="com.zheng.cms.admin.shiro.MsgAuthenticationFilter"/>
 
+    <!-- 重写authc过滤器 -->
+    <bean id="wxAuthenticationFilter" class="com.zheng.cms.admin.shiro.WxAuthenticationFilter"/>
 
 
     <!-- 强制退出会话过滤器 -->

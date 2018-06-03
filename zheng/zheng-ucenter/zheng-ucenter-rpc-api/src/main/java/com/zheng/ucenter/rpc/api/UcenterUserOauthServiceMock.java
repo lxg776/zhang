@@ -2,6 +2,7 @@ package com.zheng.ucenter.rpc.api;
 
 import com.zheng.common.base.BaseServiceMock;
 import com.zheng.ucenter.dao.mapper.UcenterUserOauthMapper;
+import com.zheng.ucenter.dao.model.UcenterUser;
 import com.zheng.ucenter.dao.model.UcenterUserOauth;
 import com.zheng.ucenter.dao.model.UcenterUserOauthExample;
 
@@ -11,4 +12,8 @@ import com.zheng.ucenter.dao.model.UcenterUserOauthExample;
 */
 public class UcenterUserOauthServiceMock extends BaseServiceMock<UcenterUserOauthMapper, UcenterUserOauth, UcenterUserOauthExample> implements UcenterUserOauthService {
 
+    @Override
+    public UcenterUser getUcentUserByOpenid(String openId) {
+        return null;
+    }
 }

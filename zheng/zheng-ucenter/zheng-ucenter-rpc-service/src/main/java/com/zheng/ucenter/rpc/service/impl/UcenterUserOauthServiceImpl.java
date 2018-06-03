@@ -2,7 +2,9 @@ package com.zheng.ucenter.rpc.service.impl;
 
 import com.zheng.common.annotation.BaseService;
 import com.zheng.common.base.BaseServiceImpl;
+import com.zheng.ucenter.dao.mapper.UcenterUserMapper;
 import com.zheng.ucenter.dao.mapper.UcenterUserOauthMapper;
+import com.zheng.ucenter.dao.model.UcenterUser;
 import com.zheng.ucenter.dao.model.UcenterUserOauth;
 import com.zheng.ucenter.dao.model.UcenterUserOauthExample;
 import com.zheng.ucenter.rpc.api.UcenterUserOauthService;
@@ -11,11 +13,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 /**
 * UcenterUserOauthService实现
 * Created by shuzheng on 2017/4/27.
 */
+
 @Service
 @Transactional
 @BaseService
@@ -25,5 +29,30 @@ public class UcenterUserOauthServiceImpl extends BaseServiceImpl<UcenterUserOaut
 
     @Autowired
     UcenterUserOauthMapper ucenterUserOauthMapper;
+    @Autowired
+    UcenterUserMapper ucenterUserMapper;
+
+    @Override
+    public UcenterUser getUcentUserByOpenid(String openId) {
+
+        UcenterUserOauthExample example = new UcenterUserOauthExample();
+        example.createCriteria().andOpenIdEqualTo(openId);
+
+        List<UcenterUserOauth> oauthList = ucenterUserOauthMapper.selectByExample(example);
+        UcenterUser ucenterUser = null;
+        if(null!=oauthList&&oauthList.size()>0){
+
+            UcenterUserOauth ucenterUserOauth = oauthList.get(0);
+            ucenterUser = ucenterUserMapper.selectByPrimaryKey(ucenterUserOauth.getUserId());
+
+            if(ucenterUser!=null){
+                ucenterUser.setPassword("");
+            }
+
+        }
+
+        return ucenterUser;
+    }
+
 
 }

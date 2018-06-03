@@ -1,7 +1,6 @@
 package com.zheng.ucenter.dao.model;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Date;
 
 public class UcenterUserOauth implements Serializable {
@@ -27,6 +26,13 @@ public class UcenterUserOauth implements Serializable {
     private Integer oauthId;
 
     /**
+     * 第三方ID
+     *
+     * @mbg.generated
+     */
+    private String openId;
+
+    /**
      * 绑定状态(0:解绑,1:绑定)
      *
      * @mbg.generated
@@ -39,13 +45,6 @@ public class UcenterUserOauth implements Serializable {
      * @mbg.generated
      */
     private Date createTime;
-
-    /**
-     * 第三方ID
-     *
-     * @mbg.generated
-     */
-    private byte[] openId;
 
     private static final long serialVersionUID = 1L;
 
@@ -73,6 +72,14 @@ public class UcenterUserOauth implements Serializable {
         this.oauthId = oauthId;
     }
 
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
     public Byte getStatus() {
         return status;
     }
@@ -89,14 +96,6 @@ public class UcenterUserOauth implements Serializable {
         this.createTime = createTime;
     }
 
-    public byte[] getOpenId() {
-        return openId;
-    }
-
-    public void setOpenId(byte[] openId) {
-        this.openId = openId;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -106,9 +105,9 @@ public class UcenterUserOauth implements Serializable {
         sb.append(", userOauthId=").append(userOauthId);
         sb.append(", userId=").append(userId);
         sb.append(", oauthId=").append(oauthId);
+        sb.append(", openId=").append(openId);
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
-        sb.append(", openId=").append(openId);
         sb.append("]");
         return sb.toString();
     }
@@ -128,9 +127,9 @@ public class UcenterUserOauth implements Serializable {
         return (this.getUserOauthId() == null ? other.getUserOauthId() == null : this.getUserOauthId().equals(other.getUserOauthId()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getOauthId() == null ? other.getOauthId() == null : this.getOauthId().equals(other.getOauthId()))
+            && (this.getOpenId() == null ? other.getOpenId() == null : this.getOpenId().equals(other.getOpenId()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (Arrays.equals(this.getOpenId(), other.getOpenId()));
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
     }
 
     @Override
@@ -140,9 +139,9 @@ public class UcenterUserOauth implements Serializable {
         result = prime * result + ((getUserOauthId() == null) ? 0 : getUserOauthId().hashCode());
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getOauthId() == null) ? 0 : getOauthId().hashCode());
+        result = prime * result + ((getOpenId() == null) ? 0 : getOpenId().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
-        result = prime * result + (Arrays.hashCode(getOpenId()));
         return result;
     }
 }

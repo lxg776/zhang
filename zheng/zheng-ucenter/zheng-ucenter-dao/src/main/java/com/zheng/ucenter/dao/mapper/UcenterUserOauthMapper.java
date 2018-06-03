@@ -16,21 +16,15 @@ public interface UcenterUserOauthMapper {
 
     int insertSelective(UcenterUserOauth record);
 
-    List<UcenterUserOauth> selectByExampleWithBLOBs(UcenterUserOauthExample example);
-
     List<UcenterUserOauth> selectByExample(UcenterUserOauthExample example);
 
     UcenterUserOauth selectByPrimaryKey(Integer userOauthId);
 
     int updateByExampleSelective(@Param("record") UcenterUserOauth record, @Param("example") UcenterUserOauthExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") UcenterUserOauth record, @Param("example") UcenterUserOauthExample example);
-
     int updateByExample(@Param("record") UcenterUserOauth record, @Param("example") UcenterUserOauthExample example);
 
     int updateByPrimaryKeySelective(UcenterUserOauth record);
-
-    int updateByPrimaryKeyWithBLOBs(UcenterUserOauth record);
 
     int updateByPrimaryKey(UcenterUserOauth record);
 }

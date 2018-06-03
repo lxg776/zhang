@@ -1,6 +1,7 @@
 package com.zheng.ucenter.rpc.api;
 
 import com.zheng.common.base.BaseService;
+import com.zheng.ucenter.dao.model.UcenterUser;
 import com.zheng.ucenter.dao.model.UcenterUserOauth;
 import com.zheng.ucenter.dao.model.UcenterUserOauthExample;
 
@@ -9,5 +10,8 @@ import com.zheng.ucenter.dao.model.UcenterUserOauthExample;
 * Created by shuzheng on 2017/4/27.
 */
 public interface UcenterUserOauthService extends BaseService<UcenterUserOauth, UcenterUserOauthExample> {
+
+
+    public UcenterUser getUcentUserByOpenid(String openId);
 
 }

@@ -158,7 +158,7 @@ create table ucenter_user_oauth
    user_oauth_id        int unsigned not null auto_increment comment '编号',
    user_id              int unsigned not null comment '帐号编号',
    oauth_id             int unsigned not null comment '认证方式编号',
-   open_id              varbinary(50) not null comment '第三方ID',
+   open_id              varchar(100) not null comment '第三方ID',
    status               tinyint(4) unsigned comment '绑定状态(0:解绑,1:绑定)',
    create_time          timestamp default CURRENT_TIMESTAMP comment '创建时间',
    primary key (user_oauth_id)
