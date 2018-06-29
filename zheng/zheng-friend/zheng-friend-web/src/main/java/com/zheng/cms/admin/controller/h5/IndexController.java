@@ -2,7 +2,9 @@ package com.zheng.cms.admin.controller.h5;
 
 
 import com.zheng.cms.admin.shiro.UpmsSessionDao;
+import com.zheng.cms.admin.shiro.UserPassTypeToken;
 import com.zheng.cms.admin.util.SmsUtil;
+import com.zheng.cms.admin.util.TokenUtil;
 import com.zheng.cms.common.constant.FriendResult;
 import com.zheng.cms.common.constant.FriendResultConstant;
 import com.zheng.common.base.BaseController;
@@ -11,11 +13,9 @@ import com.zheng.common.util.MD5Util;
 import com.zheng.common.util.RedisUtil;
 import com.zheng.friend.dao.model.*;
 import com.zheng.friend.rpc.api.*;
-import com.zheng.ucenter.dao.model.UcenterIdentificaion;
-import com.zheng.ucenter.dao.model.UcenterIdentificaionExample;
-import com.zheng.ucenter.dao.model.UcenterUser;
-import com.zheng.ucenter.dao.model.UcenterUserExample;
+import com.zheng.ucenter.dao.model.*;
 import com.zheng.ucenter.rpc.api.UcenterIdentificaionService;
+import com.zheng.ucenter.rpc.api.UcenterUserOauthService;
 import com.zheng.ucenter.rpc.api.UcenterUserService;
 
 
@@ -43,6 +43,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -92,6 +94,9 @@ public class IndexController extends BaseController {
 	@Autowired
 	FAreasService fAreasService;
 
+	@Autowired
+	UcenterUserOauthService ucenterUserOauthService;
+
 	/**
 	 * 首页
 	 * @return
@@ -140,6 +145,8 @@ public class IndexController extends BaseController {
 
 
 
+
+
 	/**
 	 * 获取验证码
 	 * @return
@@ -174,6 +181,152 @@ public class IndexController extends BaseController {
 	}
 
 
+
+
+
+
+	/**
+	 * 创建订单
+	 * @return
+	 */
+	@ApiOperation(value = "微信小程序注册")
+	@RequestMapping(value = "/wxReg", method = RequestMethod.POST)
+	@ResponseBody
+	public Object wxReg(HttpServletRequest request, Byte sex, String userName, String idCard, String idCardImgs, String realName, String msgCode, Integer fromCityId, Integer fAreasId, String birthDay, String wxCode,HttpSession session) {
+		//生成订单
+		FriendResult result  = new FriendResult(FriendResultConstant.SUCCESS,null);
+		UcenterUser ucenterUser =null;
+
+		if(null!= SecurityUtils.getSubject().getPrincipal()){
+			String  username = (String)SecurityUtils.getSubject().getPrincipal();
+			ucenterUser= getUctenuser(username,session);
+		}
+
+
+		String remoteAddr="";
+
+		if (request != null) {
+			remoteAddr = request.getHeader("X-FORWARDED-FOR");
+			if (remoteAddr == null || "".equals(remoteAddr)) {
+				remoteAddr = request.getRemoteAddr();
+			}
+		}
+
+		UcenterUser modle =new UcenterUser();
+		modle.setSalt("friend");
+		String password = "123456";
+		if(idCard!=null&&idCard.length()>6){
+			password = idCard.substring(idCard.length()-6,idCard.length());
+		}
+		String md5Password =  MD5Util.MD5(modle.getSalt()+password);
+		modle.setPassword(md5Password);
+		modle.setUserName(userName);
+		modle.setCreateIp(remoteAddr);
+		modle.setSex(sex);
+
+		if(null!=ucenterUser){
+			ucenterUser=ucenterUserService.selectByPrimaryKey(ucenterUser.getUserId());
+			if(null!=ucenterUser){
+				modle.setUserId(ucenterUser.getUserId());
+				ucenterUserService.updateByPrimaryKey(modle);
+			}else{
+				SecurityUtils.getSubject().logout();
+				ucenterUserService.insert(modle);
+			}
+
+		}else{
+			ucenterUserService.insert(modle);
+		}
+		UcenterUserExample example = new UcenterUserExample();
+		example.createCriteria().andUserNameEqualTo(userName);
+		modle=ucenterUserService.selectFirstByExample(example);
+
+
+
+		UcenterIdentificaion ucenterIdentificaion = new UcenterIdentificaion();
+		ucenterIdentificaion.setUserId(modle.getUserId());
+		ucenterIdentificaion.setCellphone(userName);
+		ucenterIdentificaion.setIdcardImgs(idCardImgs);
+		ucenterIdentificaion.setIdcardNo(idCard);
+		ucenterIdentificaion.setRealName(realName);
+
+		if(null!=ucenterUser){
+			ucenterIdentificaionService.updateByPrimaryKey(ucenterIdentificaion);
+			return "redirect:/u/txGrzl";
+
+
+		}else{
+			ucenterIdentificaionService.insert(ucenterIdentificaion);
+			//随机一个昵称
+			FUserBaseMsg fUserBaseMsg = new FUserBaseMsg();
+			fUserBaseMsg.setNikename(SmsUtil.randomCheckCode(7));
+			fUserBaseMsg.setUserId(modle.getUserId());
+			fUserBaseMsg.setBirthDate(birthDay);
+
+			FCitiesExample fCitiesExample =new FCitiesExample();
+			fCitiesExample.createCriteria().andCityidEqualTo(fromCityId+"");
+			FCities cities = fCitiesService.selectFirstByExample(fCitiesExample);
+
+			if(cities!=null){
+				fUserBaseMsg.setFromCity(cities.getCity());
+				fUserBaseMsg.setFromCityId(Integer.parseInt(cities.getCityid()));
+			}
+
+
+			FAreasExample fAreasExample =new FAreasExample();
+			fAreasExample.createCriteria().andAreaidEqualTo(fAreasId+"");
+			FAreas fAreas = fAreasService.selectFirstByExample(fAreasExample);
+			if(fAreas!=null){
+				fUserBaseMsg.setFromArea(fAreas.getArea());
+				fUserBaseMsg.setFromAreaId(Integer.parseInt(fAreas.getAreaid()));
+			}
+
+			//设置显示选项
+			FUserSetting fUserSetting =new FUserSetting();
+			fUserSetting.setUserId(modle.getUserId());
+			fUserSetting.setShowIndexPage((byte)0);
+			fUserSetting.setShowBaseMsg((byte)0);
+			fUserSetting.setShowFavorite((byte)0);
+			fUserSetting.setShowFriendRequest((byte)0);
+			fUserSetting.setShowLivingStatus((byte)0);
+			fUserSetting.setMsgReadStatus((byte)0);
+			fUserSetting.setMsgSendStatus((byte)0);
+			fUserSetting.setHistoryviewStatus((byte)1);
+			fUserSetting.setIdcardStatus((byte)1);
+			fUserBaseMsgService.insert(fUserBaseMsg);
+			fUserSettingService.insert(fUserSetting);
+			result.setMessage("注册成功!");
+
+
+			Map<String,Object> map =new HashMap<>();
+
+			//关联openId
+			String openId = TokenUtil.getOpenIdFromWx("123", "123", wxCode);
+
+			//无密码登录
+			String username = modle.getUserName();
+
+
+			Subject subject = SecurityUtils.getSubject();
+
+
+			UcenterUserOauth oauth = new UcenterUserOauth();
+			oauth.setUserId(modle.getUserId());
+			oauth.setOpenId(openId);
+			oauth.setUserOauthId(1);
+			ucenterUserOauthService.insert(oauth);
+
+			Session subjectSession = subject.getSession();
+			String token = TokenUtil.getToken(subjectSession,userName);
+			map.put("token",token);
+			result.setData(map);
+
+
+
+			return result;
+		}
+
+	}
 
 
 

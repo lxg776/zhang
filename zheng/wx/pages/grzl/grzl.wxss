@@ -11,6 +11,8 @@
   align-items: center;
 }
 
+
+
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
@@ -20,9 +22,9 @@
 
 .userinfo-nickname {
   color: #aaa;
-
- 
 }
+
+
 
 .usermotto {
   margin-top: 200px;
@@ -32,7 +34,7 @@
 .head-content{
   position: relative;
   width: 100%;
-  height: 120px;
+  height: 300rpx;
     
 }
 
@@ -47,16 +49,17 @@
 
 .head-img{
   position: absolute;
-  top: 8px;
-  left: 60px;
-  width: 110px;
-  height: 110px;
+ 
+  left: 32rpx;
+  width: 220rpx;
+  height: 220rpx;
+  top: 70rpx;
 }
 
 .head-btn{
   position: absolute;
   top: 8px;
-  left: 200px;
+  left: 520rpx;
  
 }
 
@@ -76,4 +79,49 @@
   height:25px !important;
   
   
+}
+
+.photo_content{
+    width: 100%;
+    flex-direction: column;
+    height: auto;
+    min-height: 250rpx;
+    padding-top: 10rpx;
+    display: block;
+  
+}
+
+.s1_view{
+  position: relative;
+  width: 230rpx;
+  height: 230rpx;
+  float: left;
+  margin-top: 20rpx;
+}
+
+.s1_close{
+  position: absolute;
+  width: 16rpx;
+  height: 16rpx;
+  top: 4rpx;
+  left: 220rpx;
+
+}
+
+
+
+
+.s1_image{
+  width: 200rpx;
+  height: 200rpx;
+  top: 10rpx;
+  left: 5rpx;
+  position: absolute;
+}
+.s1_process{
+   position: absolute;
+   width: 190rpx;
+   left: 25rpx;
+   top: 225rpx;
+   height: 5rpx;
 }

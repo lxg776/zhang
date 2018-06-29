@@ -172,16 +172,35 @@ export default(config = {}) =>{
   }).then((province) => {
     
       const provinces = province.data.data.dataList;
-      const firstProvince = provinces[0];
+      let cityes;
+  
+      let areaes;
 
+      let pIndex;
+      let cIndex;
+      let dIndex;
 
+      let firstProvince;
+      let firstCity;
+      let firstDistrict;
+      if (provinces && provinces.length>0){
+        for (var i = 0; i < provinces.length; i++) {
+
+          let item = provinces[i];
+          if (item.provinceid == self.data.dProvinceId){
+            firstProvince = item;
+            pIndex = i;
+            break;
+          }
+        } 
+      }
       
       /**
 		 * 默认选择获取的省份第一个省份数据
 		 */
       self.setData({
         'areaPicker.provinces': provinces,
-        'areaPicker.selectedProvince.index': 0,
+        'areaPicker.selectedProvince.index': pIndex,
         'areaPicker.selectedProvince.code': firstProvince.provinceid,
         'areaPicker.selectedProvince.fullName': firstProvince.province,
       });
@@ -192,12 +211,25 @@ export default(config = {}) =>{
           method: 'GET'
         })).then((city) => {
 
-          const cityes = city.data.data.dataList;
+          cityes = city.data.data.dataList;
           if(cityes){
-          const firstCity = cityes[0];
+       
+
+          if (cityes && cityes.length > 0) {
+            for (var i = 0; i < cityes.length; i++) {
+
+              let item = cityes[i];
+              if (item.cityid == self.data.dcityid) {
+                firstCity = item;
+                cIndex = i;
+                break;
+              }
+            }
+          }
+
           self.setData({
             'areaPicker.cityData': cityes,
-            'areaPicker.selectedCity.index': 0,
+            'areaPicker.selectedCity.index': cIndex,
             'areaPicker.selectedCity.code': firstCity.cityid,
             'areaPicker.selectedCity.fullName': firstCity.city,
           });
@@ -209,14 +241,30 @@ export default(config = {}) =>{
                 method: 'GET'
               })
         ).then((area) => {
-        const areaes = area.data.data.dataList;
-        const firstDistrict = areaes[0];
+         areaes = area.data.data.dataList;
+      
+
+        if (areaes) {
+          if (areaes && areaes.length > 0) {
+            for (var i = 0; i < areaes.length; i++) {
+              let item = areaes[i];
+              if (item.areaid == self.data.dAreaid) {
+                firstDistrict = item;
+                dIndex = i;
+                break;
+              }
+            }
+          }
+        }
+
+
         self.setData({
-          'areaPicker.value': [0, 0, 0],
+          'areaPicker.value': [pIndex, cIndex, dIndex],
           'areaPicker.districtData': areaes,
           'areaPicker.selectedArea.index': 0,
           'areaPicker.selectedArea.code': firstDistrict.areaid,
           'areaPicker.selectedArea.fullName': firstDistrict.area,
+          'areaPicker.address': provinces[pIndex].province + ' - ' + cityes[cIndex].city + ' - ' + areaes[dIndex].area ,
         });
 
         //const areaes = area.data.data.dataList;
@@ -253,83 +301,3 @@ function fetch(options) {
     wx.request(options);
   });
 }
-
-// export const getSelectedAreaData = () => {
-//   const self = _getCurrentPage();
-//   return self.data.areaPicker.selected;
-// };
-
-// export default (config = {}) => {
-//   const self = _getCurrentPage();
-//   self.setData({
-//     'areaPicker.hideDistrict': !config.hideDistrict
-//   });
-//   self.config = config;
-//   self.bindChange = conf.bindChange.bind(self);
-
-//   fetch({
-//     url: API + '0',
-//     method: 'GET'
-//   }).then((province) => {
-//     const firstProvince = province.data.result[0];
-//     const dataWithDot = conf.addDot(province.data.result);
-//     /**
-// 		 * 默认选择获取的省份第一个省份数据
-// 		 */
-//     self.setData({
-//       'areaPicker.provinceData': dataWithDot,
-//       'areaPicker.selectedProvince.index': 0,
-//       'areaPicker.selectedProvince.code': firstProvince.code,
-//       'areaPicker.selectedProvince.fullName': firstProvince.fullName,
-//     });
-//     return (
-//       fetch({
-//         url: API + firstProvince.code,
-//         method: 'GET'
-//       })
-//     );
-//   }).then((city) => {
-//     const firstCity = city.data.result[0];
-//     const dataWithDot = conf.addDot(city.data.result);
-//     self.setData({
-//       'areaPicker.cityData': dataWithDot,
-//       'areaPicker.selectedCity.index': 0,
-//       'areaPicker.selectedCity.code': firstCity.code,
-//       'areaPicker.selectedCity.fullName': firstCity.fullName,
-//     });
-//     /**
-// 		 * 省市二级则不请求区域
-// 		 */
-//     if (!config.hideDistrict) {
-//       return (
-//         fetch({
-//           url: API + firstCity.code,
-//           method: 'GET'
-//         })
-//       );
-//     } else {
-//       const { provinceData, cityData } = self.data.areaPicker;
-//       self.setData({
-//         'areaPicker.value': [0, 0],
-//         'areaPicker.address': provinceData[0].fullName + ' - ' + cityData[0].fullName,
-//         'areaPicker.selected': [provinceData[0], cityData[0]]
-//       });
-//     }
-//   }).then((district) => {
-//     if (!district) return;
-//     const firstDistrict = district.data.result[0];
-//     const dataWithDot = conf.addDot(district.data.result);
-//     const { provinceData, cityData } = self.data.areaPicker;
-//     self.setData({
-//       'areaPicker.value': [0, 0, 0],
-//       'areaPicker.districtData': dataWithDot,
-//       'areaPicker.selectedDistrict.index': 0,
-//       'areaPicker.selectedDistrict.code': firstDistrict.code,
-//       'areaPicker.selectedDistrict.fullName': firstDistrict.fullName,
-//       'areaPicker.address': provinceData[0].fullName + ' - ' + cityData[0].fullName + ' - ' + firstDistrict.fullName,
-//       'areaPicker.selected': [provinceData[0], cityData[0], firstDistrict]
-//     });
-//   }).catch((e) => {
-//     console.error(e);
-//   });
-// };

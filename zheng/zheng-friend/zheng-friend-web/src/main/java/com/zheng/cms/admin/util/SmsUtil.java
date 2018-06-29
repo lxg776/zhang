@@ -42,9 +42,15 @@ public class SmsUtil {
 
 
 
-        HttpResponse httpResponse = httpclient.execute(httpGet);
+
+
 
         int returnCode =200;
+        if(Config.isDebug){
+            return  returnCode;
+        }
+
+        HttpResponse httpResponse = httpclient.execute(httpGet);
         if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
             HttpEntity httpEntity = httpResponse.getEntity();
             JSONObject result = JSONObject.parseObject(EntityUtils.toString(httpEntity));

@@ -1,17 +1,20 @@
 {
   "pages":[
-    "pages/regited/regited",
     "pages/main/main",
+    "pages/xqhh/xqhh",
+   
+    "pages/shzk/shzk",
+    "pages/regited/regited",
+    
+    "pages/zobz/zobz",
+    "pages/grzl/grzl",
+    "head/upload/upload",
+   
     "pages/activity/activity",
     "pages/msgList/msgList",
     "pages/mine/mine",
-    "pages/xqhh/xqhh",
-    "pages/shzk/shzk",
-    "pages/zobz/zobz",
-    "pages/grzl/grzl",
-   
-   
     "pages/logs/logs"
+   
   ],
   "window":{
     "backgroundTextStyle":"light",

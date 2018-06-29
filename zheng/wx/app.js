@@ -35,7 +35,20 @@ App({
   },
   globalData: {
     userInfo: null,
-     servsers: "http://127.0.0.1:9991"
+    servsers: "http://127.0.0.1:9991",
+    token:'8Q8r461197068178821121',
+    wxCode: 'wtf998',
+    tixingArray: ['偏瘦', '一般','偏胖','强壮'],
+    danweiArray: ['私营企业', '国有企业', '事业单位', '国家行政机关'],
+    xueliArray: ['大专', '本科', '研究生', '中专', '高中'],
+    shouruArray: ['3000元以下', '3000元~5000元', '5000元~8000元', '8000元~12000元','12000元以上'],
+    fumutongzhuArray: ['看情况', '不介意与父母同住', '不希望与父母同住'],
+    goucheArray: ['不限', '购有车辆'],
+    goufangArray: ['不限', '购有房屋'],
+    chouyanArray: [ '不抽','偶尔抽','经常抽'],
+    hejiuArray: ['不喝', '偶尔喝', '经常喝'],
+    chuyiArray: ['不下厨', '厨艺有待提高', '上得了厅堂', '饭店大厨级别'],
+    yuehuiArray: ['公园散步', '奶茶/咖啡厅', '电影院', '酒吧'],
   },
   getUrlData: function (options){
     options = options || {};
@@ -44,6 +57,26 @@ App({
       options.fail = reject;
       wx.request(options);
     });
+  }
+  ,msg: function (msg) {
+    wx.showToast({
+      title: msg,
+      icon: 'none',
+      duration: 1500
+    });
+  },
+  handleData:function(data,success,fail){
+    if (data.data.code == 1){
+
+      if (data.data.data&&data.data.data.token) {
+        this.globalData.token = data.data.data.token;
+      }
+
+      success(data);
+
+    }else{
+      fail(data);
+    }
   }
    
 })

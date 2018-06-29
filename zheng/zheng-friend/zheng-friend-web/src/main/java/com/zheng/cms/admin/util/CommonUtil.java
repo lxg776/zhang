@@ -1,7 +1,12 @@
 package com.zheng.cms.admin.util;
 
+import com.zheng.cms.common.constant.FriendResult;
+
+import javax.servlet.http.HttpServletRequest;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class CommonUtil {
@@ -46,5 +51,26 @@ public class CommonUtil {
         }
         //将承载的字符转换成字符串
         return sb.toString();
+    }
+
+
+
+    public static FriendResult handResult(FriendResult result, HttpServletRequest request){
+
+        if(result!=null){
+            Object newsToken = request.getAttribute("newsToken");
+            if(null!=newsToken){
+                String token = (String) newsToken;
+
+                Map<String,Object> map = (Map<String, Object>) result.getData();
+                if(map==null){
+                    map =new HashMap<>();
+                    result.setData(map);
+                }
+                map.put("token",token);
+
+            }
+       }
+         return  result;
     }
 }

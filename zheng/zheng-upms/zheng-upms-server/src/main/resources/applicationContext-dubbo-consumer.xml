@@ -34,8 +34,11 @@
     <dubbo:reference id="upmsLogService" interface="com.zheng.upms.rpc.api.UpmsLogService" mock="true"/>
     <!-- 接口服务 -->
     <dubbo:reference id="upmsApiService" interface="com.zheng.upms.rpc.api.UpmsApiService" mock="true"/>
+
     <!-- 用户查询 -->
     <dubbo:reference id="ucenterUserService" interface="com.zheng.ucenter.rpc.api.UcenterUserService" mock="true"/>
+    <dubbo:reference id="ucenterUserOauthService" interface="com.zheng.ucenter.rpc.api.UcenterUserOauthService" mock="true"/>
+
     <!-- 文章 -->
     <dubbo:reference id="factivityService" interface="com.zheng.friend.rpc.api.FActivityService" mock="true"/>
     <!-- 接口服务 -->

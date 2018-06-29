@@ -1,8 +1,10 @@
+  <form bindsubmit='formSubmit'>
+   <scroll-view scroll-y="true" >
 <view class="section">
- 
+
   <view class="flex-wrp" style="flex-direction:row;">
 
-    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">昵称</text> <input name="input" class='m-left ' placeholder="填写昵称"></input> </view>
+    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">昵称</text> <input name="nikename" class='algn-right ' placeholder="填写昵称"></input> </view>
   </view>
 
 
@@ -10,74 +12,97 @@
 
     <view class='head-content aui-list-item '> 
           <view class='head-text'>头像</view>
-          <image class='head-img' src='/img/default_man_icon.png'></image>
-            <button class='common_button head-btn'>上传</button> 
+          <image class='head-img' src='{{avatar}}'></image>
+            <button class='common_button head-btn' bindtap="upload">上传</button> 
     </view>
 
  
 
-    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">身高</text> <input name="input" class='m-left' placeholder="填写身高"></input> </view>
+    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">身高(cm)</text> <input name="height" class='algn-right' placeholder="填写身高"></input> </view>
 
 
 
  
-<picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+<picker  value="{{index}}" range='{{tixingArray}}' bindchange='bindTixingChange'>
   <view class="aui-list-item aui-list-item-inner">
-      <text class="select-text">体型 </text> <text class="select-text" 
-      style='left:130px;'
-      >{{dates}}</text>
+      <text class="select-text">体型 </text> <text class="right-text"  >{{shape}}</text>
       <image class='select-arrow' src='/img/arrow-left.png'></image>
   </view>
 </picker>
 
 
-    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">婚姻</text> <radio-group name="radio-group">
-      <label><radio value="radio1"/>未婚  </label>
-      <label><radio value="radio2"/>离异  </label>
-       <label><radio value="radio2"/>丧偶  </label>
+    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">婚姻</text> <radio-group name="maritalStatus">
+      <label><radio value="未婚"/>未婚  </label>
+      <label><radio value="离异"/>离异  </label>
+       <label><radio value="丧偶"/>丧偶  </label>
     </radio-group> </view>
 
-        <view class="aui-list-item aui-list-item-inner"> <text class="m-left">孩子</text> <radio-group name="radio-group">
-      <label><radio value="radio1"/>没有  </label>
-      <label><radio value="radio2"/>有  </label>
+        <view class="aui-list-item aui-list-item-inner"> <text class="m-left">孩子</text> <radio-group name="childrenStatus">
+      <label><radio value="没有"/>没有  </label>
+      <label><radio value="有"/>有  </label>
      
     </radio-group> </view>
 
-      <view class="aui-list-item aui-list-item-inner"> <text class="m-left">职业</text> <input name="input" class='m-left' placeholder="填写职业"></input> </view>
+      <view class="aui-list-item aui-list-item-inner"> <text class="m-left">职业</text> <input name="profession" class='algn-right' placeholder="填写职业"></input> </view>
  
 
-    <picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+    <picker value="{{index}}" range='{{danweiArray}}' bindchange="bindDanweiChange">
   <view class="aui-list-item aui-list-item-inner">
-      <text class="select-text">单位性质 </text> <text class="select-text" 
-      style='left:130px;'
-      >{{dates}}</text>
+      <text class="select-text">单位性质 </text> <text class="right-text" >{{unitProperty}}</text>
       <image class='select-arrow' src='/img/arrow-left.png'></image>
   </view>
 </picker>
 
 
-    <picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+    <picker value="{{index}}" range='{{xueliArray}}' bindchange="bindXueLiChange">
   <view class="aui-list-item aui-list-item-inner">
-      <text class="select-text">学历 </text> <text class="select-text" 
-      style='left:130px;'
-      >{{dates}}</text>
+      <text class="select-text">学历 </text> <text class="right-text" 
+     
+      >{{education}}</text>
       <image class='select-arrow' src='/img/arrow-left.png'></image>
   </view>
 </picker>
 
-    <picker mode="date" value="{{date}}" start="1978-01-01" end="2017-1-23" bindchange="listenerGetBrithDay">
+    <picker value="{{index}}" range='{{shouruArray}}' bindchange="bindShouRuChange">
   <view class="aui-list-item aui-list-item-inner">
-      <text class="select-text">月收入(元) </text> <text class="select-text" 
-      style='left:130px;'
-      >{{dates}}</text>
+      <text class="select-text">月收入(元) </text> <text class="right-text" >{{monthIncome}}</text>
       <image class='select-arrow' src='/img/arrow-left.png'></image>
   </view>
 </picker>
 
+  <view class="aui-list-item aui-list-item-inner">
+      <text class="select-text">个人相册 </text>  <button class='common_button head-btn' bindtap="selectPhoto">上传</button> 
+    
+  </view>
 
+
+  <view class="photo_content">
+
+
+
+  
+
+    
+
+<block wx:for="{{imgList}}" wx:for-index="idx"  wx:key="key" wx:for-item="item" >
+  <view class='s1_view'>
+       <image class='s1_close' src='/img/close.png' bindtap='deletePhoto' data-idx = '{{idx}}'  ></image>
+       <image class='s1_image' src='{{item.url}}'></image>
+      
+       <progress percent="{{item.percent}}" class='s1_process' /> 
+  </view>
+  
+</block>
+
+  </view>
+  <view  class="aui-list-item aui-list-item-inner" style='height:20rpx;'> </view>
+
+  <button style=' margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' formType="submit">下一步</button>
  
 
 
- <button style=' margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' >完成</button> 
+
 
 </view>
+</scroll-view>
+</form>

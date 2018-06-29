@@ -15,11 +15,11 @@
         <!-- 后台拦截器 -->
         <mvc:interceptor>
             <!-- 拦截路径 -->
-            <mvc:mapping path="/u/**"/>
-            <!-- 非拦截路径 -->
-            <mvc:exclude-mapping path="/manage/login"/>
+            <mvc:mapping path="/wx/**"/>
+            <!-- 非拦截路径    <mvc:exclude-mapping path="/manage/login"/> -->
+
             <!-- 拦截器对象 -->
-            <bean id="manageInterceptor" class="com.zheng.cms.admin.Interceptor.ManageInterceptor"/>
+            <bean id="wxInterceptor" class="com.zheng.cms.admin.Interceptor.WxInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
     <mvc:resources location="/cdn/" mapping="/**" />

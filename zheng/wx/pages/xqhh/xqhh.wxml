@@ -1,21 +1,23 @@
+ <form bindsubmit='formSubmit'>
 <view class="section">
  
 
-      <view class="aui-list-item aui-list-item-inner"> <text class="m-left">喜欢的音乐</text> <input name="input" class='m-left ' placeholder="填写"></input> </view>
+      <view class="aui-list-item aui-list-item-inner"> <text class="m-left">喜欢的音乐</text> <input name="favoriteMusic" class='m-left ' placeholder="填写"></input> </view>
 
 
-   <view class="aui-list-item aui-list-item-inner"> <text class="m-left">喜欢的电影</text> <input name="input" class='m-left ' placeholder="填写"></input> </view>
+   <view class="aui-list-item aui-list-item-inner"> <text class="m-left">喜欢的电影</text> <input name="favoriteFilm" class='m-left ' placeholder="填写"></input> </view>
 
-   <view class="aui-list-item aui-list-item-inner"> <text class="m-left">喜欢的运动</text> <input name="input" class='m-left ' placeholder="填写"></input> </view>
+   <view class="aui-list-item aui-list-item-inner"> <text class="m-left">喜欢的运动</text> <input name="favoriteSports" class='m-left ' placeholder="填写"></input> </view>
 
 
-   <view class="aui-list-item aui-list-item-inner"> <text class="m-left">喜欢的宠物</text> <input name="input" class='m-left ' placeholder="填写"></input> </view>
+   <view class="aui-list-item aui-list-item-inner"> <text class="m-left">喜欢的宠物</text> <input name="favoritePet" class='m-left ' placeholder="填写"></input> </view>
 
 
 
   
 
 
- <button style=' margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' >完成</button> 
+ <button style=' margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' formType="submit" >完成</button> 
 
 </view>
+</form>

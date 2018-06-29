@@ -10,10 +10,10 @@ import com.zheng.friend.dao.vo.FUserMemberRelVo;
 import com.zheng.friend.dao.vo.FuserDetailVo;
 import com.zheng.friend.rpc.api.*;
 import com.zheng.oss.common.constant.OssConstant;
-import com.zheng.ucenter.dao.model.UcenterIdentificaion;
-import com.zheng.ucenter.dao.model.UcenterUser;
-import com.zheng.ucenter.dao.model.UcenterUserExample;
+import com.zheng.ucenter.dao.model.*;
 import com.zheng.ucenter.rpc.api.UcenterIdentificaionService;
+import com.zheng.ucenter.rpc.api.UcenterOauthService;
+import com.zheng.ucenter.rpc.api.UcenterUserOauthService;
 import com.zheng.ucenter.rpc.api.UcenterUserService;
 import com.zheng.upms.common.constant.UpmsResult;
 import com.zheng.upms.common.constant.UpmsResultConstant;
@@ -57,6 +57,10 @@ public class MemberController extends BaseController{
 
     @Autowired
     private UcenterUserService ucenterUserService;
+
+
+    @Autowired
+    private UcenterUserOauthService ucenterUserOauthService;
 
     @Autowired
     private FUserBaseMsgService fUserBaseMsgService;
@@ -272,6 +276,12 @@ public class MemberController extends BaseController{
                 fUserRequestService.deleteByPrimaryKey(id);
                 fUserSettingService.deleteByPrimaryKey(id);
                 fUserLivingStatusService.deleteByPrimaryKey(id);
+
+                //解除绑定
+                UcenterUserOauthExample example =new UcenterUserOauthExample();
+                example.createCriteria().andUserIdEqualTo(id);
+                ucenterUserOauthService.deleteByExample(example);
+
         }
 
         return "redirect:list";

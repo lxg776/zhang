@@ -1,5 +1,5 @@
 import initAreaPicker, { getSelectedAreaData } from '../../template/areaSelect';
-
+import uploadImg, { } from '../../template/uploadImg';
 
 
 const app = getApp()
@@ -13,8 +13,14 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     imgList:[],
     tempFiles:[],
-  
-   
+    codeButtonState:false,
+    codeButtonText:'获取验证码',
+    time: 60,//初始时间
+    date:"1990-01-01",
+    dProvinceId :"450000",
+    dcityid : "451000",
+    dAreaid : "451025",
+    wxCode: "wtf998",
   },
   //事件处理函数
   bindViewTap: function() {
@@ -25,6 +31,10 @@ Page({
   onShow: () => {
     initAreaPicker({
       // hideDistrict: true, // 是否隐藏区县选择栏，默认显示
+    });
+
+    uploadImg({
+
     });
   },
   onLoad: function () {
@@ -67,25 +77,7 @@ Page({
      
   }
   ,
-  deletePhoto:function(e){
-    //console.log(e.currentTarget.dataset.url);
-    let idx = e.currentTarget.dataset.idx;
-    let newImgList = [];
-
-    for (var i = 0; i < this.data.imgList.length; i++) {
-      if (idx == i) {
-
-      } else {
-        newImgList.push(this.data.imgList[i]);
-      }
-    } 
-
-    this.setData({
-      imgList: newImgList,
-    });  
-
-  
-  },
+ 
   getUserInfo: function(e) {
     // console.log(e);
     app.globalData.userInfo = e.detail.userInfo
@@ -102,72 +94,7 @@ Page({
     })
 
   },
-  selectPhoto:function(e){
-    let imgList = this.data.imgList;
-    let tempImgList = [];
-    // imgList.push("991");
-    // this.setData({
-    //     imgList: imgList,
-    // });
-    var self = this;  
-    wx.chooseImage({
-      success: function(res) {
-        var path = res.tempFilePaths;
-      
-        for (let i = 0; i < res.tempFilePaths.length;i++){
-          let fileObject = {
-            url: '',
-            id: '',
-            percent:0,
-          }
-          let itemPath = res.tempFilePaths[i];
-          fileObject.url = itemPath;
-          fileObject.id = self.random_string(4);
-          fileObject.percent=30;
-          imgList.push(fileObject);
-          tempImgList.push(fileObject);
-        }
-       
 
-
-        //imgList.push(path);
-        self.setData({
-          imgList: imgList,
-          tempFiles: tempImgList,
-        });
-        self.aliyunOOs(self.uploadImgFile);
-        
-      },
-      fail:function(res){
-
-      }
-    })
-  
-  },
-
-  finishRegedit:function(e){
-
-    //console.log(app.globalData.servsers);
-
-    wx.request({
-      url: app.globalData.servsers +"/wx/reg",
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-
-        wx.showToast({
-          title: res.data.message,
-          icon: 'none',
-          duration: 2000
-        })
-
-      //  console.log(res.data)
-      }
-    })
-   
-
-  },
   open: function () {
     this.setData({
       'areaPicker.condition': !this.data.areaPicker.condition,
@@ -193,119 +120,333 @@ Page({
       'areaPicker.condition': !this.data.areaPicker.condition,
       isScroll: !this.data.isScroll,
       mAddress: this.data.areaPicker.address,
+      fAreasId: this.data.areaPicker.selectedArea.code,
+      fromCityId: this.data.areaPicker.selectedCity.code,
       mAddressValue: this.data.areaPicker.value,
     })
   },
-  get_suffix: function (filename){
-    var pos = filename.lastIndexOf('.');
-    var suffix = '';
-    if (pos != -1) {
-      suffix = filename.substring(pos);
-    }
-    return suffix;
-  },
-  random_string:function(len){
-    len = len || 32;
-    let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let maxPos = chars.length;
-    let pwd = '';
-    for (var i = 0; i < len; i++) {
-      pwd += chars.charAt(Math.floor(Math.random() * maxPos));
-    }
-    return pwd;
-  },
-  uploadImgFile: function (self,oos){
-   
-    for (var i = 0; i < this.data.tempFiles.length; i++) {
-      let itemFile = this.data.tempFiles[i];
 
-      let suffix = this.get_suffix(itemFile.url);
-      let random_name = this.random_string();
-      let key = oos.dir + "/" + random_name + suffix;
-
-      let task = wx.uploadFile({
-        url: oos.action,
-        filePath: itemFile.url,
-        name: 'file',
-        formData: {
-          'key': key,
-          'policy': oos.policy,
-          'OSSAccessKeyId': oos.OSSAccessKeyId,
-          'signature': oos.signature,
-          'success_action_status': '200',
-        },
-        success: function (res) {
-          console.log('success');
-
-        },
-        fail: function (err) {
-         // console.log('file');
-        },
-      });
-      
-      task.onProgressUpdate((res) => {
-        let imgList = self.data.imgList;
-
-
-     
-
-        for (var i = 0; i < imgList.length; i++) {
-          let item = imgList[i];
-          if (item.url == itemFile.url ){
-            item.percent = res.progress;
-          }
-        }
-        self.setData({
-          imgList:imgList,
-        });
-
-          
-         console.log('上传进度', res.progress)
-          // console.log('已经上传的数据长度', res.totalBytesSent)
-          // console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
-        })  
-
-
-    } 
-
-   
-  },
-  aliyunOOs:function(handle){
+  getSmsCode:function(e){ 
+    //cone.detail.value.username,
     let self = this;
-    let timestamp = Date.parse(new Date());  
-    if(this.data.oos){
-      if (timestamp <= this.data.oos.expireEndTime){
-            if(handle){
-              handle(self,this.data.oos);
-            }
-        }else{
-        app.getUrlData({
-          url: app.globalData.servsers + '/aliyun/oss/policy',
-          method: 'GET'
-        }).then((data) => {
-          self.setData({
-            'oos': data.data
-          });
-        });
-        if (handle) {
-          handle(self,data.data);
-        }
-        }
-    }else{
+    console.log(this.data.cellphone);
+    let cellphone = this.data.cellphone;
+  
+    if (this.validatemobile(cellphone)){
+    
       app.getUrlData({
-        url: app.globalData.servsers + '/aliyun/oss/policy',
-        method: 'GET'
+        url: app.globalData.servsers + '/h5/gegSms',
+        method: 'POST',
+        data: { phoneNo: cellphone },
+        header: { 'content-type': 'application/x-www-form-urlencoded' }
       }).then((data) => {
-        self.setData({
-          'oos': data.data
-        });
-        if (handle) {
-          handle(self,this.data.oos);
+        if (data.data.code == 1) {
+           self.startTap();
+        } else {
+          wx.showToast({
+            title: '发送失败',
+            icon: 'fail',
+            duration: 1000
+          })
         }
       });
-     
+    }
+  },
+  validatemobile: function (mobile) {
+    if (!mobile||mobile.length == 0) {
+      wx.showToast({
+        title: '请填写手机号码',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
+    if (mobile.length != 11) {
+      wx.showToast({
+        title: '手机号长度有误！',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
+    var myreg = /^(((1[3-9][0-9]{1})|159|153)+\d{8})$/;
+    if (!myreg.test(mobile)) {
+      wx.showToast({
+        title: '手机号有误！',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
+    return true;
+  },
+  cellphoneInput:function(e){
+    const self = this;
+    self.setData({
+      cellphone: e.detail.value,
+    })
+  },
+  validateIdcard: function (idcard) {
+    if (!idcard || idcard.length == 0) {
+      wx.showToast({
+        title: '请填写身份证号码',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
     }
 
+    var myreg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+    if (!myreg.test(idcard)) {
+      wx.showToast({
+        title: '身份证号码有误！',
+        icon: 'none',
+        duration: 1500
+      })
+      return false;
+    }
+    return true;
+  },
+  cellphoneInput: function (e) {
+    const self = this;
+    self.setData({
+      cellphone: e.detail.value,
+    })
+  },
+  formSubmit:function(e){
+    
+    let self = this;
+    let sex = e.detail.value.sex;
+    let brithDay = self.data.dates;
+    let userName = e.detail.value.userName;
+    let address = self.data.mAddress;
+    let code = e.detail.value.code;
+    let realName = e.detail.value.realName;
+    let idCard = e.detail.value.idCard;
+    let isAgree = e.detail.value.isAgree;
+   
+
+
+    let idCardImgs='';
+
+    for (let i = 0; i < self.data.imgList.length;i++){
+      let item = self.data.imgList[i];
+      if(item.key != ''){
+        idCardImgs = idCardImgs+item.key;
+      }
+
+      if (i != self.data.imgList.length-1){
+        idCardImgs = idCardImgs + ',';
+      }
+    }
+
+    if (sex == '') {
+      self.msg("请选择性别");
+      return;
+    }
+
+    if (!brithDay||brithDay == '') {
+      self.msg("请填写出生日期");
+      return;
+    }
+
+    if (!address || address == '') {
+      self.msg("请填写地区");
+      return;
+    }
+
+    if (!self.validatemobile(userName)) {
+      return;
+    }
+
+    if (!code || code == '') {
+      self.msg("请填写验证码");
+      return;
+    }
+
+    if (!realName || realName == '') {
+      self.msg("请填写真实姓名");
+      return;
+    }
+
+    let matchIdcard = '/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/';
+
+    if (!self.validateIdcard(idCard)) {
+      return;
+    }
+
+    if (!idCardImgs || idCardImgs == '') {
+      self.msg("请上传身份证图片");
+      return;
+    }
+
+    if (!isAgree || isAgree == '') {
+      self.msg("请同意《婚恋网服务协议》");
+      return;
+    }
+
+
+    let fAreasId = self.data.fAreasId;
+    let fromCityId = self.data.fromCityId;
+    let wxCode = self.data.wxCode;
+
+    app.globalData.wxCode = wxCode;
+
+    app.getUrlData({
+      url: app.globalData.servsers + '/h5/checkUserName',
+      method: 'POST',
+      data: { idCard: idCard,
+        userName, userName,
+        code, code,
+      },
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
+    }).then((data) => {
+      if (data.data.code == 1) {
+        //提交表单
+        //$("#regForm").submit();
+
+
+        app.getUrlData({
+          url: app.globalData.servsers + '/h5/wxReg',
+          method: 'POST',
+          data: {
+            sex: sex,
+            birthDay: brithDay,
+            fromCityId: fromCityId,
+            fAreasId: fAreasId,
+            userName, userName,
+            realName, realName,
+            idCard: idCard,
+            idCardImgs: idCardImgs,
+            wxCode, wxCode,
+          },
+          header: { 'content-type': 'application/x-www-form-urlencoded' },
+        }).then((data) => {
+
+          if(data.data.code == '1'){
+             app.globalData.token = data.data.data.token;
+
+             wx.redirectTo({
+               url: '/pages/grzl/grzl',
+               success: function () {
+                 console.log(data.data);
+               },
+               fail: function () {
+                 console.log('fail');
+               },
+               complete: function () {
+
+               }
+             });
+
+          }else{
+            msg('注册错误!');
+          }
+        });
+
+      } else {
+        self.msg(data.data.message);
+      }
+    });
+
+    console.log(sex + '-' + brithDay + '-' + userName + '-' + code + '-' + idCardImgs + '-' + isAgree);
+
+  },
+
+  msg:function(msg){
+    wx.showToast({
+      title: msg,
+      icon: 'none',
+      duration: 1500
+    });
+  },
+  /**
+    * 开始倒计时
+   */
+  startTap: function () {
+    var that = this;
+    that.init(that);          //这步很重要，没有这步，重复点击会出现多个定时器
+    var time = that.data.time;
+   
+    var interval = setInterval(function () {
+      time--;
+      that.setData({
+        time: time,
+        codeButtonText: time+'s',
+        codeButtonState:true,
+      })
+      if (time == 0) {           //归0时回到60
+        that.clearTimeInterval(that);
+
+        that.setData({
+          codeButtonText: '获取验证码',
+          codeButtonState: false,
+        })
+
+      }
+    }, 1000)
+
+    that.setData({
+      interval: interval
+    })
+  },
+
+  /**
+    * 暂停倒计时
+   */
+  stopTap: function () {
+    var that = this;
+    console.log("倒计时暂停")
+    that.clearTimeInterval(that)
+  },
+
+  /**
+    * 重新倒计时
+   */
+  restartTap: function () {
+    var that = this;
+    that.init(that);
+    that.startTap()
+  },
+
+  /**
+    * 初始化数据
+   */
+  init: function (that) {
+    var time = 60;
+    var interval = ""
+    that.clearTimeInterval(that)
+    that.setData({
+      time: time,
+      interval: interval,
+    })
+  },
+
+  /**
+    * 清除interval
+   * @param that
+   */
+  clearTimeInterval: function (that) {
+    var interval = that.data.interval;
+    clearInterval(interval);
+  },
+
+  /**
+    * 生命周期函数--监听页面卸载
+    * 退出本页面时停止计时器
+   */
+  onUnload: function () {
+    var that = this;
+    that.clearTimeInterval(that)
+  },
+
+  /**
+    * 生命周期函数--监听页面隐藏
+    * 在后台运行时停止计时器
+   */
+  onHide: function () {
+    var that = this;
+    that.clearTimeInterval(that)
   }
 
 })

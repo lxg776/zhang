@@ -1,23 +1,38 @@
-
+<view>
 <scroll-view scroll-y  class='allview'>
+<block wx:for="{{recommendUserList}}" wx:for-index="idx"  wx:key="key" wx:for-item="item" >
+    <view class="item-view">
 
-      <view class="item-view"> 
-          <image src='/img/default_man_icon.png' class='item-img' mode='aspectFit'></image>
+    <block wx:if="{{item.avatar}}">
+         <image src='{{imageBase}}{{item.avatar}}' class='item-img' mode='aspectFit'></image>
+    </block> 
+
+    <block wx:else>
+         <image wx:if="{{item.sex == 1}}" src='/img/default_man_icon.png' class='item-img' mode='aspectFit'></image>
+         <image wx:if="{{item.sex == 2}}" src='/img/default_woman_icon.png' class='item-img' mode='aspectFit'></image>
+    </block> 
+   
+         
      
 
       <view class='m-item-inner item-t1-view'>
-      <text>soul.e</text>
+      <text>{{item.fUserBaseMsg.nikename}}</text>
       <text class='text-readname'>实名</text>
       </view>
        <view class='m-item-inner item-t2-view'>
-      <text class='text-info'>30岁</text>
-         <text class='text-info'>程序员</text>
-            <text class='text-info'>160cm</text>
+      <text class='text-info'>{{item.age}}岁</text>
+         <text class='text-info'>{{item.fUserBaseMsg.profession}}</text>
+            <text class='text-info'>{{item.fUserBaseMsg.height}}cm</text>
       </view>
 
         <view class='m-item-inner item-t3-view'>
     
-         <text class='black_2b'>123123123</text>
+         <text class='black_2b'> 
+         择偶条件:我想找寻靖西  <block wx:if="{{item.item.fUserRequest.age}}">年龄在{{item.fUserRequest.age}}岁,</block>
+               <block wx:if="{{item.fUserRequest.height}}"> 身高{{item.fUserRequest.height}}
+                                <block wx:if="{{item.fUserRequest.height!='不限'}}">cm</block>，</block><block wx:if="{{item.fUserRequest.incomeMonthly}}">月收入{{item.fUserRequest.incomeMonthly}}</block>的<block wx:if="{{item.sex == 1}}">男性</block><block wx:if="{{item.sex == 2}}">女性</block>
+          </text>
+                     
       </view>
 
 
@@ -28,8 +43,19 @@
   </view>
 
       </view>
+</block>
+
+    
+
+  
 
 
 </scroll-view>
 
+<view class='rerefresh-view'  bindtap='reFreshList' >
+<view class='rerefresh-btn'>
+<image src='/img/refresh_bg.png' class='rerefresh-img'></image>
+<image src='/img/refresh_icon.png' class='rerefresh-img {{animation}}'></image> </view>
+</view>
+</view>
 

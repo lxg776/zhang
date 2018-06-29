@@ -1,0 +1,48 @@
+.cropper-wrapper{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    background-color: #e5e5e5;
+}
+
+.empty_tip{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;/*垂直居中*/
+  justify-content: center;/*水平居中*/
+}
+
+.cropper-buttons{
+  
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+}
+
+.upload,.upload{
+    width: 50%;
+    text-align: center;
+    color: #ec407a;
+    float: left;
+}
+
+.cropper{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+

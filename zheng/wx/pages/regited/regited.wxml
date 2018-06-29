@@ -1,11 +1,13 @@
+ 
+ <form bindsubmit='formSubmit'>
  <scroll-view scroll-y="true" >
 <view class="section">
- 
+  
   <view class="flex-wrp" style="flex-direction:row;">
 
-    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">我是</text>  <radio-group name="radio-group">
-      <label><radio value="radio1"/>男生</label>
-      <label><radio value="radio2"/>女生</label>
+    <view class="aui-list-item aui-list-item-inner"> <text class="m-left">我是</text>  <radio-group name="sex">
+      <label><radio value="1"/>男生</label>
+      <label><radio value="2"/>女生</label>
     </radio-group></view>
   </view>
  
@@ -26,24 +28,24 @@
  
 
    <view class="aui-list-item aui-list-item-inner">
-    <input name="input" class='m-left' placeholder="手机号码"></input>
+    <input name="userName" class='m-left' type='number' placeholder="手机号码" bindinput='cellphoneInput'></input>
    
    
-    <button class='common_button'>获取验证码</button> 
+    <button class='common_button' bindtap='getSmsCode' disabled='{{codeButtonState}}'>{{codeButtonText}}</button> 
   </view>
  
 
      <view class="aui-list-item aui-list-item-inner">
-    <input name="input" class='m-left' placeholder="验证码"></input>
+    <input name="code" class='m-left' placeholder="验证码" type='number'></input>
   </view>
 
 
      <view class="aui-list-item aui-list-item-inner">
-    <input name="input" class='m-left' placeholder="真实姓名"></input>
+    <input name="realName" class='m-left' placeholder="真实姓名"></input>
       </view>
 
      <view class="aui-list-item aui-list-item-inner">
-    <input name="input" class='m-left' placeholder="身份证号码"></input>
+    <input name="idCard" class='m-left' placeholder="身份证号码"></input>
       </view>
 
 
@@ -54,6 +56,7 @@
     <button class='common_button' style="with:50px;" bindtap='selectPhoto'>上传</button> 
   </view>
   <view class="photo_content">
+
 
 
 
@@ -72,17 +75,17 @@
   
   </view>
 
-  <view class="aui-list-item aui-list-item-inner"> <text class="m-left" style='font-size:14px;'>我同意并准守《婚恋墙服务协议》</text>  <switch ></switch></view>
+  <view class="aui-list-item aui-list-item-inner"> <text class="m-left" style='font-size:14px;'>我同意并准守《婚恋墙服务协议》</text>  <switch type="switch" checked="true" name="isAgree"></switch></view>
  
 
 
- <button style=' margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' bindtap='finishRegedit' >完成</button> 
+ <button style='margin-top: 8px;' class='bigBtn' hover-class='bigBtn2' formType="submit" >完成</button> 
 
 </view>
 
 </scroll-view> 
 
-
+</form>
 <!-- <view class="show">{{areaPicker.address}}</view>
 
 <button bindtap="areaSelect.initCityData" >获取已选择的城市信息</button> -->
